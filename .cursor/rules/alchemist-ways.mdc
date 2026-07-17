@@ -32,3 +32,9 @@ alwaysApply: true
 - Read `docs/BRIEF.md`, `docs/BRAND.md`, `docs/WORKFLOW.md` before structural changes.
 - Always test with `bun run dev` / `npm run dev` before push. Do not push unless the user asks.
 - Update `docs/CHANGELOG.md` when shipping meaningful changes.
+
+## Git workflow
+
+- `origin` is the client repo `alchemistways/Alchemist-ways`; the user is a collaborator.
+- **Always push to `branch1`** — never push to `main`. The user merges to `main` themselves.
+- Do not create new repositories or remotes.
