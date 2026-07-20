@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Instagram, Twitter, Youtube } from "lucide-react";
-import bookCover from "@/assets/book.jpg";
+import bookCover from "@/assets/book-meet.jpg";
 import heroMeet from "@/assets/hero-meet-4k.jpg";
 import heroMeetSm from "@/assets/hero-meet.jpg";
 import malekPortrait from "@/assets/malek-portrait.jpg";
@@ -24,52 +24,58 @@ function LandingPage() {
       <div className="min-h-screen bg-background text-foreground">
         <SiteHeader />
 
-        {/* Hero — mobile: image above cream copy; desktop: full-bleed image + cream panel */}
-        <section id="top" className="relative overflow-hidden md:min-h-[100svh]">
-          <div className="relative h-[min(52svh,420px)] w-full md:absolute md:inset-0 md:h-full">
+        {/* Hero — Higgsfield book on the right; copy sits in the open left wall */}
+        <section id="top" className="relative overflow-hidden bg-[#d4c4b0] md:min-h-[100svh]">
+          <div className="relative h-[min(48svh,400px)] w-full md:absolute md:inset-0 md:h-full">
             <picture>
               <source media="(min-width: 768px)" srcSet={heroMeet} />
               <img
                 src={heroMeetSm}
-                alt="Meet Yourself, Differently — Alchemist Ways book"
+                alt="Meet Yourself, Differently — Alchemist Ways hardcover"
                 width={3840}
-                height={2560}
+                height={2140}
                 fetchPriority="high"
                 decoding="async"
                 sizes="100vw"
-                className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
+                className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-[72%_48%] md:object-[68%_50%] lg:object-[62%_48%]"
               />
             </picture>
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent md:hidden"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent md:hidden"
             />
+            {/* Soft left wash so copy stays legible without covering the book */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(55%,40rem)] bg-gradient-to-r from-background/90 via-background/55 to-transparent md:block"
+              className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(48%,34rem)] bg-gradient-to-r from-[#cfc0ab]/75 via-[#cfc0ab]/25 to-transparent md:block"
             />
           </div>
 
-          <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-5 pb-14 pt-4 md:min-h-[100svh] md:bg-transparent md:px-8 md:pb-20 md:pt-28 lg:px-10 lg:pb-24">
-            <div className="hero-stagger flex w-full flex-1 flex-col justify-center md:max-w-[min(100%,26rem)] lg:max-w-[28rem]">
-              <h1 className="font-display text-[2.15rem] uppercase leading-[1.05] tracking-[0.02em] text-ink sm:text-5xl md:text-[2.75rem] lg:text-[3.25rem]">
-                <span className="block">Meet Yourself,</span>
-                <span className="mt-1 inline-block rotate-180 origin-center text-ember-deep">
+          <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-5 pb-14 pt-5 md:min-h-[100svh] md:bg-transparent md:px-8 md:pb-24 md:pt-28 lg:px-12">
+            <div className="hero-stagger flex w-full flex-1 flex-col justify-center md:max-w-[min(100%,24rem)] lg:max-w-[26rem]">
+              <p className="text-[0.65rem] uppercase tracking-[0.32em] text-ember-deep md:text-[#3a2a1f]/70">
+                Alchemist Ways
+              </p>
+              <h1 className="mt-4 flex flex-col items-start gap-1 font-display text-[2.1rem] uppercase leading-[1.05] tracking-[0.03em] text-ink sm:text-5xl md:mt-5 md:text-[2.65rem] lg:text-[3.1rem]">
+                <span>Meet Yourself,</span>
+                <span
+                  className="origin-center text-ember-deep"
+                  style={{ transform: "rotate(180deg)" }}
+                >
                   Differently.
                 </span>
               </h1>
-              <p className="mt-5 max-w-md text-balance font-display text-[1.05rem] leading-relaxed text-ink/80 sm:text-lg md:mt-6">
+              <p className="mt-6 max-w-sm text-balance text-[1.02rem] leading-relaxed text-ink/80 sm:text-lg md:text-[#3a2a1f]/85">
                 A practical map for discovering a different relationship with yourself.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:mt-10 md:flex-row md:items-center md:flex-wrap">
-                <a href="#map" className="btn-lux btn-lux-primary w-full md:w-auto">
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a href="#map" className="btn-lux btn-lux-primary w-full sm:w-auto">
                   Explore The Map
                   <span aria-hidden>↓</span>
                 </a>
-                <a href="#book" className="btn-lux btn-lux-sand w-full md:w-auto">
+                <a href="#book" className="btn-lux btn-lux-sand w-full sm:w-auto">
                   Get the Book
-                  <span aria-hidden>↓</span>
                 </a>
               </div>
             </div>

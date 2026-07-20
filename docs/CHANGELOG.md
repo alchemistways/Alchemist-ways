@@ -3,13 +3,12 @@
 ## Landing page rebuild — Meet Yourself, Differently. (branch1)
 
 - Fully rewrote `src/routes/index.tsx` from client landing PDF + Brand OS (verbatim copy)
-- New hero (`hero-meet` assets from client environment art; Higgsfield deferred — session expired): MEET YOURSELF / DIFFERENTLY. (rotated), Explore The Map + Get the Book
+- Hero: Higgsfield book-in-corridor plate (`hero-meet`); copy left-aligned on open wall; DIFFERENTLY. flipped to match cover
+- Map: open numbered nodes (labels outside circles) — fixes congested oversized stage pills
 - Narrative sections One–Four, Emotional Reactivity triptych, triggers doorway, About Malek + portrait
-- Ways to Begin: Book, Conversations (YouTube), Clarity Call (Calendly free/paid), Community (Skool)
-- Kit waitlist: form `9699624`, “Continue the exploration.” / “Begin Here”; footer socials from Brand OS
-- Palette: warm ivory + terracotta/ember; CircularMap restyled to numbered terracotta stages
+- Ways to Begin: Book (`book-meet.jpg`), Conversations, Clarity Call (Calendly), Community (Skool)
+- Kit waitlist form `9699624`; ivory + terracotta palette
 - Removed FAQ, practices strip, waitlist count / localStorage
-- Meta → Meet Yourself, Differently.; MapIntro aligned to PDF map framing
 
 ---
 

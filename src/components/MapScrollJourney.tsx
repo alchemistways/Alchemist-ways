@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { CircularMap, MOVEMENT_COUNT } from "@/components/CircularMap";
 
-/** Desktop: more scroll room per chapter. Mobile: shorter so it stays snappy. */
+/** Desktop: roomier per chapter. Mobile: shorter track. */
 function stepVh(isMobile: boolean) {
-  return isMobile ? 95 : 125;
+  return isMobile ? 90 : 110;
 }
 
 function prefersReducedMotion() {
@@ -12,8 +12,8 @@ function prefersReducedMotion() {
 }
 
 /**
- * Sticky scroll chapter: map stays pinned while finger/wheel scroll
- * walks through every circle, then the page continues.
+ * Sticky scroll chapter: map stays pinned while scroll walks each circle.
+ * Layout is deliberately spacious — slim intro, roomy ring, panel beside it.
  */
 export function MapScrollJourney() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -84,10 +84,10 @@ export function MapScrollJourney() {
 
   if (!scrollDriven) {
     return (
-      <section className="border-y border-border/60 bg-gradient-to-b from-secondary/40 to-background">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-28">
+      <section className="border-y border-border/60 bg-gradient-to-b from-secondary/30 to-background">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <MapIntro />
-          <div className="mt-10 sm:mt-16">
+          <div className="mt-12 sm:mt-16">
             <CircularMap />
           </div>
         </div>
@@ -98,13 +98,13 @@ export function MapScrollJourney() {
   const trackHeight = MOVEMENT_COUNT * stepVh(isMobile);
 
   return (
-    <section className="border-y border-border/60 bg-gradient-to-b from-secondary/40 to-background">
+    <section className="border-y border-border/60 bg-gradient-to-b from-secondary/30 to-background">
       <div ref={trackRef} className="relative" style={{ height: `${trackHeight}vh` }}>
-        <div className="sticky top-0 z-10 flex h-[100dvh] max-h-[100svh] flex-col overflow-hidden pt-[3.75rem] sm:pt-[4.25rem]">
-          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-4 py-3 sm:px-8 sm:py-5 lg:py-6">
+        <div className="sticky top-0 z-10 flex h-[100dvh] max-h-[100svh] flex-col overflow-hidden pt-[3.75rem] sm:pt-[4.5rem]">
+          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-5 py-4 sm:px-8 sm:py-6 lg:py-8">
             <MapIntro scrollHint compact active={active} />
 
-            <div className="mt-3 flex min-h-0 min-w-0 flex-1 items-center overflow-hidden sm:mt-4">
+            <div className="mt-4 flex min-h-0 min-w-0 flex-1 items-center sm:mt-6">
               <CircularMap
                 activeIndex={active}
                 onActiveChange={scrollToStep}
@@ -132,32 +132,28 @@ function MapIntro({
   active?: number;
 }) {
   return (
-    <div className={`mx-auto shrink-0 text-center ${compact ? "max-w-xl" : "max-w-2xl"}`}>
-      <div className="text-[0.6rem] uppercase tracking-[0.28em] text-ember-deep sm:text-[0.65rem]">
+    <div className={`mx-auto shrink-0 text-center ${compact ? "max-w-2xl" : "max-w-2xl"}`}>
+      <div className="text-[0.6rem] uppercase tracking-[0.32em] text-ember-deep sm:text-[0.65rem]">
         The Map
       </div>
       <h2
         className={`font-display leading-tight text-ink ${
           compact
-            ? "mt-1.5 text-xl sm:mt-2 sm:text-3xl md:text-4xl"
+            ? "mt-1.5 text-xl sm:mt-2 sm:text-3xl md:text-[2.35rem]"
             : "mt-3 text-3xl sm:text-4xl md:text-5xl"
         }`}
       >
         From Emotional Reactivity to Creative Agency
       </h2>
       {scrollHint ? (
-        <p className="mt-1.5 text-[0.7rem] text-ink/70 sm:mt-2 sm:text-sm">
-          <span className="sm:hidden">
-            Five movements. One relationship. Meet yourself, differently. · {active + 1}/
-            {MOVEMENT_COUNT}
-          </span>
-          <span className="hidden sm:inline">
-            Five movements. One relationship. Meet yourself, differently. · Circle {active + 1} of{" "}
-            {MOVEMENT_COUNT} — keep scrolling.
+        <p className="mt-2 text-[0.7rem] leading-relaxed text-ink/65 sm:text-sm">
+          Five movements. One relationship.{" "}
+          <span className="text-ink/50">
+            · {active + 1} of {MOVEMENT_COUNT}
           </span>
         </p>
       ) : (
-        <p className="mt-5 text-ink/75">
+        <p className="mx-auto mt-5 max-w-xl text-ink/75">
           The Map isn&apos;t something to master. It&apos;s a way of learning the language of your
           own experience. Five movements. One relationship. Meet yourself, differently.
         </p>
@@ -169,7 +165,7 @@ function MapIntro({
 function ScrollCue({ progress, active }: { progress: number; active: number }) {
   const done = active >= MOVEMENT_COUNT - 1 && progress > 0.92;
   return (
-    <div className="mt-2 flex shrink-0 flex-col items-center gap-1.5 pb-safe sm:mt-4 sm:gap-2">
+    <div className="mt-3 flex shrink-0 flex-col items-center gap-2 pb-safe sm:mt-5">
       <div className="flex w-full max-w-xs items-center gap-1.5">
         {Array.from({ length: MOVEMENT_COUNT }).map((_, i) => (
           <span
