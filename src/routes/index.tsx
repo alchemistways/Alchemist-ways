@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { Instagram, Twitter, Youtube } from "lucide-react";
-import heroCorridor from "@/assets/hero-corridor-4k.jpg";
-import heroCorridorSm from "@/assets/hero-corridor.jpg";
+import bookCover from "@/assets/book.jpg";
+import heroMeet from "@/assets/hero-meet-4k.jpg";
+import heroMeetSm from "@/assets/hero-meet.jpg";
+import malekPortrait from "@/assets/malek-portrait.jpg";
 import { MapScrollJourney } from "@/components/MapScrollJourney";
 import { PageEntrance, Reveal } from "@/components/PageMotion";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -12,229 +13,567 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const BASE_COUNT = 1247;
-const BOOKING_URL = "#waitlist"; // replace with real booking link when ready
+const CONVERSATIONS_URL = "https://www.youtube.com/@alchemistwaysofficial";
+const CLARITY_FREE_URL = "https://calendly.com/alchemistways/conversation";
+const CLARITY_PAID_URL = "https://calendly.com/alchemistways/clarity-session";
+const COMMUNITY_URL = "https://www.skool.com/alchemist-ways-1974/about";
 
 function LandingPage() {
-  const [count, setCount] = useState(BASE_COUNT);
-  const [joined, setJoined] = useState(false);
-
-  useEffect(() => {
-    try {
-      const raw = JSON.parse(localStorage.getItem("aw_waitlist") ?? "[]");
-      const local = Array.isArray(raw) ? raw : [];
-      // Unique emails only — matches WaitlistForm dedupe
-      const unique = new Set(
-        local
-          .map((e: { email?: string }) =>
-            typeof e?.email === "string" ? e.email.toLowerCase() : "",
-          )
-          .filter(Boolean),
-      );
-      setCount(BASE_COUNT + unique.size);
-    } catch {
-      /* ignore */
-    }
-  }, [joined]);
-
   return (
     <PageEntrance>
       <div className="min-h-screen bg-background text-foreground">
-        <SiteHeader bookingHref={BOOKING_URL} />
+        <SiteHeader />
 
-        {/* Hero — mobile stacks book + copy; desktop: copy left wall, book clear on right */}
-        <section id="top" className="relative overflow-hidden bg-[#c9baa9] md:min-h-[100svh]">
-          <div className="relative h-[min(46svh,380px)] w-full md:absolute md:inset-0 md:h-full">
+        {/* Hero — mobile: image above cream copy; desktop: full-bleed image + cream panel */}
+        <section id="top" className="relative overflow-hidden md:min-h-[100svh]">
+          <div className="relative h-[min(52svh,420px)] w-full md:absolute md:inset-0 md:h-full">
             <picture>
-              <source media="(min-width: 768px)" srcSet={heroCorridor} />
+              <source media="(min-width: 768px)" srcSet={heroMeet} />
               <img
-                src={heroCorridorSm}
-                alt="Alchemist Ways silver hardcover with yin-yang droplet, standing in a sand-toned corridor"
+                src={heroMeetSm}
+                alt="Meet Yourself, Differently — Alchemist Ways book"
                 width={3840}
                 height={2560}
                 fetchPriority="high"
                 decoding="async"
                 sizes="100vw"
-                className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-[62%_48%] md:object-[78%_50%] lg:object-[80%_48%] xl:object-[76%_46%]"
+                className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center"
               />
             </picture>
-            {/* Soft fade into copy panel — phones only */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#ebe3d6] to-transparent md:hidden"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent md:hidden"
             />
-            {/* Keep left wall legible without darkening the book */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(52%,36rem)] bg-gradient-to-r from-[#c9baa9]/55 via-[#c9baa9]/20 to-transparent md:block"
+              className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(55%,40rem)] bg-gradient-to-r from-background/90 via-background/55 to-transparent md:block"
             />
           </div>
 
-          <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-[#ebe3d6] px-5 pb-12 pt-2 md:min-h-[100svh] md:bg-transparent md:px-8 md:pb-20 md:pt-28 lg:px-10 lg:pb-24">
-            {/* Desktop: narrow left column so copy never meets the book */}
-            <div className="hero-stagger flex w-full flex-1 flex-col justify-center md:max-w-[min(100%,22rem)] lg:max-w-[24rem] xl:max-w-[26rem]">
-              <p className="text-[0.6rem] uppercase tracking-[0.28em] text-gold-deep md:text-[0.65rem] md:text-[#3a2a1f]/75">
-                A map. A practice. A return.
-              </p>
-              <h1 className="mt-3 text-balance font-display text-[1.85rem] uppercase leading-[1.1] tracking-[0.02em] text-ink sm:text-4xl md:mt-4 md:text-[2.35rem] md:leading-[1.12] lg:text-[2.75rem] xl:text-[3.15rem]">
-                From
-                <br />
-                emotional
-                <br />
-                reactivity
-                <br />
-                to <span className="text-gold-deep">creative agency.</span>
-              </h1>
-              <p className="mt-4 max-w-sm text-balance font-display text-[0.95rem] leading-relaxed text-ink/80 sm:text-base md:mt-5 md:text-[1.05rem] md:text-[#3a2a1f]/80">
-                A book for sensitive creators who are ready to stop abandoning themselves and start
-                creating from who they truly are.
-              </p>
-
-              <div className="mt-7 flex flex-col gap-3 sm:mt-8 md:flex-row md:items-center md:flex-wrap">
-                <a href="#waitlist" className="btn-lux btn-lux-primary w-full md:w-auto">
-                  Join the waitlist
-                  <span aria-hidden>→</span>
-                </a>
-                <a href="#book-inside" className="btn-lux btn-lux-sand w-full md:w-auto">
-                  Get the book
-                </a>
-              </div>
-
-              <div className="mt-6 flex items-start gap-3 text-xs text-ink/70 sm:mt-7 md:items-center md:text-[#3a2a1f]/70">
-                <div className="flex shrink-0 -space-x-2">
-                  {["#c9a575", "#e0c9a2", "#a9846b", "#d4b896"].map((c) => (
-                    <span
-                      key={c}
-                      className="h-6 w-6 rounded-full border border-[#c9baa9]/80"
-                      style={{ background: c }}
-                    />
-                  ))}
-                </div>
-                <span>
-                  <strong className="font-medium text-ink">{count.toLocaleString()}</strong>{" "}
-                  {joined
-                    ? "curious minds — you're one of them"
-                    : "Join readers transforming their inner world and their life."}
+          <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-5 pb-14 pt-4 md:min-h-[100svh] md:bg-transparent md:px-8 md:pb-20 md:pt-28 lg:px-10 lg:pb-24">
+            <div className="hero-stagger flex w-full flex-1 flex-col justify-center md:max-w-[min(100%,26rem)] lg:max-w-[28rem]">
+              <h1 className="font-display text-[2.15rem] uppercase leading-[1.05] tracking-[0.02em] text-ink sm:text-5xl md:text-[2.75rem] lg:text-[3.25rem]">
+                <span className="block">Meet Yourself,</span>
+                <span className="mt-1 inline-block rotate-180 origin-center text-ember-deep">
+                  Differently.
                 </span>
+              </h1>
+              <p className="mt-5 max-w-md text-balance font-display text-[1.05rem] leading-relaxed text-ink/80 sm:text-lg md:mt-6">
+                A practical map for discovering a different relationship with yourself.
+              </p>
+
+              <div className="mt-8 flex flex-col gap-3 sm:mt-10 md:flex-row md:items-center md:flex-wrap">
+                <a href="#map" className="btn-lux btn-lux-primary w-full md:w-auto">
+                  Explore The Map
+                  <span aria-hidden>↓</span>
+                </a>
+                <a href="#book" className="btn-lux btn-lux-sand w-full md:w-auto">
+                  Get the Book
+                  <span aria-hidden>↓</span>
+                </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Five practices — aligned with client map of lived outcomes */}
-        <section className="border-y border-border/60 bg-secondary/50">
-          <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
+        {/* Section One */}
+        <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal>
+            <div className="space-y-8 text-center">
+              <p className="font-display text-2xl leading-snug text-ink sm:text-3xl md:text-4xl">
+                What if nothing within you is against you…
+              </p>
+              <p className="font-display text-2xl leading-snug text-ink sm:text-3xl md:text-4xl">
+                And everything within you is communicating with you?
+              </p>
+              <div className="mx-auto h-px w-10 bg-ember/40" aria-hidden />
+              <div className="space-y-4 text-lg leading-relaxed text-ink/80 sm:text-xl">
+                <p>What if every emotion…</p>
+                <p>every reaction…</p>
+                <p>every recurring pattern…</p>
+                <p>has been trying to tell you something?</p>
+              </div>
+              <p className="font-display text-xl italic text-ink/70 sm:text-2xl">
+                If that&apos;s true…
+                <br />
+                have I learned how to listen?
+              </p>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* Section Two */}
+        <section className="border-y border-border/60 bg-secondary/40">
+          <div className="mx-auto max-w-2xl px-5 py-20 sm:px-8 sm:py-28">
             <Reveal>
-              <div className="-mx-5 flex gap-4 overflow-x-auto px-5 pb-2 snap-x snap-mandatory scrollbar-none md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
-                {practices.map((p) => (
-                  <div
-                    key={p.title}
-                    className="w-[min(72vw,16rem)] shrink-0 snap-start text-left md:w-auto md:text-left"
-                  >
-                    <div
-                      className="mb-3 flex h-10 w-10 items-center justify-center text-gold-deep md:mb-4"
-                      aria-hidden
-                    >
-                      {p.icon}
-                    </div>
-                    <h3 className="text-[0.65rem] uppercase tracking-[0.2em] text-ink md:text-[0.7rem]">
-                      {p.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink/70">{p.line}</p>
-                  </div>
-                ))}
+              <div className="space-y-10 text-center">
+                <div className="space-y-3">
+                  <p className="font-display text-2xl leading-snug text-ink sm:text-3xl">
+                    The conversation ended three days ago.
+                  </p>
+                  <p className="font-display text-2xl leading-snug text-ink sm:text-3xl">
+                    You&apos;re still running it.
+                  </p>
+                </div>
+                <div className="mx-auto h-px w-8 bg-ember/35" aria-hidden />
+                <div className="space-y-8 text-lg leading-relaxed text-ink/80">
+                  <p>
+                    You said yes.
+                    <br />
+                    You meant something different.
+                  </p>
+                  <p>
+                    You understand yourself clearly.
+                    <br />
+                    Nothing has changed.
+                  </p>
+                  <p>
+                    You promised yourself it wouldn&apos;t happen again.
+                    <br />
+                    It did.
+                  </p>
+                  <p>You keep reacting in ways you don&apos;t fully understand.</p>
+                </div>
+                <div className="mx-auto h-px w-8 bg-ember/35" aria-hidden />
+                <div className="space-y-3 font-display text-xl leading-snug text-ink sm:text-2xl">
+                  <p>These aren&apos;t failures.</p>
+                  <p>They&apos;re intelligent ways you learned to protect yourself.</p>
+                </div>
               </div>
             </Reveal>
           </div>
         </section>
 
-        {/* The Map — sticky scroll through each circle */}
-        <MapScrollJourney />
-
-        {/* Doorway + what's inside */}
-        <section id="book-inside" className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
+        {/* Section Three */}
+        <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
           <Reveal>
-            <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:items-start">
-              <div>
-                <div className="h-px w-10 bg-gold-deep" aria-hidden />
-                <h2 className="mt-6 font-display text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
-                  Your triggers are the doorway.
-                </h2>
-                <p className="mt-5 text-[0.7rem] uppercase leading-relaxed tracking-[0.18em] text-gold-deep sm:text-xs">
-                  Every emotional reaction contains creative energy waiting to be reclaimed.
+            <div className="space-y-6 text-lg leading-relaxed text-ink/80 sm:text-xl">
+              <p>The patterns you&apos;ve been fighting—</p>
+              <ul className="space-y-1 pl-1">
+                <li>the overthinking,</li>
+                <li>the people-pleasing,</li>
+                <li>the reactive anger,</li>
+                <li>the endless self-monitoring—</li>
+              </ul>
+              <p>didn&apos;t appear randomly.</p>
+              <p>They formed in conditions where those responses served a purpose.</p>
+              <div className="space-y-1 pt-2">
+                <p>They helped you stay safe.</p>
+                <p>Preserve connection.</p>
+                <p>Anticipate conflict.</p>
+                <p>Manage what your environment couldn&apos;t hold.</p>
+              </div>
+              <p className="pt-2 font-display text-xl text-ink sm:text-2xl">
+                At one time,
+                <br />
+                they made perfect sense.
+              </p>
+              <p>
+                The difficulty is that they remained
+                <br />
+                long after they were needed.
+              </p>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* Section Four */}
+        <section className="border-y border-border/60 bg-secondary/30">
+          <div className="mx-auto max-w-2xl px-5 py-20 text-center sm:px-8 sm:py-28">
+            <Reveal>
+              <div className="space-y-6">
+                <p className="font-display text-2xl leading-snug text-ink sm:text-3xl md:text-4xl">
+                  Everything begins…
+                  <br />
+                  with meeting yourself differently.
                 </p>
-                <p className="mt-10 font-display text-2xl italic text-ink/70">Malek</p>
+                <p className="text-lg leading-relaxed text-ink/75 sm:text-xl">
+                  Learning how to listen
+                  <br />
+                  is where that relationship begins.
+                </p>
               </div>
-              <div className="rounded-[1.25rem] border border-border/70 bg-card px-6 py-7 sm:px-8 sm:py-8">
-                <div className="text-[0.65rem] uppercase tracking-[0.28em] text-gold-deep">
-                  What you&apos;ll find inside
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Emotional Reactivity triptych */}
+        <section className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal>
+            <div className="text-center">
+              <h2 className="font-display text-3xl uppercase tracking-[0.06em] text-ink sm:text-4xl md:text-5xl">
+                Emotional Reactivity
+              </h2>
+              <div className="mx-auto mt-8 max-w-2xl space-y-4 text-lg leading-relaxed text-ink/80">
+                <p>Emotional Reactivity doesn&apos;t always look dramatic.</p>
+                <p>Sometimes it becomes obvious.</p>
+                <p>Sometimes it becomes invisible.</p>
+                <p>Sometimes it simply becomes the way we&apos;ve learned to survive.</p>
+                <p className="pt-2 text-ink/70">It may express itself through…</p>
+              </div>
+            </div>
+          </Reveal>
+
+          <div className="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+            {reactivityModes.map((mode, i) => (
+              <Reveal key={mode.title} delay={i * 80}>
+                <div className="text-center sm:text-left">
+                  <h3 className="font-display text-xl text-ink sm:text-2xl">{mode.title}</h3>
+                  <p className="mt-4 text-[0.95rem] leading-relaxed text-ink/75 whitespace-pre-line">
+                    {mode.body}
+                  </p>
                 </div>
-                <ul className="mt-6 space-y-4">
-                  {insideItems.map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-3 text-[0.95rem] leading-relaxed text-ink/80"
-                    >
-                      <span
-                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep"
-                        aria-hidden
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={200}>
+            <div className="mx-auto mt-14 max-w-xl space-y-2 text-center font-display text-xl leading-snug text-ink sm:text-2xl">
+              <p>Different expressions.</p>
+              <p>The same invitation.</p>
+              <p className="pt-2 text-lg text-ink/70 sm:text-xl">
+                To understand what your protective system has been carrying.
+              </p>
             </div>
           </Reveal>
         </section>
 
-        {/* Founder */}
-        <section className="mx-auto max-w-4xl px-5 py-20 sm:px-8 sm:py-28">
+        {/* Triggers */}
+        <section className="border-y border-border/60 bg-secondary/40">
+          <div className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8 sm:py-28">
+            <Reveal>
+              <h2 className="font-display text-3xl uppercase leading-tight tracking-[0.04em] text-ink sm:text-4xl md:text-5xl">
+                Your Triggers Are the Doorway.
+              </h2>
+              <div className="mx-auto mt-10 max-w-xl space-y-5 text-lg leading-relaxed text-ink/80">
+                <p>A trigger is rarely only about what is happening now.</p>
+                <p>
+                  It often reveals
+                  <br />
+                  what the past taught you to expect.
+                  <br />
+                  To protect.
+                  <br />
+                  To suppress.
+                  <br />
+                  To become.
+                </p>
+                <p className="pt-2 font-display text-xl text-ink sm:text-2xl">
+                  The invitation isn&apos;t to eliminate the reaction.
+                  <br />
+                  It&apos;s to understand
+                  <br />
+                  what it has been carrying.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* The Map */}
+        <div id="map">
+          <MapScrollJourney />
+        </div>
+
+        {/* About Malek */}
+        <section id="about" className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
           <Reveal>
-            <div className="text-[0.65rem] uppercase tracking-[0.28em] text-gold-deep">
-              Why this exists
-            </div>
-            <h2 className="mt-3 font-display text-3xl leading-tight text-ink sm:text-4xl">
-              Alchemist Ways did not begin as a framework.
-            </h2>
-            <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink/80">
-              <p>
-                It began with a question I could no longer avoid:{" "}
-                <em className="font-display text-ink">What if there is nothing wrong with me?</em>
-              </p>
-              <p>
-                For years, I had learned to manage myself. To perform competence. To suppress what
-                felt too large. To become useful before learning how to fully become myself.
-              </p>
-              <p>
-                Eventually, life slowed me down enough to ask a different question. Not{" "}
-                <em>how do I fix myself?</em> — but{" "}
-                <em>what is this experience trying to show me?</em>
-              </p>
-              <p>
-                The map emerged slowly — five movements from reactivity to creative agency — through
-                observation, practice, failure, discomfort, radical honesty, and the privilege of
-                walking beside others doing the same.
-              </p>
-              <p className="font-display italic text-muted-foreground">
-                I offer it as a map you can test for yourself.
-              </p>
-            </div>
-            <div className="mt-8 flex items-center gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gold-soft font-display text-gold-deep">
-                M
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-16">
+              <div className="mx-auto w-full max-w-sm lg:mx-0">
+                <img
+                  src={malekPortrait}
+                  alt="Malek Najm Ghaleb"
+                  width={800}
+                  height={1000}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[4/5] w-full object-cover object-top"
+                />
               </div>
               <div>
-                <div className="font-display text-lg text-ink">Malek Najm Ghaleb</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  Founder, Alchemist Ways
+                <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
+                  About Malek
+                </div>
+                <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink/80">
+                  <p>
+                    For years,
+                    <br />
+                    I thought I was searching
+                    <br />
+                    for freedom.
+                    <br />
+                    Validation.
+                    <br />
+                    Creativity.
+                    <br />
+                    Love.
+                  </p>
+                  <p>
+                    Yet beneath all those desires
+                    <br />
+                    was something quieter.
+                    <br />
+                    Something
+                    <br />I couldn&apos;t yet see.
+                  </p>
+                  <p>
+                    I was searching
+                    <br />
+                    for inner safety.
+                  </p>
+                  <p>
+                    Not physical safety.
+                    <br />
+                    The kind of inner safety
+                    <br />
+                    that allows someone
+                    <br />
+                    to express themselves honestly.
+                    <br />
+                    To create art
+                    <br />
+                    without constantly second-guessing themselves.
+                    <br />
+                    To speak
+                    <br />
+                    without silently holding back.
+                    <br />
+                    To live
+                    <br />
+                    instead of performing.
+                  </p>
+                  <p>
+                    At the time,
+                    <br />
+                    I couldn&apos;t see beyond
+                    <br />
+                    my conditioning.
+                    <br />
+                    I only knew
+                    <br />
+                    that despite my strengths,
+                    <br />
+                    my ambitions,
+                    <br />
+                    and my creativity,
+                    <br />
+                    much of my life felt shaped by fear,
+                    <br />
+                    self-doubt,
+                    <br />
+                    shame,
+                    <br />
+                    anxiety,
+                    <br />
+                    and emotional reactivity.
+                  </p>
+                  <p>
+                    Eventually,
+                    <br />
+                    life slowed me down enough
+                    <br />
+                    to ask
+                    <br />a different question.
+                  </p>
+                  <p>
+                    Not,
+                    <br />
+                    &ldquo;How do I fix myself?&rdquo;
+                    <br />
+                    But…
+                    <br />
+                    &ldquo;What is this experience trying to communicate?&rdquo;
+                  </p>
+                  <p>
+                    The Map emerged slowly.
+                    <br />
+                    Through observation.
+                    <br />
+                    Practice.
+                    <br />
+                    Discomfort.
+                    <br />
+                    Radical honesty.
+                    <br />
+                    And through the privilege
+                    <br />
+                    of walking beside others
+                    <br />
+                    doing the same.
+                  </p>
+                  <p className="pt-4 font-display text-xl italic text-ink">— Malek Najm Ghaleb</p>
                 </div>
               </div>
             </div>
           </Reveal>
         </section>
 
-        {/* Waitlist */}
+        {/* Invitation */}
+        <section className="border-y border-border/60 bg-secondary/40">
+          <div className="mx-auto max-w-2xl px-5 py-20 text-center sm:px-8 sm:py-28">
+            <Reveal>
+              <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
+                An Invitation
+              </div>
+              <div className="mt-8 space-y-4 font-display text-2xl leading-snug text-ink sm:text-3xl">
+                <p>Remain curious.</p>
+                <p>Explore the Map.</p>
+                <p>
+                  Test it
+                  <br />
+                  against your own experience.
+                </p>
+                <p>Keep what is true.</p>
+                <p>Leave what isn&apos;t.</p>
+              </div>
+              <p className="mx-auto mt-10 max-w-md text-lg leading-relaxed text-ink/75">
+                Alchemist Ways is an invitation—
+                <br />
+                not to become someone else—
+                <br />
+                but to discover
+                <br />
+                a different relationship
+                <br />
+                with yourself.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Ways to Begin */}
+        <section id="book" className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal>
+            <div className="text-center">
+              <h2 className="font-display text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
+                There Are Several Ways to Begin
+              </h2>
+            </div>
+          </Reveal>
+
+          <div className="mt-14 space-y-16">
+            {/* The Book */}
+            <Reveal>
+              <div className="grid gap-10 md:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] md:items-center md:gap-14">
+                <img
+                  src={bookCover}
+                  alt="Meet Yourself, Differently — book cover"
+                  width={800}
+                  height={1000}
+                  loading="lazy"
+                  decoding="async"
+                  className="mx-auto w-full max-w-[16rem] object-contain md:max-w-none"
+                />
+                <div>
+                  <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
+                    The Book
+                  </div>
+                  <h3 className="mt-3 font-display text-2xl uppercase leading-tight text-ink sm:text-3xl">
+                    Meet Yourself, Differently.
+                  </h3>
+                  <p className="mt-2 text-sm uppercase tracking-[0.14em] text-ink/60">
+                    A Map from Emotional Reactivity to Creative Agency.
+                  </p>
+                  <p className="mt-6 leading-relaxed text-ink/80">
+                    Meet Yourself, Differently is an invitation to discover a new relationship with
+                    yourself. Through the lens of Emotional Reactivity, Awareness, Integration,
+                    Sovereignty, and Creative Agency, it offers a practical map for understanding
+                    what your experience has been trying to communicate—and how that understanding
+                    can naturally become greater clarity, freedom, and authentic self-expression.
+                  </p>
+                  <p className="mt-4 text-ink/75">
+                    Begin here if you&apos;d like to explore the work quietly, at your own pace.
+                  </p>
+                  <a href="#waitlist" className="btn-lux btn-lux-primary mt-6 inline-flex">
+                    Explore the Book
+                    <span aria-hidden>→</span>
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Conversations */}
+            <Reveal>
+              <div id="conversations" className="scroll-mt-24 border-t border-border/60 pt-14">
+                <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
+                  Conversations
+                </div>
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
+                  Watch the philosophy come alive through reflections, teachings, and real
+                  conversations.
+                </p>
+                <a
+                  href={CONVERSATIONS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-lux btn-lux-sand mt-6 inline-flex"
+                >
+                  Watch Conversations
+                  <span aria-hidden>→</span>
+                </a>
+              </div>
+            </Reveal>
+
+            {/* Clarity Call */}
+            <Reveal>
+              <div id="clarity-call" className="scroll-mt-24 border-t border-border/60 pt-14">
+                <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
+                  A Clarity Call
+                </div>
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
+                  An honest conversation about where you are, what patterns keep repeating, and
+                  whether this work feels like the right next step.
+                </p>
+                <p className="mt-4 max-w-xl leading-relaxed text-ink/70">
+                  No pressure. No performance. Just curiosity, generous listening, care, and
+                  thoughtful inquiry.
+                </p>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <a
+                    href={CLARITY_FREE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-lux btn-lux-primary inline-flex"
+                  >
+                    Clarity Conversation (Free · 30 min)
+                  </a>
+                  <a
+                    href={CLARITY_PAID_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-lux btn-lux-sand inline-flex"
+                  >
+                    Clarity Session (Paid · 90 min)
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Community */}
+            <Reveal>
+              <div className="border-t border-border/60 pt-14">
+                <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
+                  The Community
+                </div>
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
+                  Walk alongside others learning to meet their inner lives with greater awareness,
+                  honesty, and choice.
+                </p>
+                <a
+                  href={COMMUNITY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-lux btn-lux-sand mt-6 inline-flex"
+                >
+                  Explore the Community
+                  <span aria-hidden>→</span>
+                </a>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Final + Waitlist */}
         <section
           id="waitlist"
           className="relative overflow-hidden border-y border-border/60 bg-secondary/40"
@@ -243,100 +582,91 @@ function LandingPage() {
             aria-hidden
             className="pointer-events-none absolute inset-0 opacity-70"
             style={{
-              background: "radial-gradient(ellipse at 50% 0%, var(--gold-soft), transparent 60%)",
+              background: "radial-gradient(ellipse at 50% 0%, var(--ember-soft), transparent 60%)",
             }}
           />
           <div className="relative mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
             <Reveal>
               <div className="text-center">
-                <div className="text-[0.65rem] uppercase tracking-[0.28em] text-gold-deep">
-                  Join the waitlist
+                <div className="space-y-3 font-display text-2xl leading-snug text-ink sm:text-3xl">
+                  <p>Start where you are.</p>
+                  <p>Bring your curiosity.</p>
+                  <p>
+                    The rest
+                    <br />
+                    will unfold naturally.
+                  </p>
                 </div>
-                <h2 className="mt-3 font-display text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
-                  Begin your journey.
+                <p className="mt-8 text-ink/70">
+                  Keep what is true.
+                  <br />
+                  Leave what isn&apos;t.
+                </p>
+                <div className="mx-auto mt-12 h-px w-10 bg-ember/40" aria-hidden />
+                <h2 className="mt-12 font-display text-3xl leading-tight text-ink sm:text-4xl">
+                  Continue the exploration.
                 </h2>
-                <p className="mx-auto mt-5 max-w-xl text-balance text-ink/75">
-                  Join the waitlist for the book. We&apos;ll send the opening chapter when it&apos;s
-                  ready — quietly, not often.
+                <p className="mx-auto mt-4 max-w-md text-ink/75">
+                  Receive reflections, conversations, and updates from Alchemist Ways.
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={120} className="mt-10">
-              <WaitlistForm onJoined={() => setJoined(true)} />
+              <WaitlistForm />
             </Reveal>
-
-            {!joined && (
-              <Reveal delay={200}>
-                <p className="mt-6 text-center text-xs text-muted-foreground">
-                  <strong className="font-medium text-ink">{count.toLocaleString()}</strong> people
-                  already on the list.
-                </p>
-              </Reveal>
-            )}
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
-          <Reveal>
-            <div className="text-[0.65rem] uppercase tracking-[0.28em] text-gold-deep">
-              Questions
-            </div>
-            <h2 className="mt-3 font-display text-3xl leading-tight text-ink sm:text-4xl">
-              A few things worth knowing.
-            </h2>
-          </Reveal>
-
-          <div className="mt-10 divide-y divide-border">
-            {faqs.map((f, i) => (
-              <Reveal key={f.q} delay={i * 40}>
-                <FaqItem q={f.q} a={f.a} />
-              </Reveal>
-            ))}
           </div>
         </section>
 
         {/* Footer */}
         <footer className="border-t border-border/60 bg-secondary/30">
           <Reveal>
-            <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-5 py-12 sm:px-8 md:flex-row md:items-center md:justify-between">
+            <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 px-5 py-12 sm:px-8 md:flex-row md:items-center md:justify-between">
               <div>
                 <div className="font-display text-[0.7rem] uppercase tracking-[0.3em] text-ink">
-                  A · W&nbsp;&nbsp;Alchemist Ways
+                  Alchemist Ways
                 </div>
                 <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                  Some things can only be seen at the speed of attention.
+                  A practical map from Emotional Reactivity to Creative Agency.
                 </p>
               </div>
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <div className="flex items-center gap-3">
                   <a
-                    href="https://x.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X (formerly Twitter)"
-                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink hover:border-gold hover:text-gold-deep hover:-translate-y-0.5"
-                  >
-                    <Twitter size={18} />
-                  </a>
-                  <a
-                    href="https://instagram.com/"
+                    href="https://www.instagram.com/alchemistways"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink hover:border-gold hover:text-gold-deep hover:-translate-y-0.5"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
                   >
                     <Instagram size={18} />
                   </a>
                   <a
-                    href="https://youtube.com/"
+                    href="https://www.youtube.com/@alchemistwaysofficial"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="YouTube"
-                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink hover:border-gold hover:text-gold-deep hover:-translate-y-0.5"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
                   >
                     <Youtube size={18} />
+                  </a>
+                  <a
+                    href="https://www.tiktok.com/@alchemistways"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="TikTok"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
+                  >
+                    <TikTokIcon />
+                  </a>
+                  <a
+                    href="https://x.com/alchemistways"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X (formerly Twitter)"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
+                  >
+                    <Twitter size={18} />
                   </a>
                 </div>
                 <div className="text-xs text-muted-foreground">
@@ -351,162 +681,25 @@ function LandingPage() {
   );
 }
 
-const practices = [
+const reactivityModes = [
   {
-    title: "Understand the Root",
-    line: "See the patterns beneath your reactions.",
-    icon: (
-      <svg
-        viewBox="0 0 40 40"
-        className="h-9 w-9"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      >
-        <circle cx="20" cy="20" r="12" />
-        <circle cx="20" cy="20" r="3" fill="currentColor" stroke="none" />
-      </svg>
-    ),
+    title: "Acting Out",
+    body: "When energy moves outward\nbefore awareness has a chance to respond.",
   },
   {
-    title: "Integrate the Shadow",
-    line: "Welcome what was rejected. Reclaim your energy.",
-    icon: (
-      <svg
-        viewBox="0 0 40 40"
-        className="h-9 w-9"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      >
-        <path d="M20 8c6 0 10 4 10 9s-4 8-8 9c3-1 5-4 5-7 0-5-4-9-10-9-4 0-7 2-8 5 2-4 6-7 11-7z" />
-      </svg>
-    ),
+    title: "Shutting Down",
+    body: "When the nervous system withdraws\nfrom experience.",
   },
   {
-    title: "Build Inner Sovereignty",
-    line: "Create from choice, not compulsion.",
-    icon: (
-      <svg
-        viewBox="0 0 40 40"
-        className="h-9 w-9"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      >
-        <path d="M20 9 L31 29 H9 Z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Act from Alignment",
-    line: "Your life becomes a true expression of you.",
-    icon: (
-      <svg
-        viewBox="0 0 40 40"
-        className="h-9 w-9"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      >
-        <circle cx="20" cy="20" r="4" />
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
-          const r = (deg * Math.PI) / 180;
-          return (
-            <line
-              key={deg}
-              x1={20 + Math.cos(r) * 7}
-              y1={20 + Math.sin(r) * 7}
-              x2={20 + Math.cos(r) * 14}
-              y2={20 + Math.sin(r) * 14}
-            />
-          );
-        })}
-      </svg>
-    ),
-  },
-  {
-    title: "Create with Freedom",
-    line: "Your creativity becomes your contribution.",
-    icon: (
-      <svg
-        viewBox="0 0 40 40"
-        className="h-9 w-9"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      >
-        <path d="M12 20c0-3 2.5-5 5-5s5 2 6 5c1 3 3.5 5 6 5s5-2 5-5-2.5-5-5-5-5 2-6 5c-1 3-3.5 5-6 5s-5-2-5-5z" />
-      </svg>
-    ),
+    title: "Suppressing",
+    body: "When thoughts,\nemotions,\nneeds,\nor impulses\nare continually pushed aside\nto preserve safety,\nconnection,\nor control.",
   },
 ];
 
-const insideItems = [
-  "A practical map to transform emotional reactivity",
-  "Step-by-step tools for lasting integration",
-  "Reflections and inquiries that create real shifts",
-  "A new relationship with yourself, others, and life",
-];
-
-const faqs = [
-  {
-    q: "What is the waitlist for?",
-    a: "The waitlist is for the Alchemist Ways book — a map from emotional reactivity to creative agency. Joining means you'll be among the first to receive it, along with early reflections from the work.",
-  },
-  {
-    q: "What happens after I sign up?",
-    a: "You'll receive a short welcome note. When the book is ready, you'll be the first to know. In between, we may share the occasional reflection — never more than once or twice a month.",
-  },
-  {
-    q: "How often will I hear from you?",
-    a: "Quietly. Not often. We'd rather write less and say something worth reading than fill your inbox.",
-  },
-  {
-    q: "Is this therapy or coaching?",
-    a: "No. Alchemist Ways is a philosophy and a map — offered as territory you can explore. It complements rather than replaces professional support.",
-  },
-  {
-    q: "Can I unsubscribe anytime?",
-    a: "Of course. Every email includes a one-click unsubscribe. Keep what is true, leave what isn't.",
-  },
-];
-
-function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  const panelId = `faq-${q.slice(0, 24).replace(/\W+/g, "-").toLowerCase()}`;
+function TikTokIcon() {
   return (
-    <div className="py-2">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-controls={panelId}
-        className="group flex w-full items-center justify-between gap-6 py-5 text-left"
-      >
-        <span className="font-display text-lg text-ink transition-colors group-hover:text-gold-deep sm:text-xl">
-          {q}
-        </span>
-        <span
-          className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-gold-deep transition-all duration-300 ease-out group-hover:border-gold ${
-            open ? "rotate-45 bg-gold-soft" : ""
-          }`}
-          aria-hidden
-        >
-          +
-        </span>
-      </button>
-      <div
-        id={panelId}
-        role="region"
-        className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          open ? "grid-rows-[1fr] pb-6 opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <p className="max-w-2xl leading-relaxed text-ink/75">{a}</p>
-        </div>
-      </div>
-    </div>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.16 15.3a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.77a8.2 8.2 0 0 0 4.76 1.52V6.84a4.84 4.84 0 0 1-1.01-.15z" />
+    </svg>
   );
 }

@@ -1,38 +1,41 @@
 /**
- * Top navigation — fixed glass bar; blends over sand hero.
+ * Top navigation — fixed glass bar over the ivory hero.
+ * Nav: The Map · The Book · Conversations · About · Book a Clarity Call.
  */
-export function SiteHeader({ bookingHref = "#waitlist" }: { bookingHref?: string }) {
+const navLinks = [
+  { href: "#map", label: "The Map" },
+  { href: "#book", label: "The Book" },
+  { href: "#conversations", label: "Conversations" },
+  { href: "#about", label: "About" },
+] as const;
+
+export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
-      <div className="border-b border-[#3a2a1f]/10 bg-[#c9baa9]/45 backdrop-blur-xl supports-[backdrop-filter]:bg-[#c9baa9]/30">
+      <div className="border-b border-[#3a2a1f]/10 bg-[#faf6f0]/70 backdrop-blur-xl supports-[backdrop-filter]:bg-[#faf6f0]/55">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:gap-4 sm:px-8 sm:py-3.5">
           <a
             href="#top"
-            className="group flex min-w-0 items-center gap-2 transition-opacity hover:opacity-80"
+            className="min-w-0 truncate font-display text-[0.75rem] uppercase tracking-[0.3em] text-ink transition-colors hover:text-ember-deep sm:text-[0.85rem]"
           >
-            <span className="font-display text-base tracking-[0.18em] text-[#3a2a1f] transition-colors group-hover:text-gold-deep sm:text-lg sm:tracking-[0.2em]">
-              A · W
-            </span>
-            <span className="hidden truncate text-[0.7rem] uppercase tracking-[0.28em] text-[#3a2a1f]/70 sm:inline">
-              Alchemist Ways
-            </span>
+            Alchemist Ways
           </a>
-          <nav className="flex shrink-0 items-center gap-1.5 sm:gap-3" aria-label="Primary">
+          <nav className="flex shrink-0 items-center gap-1 sm:gap-2" aria-label="Primary">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="nav-link-lux hidden rounded-full px-3 py-2 text-[0.75rem] text-ink/80 transition-colors hover:text-ember-deep md:inline-flex"
+              >
+                {link.label}
+              </a>
+            ))}
             <a
-              href="#book-inside"
-              className="btn-lux btn-lux-sand btn-lux-nav nav-link-lux hidden sm:inline-flex"
+              href="#clarity-call"
+              className="btn-lux btn-lux-primary btn-lux-nav whitespace-nowrap"
             >
-              Get the book
-            </a>
-            <a
-              href={bookingHref}
-              className="btn-lux btn-lux-sand btn-lux-nav nav-link-lux hidden md:inline-flex"
-            >
-              Book a Call
-            </a>
-            <a href="#waitlist" className="btn-lux btn-lux-primary btn-lux-nav whitespace-nowrap">
-              <span className="sm:hidden">Waitlist</span>
-              <span className="hidden sm:inline">Join the waitlist</span>
+              <span className="sm:hidden">Clarity Call</span>
+              <span className="hidden sm:inline">Book a Clarity Call</span>
             </a>
           </nav>
         </div>

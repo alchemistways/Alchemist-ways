@@ -133,8 +133,8 @@ function MapIntro({
 }) {
   return (
     <div className={`mx-auto shrink-0 text-center ${compact ? "max-w-xl" : "max-w-2xl"}`}>
-      <div className="text-[0.6rem] uppercase tracking-[0.28em] text-gold-deep sm:text-[0.65rem]">
-        The Map —
+      <div className="text-[0.6rem] uppercase tracking-[0.28em] text-ember-deep sm:text-[0.65rem]">
+        The Map
       </div>
       <h2
         className={`font-display leading-tight text-ink ${
@@ -143,21 +143,23 @@ function MapIntro({
             : "mt-3 text-3xl sm:text-4xl md:text-5xl"
         }`}
       >
-        From reactivity to creative agency.
+        From Emotional Reactivity to Creative Agency
       </h2>
       {scrollHint ? (
         <p className="mt-1.5 text-[0.7rem] text-ink/70 sm:mt-2 sm:text-sm">
           <span className="sm:hidden">
-            Circle {active + 1} of {MOVEMENT_COUNT} — keep scrolling
+            Five movements. One relationship. Meet yourself, differently. · {active + 1}/
+            {MOVEMENT_COUNT}
           </span>
           <span className="hidden sm:inline">
-            A 5-stage path — circle {active + 1} of {MOVEMENT_COUNT}. Keep scrolling through each
-            movement.
+            Five movements. One relationship. Meet yourself, differently. · Circle {active + 1} of{" "}
+            {MOVEMENT_COUNT} — keep scrolling.
           </span>
         </p>
       ) : (
         <p className="mt-5 text-ink/75">
-          A 5-stage path of inner transformation. Hover a movement to preview · click to open.
+          The Map isn&apos;t something to master. It&apos;s a way of learning the language of your
+          own experience. Five movements. One relationship. Meet yourself, differently.
         </p>
       )}
     </div>
@@ -173,7 +175,7 @@ function ScrollCue({ progress, active }: { progress: number; active: number }) {
           <span
             key={i}
             className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
-              i < active ? "bg-gold-deep" : i === active ? "bg-ink" : "bg-border"
+              i < active ? "bg-ember/60" : i === active ? "bg-ember" : "bg-border"
             }`}
           />
         ))}

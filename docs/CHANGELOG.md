@@ -1,5 +1,18 @@
 # Changelog
 
+## Landing page rebuild — Meet Yourself, Differently. (branch1)
+
+- Fully rewrote `src/routes/index.tsx` from client landing PDF + Brand OS (verbatim copy)
+- New hero (`hero-meet` assets from client environment art; Higgsfield deferred — session expired): MEET YOURSELF / DIFFERENTLY. (rotated), Explore The Map + Get the Book
+- Narrative sections One–Four, Emotional Reactivity triptych, triggers doorway, About Malek + portrait
+- Ways to Begin: Book, Conversations (YouTube), Clarity Call (Calendly free/paid), Community (Skool)
+- Kit waitlist: form `9699624`, “Continue the exploration.” / “Begin Here”; footer socials from Brand OS
+- Palette: warm ivory + terracotta/ember; CircularMap restyled to numbered terracotta stages
+- Removed FAQ, practices strip, waitlist count / localStorage
+- Meta → Meet Yourself, Differently.; MapIntro aligned to PDF map framing
+
+---
+
 ## Hero image sharpening (local; not pushed)
 
 - Higgsfield upload API still failing (`media_upload`/`balance` both error) — used local fallback

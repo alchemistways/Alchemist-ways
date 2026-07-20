@@ -4,21 +4,19 @@ Items needed to remove provisional copy / wiring placeholders and go fully live 
 
 | Input | Status | Notes |
 |-------|--------|-------|
-| Book title | **Needed** | Page uses provisional “The forthcoming book” — replace with final title |
-| Book blurb / promise | Soft | Provisional grounded copy ships; replace with client-approved language |
-| What waitlist subscribers get | Soft | Provisional “book updates + early access notes”; refine if benefit differs |
-| Cover / book art approval | Soft | Cover JPEG already in repo; confirm usage |
-| Booking URL for 1-on-1 call | **Needed** | Replace `[BOOKING URL]` |
-| Email tool / Formspree (or Mailchimp, ConvertKit, etc.) | **Needed** | Replace `[FORM_ENDPOINT]` |
-| Map visual references | Optional | Symbolic circle ships without them |
-| Brand assets / Google Drive materials | Optional | Logo, fonts, approved copy |
-| Social links | Optional | Footer / community |
-| Community name / URL | Optional | Nav “Community” currently anchors on-page |
+| Book title | **Done** | *Meet Yourself, Differently.* |
+| Book blurb / promise | **Done** | From Brand OS PDF — on Ways to Begin / Book card |
+| Cover / book art | **Done** | `BOOK_MAP DESIGN/` + `hero-meet` assets |
+| Email tool | **Done** | Kit form `9699624` — native POST in `WaitlistForm` |
+| Booking URL | **Done** | Calendly free 30min + paid 90min Clarity Session |
+| Social links | **Done** | IG / YT / TikTok / X @alchemistways; Skool community |
+| About portrait | **Done** | `Malek Portrait_ABOUT SECTION.jpg` → `src/assets/malek-portrait.jpg` |
+| Map visual references | **Done** | Client MAP artwork — CircularMap restyled |
 
-## Provisional copy (design pass)
+## Still optional / later
 
-Until client assets arrive, the page uses grounded provisional language (no empty `[PLACEHOLDER]` cards). Treat book title, blurbs, waitlist benefit, and community line as **editable drafts**, not final claims.
-
-## Ready-to-send client note
-
-> The page is refined around one job: trust + waitlist signups, with the circular journey as the signature. Please send: final book title/blurb, what waitlist subscribers get (if different from early book updates), booking link, and email tool (or approve Formspree). Optional: map references, brand/Drive materials, socials.
+| Input | Status | Notes |
+|-------|--------|-------|
+| Higgsfield 4K hero regen | Optional | Session was expired; local upscale of client environment shot ships for now |
+| Per-stage Map routes | Deferred | Stages expand in place on the landing page (v1) |
+| Long-term coaching funnel | Out of Phase 1 | Roadmap only — Clarity Session → Private Coaching |

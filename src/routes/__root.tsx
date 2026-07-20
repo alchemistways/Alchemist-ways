@@ -69,20 +69,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Alchemist Ways — From Emotional Reactivity to Creative Agency" },
+      { title: "Alchemist Ways — Meet Yourself, Differently." },
       {
         name: "description",
         content:
-          "A quiet philosophy and map for meeting your inner life with awareness, honesty, and choice. Join the waitlist for the book.",
+          "A practical map for discovering a different relationship with yourself. From Emotional Reactivity to Creative Agency.",
       },
       { name: "author", content: "Malek Najm Ghaleb" },
       {
         property: "og:title",
-        content: "Alchemist Ways — From Emotional Reactivity to Creative Agency",
+        content: "Alchemist Ways — Meet Yourself, Differently.",
       },
       {
         property: "og:description",
-        content: "A map for moving from reactivity to creative agency. Join the waitlist.",
+        content:
+          "A practical map for discovering a different relationship with yourself. From Emotional Reactivity to Creative Agency.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "/brand/ac-logo.png" },

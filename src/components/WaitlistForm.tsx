@@ -1,137 +1,75 @@
 import { useState } from "react";
-import { z } from "zod";
 
-const schema = z.object({
-  firstName: z.string().trim().max(80).optional().or(z.literal("")),
-  email: z.string().trim().email("Please enter a valid email").max(255),
-});
+const KIT_FORM_ACTION = "https://app.kit.com/forms/9699624/subscriptions";
 
-type Props = {
-  onJoined?: () => void;
-  compact?: boolean;
-};
-
-const STORAGE_KEY = "aw_waitlist";
-
-function readWaitlist(): Array<{
-  firstName?: string;
-  email: string;
-  at: string;
-}> {
-  try {
-    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
-    return Array.isArray(raw) ? raw : [];
-  } catch {
-    return [];
-  }
-}
-
-export function WaitlistForm({ onJoined, compact = false }: Props) {
-  const [firstName, setFirstName] = useState("");
+/**
+ * Kit (ConvertKit) email form, styled natively — no Kit JS/CSS embed.
+ * POSTs the single `email_address` field to the hosted Kit form endpoint.
+ */
+export function WaitlistForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const parsed = schema.safeParse({ firstName, email });
-    if (!parsed.success) {
-      setStatus("error");
-      setMessage(parsed.error.issues[0]?.message ?? "Please check your details");
-      return;
-    }
     setStatus("loading");
-    setMessage("");
-    // Local-only capture for now. When a backend is connected (Cloud/Mailchimp/Kit),
-    // this is where we POST the submission.
     try {
-      const existing = readWaitlist();
-      const normalized = parsed.data.email.toLowerCase();
-      const already = existing.some(
-        (entry) => typeof entry?.email === "string" && entry.email.toLowerCase() === normalized,
-      );
-      if (!already) {
-        existing.push({ ...parsed.data, at: new Date().toISOString() });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
-      }
-      await new Promise((r) => setTimeout(r, 600));
+      const body = new FormData();
+      body.append("email_address", email);
+      const res = await fetch(KIT_FORM_ACTION, {
+        method: "POST",
+        body,
+        headers: { Accept: "application/json" },
+      });
+      if (!res.ok) throw new Error(`Kit responded ${res.status}`);
       setStatus("success");
-      onJoined?.();
     } catch {
       setStatus("error");
-      setMessage("Something went quiet on our end. Please try again.");
     }
   }
 
   if (status === "success") {
     return (
-      <div className="animate-fade-up rounded-2xl border border-gold/40 bg-gold-soft/40 p-6 sm:p-8">
-        <div className="flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.28em] text-gold-deep">
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold-deep" />
-          You're on the list
-        </div>
-        <h3 className="mt-3 font-display text-2xl leading-tight text-ink sm:text-3xl">
-          {firstName ? `Thank you, ${firstName}.` : "Thank you for joining."}
-        </h3>
-        <p className="mt-3 leading-relaxed text-ink/80">
-          We'll be in touch quietly, not often. When the book is ready, you'll be the first to know.
-          In the meantime — stay curious.
-        </p>
-        <p className="mt-4 font-display italic text-muted-foreground">
-          Keep what is true. Leave what isn't.
+      <div
+        className="animate-fade-up rounded-2xl border border-ember/40 bg-ember-soft/50 px-6 py-6 text-center sm:px-8 sm:py-8"
+        role="status"
+      >
+        <p className="font-display text-xl leading-snug text-ink sm:text-2xl">
+          Success! Now check your email to confirm your subscription.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
-      <div
-        className={
-          compact ? "flex flex-col gap-3 sm:flex-row" : "grid gap-3 sm:grid-cols-[1fr_1.4fr]"
-        }
-      >
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => {
-            setFirstName(e.target.value);
-            if (status === "error") setStatus("idle");
-          }}
-          placeholder="First name (optional)"
-          className="w-full rounded-full border border-border bg-card px-5 py-3.5 text-base text-ink placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30 sm:py-3 sm:text-sm"
-          autoComplete="given-name"
-          maxLength={80}
-        />
+    <form onSubmit={handleSubmit} className="mx-auto w-full max-w-xl">
+      <div className="flex flex-col gap-3 sm:flex-row">
         <input
           type="email"
+          name="email_address"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
             if (status === "error") setStatus("idle");
           }}
-          placeholder="you@example.com"
+          placeholder="Your email"
+          aria-label="Your email"
           required
-          className="w-full rounded-full border border-border bg-card px-5 py-3.5 text-base text-ink placeholder:text-muted-foreground focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30 sm:py-3 sm:text-sm"
           autoComplete="email"
           maxLength={255}
+          className="w-full flex-1 rounded-full border border-border bg-card px-5 py-3.5 text-base text-ink placeholder:text-muted-foreground focus:border-ember focus:outline-none focus:ring-2 focus:ring-ember/25 sm:py-3 sm:text-sm"
         />
-      </div>
-      <div className="flex flex-col-reverse items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-muted-foreground">
-          Quiet updates. No noise. Unsubscribe anytime.
-        </p>
         <button
           type="submit"
           disabled={status === "loading"}
-          className="btn-lux btn-lux-primary w-full disabled:pointer-events-none disabled:opacity-60 sm:w-auto"
+          className="btn-lux btn-lux-primary w-full whitespace-nowrap disabled:pointer-events-none disabled:opacity-60 sm:w-auto"
         >
-          {status === "loading" ? "Joining…" : "Join the waitlist"}
+          {status === "loading" ? "One moment…" : "Begin Here"}
         </button>
       </div>
       {status === "error" && (
-        <p className="text-xs text-destructive" role="alert">
-          {message}
+        <p className="mt-3 text-center text-xs text-destructive" role="alert">
+          Something went quiet on our end. Please try again.
         </p>
       )}
     </form>

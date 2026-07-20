@@ -30,6 +30,9 @@
   --color-ring: var(--ring);
   --color-ink: var(--ink);
   --color-cream: var(--cream);
+  --color-ember: var(--ember);
+  --color-ember-soft: var(--ember-soft);
+  --color-ember-deep: var(--ember-deep);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-gold-deep: var(--gold-deep);
@@ -40,32 +43,37 @@
 :root {
   --radius: 0.5rem;
 
-  /* Soft white / cream blend */
-  --cream: #faf8f3;
-  --ink: #1f1b17;
-  --gold: #c9a575;
-  --gold-soft: #e8d4b0;
-  --gold-deep: #a9846b;
+  /* Warm ivory ground + terracotta/ember accents — matches the new book art */
+  --cream: #faf6f0;
+  --ink: #262019;
+  --ember: #c05a2e;
+  --ember-soft: #f5e2d3;
+  --ember-deep: #9c4722;
 
-  --background: #faf8f3;
-  --foreground: #1f1b17;
-  --card: #ffffff;
+  /* Legacy gold tokens now resolve to the ember family */
+  --gold: var(--ember);
+  --gold-soft: var(--ember-soft);
+  --gold-deep: var(--ember-deep);
+
+  --background: #faf6f0;
+  --foreground: #262019;
+  --card: #fffdf9;
   --card-foreground: var(--ink);
-  --popover: #ffffff;
+  --popover: #fffdf9;
   --popover-foreground: var(--ink);
-  --primary: var(--ink);
-  --primary-foreground: #faf8f3;
-  --secondary: #f3ebe0;
+  --primary: var(--ember);
+  --primary-foreground: #faf6f0;
+  --secondary: #f3e9dd;
   --secondary-foreground: var(--ink);
-  --muted: #f3ebe0;
-  --muted-foreground: #6b635a;
-  --accent: var(--gold-soft);
+  --muted: #f3e9dd;
+  --muted-foreground: #70614f;
+  --accent: var(--ember-soft);
   --accent-foreground: var(--ink);
   --destructive: oklch(0.55 0.2 27);
-  --destructive-foreground: #faf8f3;
-  --border: rgba(31, 27, 23, 0.12);
-  --input: rgba(31, 27, 23, 0.12);
-  --ring: var(--gold);
+  --destructive-foreground: #faf6f0;
+  --border: rgba(38, 32, 25, 0.12);
+  --input: rgba(38, 32, 25, 0.12);
+  --ring: var(--ember);
 
   /* Motion — quiet luxury */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -182,14 +190,14 @@
 }
 
 .btn-lux-primary {
-  background: var(--ink);
+  background: var(--ember);
   color: var(--primary-foreground);
-  box-shadow: 0 10px 28px -16px rgba(31, 27, 23, 0.55);
+  box-shadow: 0 10px 28px -16px rgba(156, 71, 34, 0.6);
 }
 
 .btn-lux-primary:hover {
-  background: var(--gold-deep);
-  box-shadow: 0 16px 36px -14px rgba(169, 132, 107, 0.55);
+  background: var(--ember-deep);
+  box-shadow: 0 16px 36px -14px rgba(156, 71, 34, 0.55);
 }
 
 .btn-lux-ghost {
@@ -205,9 +213,9 @@
   box-shadow: 0 12px 28px -18px rgba(169, 132, 107, 0.45);
 }
 
-/* Ghost button tuned for sand / corridor hero */
+/* Ghost button tuned for ivory hero */
 .btn-lux-sand {
-  background: rgba(250, 248, 243, 0.55);
+  background: rgba(250, 246, 240, 0.55);
   color: #3a2a1f;
   border: 1px solid rgba(58, 42, 31, 0.16);
   backdrop-filter: blur(10px);
