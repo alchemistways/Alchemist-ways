@@ -14,6 +14,13 @@ export default defineConfig({
   plugins: [
     tanstackStart({
       server: { entry: "server" },
+      // Client-only shell for GitHub Pages (static hosting, no Node server).
+      spa: {
+        enabled: true,
+      },
+      prerender: {
+        enabled: true,
+      },
     }),
     viteReact(),
     tailwindcss(),

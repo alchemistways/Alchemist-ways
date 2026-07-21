@@ -1,0 +1,44 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # Legacy Pages is set to "Deploy from branch: main /".
+  # Sync the built SPA into the repo root so index.html wins over README.
+  publish-root:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build:pages
+
+      - name: Commit Pages root if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .nojekyll assets brand hero models \
+            apple-touch-icon.png favicon.ico favicon-16.png favicon-32.png favicon.png || true
+          if git diff --staged --quiet; then
+            echo "No Pages root changes"
+          else
+            git commit -m "chore: sync static Pages build"
+            git push
+          fi

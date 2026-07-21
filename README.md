@@ -11,7 +11,9 @@ bun install   # or: npm install
 bun run dev   # or: npm run dev
 ```
 
-Open the URL Vite prints (usually `http://localhost:3000`). Do not push until the page looks right locally.
+Open the URL Vite prints (usually `http://localhost:3000`). That is the real site — not the GitHub README.
+
+Live site: [alchemistways.com](https://alchemistways.com) (GitHub Pages deploys the built app from `main` via Actions). Do not push until the page looks right locally.
 
 ## Stack
 
