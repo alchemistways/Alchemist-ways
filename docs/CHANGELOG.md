@@ -1,5 +1,12 @@
 # Changelog
 
+## GitHub Pages: serve the real app (not README)
+
+- SPA/prerender build for static hosting; Actions workflow deploys `.output/public` to Pages
+- Fixes live site previously rendering the repo README via Jekyll
+
+---
+
 ## Book plate rebuild — correct typography (branch1)
 
 - Regenerated hero/book plate with Higgsfield `nano_banana_pro` from clean cover + corridor refs
