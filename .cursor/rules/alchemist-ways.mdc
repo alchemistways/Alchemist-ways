@@ -1,0 +1,40 @@
+---
+description: Alchemist Ways landing — conversion, brand, and scope rules
+alwaysApply: true
+---
+
+# Alchemist Ways
+
+## Conversion first
+
+- Primary CTA: **Join the Waitlist** (email).
+- Secondary CTA: **Book a 1-on-1 Call** — muted, not hero-equal.
+- Do not add competing CTAs in the hero.
+
+## Brand / visual
+
+- Brand mark: **A•C** with wordmark **Alchemist Ways**. No Lovable or third-party builder logos/links.
+- Paper-white / warm cream from the TanStack app styles; gold accents; no purple mystical templates.
+- Signature: circular journey map (`CircularMap`). Quiet other chrome.
+- See `docs/DESIGN-PRINCIPLES.md` and `docs/BRAND.md`.
+
+## Stack
+
+- Main app is **TanStack Start + Vite + React** at the repo root (`src/`).
+- Do **not** revive the archived static `archive/legacy-landing.html` as the live site.
+- Do **not** reintroduce `@lovable.dev/*`, Lovable telemetry, or `.lovable/` project metadata.
+
+## Scope
+
+- Landing + waitlist. No product/funnel/app scope creep unless asked.
+- Prefer source/client copy over invented marketing language.
+- Ask before guessing book title, booking URL, form endpoint, or brand claims.
+- Read `docs/BRIEF.md`, `docs/BRAND.md`, `docs/WORKFLOW.md` before structural changes.
+- Always test with `bun run dev` / `npm run dev` before push. Do not push unless the user asks.
+- Update `docs/CHANGELOG.md` when shipping meaningful changes.
+
+## Git workflow
+
+- `origin` is the client repo `alchemistways/Alchemist-ways`; the user is a collaborator.
+- **Always push to `branch1`** — never push to `main`. The user merges to `main` themselves.
+- Do not create new repositories or remotes.
