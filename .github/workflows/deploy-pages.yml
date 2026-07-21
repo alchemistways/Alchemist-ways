@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -15,7 +15,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  # Legacy Pages is set to "Deploy from branch: main /".
+  # Sync the built SPA into the repo root so index.html wins over README.
+  publish-root:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,34 +27,18 @@ jobs:
           node-version: "22"
           cache: npm
 
-      - name: Install
-        run: npm ci
+      - run: npm ci
+      - run: npm run build:pages
 
-      - name: Build static site
-        run: npm run build
-
-      - name: Prepare Pages artifact
+      - name: Commit Pages root if changed
         run: |
-          mkdir -p _site
-          cp -R .output/public/. _site/
-          # SPA shell is emitted as _shell.html — Pages needs index.html
-          if [ -f _site/_shell.html ]; then
-            cp _site/_shell.html _site/index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .nojekyll assets brand hero models \
+            apple-touch-icon.png favicon.ico favicon-16.png favicon-32.png favicon.png || true
+          if git diff --staged --quiet; then
+            echo "No Pages root changes"
+          else
+            git commit -m "chore: sync static Pages build"
+            git push
           fi
-          # Keep custom domain + disable Jekyll (repo README was being served as the site)
-          cp CNAME _site/CNAME
-          touch _site/.nojekyll
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4

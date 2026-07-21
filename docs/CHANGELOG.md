@@ -2,8 +2,9 @@
 
 ## GitHub Pages: serve the real app (not README)
 
-- SPA/prerender build for static hosting; Actions workflow deploys `.output/public` to Pages
-- Fixes live site previously rendering the repo README via Jekyll
+- SPA/prerender build; `npm run build:pages` syncs `index.html` + assets to repo root
+- `.nojekyll` so Pages stops rendering the README as the live site
+- Actions workflow keeps the root build in sync on pushes to `main`
 
 ---
 
