@@ -1,5 +1,15 @@
 # Changelog
 
+## Site formatting cleanup pass (branch1)
+
+- Assets: refreshed `hero-meet` plates; added `begin-book-bg` (+ 4k) — Higgsfield upscale failed, used local sharpen/resample
+- Map: CircularMap / MapScrollJourney spacing and label cleanup
+- About / Invitation copy layout tightened in `index.tsx`
+- Book section: full-bleed begin-book background + BeginCarousel
+- Waitlist remains primary CTA
+
+---
+
 ## Landing page rebuild — Meet Yourself, Differently. (branch1)
 
 - Fully rewrote `src/routes/index.tsx` from client landing PDF + Brand OS (verbatim copy)

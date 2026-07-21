@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Instagram, Twitter, Youtube } from "lucide-react";
-import bookCover from "@/assets/book-meet.jpg";
+import beginBookBg from "@/assets/begin-book-bg-4k.jpg";
+import beginBookBgSm from "@/assets/begin-book-bg.jpg";
 import heroMeet from "@/assets/hero-meet-4k.jpg";
 import heroMeetSm from "@/assets/hero-meet.jpg";
 import malekPortrait from "@/assets/malek-portrait.jpg";
+import { BeginCarousel } from "@/components/BeginCarousel";
 import { MapScrollJourney } from "@/components/MapScrollJourney";
 import { PageEntrance, Reveal } from "@/components/PageMotion";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -12,11 +14,6 @@ import { WaitlistForm } from "@/components/WaitlistForm";
 export const Route = createFileRoute("/")({
   component: LandingPage,
 });
-
-const CONVERSATIONS_URL = "https://www.youtube.com/@alchemistwaysofficial";
-const CLARITY_FREE_URL = "https://calendly.com/alchemistways/conversation";
-const CLARITY_PAID_URL = "https://calendly.com/alchemistways/clarity-session";
-const COMMUNITY_URL = "https://www.skool.com/alchemist-ways-1974/about";
 
 function LandingPage() {
   return (
@@ -110,7 +107,7 @@ function LandingPage() {
 
         {/* Section Two */}
         <section className="border-y border-border/60 bg-secondary/40">
-          <div className="mx-auto max-w-2xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
             <Reveal>
               <div className="space-y-10 text-center">
                 <div className="space-y-3">
@@ -185,7 +182,7 @@ function LandingPage() {
 
         {/* Section Four */}
         <section className="border-y border-border/60 bg-secondary/30">
-          <div className="mx-auto max-w-2xl px-5 py-20 text-center sm:px-8 sm:py-28">
+          <div className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8 sm:py-28">
             <Reveal>
               <div className="space-y-6">
                 <p className="font-display text-2xl leading-snug text-ink sm:text-3xl md:text-4xl">
@@ -282,10 +279,10 @@ function LandingPage() {
         </div>
 
         {/* About Malek */}
-        <section id="about" className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
-          <Reveal>
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-16">
-              <div className="mx-auto w-full max-w-sm lg:mx-0">
+        <section id="about" className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-16">
+            <Reveal>
+              <div className="mx-auto w-full max-w-md lg:mx-0">
                 <img
                   src={malekPortrait}
                   alt="Malek Najm Ghaleb"
@@ -296,285 +293,179 @@ function LandingPage() {
                   className="aspect-[4/5] w-full object-cover object-top"
                 />
               </div>
-              <div>
+            </Reveal>
+
+            <div>
+              <Reveal>
                 <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
                   About Malek
                 </div>
-                <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink/80">
+              </Reveal>
+
+              <div className="mt-8 space-y-8 text-lg leading-relaxed text-ink/80">
+                <Reveal delay={40}>
                   <p>
-                    For years,
+                    For years, I thought I was searching for freedom.
                     <br />
-                    I thought I was searching
-                    <br />
-                    for freedom.
-                    <br />
-                    Validation.
-                    <br />
-                    Creativity.
-                    <br />
-                    Love.
+                    Validation. Creativity. Love.
                   </p>
+                </Reveal>
+                <Reveal delay={80}>
                   <p>
-                    Yet beneath all those desires
+                    Yet beneath all those desires was something quieter.
                     <br />
-                    was something quieter.
-                    <br />
-                    Something
-                    <br />I couldn&apos;t yet see.
+                    Something I couldn&apos;t yet see.
                   </p>
-                  <p>
-                    I was searching
-                    <br />
-                    for inner safety.
-                  </p>
+                </Reveal>
+                <Reveal delay={120}>
+                  <p>I was searching for inner safety.</p>
+                </Reveal>
+                <Reveal delay={160}>
                   <p>
                     Not physical safety.
                     <br />
-                    The kind of inner safety
+                    The kind of inner safety that allows someone to express themselves honestly.
                     <br />
-                    that allows someone
+                    To create art without constantly second-guessing themselves.
                     <br />
-                    to express themselves honestly.
+                    To speak without silently holding back.
                     <br />
-                    To create art
-                    <br />
-                    without constantly second-guessing themselves.
-                    <br />
-                    To speak
-                    <br />
-                    without silently holding back.
-                    <br />
-                    To live
-                    <br />
-                    instead of performing.
+                    To live instead of performing.
                   </p>
+                </Reveal>
+                <Reveal delay={200}>
                   <p>
-                    At the time,
+                    At the time, I couldn&apos;t see beyond my conditioning.
                     <br />
-                    I couldn&apos;t see beyond
+                    I only knew that despite my strengths, my ambitions, and my creativity,
                     <br />
-                    my conditioning.
-                    <br />
-                    I only knew
-                    <br />
-                    that despite my strengths,
-                    <br />
-                    my ambitions,
-                    <br />
-                    and my creativity,
-                    <br />
-                    much of my life felt shaped by fear,
-                    <br />
-                    self-doubt,
-                    <br />
-                    shame,
-                    <br />
-                    anxiety,
+                    much of my life felt shaped by fear, self-doubt, shame, anxiety,
                     <br />
                     and emotional reactivity.
                   </p>
+                </Reveal>
+                <Reveal delay={240}>
+                  <p>Eventually, life slowed me down enough to ask a different question.</p>
+                </Reveal>
+                <Reveal delay={280}>
                   <p>
-                    Eventually,
+                    Not, &ldquo;How do I fix myself?&rdquo;
                     <br />
-                    life slowed me down enough
-                    <br />
-                    to ask
-                    <br />a different question.
+                    But… &ldquo;What is this experience trying to communicate?&rdquo;
                   </p>
-                  <p>
-                    Not,
-                    <br />
-                    &ldquo;How do I fix myself?&rdquo;
-                    <br />
-                    But…
-                    <br />
-                    &ldquo;What is this experience trying to communicate?&rdquo;
-                  </p>
+                </Reveal>
+                <Reveal delay={320}>
                   <p>
                     The Map emerged slowly.
                     <br />
-                    Through observation.
+                    Through observation. Practice. Discomfort. Radical honesty.
                     <br />
-                    Practice.
-                    <br />
-                    Discomfort.
-                    <br />
-                    Radical honesty.
-                    <br />
-                    And through the privilege
-                    <br />
-                    of walking beside others
-                    <br />
-                    doing the same.
+                    And through the privilege of walking beside others doing the same.
                   </p>
-                  <p className="pt-4 font-display text-xl italic text-ink">— Malek Najm Ghaleb</p>
-                </div>
+                </Reveal>
+                <Reveal delay={360}>
+                  <p className="pt-2 font-display text-xl italic text-ink">— Malek Najm Ghaleb</p>
+                </Reveal>
               </div>
             </div>
-          </Reveal>
+          </div>
         </section>
 
         {/* Invitation */}
-        <section className="border-y border-border/60 bg-secondary/40">
-          <div className="mx-auto max-w-2xl px-5 py-20 text-center sm:px-8 sm:py-28">
+        <section className="border-y border-border/60 bg-secondary/35">
+          <div className="mx-auto max-w-xl px-5 py-24 text-center sm:px-8 sm:py-32">
             <Reveal>
               <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
                 An Invitation
               </div>
-              <div className="mt-8 space-y-4 font-display text-2xl leading-snug text-ink sm:text-3xl">
+              <div className="mx-auto mt-6 h-px w-8 bg-ember/40" aria-hidden />
+              <div className="mt-10 space-y-6 font-display text-2xl leading-snug text-ink sm:space-y-7 sm:text-3xl">
                 <p>Remain curious.</p>
                 <p>Explore the Map.</p>
-                <p>
-                  Test it
-                  <br />
-                  against your own experience.
-                </p>
+                <p>Test it against your own experience.</p>
                 <p>Keep what is true.</p>
                 <p>Leave what isn&apos;t.</p>
               </div>
-              <p className="mx-auto mt-10 max-w-md text-lg leading-relaxed text-ink/75">
-                Alchemist Ways is an invitation—
-                <br />
-                not to become someone else—
-                <br />
-                but to discover
-                <br />
-                a different relationship
-                <br />
-                with yourself.
+              <p className="mx-auto mt-12 max-w-md text-lg leading-relaxed text-ink/75">
+                Alchemist Ways is an invitation—not to become someone else—but to discover a
+                different relationship with yourself.
               </p>
             </Reveal>
           </div>
         </section>
 
         {/* Ways to Begin */}
-        <section id="book" className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
-          <Reveal>
-            <div className="text-center">
-              <h2 className="font-display text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
-                There Are Several Ways to Begin
-              </h2>
-            </div>
-          </Reveal>
-
-          <div className="mt-14 space-y-16">
-            {/* The Book */}
+        <section className="py-20 sm:py-28">
+          <div className="mx-auto max-w-5xl px-5 sm:px-8">
             <Reveal>
-              <div className="grid gap-10 md:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] md:items-center md:gap-14">
-                <img
-                  src={bookCover}
-                  alt="Meet Yourself, Differently — book cover"
-                  width={800}
-                  height={1000}
-                  loading="lazy"
-                  decoding="async"
-                  className="mx-auto w-full max-w-[16rem] object-contain md:max-w-none"
+              <div className="text-center">
+                <h2 className="font-display text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
+                  There Are Several Ways to Begin
+                </h2>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* The Book — full-bleed environment; copy left, book visible on right */}
+          <Reveal className="mt-14">
+            <div id="book" className="relative scroll-mt-24 overflow-hidden bg-[#d4c4b0]">
+              <div className="relative h-[min(42svh,360px)] w-full md:absolute md:inset-0 md:h-full">
+                <picture>
+                  <source media="(min-width: 768px)" srcSet={beginBookBg} />
+                  <img
+                    src={beginBookBgSm}
+                    alt="Meet Yourself, Differently — hardcover standing in a sand corridor"
+                    width={3840}
+                    height={2160}
+                    loading="lazy"
+                    decoding="async"
+                    sizes="100vw"
+                    className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-[72%_50%] md:object-[68%_48%] lg:object-[62%_45%]"
+                  />
+                </picture>
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background to-transparent md:hidden"
                 />
-                <div>
-                  <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(52%,36rem)] bg-gradient-to-r from-[#cfc0ab]/80 via-[#cfc0ab]/35 to-transparent md:block"
+                />
+              </div>
+
+              <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-5 pb-14 pt-6 md:min-h-[min(72svh,40rem)] md:bg-transparent md:px-8 md:pb-20 md:pt-16 lg:px-12">
+                <div className="flex w-full flex-1 flex-col justify-center md:max-w-[min(100%,26rem)] lg:max-w-[28rem]">
+                  <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep md:text-[#3a2a1f]/75">
                     The Book
                   </div>
-                  <h3 className="mt-3 font-display text-2xl uppercase leading-tight text-ink sm:text-3xl">
+                  <h3 className="mt-3 font-display text-2xl uppercase leading-tight text-ink sm:text-3xl md:text-[#2a1f16]">
                     Meet Yourself, Differently.
                   </h3>
-                  <p className="mt-2 text-sm uppercase tracking-[0.14em] text-ink/60">
+                  <p className="mt-2 text-sm uppercase tracking-[0.14em] text-ink/60 md:text-[#3a2a1f]/65">
                     A Map from Emotional Reactivity to Creative Agency.
                   </p>
-                  <p className="mt-6 leading-relaxed text-ink/80">
+                  <p className="mt-6 leading-relaxed text-ink/80 md:text-[#3a2a1f]/85">
                     Meet Yourself, Differently is an invitation to discover a new relationship with
                     yourself. Through the lens of Emotional Reactivity, Awareness, Integration,
                     Sovereignty, and Creative Agency, it offers a practical map for understanding
                     what your experience has been trying to communicate—and how that understanding
                     can naturally become greater clarity, freedom, and authentic self-expression.
                   </p>
-                  <p className="mt-4 text-ink/75">
+                  <p className="mt-4 text-ink/75 md:text-[#3a2a1f]/75">
                     Begin here if you&apos;d like to explore the work quietly, at your own pace.
                   </p>
-                  <a href="#waitlist" className="btn-lux btn-lux-primary mt-6 inline-flex">
+                  <a href="#waitlist" className="btn-lux btn-lux-primary mt-6 inline-flex w-fit">
                     Explore the Book
                     <span aria-hidden>→</span>
                   </a>
                 </div>
               </div>
-            </Reveal>
+            </div>
+          </Reveal>
 
-            {/* Conversations */}
-            <Reveal>
-              <div id="conversations" className="scroll-mt-24 border-t border-border/60 pt-14">
-                <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
-                  Conversations
-                </div>
-                <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
-                  Watch the philosophy come alive through reflections, teachings, and real
-                  conversations.
-                </p>
-                <a
-                  href={CONVERSATIONS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-lux btn-lux-sand mt-6 inline-flex"
-                >
-                  Watch Conversations
-                  <span aria-hidden>→</span>
-                </a>
-              </div>
-            </Reveal>
-
-            {/* Clarity Call */}
-            <Reveal>
-              <div id="clarity-call" className="scroll-mt-24 border-t border-border/60 pt-14">
-                <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
-                  A Clarity Call
-                </div>
-                <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
-                  An honest conversation about where you are, what patterns keep repeating, and
-                  whether this work feels like the right next step.
-                </p>
-                <p className="mt-4 max-w-xl leading-relaxed text-ink/70">
-                  No pressure. No performance. Just curiosity, generous listening, care, and
-                  thoughtful inquiry.
-                </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                  <a
-                    href={CLARITY_FREE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-lux btn-lux-primary inline-flex"
-                  >
-                    Clarity Conversation (Free · 30 min)
-                  </a>
-                  <a
-                    href={CLARITY_PAID_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-lux btn-lux-sand inline-flex"
-                  >
-                    Clarity Session (Paid · 90 min)
-                  </a>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Community */}
-            <Reveal>
-              <div className="border-t border-border/60 pt-14">
-                <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
-                  The Community
-                </div>
-                <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
-                  Walk alongside others learning to meet their inner lives with greater awareness,
-                  honesty, and choice.
-                </p>
-                <a
-                  href={COMMUNITY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-lux btn-lux-sand mt-6 inline-flex"
-                >
-                  Explore the Community
-                  <span aria-hidden>→</span>
-                </a>
-              </div>
+          <div className="mx-auto mt-16 max-w-5xl px-5 sm:mt-20 sm:px-8">
+            <Reveal delay={80}>
+              <BeginCarousel />
             </Reveal>
           </div>
         </section>

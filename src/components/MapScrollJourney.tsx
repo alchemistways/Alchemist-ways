@@ -101,10 +101,10 @@ export function MapScrollJourney() {
     <section className="border-y border-border/60 bg-gradient-to-b from-secondary/30 to-background">
       <div ref={trackRef} className="relative" style={{ height: `${trackHeight}vh` }}>
         <div className="sticky top-0 z-10 flex h-[100dvh] max-h-[100svh] flex-col overflow-hidden pt-[3.75rem] sm:pt-[4.5rem]">
-          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-5 py-4 sm:px-8 sm:py-6 lg:py-8">
+          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-5 py-5 sm:px-8 sm:py-7 lg:py-9">
             <MapIntro scrollHint compact active={active} />
 
-            <div className="mt-4 flex min-h-0 min-w-0 flex-1 items-center sm:mt-6">
+            <div className="mt-5 flex min-h-0 min-w-0 flex-1 items-center sm:mt-8">
               <CircularMap
                 activeIndex={active}
                 onActiveChange={scrollToStep}

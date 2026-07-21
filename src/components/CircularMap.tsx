@@ -58,8 +58,8 @@ type Props = {
 };
 
 /**
- * The Map — open terracotta ring with numbered nodes (labels outside).
- * Matches the client's MAP artwork: clear, uncluttered circles.
+ * The Map — open terracotta ring with numbered nodes.
+ * Labels live in the detail panel (sticky scroll) or a compact legend (static).
  */
 export function CircularMap({
   activeIndex,
@@ -73,7 +73,7 @@ export function CircularMap({
   const [panelKey, setPanelKey] = useState(0);
   const tipId = useId();
   const detailRef = useRef<HTMLDivElement>(null);
-  const radius = 36;
+  const radius = 38;
 
   const controlled = typeof activeIndex === "number";
   const active = controlled ? activeIndex : internalActive;
@@ -123,18 +123,18 @@ export function CircularMap({
         scrollDriven
           ? compactMobile
             ? "grid h-full min-h-0 min-w-0 grid-rows-[auto_minmax(0,1fr)] gap-4"
-            : "grid h-full min-h-0 min-w-0 grid-cols-1 items-center gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-10 lg:gap-14"
+            : "grid h-full min-h-0 min-w-0 grid-cols-1 items-center gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-12 lg:gap-16"
           : "grid min-w-0 items-start gap-12 lg:grid-cols-2 lg:items-center lg:gap-16"
       }
     >
-      <div className="flex min-h-0 min-w-0 items-center justify-center self-stretch px-2 sm:px-4">
+      <div className="flex min-h-0 min-w-0 flex-col items-center justify-center self-stretch px-2 sm:px-4">
         <div
           className={`relative aspect-square shrink-0 ${
             compactMobile
-              ? "w-[min(92%,260px)]"
+              ? "w-[min(92%,280px)]"
               : scrollDriven
-                ? "w-[min(100%,min(30rem,58vh))]"
-                : "w-[min(100%,30rem)]"
+                ? "w-[min(100%,min(32rem,62vh))]"
+                : "w-[min(100%,32rem)]"
           }`}
           role="listbox"
           aria-label="Alchemist Ways map movements"
@@ -151,8 +151,8 @@ export function CircularMap({
               r={radius}
               fill="none"
               stroke="currentColor"
-              strokeWidth="0.28"
-              className="text-ember/30"
+              strokeWidth="0.22"
+              className="text-ember/25"
             />
             <circle
               cx="50"
@@ -160,7 +160,7 @@ export function CircularMap({
               r={radius}
               fill="none"
               stroke="currentColor"
-              strokeWidth="0.85"
+              strokeWidth="0.75"
               strokeLinecap="round"
               className="text-ember"
               style={{
@@ -200,63 +200,48 @@ export function CircularMap({
             const isActive = i === active;
             const isHovered = hovered === i;
             const isCrossed = i < active;
-            // Push labels outward from center so they don't sit on the ring
-            const labelOut = 1.22;
-            const lx = 50 + (x - 50) * labelOut;
-            const ly = 50 + (y - 50) * labelOut;
 
             return (
-              <div key={m.key}>
-                <div
-                  className="absolute -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: `${x}%`, top: `${y}%` }}
+              <div
+                key={m.key}
+                className="absolute -translate-x-1/2 -translate-y-1/2"
+                style={{ left: `${x}%`, top: `${y}%` }}
+              >
+                <button
+                  id={`map-node-${m.key}`}
+                  type="button"
+                  role="option"
+                  aria-selected={isActive}
+                  aria-label={m.label}
+                  aria-describedby={isHovered || isActive ? tipId : undefined}
+                  onClick={() => select(i)}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  onFocus={() => setHovered(i)}
+                  onBlur={() => setHovered(null)}
+                  onKeyDown={(e) => onKeyRing(e, i)}
+                  className={`relative flex items-center justify-center rounded-full border bg-card font-display outline-none transition-[transform,background-color,border-color,box-shadow,color] duration-300 ${
+                    compactMobile
+                      ? "h-10 w-10 text-sm"
+                      : "h-12 w-12 text-base sm:h-14 sm:w-14 sm:text-lg"
+                  } ${
+                    isActive
+                      ? "scale-110 border-ember bg-ember text-primary-foreground shadow-[0_8px_20px_-12px_rgba(156,71,34,0.45)]"
+                      : isCrossed
+                        ? "border-ember/80 bg-ember-soft text-ember-deep"
+                        : isHovered
+                          ? "scale-105 border-ember bg-card text-ember-deep"
+                          : "border-ember/40 text-ember hover:border-ember"
+                  } focus-visible:ring-2 focus-visible:ring-ember/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                 >
-                  <button
-                    id={`map-node-${m.key}`}
-                    type="button"
-                    role="option"
-                    aria-selected={isActive}
-                    aria-describedby={isHovered || isActive ? tipId : undefined}
-                    onClick={() => select(i)}
-                    onMouseEnter={() => setHovered(i)}
-                    onMouseLeave={() => setHovered(null)}
-                    onFocus={() => setHovered(i)}
-                    onBlur={() => setHovered(null)}
-                    onKeyDown={(e) => onKeyRing(e, i)}
-                    className={`relative flex items-center justify-center rounded-full border bg-card font-display outline-none transition-[transform,background-color,border-color,box-shadow,color] duration-300 ${
-                      compactMobile ? "h-10 w-10 text-sm" : "h-12 w-12 text-base sm:h-14 sm:w-14 sm:text-lg"
-                    } ${
-                      isActive
-                        ? "scale-110 border-ember bg-ember text-primary-foreground shadow-[0_12px_28px_-14px_rgba(156,71,34,0.55)]"
-                        : isCrossed
-                          ? "border-ember/80 bg-ember-soft text-ember-deep"
-                          : isHovered
-                            ? "scale-105 border-ember bg-card text-ember-deep"
-                            : "border-ember/40 text-ember hover:border-ember"
-                    } focus-visible:ring-2 focus-visible:ring-ember/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
-                  >
-                    {i + 1}
-                    {isActive && (
-                      <span
-                        className="pointer-events-none absolute -inset-1.5 rounded-full border border-ember/35 motion-safe:animate-map-pulse"
-                        aria-hidden
-                      />
-                    )}
-                  </button>
-                </div>
-
-                {!compactMobile && (
-                  <span
-                    className={`pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-center transition-opacity duration-200 ${
-                      isActive || isHovered || isCrossed ? "opacity-100" : "opacity-60"
-                    }`}
-                    style={{ left: `${lx}%`, top: `${ly}%` }}
-                  >
-                    <span className="block text-[0.55rem] uppercase tracking-[0.2em] text-ink sm:text-[0.6rem]">
-                      {m.label}
-                    </span>
-                  </span>
-                )}
+                  {i + 1}
+                  {isActive && (
+                    <span
+                      className="pointer-events-none absolute -inset-1.5 rounded-full border border-ember/35 motion-safe:animate-map-pulse"
+                      aria-hidden
+                    />
+                  )}
+                </button>
               </div>
             );
           })}
@@ -273,14 +258,38 @@ export function CircularMap({
           <div
             id={tipId}
             role="status"
-            className={`pointer-events-none absolute inset-x-3 bottom-0 z-10 mx-auto max-w-[14rem] rounded-xl border border-border/70 bg-card/95 px-3 py-2.5 text-center shadow-sm backdrop-blur-sm transition-all duration-300 md:hidden ${
+            className={`pointer-events-none absolute inset-x-3 bottom-0 z-10 mx-auto max-w-[14rem] rounded-xl border border-border/50 bg-card/95 px-3 py-2.5 text-center backdrop-blur-sm transition-all duration-300 md:hidden ${
               hovered !== null ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
             }`}
           >
             <p className="font-display text-sm text-ink">{preview.label}</p>
-            <p className="mt-0.5 text-[0.7rem] leading-snug text-muted-foreground">{preview.short}</p>
+            <p className="mt-0.5 text-[0.7rem] leading-snug text-muted-foreground">
+              {preview.short}
+            </p>
           </div>
         </div>
+
+        {/* Compact legend — static / reduced-motion only (no drifting outer labels) */}
+        {!scrollDriven && (
+          <ol className="mt-8 flex w-full max-w-md flex-wrap items-center justify-center gap-x-4 gap-y-2 px-2">
+            {movements.map((m, i) => (
+              <li key={m.key}>
+                <button
+                  type="button"
+                  onClick={() => select(i)}
+                  className={`text-[0.6rem] uppercase tracking-[0.18em] transition-colors ${
+                    i === active ? "text-ember-deep" : "text-ink/55 hover:text-ember-deep"
+                  }`}
+                >
+                  <span className="tabular-nums text-ember/70">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="ml-1.5">{m.label}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+        )}
       </div>
 
       <div
@@ -290,16 +299,19 @@ export function CircularMap({
         }`}
       >
         <div
-          className={`relative overflow-hidden rounded-2xl border border-border/60 bg-card ${
-            compactMobile ? "px-5 py-5" : "px-6 py-6 sm:px-8 sm:py-8"
-          }`}
+          className={`relative overflow-hidden border-y border-border/50 bg-transparent ${
+            compactMobile ? "px-1 py-4" : "px-1 py-5 sm:px-2 sm:py-6"
+          } ${scrollDriven ? "max-h-[min(42vh,22rem)] overflow-y-auto overscroll-contain sm:max-h-[min(48vh,26rem)]" : ""}`}
         >
-          <div key={panelKey} className={scrollDriven ? undefined : "motion-safe:animate-map-panel"}>
+          <div
+            key={panelKey}
+            className={scrollDriven ? undefined : "motion-safe:animate-map-panel"}
+          >
             <div className="flex items-baseline justify-between gap-3">
-              <span className="text-[0.6rem] uppercase tracking-[0.28em] text-ember-deep">
+              <span className="font-display text-sm tabular-nums tracking-[0.12em] text-ember-deep sm:text-base">
                 {String(active + 1).padStart(2, "0")}
               </span>
-              <span className="text-[0.6rem] text-muted-foreground">
+              <span className="text-[0.6rem] tabular-nums text-muted-foreground">
                 {active + 1} / {movements.length}
               </span>
             </div>
@@ -316,7 +328,7 @@ export function CircularMap({
             </p>
             <p
               className={`mt-4 leading-relaxed text-ink/80 ${
-                compactMobile ? "line-clamp-5 text-sm" : "text-[0.95rem] sm:text-base"
+                compactMobile ? "text-sm" : "text-[0.95rem] sm:text-base"
               }`}
             >
               {current.body}
