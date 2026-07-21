@@ -91,7 +91,10 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: calc(4.75rem + env(safe-area-inset-top, 0px));
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overflow-x: clip;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -107,17 +110,15 @@
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    min-height: 100dvh;
   }
 
-  h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.015em;
-  }
-
-  /* Natural interactive polish on primary controls */
+  /* Comfortable taps + quiet transitions */
   a,
   button {
+    -webkit-tap-highlight-color: color-mix(in oklab, var(--ember) 18%, transparent);
+    touch-action: manipulation;
     transition:
       color var(--dur-fast) var(--ease-out-soft),
       background-color var(--dur-fast) var(--ease-out-soft),
@@ -125,6 +126,12 @@
       box-shadow var(--dur-med) var(--ease-out-soft),
       transform var(--dur-fast) var(--ease-out-soft),
       opacity var(--dur-fast) var(--ease-out-soft);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
   }
 
   a:focus-visible,

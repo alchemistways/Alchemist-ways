@@ -3,7 +3,7 @@ import { CircularMap, MOVEMENT_COUNT } from "@/components/CircularMap";
 
 /** Desktop: roomier per chapter. Mobile: shorter track. */
 function stepVh(isMobile: boolean) {
-  return isMobile ? 90 : 110;
+  return isMobile ? 82 : 110;
 }
 
 function prefersReducedMotion() {
@@ -100,11 +100,11 @@ export function MapScrollJourney() {
   return (
     <section className="border-y border-border/60 bg-gradient-to-b from-secondary/30 to-background">
       <div ref={trackRef} className="relative" style={{ height: `${trackHeight}vh` }}>
-        <div className="sticky top-0 z-10 flex h-[100dvh] max-h-[100svh] flex-col overflow-hidden pt-[3.75rem] sm:pt-[4.5rem]">
-          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-5 py-5 sm:px-8 sm:py-7 lg:py-9">
+        <div className="sticky top-0 z-10 flex h-[100dvh] max-h-[100svh] flex-col overflow-hidden pt-[calc(3.5rem+env(safe-area-inset-top,0px))] sm:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
+          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-4 py-3 sm:px-8 sm:py-7 lg:py-9">
             <MapIntro scrollHint compact active={active} />
 
-            <div className="mt-5 flex min-h-0 min-w-0 flex-1 items-center sm:mt-8">
+            <div className="mt-3 flex min-h-0 min-w-0 flex-1 items-stretch sm:mt-8 sm:items-center sm:pb-3">
               <CircularMap
                 activeIndex={active}
                 onActiveChange={scrollToStep}
@@ -139,14 +139,14 @@ function MapIntro({
       <h2
         className={`font-display leading-tight text-ink ${
           compact
-            ? "mt-1.5 text-xl sm:mt-2 sm:text-3xl md:text-[2.35rem]"
+            ? "mt-1 text-lg sm:mt-2 sm:text-3xl md:text-[2.35rem]"
             : "mt-3 text-3xl sm:text-4xl md:text-5xl"
         }`}
       >
         From Emotional Reactivity to Creative Agency
       </h2>
       {scrollHint ? (
-        <p className="mt-2 text-[0.7rem] leading-relaxed text-ink/65 sm:text-sm">
+        <p className="mt-1.5 text-[0.65rem] leading-relaxed text-ink/65 sm:mt-2 sm:text-sm">
           Five movements. One relationship.{" "}
           <span className="text-ink/50">
             · {active + 1} of {MOVEMENT_COUNT}
@@ -165,18 +165,25 @@ function MapIntro({
 function ScrollCue({ progress, active }: { progress: number; active: number }) {
   const done = active >= MOVEMENT_COUNT - 1 && progress > 0.92;
   return (
-    <div className="mt-3 flex shrink-0 flex-col items-center gap-2 pb-safe sm:mt-5">
-      <div className="flex w-full max-w-xs items-center gap-1.5">
+    <div className="mt-3 flex w-full shrink-0 flex-col items-center gap-2 border-t border-border/40 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:mt-8 sm:gap-3.5 sm:pt-6 sm:pb-safe">
+      <div
+        className="grid w-full max-w-[13.5rem] grid-cols-5 gap-2"
+        role="progressbar"
+        aria-valuemin={1}
+        aria-valuemax={MOVEMENT_COUNT}
+        aria-valuenow={active + 1}
+        aria-label={`Map movement ${active + 1} of ${MOVEMENT_COUNT}`}
+      >
         {Array.from({ length: MOVEMENT_COUNT }).map((_, i) => (
           <span
             key={i}
-            className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
+            className={`h-1 rounded-full transition-colors duration-300 ${
               i < active ? "bg-ember/60" : i === active ? "bg-ember" : "bg-border"
             }`}
           />
         ))}
       </div>
-      <p className="text-[0.6rem] uppercase tracking-[0.22em] text-muted-foreground sm:text-[0.65rem]">
+      <p className="text-center text-[0.6rem] uppercase tracking-[0.22em] text-muted-foreground sm:text-[0.65rem]">
         {done ? "Continue scrolling ↓" : "Scroll to walk the map ↓"}
       </p>
     </div>

@@ -124,11 +124,11 @@ export function BeginCarousel() {
           aria-roledescription="carousel"
           aria-label="Ways to begin"
         >
-          <div className="flex touch-pan-y gap-4">
+          <div className="flex gap-4">
             {SLIDES.map((slide, i) => (
               <div
                 key={slide.id}
-                className="min-w-0 shrink-0 grow-0 basis-[88%] sm:basis-[70%]"
+                className="min-w-0 shrink-0 grow-0 basis-[85%] sm:basis-[70%]"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${i + 1} of ${SLIDES.length}`}
@@ -139,13 +139,13 @@ export function BeginCarousel() {
           </div>
         </div>
 
-        <div className="mt-6 flex items-center justify-between gap-4">
+        <div className="mt-6 flex items-center justify-between gap-4 px-0.5">
           <button
             type="button"
             onClick={() => emblaApi?.scrollPrev()}
             disabled={!canPrev}
             aria-label="Previous way to begin"
-            className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep disabled:pointer-events-none disabled:opacity-35"
+            className="grid h-11 w-11 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep disabled:pointer-events-none disabled:opacity-35"
           >
             <ChevronLeft size={18} />
           </button>
@@ -159,8 +159,8 @@ export function BeginCarousel() {
                 aria-selected={selected === i}
                 aria-label={`Go to ${slide.label}`}
                 onClick={() => emblaApi?.scrollTo(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  selected === i ? "w-6 bg-ember" : "w-1.5 bg-border hover:bg-ember/40"
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  selected === i ? "w-7 bg-ember" : "w-2.5 bg-border hover:bg-ember/40"
                 }`}
               />
             ))}
@@ -171,7 +171,7 @@ export function BeginCarousel() {
             onClick={() => emblaApi?.scrollNext()}
             disabled={!canNext}
             aria-label="Next way to begin"
-            className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep disabled:pointer-events-none disabled:opacity-35"
+            className="grid h-11 w-11 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep disabled:pointer-events-none disabled:opacity-35"
           >
             <ChevronRight size={18} />
           </button>
@@ -187,25 +187,27 @@ function BeginCard({ slide }: { slide: Slide }) {
   return (
     <article
       id={slide.id}
-      className="flex h-full min-h-[16rem] scroll-mt-24 flex-col border-t border-border/60 pt-8"
+      className="flex h-full min-h-[16rem] scroll-mt-28 flex-col border-t border-border/60 pt-6 sm:pt-8"
     >
       <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
         {slide.label}
       </div>
-      <p className="mt-5 flex-1 text-lg leading-relaxed text-ink/80">{slide.body}</p>
+      <p className="mt-4 flex-1 text-base leading-relaxed text-ink/80 sm:mt-5 sm:text-lg">
+        {slide.body}
+      </p>
       {"aside" in slide && slide.aside ? (
-        <p className="mt-4 leading-relaxed text-ink/70">{slide.aside}</p>
+        <p className="mt-4 text-sm leading-relaxed text-ink/70 sm:text-base">{slide.aside}</p>
       ) : null}
 
       {"ctas" in slide && slide.ctas ? (
-        <div className="mt-8 flex flex-col gap-3">
+        <div className="mt-6 flex flex-col gap-3 sm:mt-8">
           {slide.ctas.map((cta) => (
             <a
               key={cta.href}
               href={cta.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`btn-lux inline-flex ${
+              className={`btn-lux inline-flex w-full justify-center text-center sm:w-auto ${
                 cta.variant === "primary" ? "btn-lux-primary" : "btn-lux-sand"
               }`}
             >
@@ -218,7 +220,7 @@ function BeginCard({ slide }: { slide: Slide }) {
           href={slide.cta.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-lux btn-lux-sand mt-8 inline-flex w-fit"
+          className="btn-lux btn-lux-sand mt-6 inline-flex w-full justify-center sm:mt-8 sm:w-fit"
         >
           {slide.cta.text}
           <span aria-hidden>→</span>

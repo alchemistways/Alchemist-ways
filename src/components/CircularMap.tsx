@@ -122,16 +122,20 @@ export function CircularMap({
       className={
         scrollDriven
           ? compactMobile
-            ? "grid h-full min-h-0 min-w-0 grid-rows-[auto_minmax(0,1fr)] gap-4"
+            ? "grid h-full min-h-0 min-w-0 grid-rows-[minmax(0,auto)_minmax(0,1fr)] gap-3"
             : "grid h-full min-h-0 min-w-0 grid-cols-1 items-center gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-12 lg:gap-16"
           : "grid min-w-0 items-start gap-12 lg:grid-cols-2 lg:items-center lg:gap-16"
       }
     >
-      <div className="flex min-h-0 min-w-0 flex-col items-center justify-center self-stretch px-2 sm:px-4">
+      <div
+        className={`flex min-h-0 min-w-0 flex-col items-center justify-center self-stretch ${
+          compactMobile ? "px-0" : "px-2 sm:px-4"
+        }`}
+      >
         <div
           className={`relative aspect-square shrink-0 ${
             compactMobile
-              ? "w-[min(92%,280px)]"
+              ? "w-[min(72vw,13.5rem)]"
               : scrollDriven
                 ? "w-[min(100%,min(32rem,62vh))]"
                 : "w-[min(100%,32rem)]"
@@ -213,7 +217,9 @@ export function CircularMap({
                   role="option"
                   aria-selected={isActive}
                   aria-label={m.label}
-                  aria-describedby={isHovered || isActive ? tipId : undefined}
+                  aria-describedby={
+                    !compactMobile && (isHovered || isActive) ? tipId : undefined
+                  }
                   onClick={() => select(i)}
                   onMouseEnter={() => setHovered(i)}
                   onMouseLeave={() => setHovered(null)}
@@ -222,7 +228,7 @@ export function CircularMap({
                   onKeyDown={(e) => onKeyRing(e, i)}
                   className={`relative flex items-center justify-center rounded-full border bg-card font-display outline-none transition-[transform,background-color,border-color,box-shadow,color] duration-300 ${
                     compactMobile
-                      ? "h-10 w-10 text-sm"
+                      ? "h-11 w-11 text-sm"
                       : "h-12 w-12 text-base sm:h-14 sm:w-14 sm:text-lg"
                   } ${
                     isActive
@@ -246,15 +252,24 @@ export function CircularMap({
             );
           })}
 
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
-            <span className="text-[0.65rem] uppercase tracking-[0.36em] text-ember sm:text-sm sm:tracking-[0.4em]">
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center sm:px-8">
+            <span
+              className={`uppercase tracking-[0.36em] text-ember ${
+                compactMobile ? "text-[0.55rem]" : "text-[0.65rem] sm:text-sm sm:tracking-[0.4em]"
+              }`}
+            >
               The Map
             </span>
-            <span className="mt-1.5 text-[0.55rem] uppercase tracking-[0.28em] text-ink/70 sm:text-[0.65rem]">
+            <span
+              className={`mt-1 uppercase tracking-[0.28em] text-ink/70 ${
+                compactMobile ? "text-[0.5rem]" : "text-[0.55rem] sm:text-[0.65rem]"
+              }`}
+            >
               Alchemist Ways
             </span>
           </div>
 
+          {!compactMobile && (
           <div
             id={tipId}
             role="status"
@@ -267,6 +282,7 @@ export function CircularMap({
               {preview.short}
             </p>
           </div>
+          )}
         </div>
 
         {/* Compact legend — static / reduced-motion only (no drifting outer labels) */}
@@ -295,13 +311,17 @@ export function CircularMap({
       <div
         ref={detailRef}
         className={`mx-auto w-full min-w-0 max-w-md md:max-w-none ${
-          scrollDriven ? "min-h-0 self-center" : ""
+          scrollDriven ? "min-h-0 self-stretch sm:self-center" : ""
         }`}
       >
         <div
           className={`relative overflow-hidden border-y border-border/50 bg-transparent ${
-            compactMobile ? "px-1 py-4" : "px-1 py-5 sm:px-2 sm:py-6"
-          } ${scrollDriven ? "max-h-[min(42vh,22rem)] overflow-y-auto overscroll-contain sm:max-h-[min(48vh,26rem)]" : ""}`}
+            compactMobile ? "h-full min-h-0 overflow-y-auto overscroll-contain px-0 py-2" : "px-1 py-5 sm:px-2 sm:py-6"
+          } ${
+            scrollDriven && !compactMobile
+              ? "max-h-[min(42vh,22rem)] overflow-y-auto overscroll-contain sm:max-h-[min(48vh,26rem)]"
+              : ""
+          }`}
         >
           <div
             key={panelKey}
@@ -317,64 +337,67 @@ export function CircularMap({
             </div>
 
             <h3
-              className={`mt-3 font-display uppercase leading-tight tracking-[0.06em] text-ink ${
-                compactMobile ? "text-xl" : "text-2xl sm:text-3xl"
+              className={`mt-2 font-display uppercase leading-tight tracking-[0.06em] text-ink ${
+                compactMobile ? "text-lg" : "mt-3 text-2xl sm:text-3xl"
               }`}
             >
               {current.label}
             </h3>
-            <p className="mt-3 font-display text-base italic leading-snug text-muted-foreground sm:text-lg">
+            <p
+              className={`mt-2 font-display italic leading-snug text-muted-foreground ${
+                compactMobile ? "text-sm" : "mt-3 text-base sm:text-lg"
+              }`}
+            >
               {current.short}
             </p>
             <p
-              className={`mt-4 leading-relaxed text-ink/80 ${
-                compactMobile ? "text-sm" : "text-[0.95rem] sm:text-base"
+              className={`mt-3 leading-relaxed text-ink/80 ${
+                compactMobile ? "text-sm" : "mt-4 text-[0.95rem] sm:text-base"
               }`}
             >
               {current.body}
             </p>
           </div>
 
-          <div className="mt-6 flex items-center gap-2" aria-hidden>
-            {movements.map((m, i) => (
-              <button
-                key={m.key}
-                type="button"
-                onClick={() => select(i)}
-                className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
-                  i === active
-                    ? "bg-ember"
-                    : i < active
-                      ? "bg-ember/50"
-                      : "bg-border hover:bg-ember/30"
-                }`}
-                aria-label={`Go to ${m.label}`}
-              />
-            ))}
-          </div>
+          {/* Progress dots + prev/next stay in the static / reduced-motion map only.
+              Scroll-driven sticky chapter uses the single ScrollCue under the map. */}
+          {!scrollDriven && (
+            <>
+              <div className="mt-6 flex items-center gap-2" aria-hidden>
+                {movements.map((m, i) => (
+                  <button
+                    key={m.key}
+                    type="button"
+                    onClick={() => select(i)}
+                    className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
+                      i === active
+                        ? "bg-ember"
+                        : i < active
+                          ? "bg-ember/50"
+                          : "bg-border hover:bg-ember/30"
+                    }`}
+                    aria-label={`Go to ${m.label}`}
+                  />
+                ))}
+              </div>
 
-          {scrollDriven ? (
-            <p className="mt-4 hidden text-center text-[0.7rem] text-muted-foreground sm:block">
-              Keep scrolling to cross the next circle
-              {active >= movements.length - 1 ? " — then continue down the page" : ""}
-            </p>
-          ) : (
-            <div className="mt-6 flex items-center justify-between gap-3">
-              <button
-                type="button"
-                onClick={() => select((active - 1 + movements.length) % movements.length)}
-                className="rounded-full border border-border px-4 py-2 text-xs text-ink transition-colors hover:border-ember hover:text-ember-deep"
-              >
-                Previous
-              </button>
-              <button
-                type="button"
-                onClick={() => select((active + 1) % movements.length)}
-                className="rounded-full bg-ember px-4 py-2 text-xs text-primary-foreground transition-opacity hover:opacity-90"
-              >
-                Next movement
-              </button>
-            </div>
+              <div className="mt-6 flex items-center justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={() => select((active - 1 + movements.length) % movements.length)}
+                  className="rounded-full border border-border px-4 py-2 text-xs text-ink transition-colors hover:border-ember hover:text-ember-deep"
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  onClick={() => select((active + 1) % movements.length)}
+                  className="rounded-full bg-ember px-4 py-2 text-xs text-primary-foreground transition-opacity hover:opacity-90"
+                >
+                  Next movement
+                </button>
+              </div>
+            </>
           )}
         </div>
       </div>

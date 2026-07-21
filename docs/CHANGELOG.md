@@ -1,5 +1,31 @@
 # Changelog
 
+## Book plate rebuild — correct typography (branch1)
+
+- Regenerated hero/book plate with Higgsfield `nano_banana_pro` from clean cover + corridor refs
+- Fixes mangled text from prior upscale (`ALCHENIST WAYE` → `ALCHEMIST WAYS`; restored subtitle `A MAP FROM EMOTIONAL REACTIVITY TO CREATIVE AGENCY`)
+- Responsive `BookPlateImage`: WebP + JPEG srcset (960→4096) for phone / tablet / desktop / 4K; shared plate for hero + book
+- Mobile crops favor the book (`object-position`); slightly taller mobile hero/book media bands
+
+---
+
+## Mobile welcome pass (branch1)
+
+- Mobile nav menu (Map / Book / Conversations / About / Clarity / Begin Here)
+- Map sticky chapter denser on phones; larger tap targets; safe-area padding
+- Begin carousel: full-width CTAs, larger controls; swipe container cleaned up
+- Global: overflow-x clip, viewport-fit, scroll-padding, tap highlight
+- Tighter mobile spacing on About, Invitation, Ways to Begin, waitlist, footer
+
+---
+
+## Narrative density (layout only, branch1)
+
+- Regrouped post-hero Sections One–Four + Emotional Reactivity + Triggers into 3 denser chapters in `index.tsx`
+- Left-aligned measures, tighter vertical rhythm; no new copy — client Landing PDF wording retained verbatim
+
+---
+
 ## Site formatting cleanup pass (branch1)
 
 - Assets: refreshed `hero-meet` plates; added `begin-book-bg` (+ 4k) — Higgsfield upscale failed, used local sharpen/resample

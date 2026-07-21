@@ -1,11 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Instagram, Twitter, Youtube } from "lucide-react";
-import beginBookBg from "@/assets/begin-book-bg-4k.jpg";
-import beginBookBgSm from "@/assets/begin-book-bg.jpg";
-import heroMeet from "@/assets/hero-meet-4k.jpg";
-import heroMeetSm from "@/assets/hero-meet.jpg";
 import malekPortrait from "@/assets/malek-portrait.jpg";
 import { BeginCarousel } from "@/components/BeginCarousel";
+import { BookPlateImage } from "@/components/BookPlateImage";
 import { MapScrollJourney } from "@/components/MapScrollJourney";
 import { PageEntrance, Reveal } from "@/components/PageMotion";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -23,20 +20,11 @@ function LandingPage() {
 
         {/* Hero — Higgsfield book on the right; copy sits in the open left wall */}
         <section id="top" className="relative overflow-hidden bg-[#d4c4b0] md:min-h-[100svh]">
-          <div className="relative h-[min(48svh,400px)] w-full md:absolute md:inset-0 md:h-full">
-            <picture>
-              <source media="(min-width: 768px)" srcSet={heroMeet} />
-              <img
-                src={heroMeetSm}
-                alt="Meet Yourself, Differently — Alchemist Ways hardcover"
-                width={3840}
-                height={2140}
-                fetchPriority="high"
-                decoding="async"
-                sizes="100vw"
-                className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-[72%_48%] md:object-[68%_50%] lg:object-[62%_48%]"
-              />
-            </picture>
+          <div className="relative h-[min(52svh,440px)] w-full md:absolute md:inset-0 md:h-full">
+            <BookPlateImage
+              priority
+              alt="Meet Yourself, Differently. Alchemist Ways hardcover"
+            />
             <div
               aria-hidden
               className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent md:hidden"
@@ -79,47 +67,61 @@ function LandingPage() {
           </div>
         </section>
 
-        {/* Section One */}
-        <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
+        {/* Chapter 1 — Invitation (client Sections One + Four, layout only) */}
+        <section className="mx-auto max-w-2xl px-5 py-12 sm:px-8 sm:py-16">
           <Reveal>
-            <div className="space-y-8 text-center">
-              <p className="font-display text-2xl leading-snug text-ink sm:text-3xl md:text-4xl">
-                What if nothing within you is against you…
-              </p>
-              <p className="font-display text-2xl leading-snug text-ink sm:text-3xl md:text-4xl">
-                And everything within you is communicating with you?
-              </p>
-              <div className="mx-auto h-px w-10 bg-ember/40" aria-hidden />
-              <div className="space-y-4 text-lg leading-relaxed text-ink/80 sm:text-xl">
+            <div className="space-y-6">
+              <div className="space-y-2 font-display text-2xl leading-snug text-ink sm:text-3xl md:text-[2.15rem]">
+                <p>What if nothing within you is against you…</p>
+                <p>And everything within you is communicating with you?</p>
+              </div>
+
+              <div className="space-y-1 text-base leading-relaxed text-ink/80 sm:text-lg">
                 <p>What if every emotion…</p>
                 <p>every reaction…</p>
                 <p>every recurring pattern…</p>
                 <p>has been trying to tell you something?</p>
               </div>
-              <p className="font-display text-xl italic text-ink/70 sm:text-2xl">
+
+              <p className="font-display text-lg italic leading-snug text-ink/70 sm:text-xl">
                 If that&apos;s true…
                 <br />
                 have I learned how to listen?
               </p>
+
+              <div className="h-px w-10 bg-ember/40" aria-hidden />
+
+              <div className="space-y-3">
+                <p className="font-display text-xl leading-snug text-ink sm:text-2xl">
+                  Everything begins…
+                  <br />
+                  with meeting yourself differently.
+                </p>
+                <p className="text-base leading-relaxed text-ink/75 sm:text-lg">
+                  Learning how to listen
+                  <br />
+                  is where that relationship begins.
+                </p>
+              </div>
             </div>
           </Reveal>
         </section>
 
-        {/* Section Two */}
+        {/* Chapter 2 — Recognition (client Sections Two + Three, layout only) */}
         <section className="border-y border-border/60 bg-secondary/40">
-          <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="mx-auto max-w-xl px-5 py-12 sm:px-8 sm:py-16">
             <Reveal>
-              <div className="space-y-10 text-center">
-                <div className="space-y-3">
-                  <p className="font-display text-2xl leading-snug text-ink sm:text-3xl">
+              <div className="space-y-8">
+                <div className="border-l-2 border-ember/45 pl-4 sm:pl-5">
+                  <p className="font-display text-xl leading-snug text-ink sm:text-2xl">
                     The conversation ended three days ago.
                   </p>
-                  <p className="font-display text-2xl leading-snug text-ink sm:text-3xl">
+                  <p className="mt-1 font-display text-xl leading-snug text-ink sm:text-2xl">
                     You&apos;re still running it.
                   </p>
                 </div>
-                <div className="mx-auto h-px w-8 bg-ember/35" aria-hidden />
-                <div className="space-y-8 text-lg leading-relaxed text-ink/80">
+
+                <div className="space-y-3 text-base leading-relaxed text-ink/80 sm:text-[1.05rem]">
                   <p>
                     You said yes.
                     <br />
@@ -137,92 +139,67 @@ function LandingPage() {
                   </p>
                   <p>You keep reacting in ways you don&apos;t fully understand.</p>
                 </div>
-                <div className="mx-auto h-px w-8 bg-ember/35" aria-hidden />
-                <div className="space-y-3 font-display text-xl leading-snug text-ink sm:text-2xl">
+
+                <div className="space-y-1 font-display text-lg leading-snug text-ink sm:text-xl">
                   <p>These aren&apos;t failures.</p>
                   <p>They&apos;re intelligent ways you learned to protect yourself.</p>
+                </div>
+
+                <div className="space-y-3 text-base leading-relaxed text-ink/80 sm:text-[1.05rem]">
+                  <p>The patterns you&apos;ve been fighting:</p>
+                  <ul className="flex flex-wrap gap-x-3 gap-y-1 text-ink/75">
+                    <li>the overthinking,</li>
+                    <li>the people-pleasing,</li>
+                    <li>the reactive anger,</li>
+                    <li>the endless self-monitoring,</li>
+                  </ul>
+                  <p>didn&apos;t appear randomly.</p>
+                  <p>They formed in conditions where those responses served a purpose.</p>
+                  <div className="space-y-0.5">
+                    <p>They helped you stay safe.</p>
+                    <p>Preserve connection.</p>
+                    <p>Anticipate conflict.</p>
+                    <p>Manage what your environment couldn&apos;t hold.</p>
+                  </div>
+                  <p className="pt-1 font-display text-lg text-ink sm:text-xl">
+                    At one time,
+                    <br />
+                    they made perfect sense.
+                  </p>
+                  <p>
+                    The difficulty is that they remained
+                    <br />
+                    long after they were needed.
+                  </p>
                 </div>
               </div>
             </Reveal>
           </div>
         </section>
 
-        {/* Section Three */}
-        <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
+        {/* Chapter 3 — Doorway (Emotional Reactivity + Triggers, layout only) */}
+        <section className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-16">
           <Reveal>
-            <div className="space-y-6 text-lg leading-relaxed text-ink/80 sm:text-xl">
-              <p>The patterns you&apos;ve been fighting—</p>
-              <ul className="space-y-1 pl-1">
-                <li>the overthinking,</li>
-                <li>the people-pleasing,</li>
-                <li>the reactive anger,</li>
-                <li>the endless self-monitoring—</li>
-              </ul>
-              <p>didn&apos;t appear randomly.</p>
-              <p>They formed in conditions where those responses served a purpose.</p>
-              <div className="space-y-1 pt-2">
-                <p>They helped you stay safe.</p>
-                <p>Preserve connection.</p>
-                <p>Anticipate conflict.</p>
-                <p>Manage what your environment couldn&apos;t hold.</p>
-              </div>
-              <p className="pt-2 font-display text-xl text-ink sm:text-2xl">
-                At one time,
-                <br />
-                they made perfect sense.
-              </p>
-              <p>
-                The difficulty is that they remained
-                <br />
-                long after they were needed.
-              </p>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* Section Four */}
-        <section className="border-y border-border/60 bg-secondary/30">
-          <div className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8 sm:py-28">
-            <Reveal>
-              <div className="space-y-6">
-                <p className="font-display text-2xl leading-snug text-ink sm:text-3xl md:text-4xl">
-                  Everything begins…
-                  <br />
-                  with meeting yourself differently.
-                </p>
-                <p className="text-lg leading-relaxed text-ink/75 sm:text-xl">
-                  Learning how to listen
-                  <br />
-                  is where that relationship begins.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* Emotional Reactivity triptych */}
-        <section className="mx-auto max-w-5xl px-5 py-20 sm:px-8 sm:py-28">
-          <Reveal>
-            <div className="text-center">
-              <h2 className="font-display text-3xl uppercase tracking-[0.06em] text-ink sm:text-4xl md:text-5xl">
+            <div className="max-w-2xl">
+              <h2 className="font-display text-2xl uppercase tracking-[0.06em] text-ink sm:text-3xl md:text-4xl">
                 Emotional Reactivity
               </h2>
-              <div className="mx-auto mt-8 max-w-2xl space-y-4 text-lg leading-relaxed text-ink/80">
+              <div className="mt-5 space-y-2 text-base leading-relaxed text-ink/80 sm:text-lg">
                 <p>Emotional Reactivity doesn&apos;t always look dramatic.</p>
                 <p>Sometimes it becomes obvious.</p>
                 <p>Sometimes it becomes invisible.</p>
                 <p>Sometimes it simply becomes the way we&apos;ve learned to survive.</p>
-                <p className="pt-2 text-ink/70">It may express itself through…</p>
+                <p className="pt-1 text-ink/70">It may express itself through…</p>
               </div>
             </div>
           </Reveal>
 
-          <div className="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+          <div className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6 lg:gap-8">
             {reactivityModes.map((mode, i) => (
-              <Reveal key={mode.title} delay={i * 80}>
-                <div className="text-center sm:text-left">
-                  <h3 className="font-display text-xl text-ink sm:text-2xl">{mode.title}</h3>
-                  <p className="mt-4 text-[0.95rem] leading-relaxed text-ink/75 whitespace-pre-line">
+              <Reveal key={mode.title} delay={i * 60}>
+                <div className="border-t border-ember/30 pt-4">
+                  <h3 className="font-display text-lg text-ink sm:text-xl">{mode.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink/75 whitespace-pre-line sm:text-[0.95rem]">
                     {mode.body}
                   </p>
                 </div>
@@ -230,25 +207,22 @@ function LandingPage() {
             ))}
           </div>
 
-          <Reveal delay={200}>
-            <div className="mx-auto mt-14 max-w-xl space-y-2 text-center font-display text-xl leading-snug text-ink sm:text-2xl">
+          <Reveal delay={160}>
+            <div className="mt-10 max-w-lg space-y-1 font-display text-lg leading-snug text-ink sm:text-xl">
               <p>Different expressions.</p>
               <p>The same invitation.</p>
-              <p className="pt-2 text-lg text-ink/70 sm:text-xl">
+              <p className="pt-1 text-base text-ink/70 sm:text-lg">
                 To understand what your protective system has been carrying.
               </p>
             </div>
           </Reveal>
-        </section>
 
-        {/* Triggers */}
-        <section className="border-y border-border/60 bg-secondary/40">
-          <div className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8 sm:py-28">
-            <Reveal>
-              <h2 className="font-display text-3xl uppercase leading-tight tracking-[0.04em] text-ink sm:text-4xl md:text-5xl">
+          <Reveal delay={200}>
+            <div className="mt-14 max-w-xl border-t border-border/60 pt-10 sm:mt-16 sm:pt-12">
+              <h2 className="font-display text-2xl uppercase leading-tight tracking-[0.04em] text-ink sm:text-3xl md:text-4xl">
                 Your Triggers Are the Doorway.
               </h2>
-              <div className="mx-auto mt-10 max-w-xl space-y-5 text-lg leading-relaxed text-ink/80">
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-ink/80 sm:text-lg">
                 <p>A trigger is rarely only about what is happening now.</p>
                 <p>
                   It often reveals
@@ -261,7 +235,7 @@ function LandingPage() {
                   <br />
                   To become.
                 </p>
-                <p className="pt-2 font-display text-xl text-ink sm:text-2xl">
+                <p className="pt-1 font-display text-lg text-ink sm:text-xl">
                   The invitation isn&apos;t to eliminate the reaction.
                   <br />
                   It&apos;s to understand
@@ -269,20 +243,20 @@ function LandingPage() {
                   what it has been carrying.
                 </p>
               </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </section>
 
         {/* The Map */}
-        <div id="map">
+        <div id="map" className="scroll-mt-24">
           <MapScrollJourney />
         </div>
 
         {/* About Malek */}
-        <section id="about" className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-16">
+        <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-14 sm:px-8 sm:py-28">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-16">
             <Reveal>
-              <div className="mx-auto w-full max-w-md lg:mx-0">
+              <div className="mx-auto w-full max-w-sm lg:mx-0 lg:max-w-md">
                 <img
                   src={malekPortrait}
                   alt="Malek Najm Ghaleb"
@@ -302,7 +276,7 @@ function LandingPage() {
                 </div>
               </Reveal>
 
-              <div className="mt-8 space-y-8 text-lg leading-relaxed text-ink/80">
+              <div className="mt-6 space-y-6 text-base leading-relaxed text-ink/80 sm:mt-8 sm:space-y-8 sm:text-lg">
                 <Reveal delay={40}>
                   <p>
                     For years, I thought I was searching for freedom.
@@ -373,13 +347,13 @@ function LandingPage() {
 
         {/* Invitation */}
         <section className="border-y border-border/60 bg-secondary/35">
-          <div className="mx-auto max-w-xl px-5 py-24 text-center sm:px-8 sm:py-32">
+          <div className="mx-auto max-w-xl px-5 py-16 text-center sm:px-8 sm:py-32">
             <Reveal>
               <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
                 An Invitation
               </div>
               <div className="mx-auto mt-6 h-px w-8 bg-ember/40" aria-hidden />
-              <div className="mt-10 space-y-6 font-display text-2xl leading-snug text-ink sm:space-y-7 sm:text-3xl">
+              <div className="mt-8 space-y-5 font-display text-xl leading-snug text-ink sm:mt-10 sm:space-y-7 sm:text-3xl">
                 <p>Remain curious.</p>
                 <p>Explore the Map.</p>
                 <p>Test it against your own experience.</p>
@@ -387,7 +361,7 @@ function LandingPage() {
                 <p>Leave what isn&apos;t.</p>
               </div>
               <p className="mx-auto mt-12 max-w-md text-lg leading-relaxed text-ink/75">
-                Alchemist Ways is an invitation—not to become someone else—but to discover a
+                Alchemist Ways is an invitation, not to become someone else, but to discover a
                 different relationship with yourself.
               </p>
             </Reveal>
@@ -395,11 +369,11 @@ function LandingPage() {
         </section>
 
         {/* Ways to Begin */}
-        <section className="py-20 sm:py-28">
+        <section className="py-14 sm:py-28">
           <div className="mx-auto max-w-5xl px-5 sm:px-8">
             <Reveal>
               <div className="text-center">
-                <h2 className="font-display text-3xl leading-tight text-ink sm:text-4xl md:text-5xl">
+                <h2 className="font-display text-2xl leading-tight text-ink sm:text-4xl md:text-5xl">
                   There Are Several Ways to Begin
                 </h2>
               </div>
@@ -407,22 +381,13 @@ function LandingPage() {
           </div>
 
           {/* The Book — full-bleed environment; copy left, book visible on right */}
-          <Reveal className="mt-14">
-            <div id="book" className="relative scroll-mt-24 overflow-hidden bg-[#d4c4b0]">
-              <div className="relative h-[min(42svh,360px)] w-full md:absolute md:inset-0 md:h-full">
-                <picture>
-                  <source media="(min-width: 768px)" srcSet={beginBookBg} />
-                  <img
-                    src={beginBookBgSm}
-                    alt="Meet Yourself, Differently — hardcover standing in a sand corridor"
-                    width={3840}
-                    height={2160}
-                    loading="lazy"
-                    decoding="async"
-                    sizes="100vw"
-                    className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-[72%_50%] md:object-[68%_48%] lg:object-[62%_45%]"
-                  />
-                </picture>
+          <Reveal className="mt-10 sm:mt-14">
+            <div id="book" className="relative scroll-mt-28 overflow-hidden bg-[#d4c4b0]">
+              <div className="relative h-[min(46svh,400px)] w-full md:absolute md:inset-0 md:h-full">
+                <BookPlateImage
+                  alt="Meet Yourself, Differently. Hardcover standing in a sand corridor"
+                  objectPositionClassName="object-[78%_50%] sm:object-[72%_50%] md:object-[68%_48%] lg:object-[62%_45%]"
+                />
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background to-transparent md:hidden"
@@ -433,28 +398,28 @@ function LandingPage() {
                 />
               </div>
 
-              <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-5 pb-14 pt-6 md:min-h-[min(72svh,40rem)] md:bg-transparent md:px-8 md:pb-20 md:pt-16 lg:px-12">
+              <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-5 pb-12 pt-5 md:min-h-[min(72svh,40rem)] md:bg-transparent md:px-8 md:pb-20 md:pt-16 lg:px-12">
                 <div className="flex w-full flex-1 flex-col justify-center md:max-w-[min(100%,26rem)] lg:max-w-[28rem]">
                   <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep md:text-[#3a2a1f]/75">
                     The Book
                   </div>
-                  <h3 className="mt-3 font-display text-2xl uppercase leading-tight text-ink sm:text-3xl md:text-[#2a1f16]">
+                  <h3 className="mt-3 font-display text-xl uppercase leading-tight text-ink sm:text-3xl md:text-[#2a1f16]">
                     Meet Yourself, Differently.
                   </h3>
-                  <p className="mt-2 text-sm uppercase tracking-[0.14em] text-ink/60 md:text-[#3a2a1f]/65">
+                  <p className="mt-2 text-xs uppercase tracking-[0.14em] text-ink/60 sm:text-sm md:text-[#3a2a1f]/65">
                     A Map from Emotional Reactivity to Creative Agency.
                   </p>
-                  <p className="mt-6 leading-relaxed text-ink/80 md:text-[#3a2a1f]/85">
+                  <p className="mt-5 text-[0.95rem] leading-relaxed text-ink/80 sm:mt-6 sm:text-base md:text-[#3a2a1f]/85">
                     Meet Yourself, Differently is an invitation to discover a new relationship with
                     yourself. Through the lens of Emotional Reactivity, Awareness, Integration,
                     Sovereignty, and Creative Agency, it offers a practical map for understanding
-                    what your experience has been trying to communicate—and how that understanding
+                    what your experience has been trying to communicate, and how that understanding
                     can naturally become greater clarity, freedom, and authentic self-expression.
                   </p>
-                  <p className="mt-4 text-ink/75 md:text-[#3a2a1f]/75">
+                  <p className="mt-4 text-[0.95rem] text-ink/75 sm:text-base md:text-[#3a2a1f]/75">
                     Begin here if you&apos;d like to explore the work quietly, at your own pace.
                   </p>
-                  <a href="#waitlist" className="btn-lux btn-lux-primary mt-6 inline-flex w-fit">
+                  <a href="#waitlist" className="btn-lux btn-lux-primary mt-6 inline-flex w-full justify-center sm:w-fit">
                     Explore the Book
                     <span aria-hidden>→</span>
                   </a>
@@ -463,7 +428,7 @@ function LandingPage() {
             </div>
           </Reveal>
 
-          <div className="mx-auto mt-16 max-w-5xl px-5 sm:mt-20 sm:px-8">
+          <div className="mx-auto mt-12 max-w-5xl px-5 sm:mt-20 sm:px-8">
             <Reveal delay={80}>
               <BeginCarousel />
             </Reveal>
@@ -473,7 +438,7 @@ function LandingPage() {
         {/* Final + Waitlist */}
         <section
           id="waitlist"
-          className="relative overflow-hidden border-y border-border/60 bg-secondary/40"
+          className="relative scroll-mt-28 overflow-hidden border-y border-border/60 bg-secondary/40"
         >
           <div
             aria-hidden
@@ -482,10 +447,10 @@ function LandingPage() {
               background: "radial-gradient(ellipse at 50% 0%, var(--ember-soft), transparent 60%)",
             }}
           />
-          <div className="relative mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
+          <div className="relative mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-28">
             <Reveal>
               <div className="text-center">
-                <div className="space-y-3 font-display text-2xl leading-snug text-ink sm:text-3xl">
+                <div className="space-y-3 font-display text-xl leading-snug text-ink sm:text-3xl">
                   <p>Start where you are.</p>
                   <p>Bring your curiosity.</p>
                   <p>
@@ -494,16 +459,16 @@ function LandingPage() {
                     will unfold naturally.
                   </p>
                 </div>
-                <p className="mt-8 text-ink/70">
+                <p className="mt-6 text-ink/70 sm:mt-8">
                   Keep what is true.
                   <br />
                   Leave what isn&apos;t.
                 </p>
-                <div className="mx-auto mt-12 h-px w-10 bg-ember/40" aria-hidden />
-                <h2 className="mt-12 font-display text-3xl leading-tight text-ink sm:text-4xl">
+                <div className="mx-auto mt-10 h-px w-10 bg-ember/40 sm:mt-12" aria-hidden />
+                <h2 className="mt-10 font-display text-2xl leading-tight text-ink sm:mt-12 sm:text-4xl">
                   Continue the exploration.
                 </h2>
-                <p className="mx-auto mt-4 max-w-md text-ink/75">
+                <p className="mx-auto mt-4 max-w-md text-[0.95rem] text-ink/75 sm:text-base">
                   Receive reflections, conversations, and updates from Alchemist Ways.
                 </p>
               </div>
@@ -516,9 +481,9 @@ function LandingPage() {
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-border/60 bg-secondary/30">
+        <footer className="border-t border-border/60 bg-secondary/30 pb-[env(safe-area-inset-bottom)]">
           <Reveal>
-            <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 px-5 py-12 sm:px-8 md:flex-row md:items-center md:justify-between">
+            <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 px-5 py-10 sm:px-8 sm:py-12 md:flex-row md:items-center md:justify-between">
               <div>
                 <div className="font-display text-[0.7rem] uppercase tracking-[0.3em] text-ink">
                   Alchemist Ways
@@ -527,14 +492,14 @@ function LandingPage() {
                   A practical map from Emotional Reactivity to Creative Agency.
                 </p>
               </div>
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center">
                 <div className="flex items-center gap-3">
                   <a
                     href="https://www.instagram.com/alchemistways"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
+                    className="grid h-11 w-11 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
                   >
                     <Instagram size={18} />
                   </a>
@@ -543,7 +508,7 @@ function LandingPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="YouTube"
-                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
+                    className="grid h-11 w-11 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
                   >
                     <Youtube size={18} />
                   </a>
@@ -552,7 +517,7 @@ function LandingPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="TikTok"
-                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
+                    className="grid h-11 w-11 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
                   >
                     <TikTokIcon />
                   </a>
@@ -561,7 +526,7 @@ function LandingPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="X (formerly Twitter)"
-                    className="grid h-10 w-10 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
+                    className="grid h-11 w-11 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep"
                   >
                     <Twitter size={18} />
                   </a>
