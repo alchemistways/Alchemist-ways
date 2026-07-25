@@ -1,5 +1,13 @@
 # Changelog
 
+## Fix live white screen (asset hash mismatch)
+
+- Root cause: Pages sync updated hashed JS/CSS but left root `index.html` pointing at prior hashes → 404 → blank page
+- Pointed `index.html` at the assets actually on `main` (`index-iE0xYUnO.js`, `routes-CoQjIkII.js`, `styles-DHg4NUnN.css`)
+- Hardened `scripts/sync-pages-root.mjs` to refuse publish when HTML asset refs don’t exist on disk
+
+---
+
 ## Scene blend + map bridge + Begin columns (branch1)
 
 - Soft edge fades on book close-ups so dark floor / hard crop melts into the page
