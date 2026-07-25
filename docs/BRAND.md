@@ -49,8 +49,8 @@ See also: [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md) for distinctive-design cr
 
 ## Assets
 
-- Responsive book plate: `src/assets/book-plate-{960…4096}.{jpg,webp}`
-- Mid-page scenes: `src/assets/scene-gallery.{jpg,webp}` (gallery standing-book), `src/assets/scene-droplet.{jpg,webp}`, optional archive `scene-closeup.{jpg,webp}` (letter-perfect Higgsfield stills; originals in `src/assets/scenes/`)
+- Responsive book plate: `src/assets/book-plate-{960…4096}.{jpg,webp}` (corridor hero; keep unless a superior native 2k/4k plate lands)
+- Mid-page scenes (native Higgsfield `nano_banana_pro` **2k**, 2752×1536): `src/assets/scene-gallery.{jpg,webp}` (gallery standing-book), `src/assets/scene-droplet.{jpg,webp}`, optional archive `scene-closeup.{jpg,webp}` — masters `src/assets/scenes/hf-*.png`
 - About portrait: `src/assets/malek-portrait.jpg`
 - Brand mark: `public/brand/ac-logo.png`
 - Design source stills (optional): `BOOK_MAP DESIGN/`

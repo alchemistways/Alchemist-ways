@@ -1,5 +1,16 @@
 # Changelog
 
+## Native 2K book stills via Nano Banana Pro (branch1)
+
+- Regenerated mid-page book scenes at native `nano_banana_pro` **2k** (2752×1536) — no AI upscale of prior 1K shots
+- **Gallery standing** (`scene-gallery`): accepted job `10ccdf60` (ref `ebb14bb3`); front cover letter-perfect; spine micro-typo OK
+- **Droplet** (`scene-droplet`): accepted job `03d605f4` — Invitation atmosphere; author/subtitle clean
+- **Closeup** (`scene-closeup`): accepted job `a3ebdb6e` as unused archive alternate
+- **Hero / Book plate**: kept existing letter-perfect `book-plate-{960…4096}` set (4096 already sharp)
+- Rejected closeups with mangled `DIFFERENTLY` / extra letters; masters in `src/assets/scenes/hf-*.png`
+
+---
+
 ## Sync Pages entry for gallery build
 
 - Align root `index.html` + hashed JS/CSS with gallery standing-book build (`index-CpFgHdWY.js`, `routes-B0_XcBFL.js`, `styles-DdLgH3Ml.css`, `scene-gallery-*`)
