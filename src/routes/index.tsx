@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Instagram, Youtube } from "lucide-react";
 import malekPortrait from "@/assets/malek-portrait.jpg";
-import sceneCloseupJpg from "@/assets/scene-closeup.jpg";
-import sceneCloseupWebp from "@/assets/scene-closeup.webp";
 import sceneDropletJpg from "@/assets/scene-droplet.jpg";
 import sceneDropletWebp from "@/assets/scene-droplet.webp";
+import sceneGalleryJpg from "@/assets/scene-gallery.jpg";
+import sceneGalleryWebp from "@/assets/scene-gallery.webp";
 import { BeginCarousel } from "@/components/BeginCarousel";
 import { BookPlateImage } from "@/components/BookPlateImage";
 import { MapScrollJourney } from "@/components/MapScrollJourney";
@@ -202,14 +202,14 @@ function LandingPage() {
           <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
             <Reveal>
               <SceneImage
-                jpg={sceneCloseupJpg}
-                webp={sceneCloseupWebp}
-                alt="Meet Yourself, Differently. — cover close-up"
+                jpg={sceneGalleryJpg}
+                webp={sceneGalleryWebp}
+                alt="Meet Yourself, Differently. — hardcover standing in a gallery interior"
                 width={1024}
                 height={571}
                 blend
                 blendFromClassName="from-background"
-                imgClassName="aspect-[16/10] w-full object-cover object-[48%_28%] sm:aspect-[16/9]"
+                imgClassName="aspect-[16/10] w-full object-cover object-[52%_42%] sm:aspect-[16/9]"
               />
             </Reveal>
             <Reveal delay={80}>
@@ -405,18 +405,18 @@ function LandingPage() {
             </div>
           </Reveal>
 
-          {/* Second angle — letter-perfect cover close-up, soft-merged */}
+          {/* Second angle — gallery standing-book, soft-merged */}
           <Reveal delay={60} className="mx-auto mt-8 max-w-6xl px-5 sm:mt-10 sm:px-8">
             <div className="grid items-end gap-6 md:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] md:gap-10">
               <SceneImage
-                jpg={sceneCloseupJpg}
-                webp={sceneCloseupWebp}
-                alt="Meet Yourself, Differently. hardcover — title and subtitle close-up"
+                jpg={sceneGalleryJpg}
+                webp={sceneGalleryWebp}
+                alt="Meet Yourself, Differently. hardcover standing in a gallery interior"
                 width={1024}
                 height={571}
                 blend
                 blendFromClassName="from-background"
-                imgClassName="aspect-[21/9] w-full object-cover object-[48%_30%] sm:aspect-[2.4/1]"
+                imgClassName="aspect-[21/9] w-full object-cover object-[52%_40%] sm:aspect-[2.4/1]"
               />
               <p className="max-w-xs text-sm leading-relaxed text-ink/70 sm:text-base md:pb-3">
                 Meet Yourself, Differently. — A Map from Emotional Reactivity to Creative Agency.

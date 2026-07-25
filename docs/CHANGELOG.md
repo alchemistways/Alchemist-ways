@@ -1,5 +1,14 @@
 # Changelog
 
+## Gallery standing-book mid-page (branch1)
+
+- Second book beat (“The book is the map”) + Book section second-angle now use `scene-gallery` (Higgsfield gallery standing-book), soft-blended into cream
+- Hero / Book corridor plate unchanged (`BookPlateImage`)
+- Assets: `src/assets/scene-gallery.{jpg,webp}` + master `src/assets/scenes/hf-gallery-standing.jpg` (native 1024; no AI upscale)
+- Front cover lettering clean; spine micro-typo (`DIFFERNTLY`) acceptable at display size
+
+---
+
 ## Fix live white screen (asset hash mismatch)
 
 - Root cause: Pages sync updated hashed JS/CSS but left root `index.html` pointing at prior hashes → 404 → blank page
