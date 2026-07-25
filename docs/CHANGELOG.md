@@ -1,5 +1,12 @@
 # Changelog
 
+## Sync Pages entry after CircularMap glow fix
+
+- Align root `index.html` + hashed assets with glow-polish build (`index-BMFExvvv.js`, `routes-Cn6DNmWk.js`, `styles-Ay_fwO51.css`)
+- Unblocks `deploy-pages` after map CSS/JS hash change
+
+---
+
 ## Quieter CircularMap hover/active glow
 
 - Active node: tight 2px ember ring + thin pulse (opacity only) — no large blur halo or scale bloom into center
