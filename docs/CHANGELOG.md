@@ -1,5 +1,12 @@
 # Changelog
 
+## Sync Pages entry for gallery build
+
+- Align root `index.html` + hashed JS/CSS with gallery standing-book build (`index-CpFgHdWY.js`, `routes-B0_XcBFL.js`, `styles-DdLgH3Ml.css`, `scene-gallery-*`)
+- Unblocks `deploy-pages` sync (template hashes must match Vite emit)
+
+---
+
 ## Gallery standing-book mid-page (branch1)
 
 - Second book beat (“The book is the map”) + Book section second-angle now use `scene-gallery` (Higgsfield gallery standing-book), soft-blended into cream
