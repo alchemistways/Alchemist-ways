@@ -30,6 +30,7 @@
 
 ## GitHub Pages: serve the real app (not README)
 
+
 - SPA/prerender build; `npm run build:pages` syncs `index.html` + assets to repo root
 - `.nojekyll` so Pages stops rendering the README as the live site
 - Actions workflow keeps the root build in sync on pushes to `main`
