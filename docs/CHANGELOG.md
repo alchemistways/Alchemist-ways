@@ -1,5 +1,14 @@
 # Changelog
 
+## Quieter CircularMap hover/active glow
+
+- Active node: tight 2px ember ring + thin pulse (opacity only) — no large blur halo or scale bloom into center
+- Hover on inactive nodes: slight scale + thin ring, no halo
+- Center “The Map / Alchemist Ways” raised above node glow (`z-20`); ring radius nudged out for breathing room
+- Mobile tip stays above nodes; scroll-driven map behavior unchanged
+
+---
+
 ## Sync Pages entry for 2K book stills
 
 - Align root `index.html` + hashed JS with 2K gallery/droplet build (`index-DWR3_bYn.js`, `routes-iJjgCHfH.js`, `scene-gallery-*`, `scene-droplet-*`)
