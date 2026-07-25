@@ -1,5 +1,13 @@
 # Changelog
 
+## Scene blend + map bridge + Begin columns (branch1)
+
+- Soft edge fades on book close-ups so dark floor / hard crop melts into the page
+- Map intro bridges from “book is the map” (“Walk what the book maps”); continuous section join
+- Begin cards: equal CTA rail, matched button heights, shortened Clarity copy for even columns
+
+---
+
 ## Premium book scenes (branch1)
 
 - Audited 8 Higgsfield 3D book stills; shipped only letter-perfect (or near-perfect at display size) shots

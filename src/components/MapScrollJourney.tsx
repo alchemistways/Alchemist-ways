@@ -3,7 +3,7 @@ import { CircularMap, MOVEMENT_COUNT } from "@/components/CircularMap";
 
 /** Desktop: roomier per chapter. Mobile: shorter track. */
 function stepVh(isMobile: boolean) {
-  return isMobile ? 82 : 110;
+  return isMobile ? 78 : 100;
 }
 
 function prefersReducedMotion() {
@@ -13,7 +13,7 @@ function prefersReducedMotion() {
 
 /**
  * Sticky scroll chapter: map stays pinned while scroll walks each circle.
- * Layout is deliberately spacious — slim intro, roomy ring, panel beside it.
+ * Continues the doorway → book → walk narrative (no hard visual break).
  */
 export function MapScrollJourney() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -84,10 +84,10 @@ export function MapScrollJourney() {
 
   if (!scrollDriven) {
     return (
-      <section className="border-y border-border/60 bg-gradient-to-b from-secondary/30 to-background">
-        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+      <section className="bg-gradient-to-b from-secondary/25 via-background to-background">
+        <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
           <MapIntro />
-          <div className="mt-12 sm:mt-16">
+          <div className="mt-10 sm:mt-14">
             <CircularMap />
           </div>
         </div>
@@ -98,13 +98,13 @@ export function MapScrollJourney() {
   const trackHeight = MOVEMENT_COUNT * stepVh(isMobile);
 
   return (
-    <section className="border-y border-border/60 bg-gradient-to-b from-secondary/30 to-background">
+    <section className="bg-gradient-to-b from-secondary/25 via-background to-background">
       <div ref={trackRef} className="relative" style={{ height: `${trackHeight}vh` }}>
         <div className="sticky top-0 z-10 flex h-[100dvh] max-h-[100svh] flex-col overflow-hidden pt-[calc(3.5rem+env(safe-area-inset-top,0px))] sm:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
-          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-4 py-3 sm:px-8 sm:py-7 lg:py-9">
+          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-4 py-3 sm:px-8 sm:py-6 lg:py-8">
             <MapIntro scrollHint compact />
 
-            <div className="mt-3 flex min-h-0 min-w-0 flex-1 items-stretch sm:mt-8 sm:items-center sm:pb-3">
+            <div className="mt-2 flex min-h-0 min-w-0 flex-1 items-stretch sm:mt-6 sm:items-center sm:pb-2">
               <CircularMap
                 activeIndex={active}
                 onActiveChange={scrollToStep}
@@ -130,28 +130,28 @@ function MapIntro({
   compact?: boolean;
 }) {
   return (
-    <div className={`mx-auto w-full shrink-0 text-left ${compact ? "max-w-2xl" : "max-w-2xl"}`}>
+    <div className="mx-auto w-full max-w-2xl shrink-0 text-left">
       <div className="text-sm font-semibold uppercase tracking-[0.22em] text-ember-deep sm:text-base">
         The Map
       </div>
       <h2
         className={`font-display font-semibold leading-tight text-ink ${
           compact
-            ? "mt-1 text-lg sm:mt-2 sm:text-3xl md:text-[2.35rem]"
+            ? "mt-1 text-lg sm:mt-2 sm:text-3xl md:text-[2.2rem]"
             : "mt-3 text-3xl sm:text-4xl md:text-5xl"
         }`}
       >
-        From Emotional Reactivity to Creative Agency
+        Walk what the book maps
       </h2>
       {scrollHint ? (
-        <p className="mt-1.5 text-[0.7rem] leading-relaxed text-ink/65 sm:mt-2 sm:text-sm">
-          Five movements. One relationship.{" "}
+        <p className="mt-1.5 max-w-xl text-[0.75rem] leading-relaxed text-ink/70 sm:mt-2 sm:text-sm">
+          Five movements from Emotional Reactivity to Creative Agency.{" "}
           <span className="text-ink/50">Click a step · 1–{MOVEMENT_COUNT}</span>
         </p>
       ) : (
-        <p className="mt-5 max-w-xl text-ink/75">
-          The Map isn&apos;t something to master. It&apos;s a way of learning the language of your
-          own experience. Five movements. One relationship. Meet yourself, differently.
+        <p className="mt-4 max-w-xl text-base leading-relaxed text-ink/75 sm:text-lg">
+          The book names the path. The Map is how you walk it — five movements for learning the
+          language of your own experience. Meet yourself, differently.
         </p>
       )}
     </div>
@@ -161,7 +161,7 @@ function MapIntro({
 function ScrollCue({ progress, active }: { progress: number; active: number }) {
   const done = active >= MOVEMENT_COUNT - 1 && progress > 0.92;
   return (
-    <div className="mt-3 flex w-full shrink-0 flex-col items-start gap-2 border-t border-border/40 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:mt-8 sm:gap-3.5 sm:pt-6 sm:pb-safe">
+    <div className="mt-2 flex w-full shrink-0 flex-col items-start gap-2 border-t border-border/35 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:mt-6 sm:gap-3 sm:pt-5">
       <div
         className="grid w-full max-w-[13.5rem] grid-cols-5 gap-2"
         role="progressbar"

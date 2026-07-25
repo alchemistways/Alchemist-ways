@@ -22,17 +22,15 @@ const SLIDES = [
     id: "clarity-call",
     label: "A Clarity Call",
     body: "An honest conversation about where you are, what patterns keep repeating, and whether this work feels like the right next step.",
-    aside:
-      "No pressure. No performance. Just curiosity, generous listening, care, and thoughtful inquiry.",
     ctas: [
       {
         href: CLARITY_FREE_URL,
-        text: "Clarity Conversation (Free · 30 min)",
+        text: "Clarity Conversation · Free 30 min",
         variant: "primary" as const,
       },
       {
         href: CLARITY_PAID_URL,
-        text: "Clarity Session (Paid · 90 min)",
+        text: "Clarity Session · Paid 90 min",
         variant: "sand" as const,
       },
     ],
@@ -57,7 +55,7 @@ const HASH_TO_INDEX: Record<string, number> = {
 
 /**
  * Ways to Begin — Conversations / Clarity Call / Community.
- * Snap carousel on mobile; equal grid on wide desktop.
+ * Equal-height cards; CTAs pinned to the bottom for even columns.
  */
 export function BeginCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -109,7 +107,7 @@ export function BeginCarousel() {
   return (
     <div className="relative">
       {/* Desktop ≥1024: equal cards in a row */}
-      <div className="hidden gap-8 lg:grid lg:grid-cols-3">
+      <div className="hidden items-stretch gap-8 lg:grid lg:grid-cols-3">
         {SLIDES.map((slide) => (
           <BeginCard key={slide.id} slide={slide} />
         ))}
@@ -184,48 +182,48 @@ export function BeginCarousel() {
 type Slide = (typeof SLIDES)[number];
 
 function BeginCard({ slide }: { slide: Slide }) {
+  const hasDual = "ctas" in slide && slide.ctas;
+
   return (
     <article
       id={slide.id}
-      className="flex h-full min-h-[18rem] scroll-mt-28 flex-col items-start border-t border-border/60 pt-6 sm:min-h-[20rem] sm:pt-8 lg:min-h-[22rem]"
+      className="flex h-full min-h-[18rem] scroll-mt-28 flex-col border-t border-border/60 pt-6 sm:min-h-[20rem] sm:pt-8"
     >
       <div className="text-sm font-semibold uppercase tracking-[0.2em] text-ember-deep sm:text-base">
         {slide.label}
       </div>
-      <p className="mt-4 flex-1 text-base leading-relaxed text-ink/80 sm:mt-5 sm:text-lg">
+      <p className="mt-4 flex-1 text-base leading-relaxed text-ink/80 sm:mt-5 sm:text-[1.05rem]">
         {slide.body}
       </p>
-      {"aside" in slide && slide.aside ? (
-        <p className="mt-4 text-sm leading-relaxed text-ink/70 sm:text-[0.95rem]">{slide.aside}</p>
-      ) : null}
 
-      {"ctas" in slide && slide.ctas ? (
-        <div className="mt-6 flex w-full flex-col gap-3 sm:mt-7">
-          {slide.ctas.map((cta) => (
+      {/* Fixed CTA rail — two button slots so columns stay even */}
+      <div className="mt-8 flex min-h-[6.25rem] w-full flex-col justify-end gap-2.5">
+        {hasDual ? (
+          slide.ctas.map((cta) => (
             <a
               key={cta.href}
               href={cta.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`btn-lux inline-flex w-full justify-center text-center sm:w-auto ${
+              className={`btn-lux inline-flex h-11 w-full items-center justify-center px-4 text-center text-[0.68rem] tracking-[0.04em] sm:text-[0.7rem] ${
                 cta.variant === "primary" ? "btn-lux-primary" : "btn-lux-sand"
               }`}
             >
               {cta.text}
             </a>
-          ))}
-        </div>
-      ) : "cta" in slide && slide.cta ? (
-        <a
-          href={slide.cta.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-lux btn-lux-sand mt-6 inline-flex w-full justify-center sm:mt-7 sm:w-fit"
-        >
-          {slide.cta.text}
-          <span aria-hidden>→</span>
-        </a>
-      ) : null}
+          ))
+        ) : "cta" in slide && slide.cta ? (
+          <a
+            href={slide.cta.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-lux btn-lux-sand inline-flex h-11 w-full items-center justify-center gap-1.5 px-4 text-center text-[0.68rem] tracking-[0.04em] sm:text-[0.7rem]"
+          >
+            {slide.cta.text}
+            <span aria-hidden>→</span>
+          </a>
+        ) : null}
+      </div>
     </article>
   );
 }

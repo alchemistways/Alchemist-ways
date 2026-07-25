@@ -198,19 +198,19 @@ function LandingPage() {
         </section>
 
         {/* The book is the map — triggers → map → agency */}
-        <section className="border-y border-border/60 bg-secondary/30">
+        <section className="bg-gradient-to-b from-secondary/35 via-secondary/20 to-background">
           <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
             <Reveal>
-              <div className="overflow-hidden">
-                <SceneImage
-                  jpg={sceneCloseupJpg}
-                  webp={sceneCloseupWebp}
-                  alt="Meet Yourself, Differently. — cover close-up"
-                  width={1024}
-                  height={571}
-                  imgClassName="aspect-[16/9] w-full object-cover object-[50%_42%]"
-                />
-              </div>
+              <SceneImage
+                jpg={sceneCloseupJpg}
+                webp={sceneCloseupWebp}
+                alt="Meet Yourself, Differently. — cover close-up"
+                width={1024}
+                height={571}
+                blend
+                blendFromClassName="from-background"
+                imgClassName="aspect-[16/10] w-full object-cover object-[48%_28%] sm:aspect-[16/9]"
+              />
             </Reveal>
             <Reveal delay={80}>
               <div className="max-w-md">
@@ -221,7 +221,8 @@ function LandingPage() {
                   Your triggers are the doorway.
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-ink/80 sm:text-lg">
-                  A Map from Emotional Reactivity to Creative Agency.
+                  A Map from Emotional Reactivity to Creative Agency — five movements for learning
+                  the language of your own experience.
                 </p>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <a href="#waitlist" className="btn-lux btn-lux-primary w-full sm:w-auto">
@@ -237,7 +238,7 @@ function LandingPage() {
           </div>
         </section>
 
-        {/* The Map */}
+        {/* The Map — continues the doorway → book → walk beat */}
         <div id="map" className="scroll-mt-24">
           <MapScrollJourney />
         </div>
@@ -404,18 +405,20 @@ function LandingPage() {
             </div>
           </Reveal>
 
-          {/* Second angle — letter-perfect cover close-up */}
+          {/* Second angle — letter-perfect cover close-up, soft-merged */}
           <Reveal delay={60} className="mx-auto mt-8 max-w-6xl px-5 sm:mt-10 sm:px-8">
-            <div className="grid items-end gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-10">
+            <div className="grid items-end gap-6 md:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] md:gap-10">
               <SceneImage
                 jpg={sceneCloseupJpg}
                 webp={sceneCloseupWebp}
                 alt="Meet Yourself, Differently. hardcover — title and subtitle close-up"
                 width={1024}
                 height={571}
-                imgClassName="aspect-[21/9] w-full object-cover object-[48%_38%] sm:aspect-[2.4/1]"
+                blend
+                blendFromClassName="from-background"
+                imgClassName="aspect-[21/9] w-full object-cover object-[48%_30%] sm:aspect-[2.4/1]"
               />
-              <p className="max-w-xs text-sm leading-relaxed text-ink/70 sm:text-base md:pb-2">
+              <p className="max-w-xs text-sm leading-relaxed text-ink/70 sm:text-base md:pb-3">
                 Meet Yourself, Differently. — A Map from Emotional Reactivity to Creative Agency.
               </p>
             </div>
