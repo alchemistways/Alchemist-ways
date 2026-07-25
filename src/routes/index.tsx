@@ -41,10 +41,10 @@ function LandingPage() {
               <p className="text-[0.65rem] uppercase tracking-[0.32em] text-ember-deep md:text-[#3a2a1f]/70">
                 Alchemist Ways
               </p>
-              <h1 className="mt-4 flex flex-col items-start gap-1 font-display text-[2.1rem] uppercase leading-[1.05] tracking-[0.03em] text-ink sm:text-5xl md:mt-5 md:text-[2.65rem] lg:text-[3.1rem]">
+              <h1 className="mt-4 flex flex-col items-start gap-1 font-display text-[2.15rem] font-semibold uppercase leading-[0.98] tracking-[-0.04em] text-ink sm:text-5xl md:mt-5 md:text-[2.75rem] lg:text-[3.25rem]">
                 <span>Meet Yourself,</span>
                 <span
-                  className="origin-center text-ember-deep"
+                  className="origin-center font-semibold text-ember-deep"
                   style={{ transform: "rotate(180deg)" }}
                 >
                   Differently.

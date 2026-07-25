@@ -58,4 +58,4 @@ Words appear in a design for one reason: to make it easier to understand, and th
 - **Page job:** Trust + waitlist signup
 - **Signature:** Circular journey ring (alchemical diagram) with subtle ambient motion
 - **Palette:** Paper white base; gold for structure; ember for primary waitlist CTA only
-- **Type:** Fraunces (display) + Sora (body)
+- **Type:** Helvetica Neue trial (display + body) — pending client approval; prior Fraunces + Inter/Sora

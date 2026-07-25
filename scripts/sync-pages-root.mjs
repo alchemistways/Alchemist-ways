@@ -17,7 +17,7 @@ if (!existsSync(shell)) {
   process.exit(1);
 }
 
-const dirs = ["assets", "brand", "hero", "models"];
+const dirs = ["assets", "brand"];
 for (const dir of dirs) {
   const from = join(pub, dir);
   const to = join(root, dir);
@@ -25,6 +25,12 @@ for (const dir of dirs) {
   rmSync(to, { recursive: true, force: true });
   mkdirSync(to, { recursive: true });
   cpSync(from, to, { recursive: true });
+}
+
+// Drop stale publish dirs from older builds
+for (const stale of ["hero", "models"]) {
+  const to = join(root, stale);
+  if (existsSync(to)) rmSync(to, { recursive: true, force: true });
 }
 
 copyFileSync(shell, join(root, "index.html"));
@@ -41,4 +47,4 @@ for (const file of [
 }
 
 writeFileSync(join(root, ".nojekyll"), "");
-console.log("Synced Pages root: index.html, assets/, brand/, hero/, .nojekyll");
+console.log("Synced Pages root: index.html, assets/, brand/, .nojekyll");

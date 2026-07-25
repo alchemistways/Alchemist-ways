@@ -13,10 +13,9 @@
 | Path | Role |
 |------|------|
 | `src/routes/` | TanStack file routes (`index.tsx` = landing) |
-| `src/components/` | CircularMap, WaitlistForm, UI primitives |
-| `src/assets/` | Book image and app media |
+| `src/components/` | CircularMap, WaitlistForm, BookPlateImage, etc. |
+| `src/assets/` | Book plate + portrait media |
 | `docs/` | BRIEF, BRAND, blueprint, client inputs, changelog |
-| `archive/` | Legacy static HTML — do not serve as the site |
 | `CNAME` | Custom domain record for hosting |
 
 ## Agent rules of thumb

@@ -1,5 +1,33 @@
 # Changelog
 
+## Dead-weight cleanup (branch1)
+
+- Removed unused shadcn `src/components/ui/` kit + `components.json` + `hooks/`
+- Removed unused `Book3D` / Three.js path and `public/models`
+- Removed orphan media: `hero-corridor*`, `book.jpg`, `book-meet.jpg`, `src/assets/archive`, root portrait duplicate, `public/hero`
+- Pruned unused npm deps (Radix, three, recharts, form libs, etc.)
+- Kept client source: `BOOK_MAP DESIGN/`, brief PDFs
+
+---
+
+## Helvetica type trial (branch1)
+
+- Swapped Fraunces/Inter for system **Helvetica Neue / Helvetica** (display + body)
+- Semibold headlines, tighter tracking, uppercase spaced CTAs — sharper / game-adjacent energy without game UI
+- Dropped Google Fonts load for this trial (system stack on macOS; Arial fallback elsewhere)
+- Client preview only — easy to revert if they prefer another option
+
+---
+
+## Book plate refresh — letter-perfect front cover (branch1)
+
+- Regenerated corridor plate with Higgsfield `nano_banana_pro` from clean Alchemist Ways cover + sand corridor refs (Alchemist Ways only)
+- Front cover verified letter-perfect: `ALCHEMIST WAYS` / `MEET YOURSELF,` / upside-down `DIFFERENTLY.` / full subtitle / `MALEK NAJM GHALEB`
+- Shipped via local Lanczos → responsive `book-plate-{960…4096}.{jpg,webp}` (no blind AI upscale — that mangled type before)
+- Spine still has a near-invisible micro-typo at hero scale; AI spine edits reintroduced worse errors, so left alone for now
+
+---
+
 ## GitHub Pages: serve the real app (not README)
 
 - SPA/prerender build; `npm run build:pages` syncs `index.html` + assets to repo root

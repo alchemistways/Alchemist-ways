@@ -36,19 +36,21 @@ See also: [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md) for distinctive-design cr
 - Top nav pills: **Book a Call** · **Join Waitlist**.
 - Never show Lovable or other builder branding.
 
-## Opening hero (3D)
+## Opening hero
 
-- Layout matches the studio mockup (sand ground, serif headline, dual CTAs).
-- Book is a **live Three.js canvas** (`src/components/Book3D.tsx`) using `@react-three/fiber` + `@react-three/drei` — not a pasted screenshot.
-- Default: procedural chrome hardcover. Drop `public/models/alchemist-book.glb` to auto-swap in a custom model.
+- Full-bleed book-in-corridor plate via `BookPlateImage` (`src/assets/book-plate-*`).
+- Headline + waitlist CTA on the open wall; secondary book CTA muted.
 
 ## Typography
 
-- App uses Fraunces (display) + Inter (body) via Google Fonts in `__root.tsx`.
+- **Trial (client interest):** Helvetica Neue / Helvetica for display + body (system stack). Semibold headlines, tight tracking, uppercase CTAs — sharp / slightly game-adjacent without game UI chrome.
+- Prior: Fraunces (display) + Inter (body) via Google Fonts — kept in git history if we revert.
 - Letter-spacing used for the A · C mark and small uppercase labels.
 
 ## Assets
 
-- Optional 3D model: `public/models/alchemist-book.glb`
-- Legacy stills: `src/assets/book.jpg`, `assets/alchemist-ways-cover.jpeg` (not used as the hero book)
-- Live site entry is the TanStack app — not `archive/legacy-landing.html`
+- Responsive book plate: `src/assets/book-plate-{960…4096}.{jpg,webp}`
+- About portrait: `src/assets/malek-portrait.jpg`
+- Brand mark: `public/brand/ac-logo.png`
+- Design source stills (optional): `BOOK_MAP DESIGN/`
+
