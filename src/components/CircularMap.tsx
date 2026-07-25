@@ -123,9 +123,9 @@ export function CircularMap({
       className={
         scrollDriven
           ? compactMobile
-            ? "grid h-full min-h-0 min-w-0 grid-rows-[minmax(0,auto)_minmax(0,1fr)] gap-3"
-            : "grid h-full min-h-0 min-w-0 grid-cols-1 items-center gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-12 lg:gap-16"
-          : "grid min-w-0 items-start gap-12 lg:grid-cols-2 lg:items-center lg:gap-16"
+            ? "grid h-full min-h-0 min-w-0 grid-rows-[minmax(0,auto)_minmax(0,1fr)] gap-2 sm:gap-4"
+            : "grid h-full min-h-0 min-w-0 grid-cols-1 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16"
+          : "grid min-w-0 items-start gap-10 sm:gap-12 lg:grid-cols-2 lg:items-center lg:gap-16"
       }
     >
       <div
@@ -136,9 +136,9 @@ export function CircularMap({
         <div
           className={`relative aspect-square shrink-0 ${
             compactMobile
-              ? "w-[min(72vw,13.5rem)]"
+              ? "w-[min(68vw,14.5rem)] sm:w-[min(52vw,17rem)]"
               : scrollDriven
-                ? "w-[min(100%,min(32rem,62vh))]"
+                ? "w-[min(100%,min(32rem,58vh))]"
                 : "w-[min(100%,32rem)]"
           }`}
           role="listbox"
@@ -229,7 +229,7 @@ export function CircularMap({
                   onKeyDown={(e) => onKeyRing(e, i)}
                   className={`relative flex items-center justify-center rounded-full border bg-card font-display outline-none transition-[transform,background-color,border-color,box-shadow,color] duration-300 ${
                     compactMobile
-                      ? "h-11 w-11 text-sm"
+                      ? "h-11 w-11 text-sm sm:h-12 sm:w-12"
                       : "h-12 w-12 text-base sm:h-14 sm:w-14 sm:text-lg"
                   } ${
                     isActive
@@ -340,21 +340,21 @@ export function CircularMap({
 
             <h3
               className={`mt-2 font-display font-semibold uppercase leading-tight tracking-[0.06em] text-ink ${
-                compactMobile ? "text-lg" : "mt-3 text-2xl sm:text-3xl"
+                compactMobile ? "text-base sm:text-xl" : "mt-3 text-2xl sm:text-3xl"
               }`}
             >
               {current.label}
             </h3>
             <p
               className={`mt-2 font-display italic leading-snug text-muted-foreground ${
-                compactMobile ? "text-sm" : "mt-3 text-base sm:text-lg"
+                compactMobile ? "text-[0.9rem] sm:text-base" : "mt-3 text-base sm:text-lg"
               }`}
             >
               {current.short}
             </p>
             <p
-              className={`mt-3 leading-relaxed text-ink/80 ${
-                compactMobile ? "text-sm" : "mt-4 text-[0.95rem] sm:text-base"
+              className={`mt-2.5 leading-relaxed text-ink/80 ${
+                compactMobile ? "text-[0.875rem] sm:text-[0.95rem]" : "mt-4 text-[0.95rem] sm:text-base"
               }`}
             >
               {current.body}
@@ -387,14 +387,14 @@ export function CircularMap({
                 <button
                   type="button"
                   onClick={() => select((active - 1 + movements.length) % movements.length)}
-                  className="rounded-full border border-border px-4 py-2 text-xs text-ink transition-colors hover:border-ember hover:text-ember-deep"
+                  className="min-h-11 rounded-full border border-border px-4 py-2.5 text-xs text-ink transition-colors hover:border-ember hover:text-ember-deep"
                 >
                   Previous
                 </button>
                 <button
                   type="button"
                   onClick={() => select((active + 1) % movements.length)}
-                  className="rounded-full bg-ember px-4 py-2 text-xs text-primary-foreground transition-opacity hover:opacity-90"
+                  className="min-h-11 rounded-full bg-ember px-4 py-2.5 text-xs text-primary-foreground transition-opacity hover:opacity-90"
                 >
                   Next movement
                 </button>

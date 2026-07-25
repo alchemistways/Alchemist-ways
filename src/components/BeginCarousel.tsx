@@ -107,7 +107,7 @@ export function BeginCarousel() {
   return (
     <div className="relative">
       {/* Desktop ≥1024: equal cards in a row */}
-      <div className="hidden items-stretch gap-8 lg:grid lg:grid-cols-3">
+      <div className="hidden items-stretch gap-6 lg:grid lg:grid-cols-3 lg:gap-8">
         {SLIDES.map((slide) => (
           <BeginCard key={slide.id} slide={slide} />
         ))}
@@ -126,7 +126,7 @@ export function BeginCarousel() {
             {SLIDES.map((slide, i) => (
               <div
                 key={slide.id}
-                className="min-w-0 shrink-0 grow-0 basis-[85%] sm:basis-[70%]"
+                className="min-w-0 shrink-0 grow-0 basis-[min(100%,20.5rem)] sm:basis-[70%] md:basis-[48%]"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${i + 1} of ${SLIDES.length}`}
@@ -143,12 +143,12 @@ export function BeginCarousel() {
             onClick={() => emblaApi?.scrollPrev()}
             disabled={!canPrev}
             aria-label="Previous way to begin"
-            className="grid h-11 w-11 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep disabled:pointer-events-none disabled:opacity-35"
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep disabled:pointer-events-none disabled:opacity-35"
           >
             <ChevronLeft size={18} />
           </button>
 
-          <div className="flex items-center gap-2" role="tablist" aria-label="Carousel slides">
+          <div className="flex items-center gap-1" role="tablist" aria-label="Carousel slides">
             {SLIDES.map((slide, i) => (
               <button
                 key={slide.id}
@@ -157,10 +157,14 @@ export function BeginCarousel() {
                 aria-selected={selected === i}
                 aria-label={`Go to ${slide.label}`}
                 onClick={() => emblaApi?.scrollTo(i)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  selected === i ? "w-7 bg-ember" : "w-2.5 bg-border hover:bg-ember/40"
-                }`}
-              />
+                className="flex h-11 w-11 items-center justify-center"
+              >
+                <span
+                  className={`block h-2.5 rounded-full transition-all duration-300 ${
+                    selected === i ? "w-7 bg-ember" : "w-2.5 bg-border"
+                  }`}
+                />
+              </button>
             ))}
           </div>
 
@@ -169,7 +173,7 @@ export function BeginCarousel() {
             onClick={() => emblaApi?.scrollNext()}
             disabled={!canNext}
             aria-label="Next way to begin"
-            className="grid h-11 w-11 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep disabled:pointer-events-none disabled:opacity-35"
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border text-ink transition-colors hover:border-ember hover:text-ember-deep disabled:pointer-events-none disabled:opacity-35"
           >
             <ChevronRight size={18} />
           </button>
@@ -205,7 +209,7 @@ function BeginCard({ slide }: { slide: Slide }) {
               href={cta.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`btn-lux inline-flex h-11 w-full items-center justify-center px-4 text-center text-[0.68rem] tracking-[0.04em] sm:text-[0.7rem] ${
+              className={`btn-lux inline-flex h-11 min-h-11 w-full items-center justify-center px-4 text-center text-[0.68rem] tracking-[0.04em] sm:text-[0.7rem] ${
                 cta.variant === "primary" ? "btn-lux-primary" : "btn-lux-sand"
               }`}
             >
@@ -217,7 +221,7 @@ function BeginCard({ slide }: { slide: Slide }) {
             href={slide.cta.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-lux btn-lux-sand inline-flex h-11 w-full items-center justify-center gap-1.5 px-4 text-center text-[0.68rem] tracking-[0.04em] sm:text-[0.7rem]"
+            className="btn-lux btn-lux-sand inline-flex h-11 min-h-11 w-full items-center justify-center gap-1.5 px-4 text-center text-[0.68rem] tracking-[0.04em] sm:text-[0.7rem]"
           >
             {slide.cta.text}
             <span aria-hidden>→</span>

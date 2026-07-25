@@ -42,11 +42,11 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
       <div className="border-b border-[#3a2a1f]/10 bg-[#faf6f0]/70 backdrop-blur-xl supports-[backdrop-filter]:bg-[#faf6f0]/55">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:gap-4 sm:px-8 sm:py-3.5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-[max(1rem,env(safe-area-inset-left))] py-3 pr-[max(1rem,env(safe-area-inset-right))] sm:gap-4 sm:px-8 sm:py-3.5 sm:pr-8">
           <a
             href="#top"
             onClick={() => setOpen(false)}
-            className="min-w-0 truncate font-display text-[0.75rem] uppercase tracking-[0.3em] text-ink transition-colors hover:text-ember-deep sm:text-[0.85rem]"
+            className="min-w-0 truncate font-display text-[0.7rem] uppercase tracking-[0.28em] text-ink transition-colors hover:text-ember-deep sm:text-[0.85rem] sm:tracking-[0.3em]"
           >
             Alchemist Ways
           </a>
@@ -56,14 +56,14 @@ export function SiteHeader() {
               <a
                 key={link.href}
                 href={link.href}
-                className="nav-link-lux hidden rounded-full px-3 py-2 text-[0.75rem] text-ink/80 transition-colors hover:text-ember-deep md:inline-flex"
+                className="nav-link-lux hidden rounded-full px-3 py-2.5 text-[0.75rem] text-ink/80 transition-colors hover:text-ember-deep lg:inline-flex"
               >
                 {link.label}
               </a>
             ))}
             <a
               href="#clarity-call"
-              className="btn-lux btn-lux-primary btn-lux-nav whitespace-nowrap"
+              className="btn-lux btn-lux-primary btn-lux-nav hidden whitespace-nowrap min-[400px]:inline-flex"
             >
               <span className="sm:hidden">Clarity Call</span>
               <span className="hidden sm:inline">Book a Clarity Call</span>
@@ -71,7 +71,7 @@ export function SiteHeader() {
 
             <button
               type="button"
-              className="grid h-10 w-10 place-items-center rounded-full border border-[#3a2a1f]/15 text-ink transition-colors hover:border-ember hover:text-ember-deep md:hidden"
+              className="grid h-11 w-11 place-items-center rounded-full border border-[#3a2a1f]/15 text-ink transition-colors hover:border-ember hover:text-ember-deep lg:hidden"
               aria-expanded={open}
               aria-controls={menuId}
               aria-label={open ? "Close menu" : "Open menu"}
@@ -103,7 +103,7 @@ export function SiteHeader() {
       {/* Mobile menu */}
       <div
         id={menuId}
-        className={`md:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`lg:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}
       >
         <button
           type="button"
@@ -115,7 +115,7 @@ export function SiteHeader() {
           onClick={() => setOpen(false)}
         />
         <div
-          className={`absolute inset-x-0 top-full z-50 border-b border-[#3a2a1f]/10 bg-[#faf6f0]/97 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 shadow-[0_18px_40px_-28px_rgba(58,42,31,0.45)] backdrop-blur-xl transition-all duration-200 ${
+          className={`absolute inset-x-0 top-full z-50 border-b border-[#3a2a1f]/10 bg-[#faf6f0]/97 px-[max(1rem,env(safe-area-inset-left))] pb-[max(1rem,env(safe-area-inset-bottom))] pr-[max(1rem,env(safe-area-inset-right))] pt-2 shadow-[0_18px_40px_-28px_rgba(58,42,31,0.45)] backdrop-blur-xl transition-all duration-200 ${
             open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
           }`}
         >
@@ -128,7 +128,7 @@ export function SiteHeader() {
                   e.preventDefault();
                   go(link.href);
                 }}
-                className="rounded-xl px-3 py-3.5 text-[0.95rem] text-ink/90 transition-colors hover:bg-ember-soft/60 hover:text-ember-deep"
+                className="min-h-11 rounded-xl px-3 py-3.5 text-[0.95rem] text-ink/90 transition-colors hover:bg-ember-soft/60 hover:text-ember-deep"
               >
                 {link.label}
               </a>
@@ -139,7 +139,7 @@ export function SiteHeader() {
                 e.preventDefault();
                 go("#clarity-call");
               }}
-              className="btn-lux btn-lux-primary mt-2 w-full"
+              className="btn-lux btn-lux-primary mt-2 min-h-11 w-full"
             >
               Book a Clarity Call
             </a>
@@ -149,9 +149,9 @@ export function SiteHeader() {
                 e.preventDefault();
                 go("#waitlist");
               }}
-              className="btn-lux btn-lux-ghost mt-2 w-full"
+              className="btn-lux btn-lux-ghost mt-2 min-h-11 w-full"
             >
-              Begin Here
+              Join the Waitlist
             </a>
           </nav>
         </div>
