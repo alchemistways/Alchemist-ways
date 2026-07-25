@@ -5,15 +5,19 @@
  *
  * Usage: npm run build && node scripts/sync-pages-root.mjs
  */
-import { cpSync, copyFileSync, mkdirSync, rmSync, writeFileSync, existsSync } from "node:fs";
+import { cpSync, copyFileSync, mkdirSync, rmSync, writeFileSync, existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
 const pub = join(root, ".output", "public");
-const shell = join(pub, "_shell.html");
 
-if (!existsSync(shell)) {
-  console.error("Missing .output/public/_shell.html — run `npm run build` first.");
+/** Prefer prerendered index.html (hashed asset links). _shell.html can lag. */
+const prerendered = join(pub, "index.html");
+const shell = join(pub, "_shell.html");
+const htmlSource = existsSync(prerendered) ? prerendered : shell;
+
+if (!existsSync(htmlSource)) {
+  console.error("Missing .output/public/index.html (or _shell.html) — run `npm run build` first.");
   process.exit(1);
 }
 
@@ -33,7 +37,7 @@ for (const stale of ["hero", "models"]) {
   if (existsSync(to)) rmSync(to, { recursive: true, force: true });
 }
 
-copyFileSync(shell, join(root, "index.html"));
+copyFileSync(htmlSource, join(root, "index.html"));
 
 for (const file of [
   "apple-touch-icon.png",
@@ -47,4 +51,7 @@ for (const file of [
 }
 
 writeFileSync(join(root, ".nojekyll"), "");
-console.log("Synced Pages root: index.html, assets/, brand/, .nojekyll");
+
+const preview = readFileSync(join(root, "index.html"), "utf8").slice(0, 280);
+console.log(`Synced Pages root from ${htmlSource.includes("_shell") ? "_shell.html" : "index.html"}`);
+console.log("index head:", preview.replace(/\s+/g, " ").slice(0, 180) + "…");
