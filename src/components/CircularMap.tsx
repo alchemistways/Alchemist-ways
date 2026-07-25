@@ -73,7 +73,8 @@ export function CircularMap({
   const [panelKey, setPanelKey] = useState(0);
   const tipId = useId();
   const detailRef = useRef<HTMLDivElement>(null);
-  const radius = 38;
+  /* Keep nodes on the ring with clear air around center labels */
+  const radius = 40;
 
   const controlled = typeof activeIndex === "number";
   const active = controlled ? activeIndex : internalActive;
@@ -208,7 +209,7 @@ export function CircularMap({
             return (
               <div
                 key={m.key}
-                className="absolute -translate-x-1/2 -translate-y-1/2"
+                className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
                 style={{ left: `${x}%`, top: `${y}%` }}
               >
                 <button
@@ -232,18 +233,18 @@ export function CircularMap({
                       : "h-12 w-12 text-base sm:h-14 sm:w-14 sm:text-lg"
                   } ${
                     isActive
-                      ? "scale-110 border-ember bg-ember text-primary-foreground shadow-[0_0_0_4px_rgba(192,90,46,0.18),0_8px_20px_-12px_rgba(156,71,34,0.45)]"
+                      ? "scale-105 border-ember bg-ember text-primary-foreground shadow-[0_0_0_2px_rgba(192,90,46,0.28)]"
                       : isCrossed
                         ? "border-ember/80 bg-ember-soft text-ember-deep"
                         : isHovered
-                          ? "scale-105 border-ember bg-card text-ember-deep"
+                          ? "scale-[1.04] border-ember bg-card text-ember-deep shadow-[0_0_0_1.5px_rgba(192,90,46,0.2)]"
                           : "border-ember/40 text-ember hover:border-ember"
                   } focus-visible:ring-2 focus-visible:ring-ember/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                 >
                   {i + 1}
                   {isActive && (
                     <span
-                      className="pointer-events-none absolute -inset-2 rounded-full border border-ember/40 motion-safe:animate-map-pulse"
+                      className="pointer-events-none absolute inset-[-3px] rounded-full border border-ember/30 motion-safe:animate-map-pulse"
                       aria-hidden
                     />
                   )}
@@ -252,7 +253,8 @@ export function CircularMap({
             );
           })}
 
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center sm:px-8">
+          {/* Above node glows so center brand copy never reads under the halo */}
+          <div className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center px-8 text-center sm:px-10">
             <span
               className={`uppercase tracking-[0.36em] text-ember ${
                 compactMobile ? "text-[0.55rem]" : "text-[0.65rem] sm:text-sm sm:tracking-[0.4em]"
@@ -273,7 +275,7 @@ export function CircularMap({
           <div
             id={tipId}
             role="status"
-            className={`pointer-events-none absolute inset-x-3 bottom-0 z-10 mx-auto max-w-[14rem] rounded-xl border border-border/50 bg-card/95 px-3 py-2.5 text-center backdrop-blur-sm transition-all duration-300 md:hidden ${
+            className={`pointer-events-none absolute inset-x-3 bottom-0 z-30 mx-auto max-w-[14rem] rounded-xl border border-border/50 bg-card/95 px-3 py-2.5 text-center backdrop-blur-sm transition-all duration-300 md:hidden ${
               hovered !== null ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
             }`}
           >
