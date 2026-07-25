@@ -1,5 +1,13 @@
 # Changelog
 
+## Sync Pages entry for 2K book stills
+
+- Align root `index.html` + hashed JS with 2K gallery/droplet build (`index-DWR3_bYn.js`, `routes-iJjgCHfH.js`, `scene-gallery-*`, `scene-droplet-*`)
+- Unblocks `deploy-pages` sync after native 2K stills landed
+
+---
+
+
 ## Native 2K book stills via Nano Banana Pro (branch1)
 
 - Regenerated mid-page book scenes at native `nano_banana_pro` **2k** (2752×1536) — no AI upscale of prior 1K shots
