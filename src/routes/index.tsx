@@ -205,8 +205,8 @@ function LandingPage() {
                 jpg={sceneGalleryJpg}
                 webp={sceneGalleryWebp}
                 alt="Meet Yourself, Differently. — hardcover standing in a gallery interior"
-                width={1024}
-                height={571}
+                width={2752}
+                height={1536}
                 blend
                 blendFromClassName="from-background"
                 imgClassName="aspect-[16/10] w-full object-cover object-[52%_42%] sm:aspect-[16/9]"
@@ -317,8 +317,8 @@ function LandingPage() {
               jpg={sceneDropletJpg}
               webp={sceneDropletWebp}
               alt=""
-              width={1024}
-              height={571}
+              width={2752}
+              height={1536}
               className="absolute inset-0 h-full w-full"
               imgClassName="h-full w-full object-cover object-[50%_58%] opacity-[0.92]"
             />
@@ -412,8 +412,8 @@ function LandingPage() {
                 jpg={sceneGalleryJpg}
                 webp={sceneGalleryWebp}
                 alt="Meet Yourself, Differently. hardcover standing in a gallery interior"
-                width={1024}
-                height={571}
+                width={2752}
+                height={1536}
                 blend
                 blendFromClassName="from-background"
                 imgClassName="aspect-[21/9] w-full object-cover object-[52%_40%] sm:aspect-[2.4/1]"
