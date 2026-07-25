@@ -1,5 +1,25 @@
 # Changelog
 
+## Premium book scenes (branch1)
+
+- Audited 8 Higgsfield 3D book stills; shipped only letter-perfect (or near-perfect at display size) shots
+- Added `scene-closeup` + `scene-droplet` (JPEG/WebP via Vite) — kept existing letter-perfect `BookPlateImage` hero/book corridor plate
+- New “The book is the map” beat after Triggers (close-up + client map line + Waitlist / Explore Map)
+- Invitation: droplet detail as full-bleed atmosphere with manifesto copy
+- Book section: second-angle close-up under the corridor plate
+- Rejected corridor/flat/gallery variants with mangled brand, subtitle, or author text
+
+---
+
+## Landing polish pass (branch1)
+
+- Waitlist: hairline sits above “Continue the exploration.”; denser closer stack; footer border + Twitter/X removed
+- BeginCarousel labels enlarged; book block type bumped; Invitation densified with faint map rings (no fake cards)
+- About Malek: real section title, tighter photo/copy gap, fewer paragraphs
+- Middle narrative compressed; map detail left-aligned with active-node pulse/glow
+
+---
+
 ## Dead-weight cleanup (branch1)
 
 - Removed unused shadcn `src/components/ui/` kit + `components.json` + `hooks/`

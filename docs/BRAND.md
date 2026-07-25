@@ -50,6 +50,7 @@ See also: [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md) for distinctive-design cr
 ## Assets
 
 - Responsive book plate: `src/assets/book-plate-{960…4096}.{jpg,webp}`
+- Mid-page scenes: `src/assets/scene-closeup.{jpg,webp}`, `src/assets/scene-droplet.{jpg,webp}` (letter-perfect Higgsfield stills; originals in `src/assets/scenes/`)
 - About portrait: `src/assets/malek-portrait.jpg`
 - Brand mark: `public/brand/ac-logo.png`
 - Design source stills (optional): `BOOK_MAP DESIGN/`

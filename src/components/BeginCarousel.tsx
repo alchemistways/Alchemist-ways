@@ -187,20 +187,20 @@ function BeginCard({ slide }: { slide: Slide }) {
   return (
     <article
       id={slide.id}
-      className="flex h-full min-h-[16rem] scroll-mt-28 flex-col border-t border-border/60 pt-6 sm:pt-8"
+      className="flex h-full min-h-[18rem] scroll-mt-28 flex-col items-start border-t border-border/60 pt-6 sm:min-h-[20rem] sm:pt-8 lg:min-h-[22rem]"
     >
-      <div className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
+      <div className="text-sm font-semibold uppercase tracking-[0.2em] text-ember-deep sm:text-base">
         {slide.label}
       </div>
       <p className="mt-4 flex-1 text-base leading-relaxed text-ink/80 sm:mt-5 sm:text-lg">
         {slide.body}
       </p>
       {"aside" in slide && slide.aside ? (
-        <p className="mt-4 text-sm leading-relaxed text-ink/70 sm:text-base">{slide.aside}</p>
+        <p className="mt-4 text-sm leading-relaxed text-ink/70 sm:text-[0.95rem]">{slide.aside}</p>
       ) : null}
 
       {"ctas" in slide && slide.ctas ? (
-        <div className="mt-6 flex flex-col gap-3 sm:mt-8">
+        <div className="mt-6 flex w-full flex-col gap-3 sm:mt-7">
           {slide.ctas.map((cta) => (
             <a
               key={cta.href}
@@ -220,7 +220,7 @@ function BeginCard({ slide }: { slide: Slide }) {
           href={slide.cta.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-lux btn-lux-sand mt-6 inline-flex w-full justify-center sm:mt-8 sm:w-fit"
+          className="btn-lux btn-lux-sand mt-6 inline-flex w-full justify-center sm:mt-7 sm:w-fit"
         >
           {slide.cta.text}
           <span aria-hidden>→</span>

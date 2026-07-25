@@ -232,7 +232,7 @@ export function CircularMap({
                       : "h-12 w-12 text-base sm:h-14 sm:w-14 sm:text-lg"
                   } ${
                     isActive
-                      ? "scale-110 border-ember bg-ember text-primary-foreground shadow-[0_8px_20px_-12px_rgba(156,71,34,0.45)]"
+                      ? "scale-110 border-ember bg-ember text-primary-foreground shadow-[0_0_0_4px_rgba(192,90,46,0.18),0_8px_20px_-12px_rgba(156,71,34,0.45)]"
                       : isCrossed
                         ? "border-ember/80 bg-ember-soft text-ember-deep"
                         : isHovered
@@ -243,7 +243,7 @@ export function CircularMap({
                   {i + 1}
                   {isActive && (
                     <span
-                      className="pointer-events-none absolute -inset-1.5 rounded-full border border-ember/35 motion-safe:animate-map-pulse"
+                      className="pointer-events-none absolute -inset-2 rounded-full border border-ember/40 motion-safe:animate-map-pulse"
                       aria-hidden
                     />
                   )}
@@ -325,10 +325,10 @@ export function CircularMap({
         >
           <div
             key={panelKey}
-            className={scrollDriven ? undefined : "motion-safe:animate-map-panel"}
+            className={`text-left ${scrollDriven ? undefined : "motion-safe:animate-map-panel"}`}
           >
-            <div className="flex items-baseline justify-between gap-3">
-              <span className="font-display text-sm tabular-nums tracking-[0.12em] text-ember-deep sm:text-base">
+            <div className="flex items-baseline gap-3">
+              <span className="font-display text-sm font-semibold tabular-nums tracking-[0.12em] text-ember-deep sm:text-base">
                 {String(active + 1).padStart(2, "0")}
               </span>
               <span className="text-[0.6rem] tabular-nums text-muted-foreground">
@@ -337,7 +337,7 @@ export function CircularMap({
             </div>
 
             <h3
-              className={`mt-2 font-display uppercase leading-tight tracking-[0.06em] text-ink ${
+              className={`mt-2 font-display font-semibold uppercase leading-tight tracking-[0.06em] text-ink ${
                 compactMobile ? "text-lg" : "mt-3 text-2xl sm:text-3xl"
               }`}
             >

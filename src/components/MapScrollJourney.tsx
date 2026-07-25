@@ -102,7 +102,7 @@ export function MapScrollJourney() {
       <div ref={trackRef} className="relative" style={{ height: `${trackHeight}vh` }}>
         <div className="sticky top-0 z-10 flex h-[100dvh] max-h-[100svh] flex-col overflow-hidden pt-[calc(3.5rem+env(safe-area-inset-top,0px))] sm:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
           <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-4 py-3 sm:px-8 sm:py-7 lg:py-9">
-            <MapIntro scrollHint compact active={active} />
+            <MapIntro scrollHint compact />
 
             <div className="mt-3 flex min-h-0 min-w-0 flex-1 items-stretch sm:mt-8 sm:items-center sm:pb-3">
               <CircularMap
@@ -125,19 +125,17 @@ export function MapScrollJourney() {
 function MapIntro({
   scrollHint = false,
   compact = false,
-  active = 0,
 }: {
   scrollHint?: boolean;
   compact?: boolean;
-  active?: number;
 }) {
   return (
-    <div className={`mx-auto shrink-0 text-center ${compact ? "max-w-2xl" : "max-w-2xl"}`}>
-      <div className="text-[0.6rem] uppercase tracking-[0.32em] text-ember-deep sm:text-[0.65rem]">
+    <div className={`mx-auto w-full shrink-0 text-left ${compact ? "max-w-2xl" : "max-w-2xl"}`}>
+      <div className="text-sm font-semibold uppercase tracking-[0.22em] text-ember-deep sm:text-base">
         The Map
       </div>
       <h2
-        className={`font-display leading-tight text-ink ${
+        className={`font-display font-semibold leading-tight text-ink ${
           compact
             ? "mt-1 text-lg sm:mt-2 sm:text-3xl md:text-[2.35rem]"
             : "mt-3 text-3xl sm:text-4xl md:text-5xl"
@@ -146,14 +144,12 @@ function MapIntro({
         From Emotional Reactivity to Creative Agency
       </h2>
       {scrollHint ? (
-        <p className="mt-1.5 text-[0.65rem] leading-relaxed text-ink/65 sm:mt-2 sm:text-sm">
+        <p className="mt-1.5 text-[0.7rem] leading-relaxed text-ink/65 sm:mt-2 sm:text-sm">
           Five movements. One relationship.{" "}
-          <span className="text-ink/50">
-            · {active + 1} of {MOVEMENT_COUNT}
-          </span>
+          <span className="text-ink/50">Click a step · 1–{MOVEMENT_COUNT}</span>
         </p>
       ) : (
-        <p className="mx-auto mt-5 max-w-xl text-ink/75">
+        <p className="mt-5 max-w-xl text-ink/75">
           The Map isn&apos;t something to master. It&apos;s a way of learning the language of your
           own experience. Five movements. One relationship. Meet yourself, differently.
         </p>
@@ -165,7 +161,7 @@ function MapIntro({
 function ScrollCue({ progress, active }: { progress: number; active: number }) {
   const done = active >= MOVEMENT_COUNT - 1 && progress > 0.92;
   return (
-    <div className="mt-3 flex w-full shrink-0 flex-col items-center gap-2 border-t border-border/40 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:mt-8 sm:gap-3.5 sm:pt-6 sm:pb-safe">
+    <div className="mt-3 flex w-full shrink-0 flex-col items-start gap-2 border-t border-border/40 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:mt-8 sm:gap-3.5 sm:pt-6 sm:pb-safe">
       <div
         className="grid w-full max-w-[13.5rem] grid-cols-5 gap-2"
         role="progressbar"
@@ -183,7 +179,7 @@ function ScrollCue({ progress, active }: { progress: number; active: number }) {
           />
         ))}
       </div>
-      <p className="text-center text-[0.6rem] uppercase tracking-[0.22em] text-muted-foreground sm:text-[0.65rem]">
+      <p className="text-[0.6rem] uppercase tracking-[0.22em] text-muted-foreground sm:text-[0.65rem]">
         {done ? "Continue scrolling ↓" : "Scroll to walk the map ↓"}
       </p>
     </div>
