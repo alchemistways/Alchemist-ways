@@ -33,7 +33,7 @@ export function SceneImage({
         height={height}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
-        className={imgClassName}
+        className={`max-w-full ${imgClassName}`}
       />
     </picture>
   );

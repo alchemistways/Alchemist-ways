@@ -25,7 +25,7 @@ function LandingPage() {
 
         {/* Hero — Higgsfield book on the right; copy sits in the open left wall */}
         <section id="top" className="relative overflow-hidden bg-[#d4c4b0] md:min-h-[100svh]">
-          <div className="relative h-[min(52svh,440px)] w-full md:absolute md:inset-0 md:h-full">
+          <div className="relative h-[min(48svh,420px)] w-full sm:h-[min(52svh,480px)] md:absolute md:inset-0 md:h-full">
             <BookPlateImage
               priority
               alt="Meet Yourself, Differently. Alchemist Ways hardcover"
@@ -41,12 +41,12 @@ function LandingPage() {
             />
           </div>
 
-          <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-5 pb-14 pt-5 md:min-h-[100svh] md:bg-transparent md:px-8 md:pb-24 md:pt-28 lg:px-12">
-            <div className="hero-stagger flex w-full flex-1 flex-col justify-center md:max-w-[min(100%,24rem)] lg:max-w-[26rem]">
+          <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-[max(1.25rem,env(safe-area-inset-left))] pb-14 pr-[max(1.25rem,env(safe-area-inset-right))] pt-5 md:min-h-[100svh] md:bg-transparent md:px-8 md:pb-24 md:pt-28 lg:px-12">
+            <div className="hero-stagger flex w-full min-w-0 flex-1 flex-col justify-center md:max-w-[min(100%,24rem)] lg:max-w-[26rem]">
               <p className="text-[0.65rem] uppercase tracking-[0.32em] text-ember-deep md:text-[#3a2a1f]/70">
                 Alchemist Ways
               </p>
-              <h1 className="mt-4 flex flex-col items-start gap-1 font-display text-[2.15rem] font-semibold uppercase leading-[0.98] tracking-[-0.04em] text-ink sm:text-5xl md:mt-5 md:text-[2.75rem] lg:text-[3.25rem]">
+              <h1 className="mt-4 flex flex-col items-start gap-1 font-display text-[clamp(1.85rem,8vw,2.15rem)] font-semibold uppercase leading-[0.98] tracking-[-0.04em] text-ink sm:text-5xl md:mt-5 md:text-[2.75rem] lg:text-[3.25rem]">
                 <span>Meet Yourself,</span>
                 <span
                   className="origin-center font-semibold text-ember-deep"
@@ -59,7 +59,7 @@ function LandingPage() {
                 A practical map for discovering a different relationship with yourself.
               </p>
 
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-9 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
                 <a href="#map" className="btn-lux btn-lux-primary w-full sm:w-auto">
                   Explore The Map
                   <span aria-hidden>↓</span>
@@ -154,7 +154,7 @@ function LandingPage() {
             </div>
           </Reveal>
 
-          <div className="mt-8 grid gap-8 sm:grid-cols-3 sm:gap-6 lg:gap-8">
+          <div className="mt-8 grid gap-8 md:grid-cols-3 md:gap-6 lg:gap-8">
             {reactivityModes.map((mode, i) => (
               <Reveal key={mode.title} delay={i * 60}>
                 <div className="border-t border-ember/30 pt-4">
@@ -199,7 +199,7 @@ function LandingPage() {
 
         {/* The book is the map — triggers → map → agency */}
         <section className="bg-gradient-to-b from-secondary/35 via-secondary/20 to-background">
-          <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
+          <div className="mx-auto grid max-w-6xl items-center gap-8 px-[max(1.25rem,env(safe-area-inset-left))] py-12 pr-[max(1.25rem,env(safe-area-inset-right))] sm:px-8 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
             <Reveal>
               <SceneImage
                 jpg={sceneGalleryJpg}
@@ -209,11 +209,11 @@ function LandingPage() {
                 height={1536}
                 blend
                 blendFromClassName="from-background"
-                imgClassName="aspect-[16/10] w-full object-cover object-[52%_42%] sm:aspect-[16/9]"
+                imgClassName="aspect-[4/3] w-full object-cover object-[52%_42%] sm:aspect-[16/10] md:aspect-[16/9]"
               />
             </Reveal>
             <Reveal delay={80}>
-              <div className="max-w-md">
+              <div className="max-w-md min-w-0">
                 <p className="text-[0.65rem] uppercase tracking-[0.28em] text-ember-deep">
                   The book is the map
                 </p>
@@ -224,7 +224,7 @@ function LandingPage() {
                   A Map from Emotional Reactivity to Creative Agency — five movements for learning
                   the language of your own experience.
                 </p>
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="mt-7 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
                   <a href="#waitlist" className="btn-lux btn-lux-primary w-full sm:w-auto">
                     Join the Waitlist
                   </a>
@@ -375,8 +375,8 @@ function LandingPage() {
                 />
               </div>
 
-              <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-5 pb-12 pt-5 md:min-h-[min(68svh,36rem)] md:bg-transparent md:px-8 md:pb-16 md:pt-14 lg:px-12">
-                <div className="flex w-full flex-1 flex-col justify-center gap-0 md:max-w-[min(100%,24rem)] lg:max-w-[26rem]">
+              <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col bg-background px-[max(1.25rem,env(safe-area-inset-left))] pb-12 pr-[max(1.25rem,env(safe-area-inset-right))] pt-5 md:min-h-[min(68svh,36rem)] md:bg-transparent md:px-8 md:pb-16 md:pt-14 lg:px-12">
+                <div className="flex w-full min-w-0 flex-1 flex-col justify-center gap-0 md:max-w-[min(100%,24rem)] lg:max-w-[26rem]">
                   <div className="text-sm font-semibold uppercase tracking-[0.22em] text-ember-deep md:text-[#3a2a1f]/75">
                     The Book
                   </div>
@@ -406,8 +406,8 @@ function LandingPage() {
           </Reveal>
 
           {/* Second angle — gallery standing-book, soft-merged */}
-          <Reveal delay={60} className="mx-auto mt-8 max-w-6xl px-5 sm:mt-10 sm:px-8">
-            <div className="grid items-end gap-6 md:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] md:gap-10">
+          <Reveal delay={60} className="mx-auto mt-8 max-w-6xl px-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] sm:mt-10 sm:px-8">
+            <div className="grid min-w-0 items-end gap-6 md:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] md:gap-10">
               <SceneImage
                 jpg={sceneGalleryJpg}
                 webp={sceneGalleryWebp}
@@ -416,7 +416,7 @@ function LandingPage() {
                 height={1536}
                 blend
                 blendFromClassName="from-background"
-                imgClassName="aspect-[21/9] w-full object-cover object-[52%_40%] sm:aspect-[2.4/1]"
+                imgClassName="aspect-[16/10] w-full object-cover object-[52%_40%] sm:aspect-[2.2/1] md:aspect-[2.4/1]"
               />
               <p className="max-w-xs text-sm leading-relaxed text-ink/70 sm:text-base md:pb-3">
                 Meet Yourself, Differently. — A Map from Emotional Reactivity to Creative Agency.
@@ -443,7 +443,7 @@ function LandingPage() {
               background: "radial-gradient(ellipse at 50% 0%, var(--ember-soft), transparent 60%)",
             }}
           />
-          <div className="relative mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-20">
+          <div className="relative mx-auto max-w-3xl px-[max(1.25rem,env(safe-area-inset-left))] py-14 pr-[max(1.25rem,env(safe-area-inset-right))] sm:px-8 sm:py-20">
             <Reveal>
               <div className="text-center">
                 <div className="space-y-1 font-display text-xl leading-snug text-ink sm:space-y-1.5 sm:text-3xl">
@@ -473,7 +473,7 @@ function LandingPage() {
         {/* Footer */}
         <footer className="bg-secondary/30 pb-[env(safe-area-inset-bottom)]">
           <Reveal>
-            <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 px-5 py-10 sm:px-8 sm:py-12 md:flex-row md:items-center md:justify-between">
+            <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 px-[max(1.25rem,env(safe-area-inset-left))] py-10 pr-[max(1.25rem,env(safe-area-inset-right))] sm:px-8 sm:py-12 md:flex-row md:items-center md:justify-between">
               <div>
                 <div className="font-display text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-ink">
                   Alchemist Ways

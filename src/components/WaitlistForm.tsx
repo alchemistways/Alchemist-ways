@@ -57,12 +57,12 @@ export function WaitlistForm() {
           required
           autoComplete="email"
           maxLength={255}
-          className="w-full flex-1 rounded-full border border-border bg-card px-5 py-3.5 text-base text-ink placeholder:text-muted-foreground focus:border-ember focus:outline-none focus:ring-2 focus:ring-ember/25 sm:py-3 sm:text-sm"
+          className="min-h-11 w-full flex-1 rounded-full border border-border bg-card px-5 py-3.5 text-base text-ink placeholder:text-muted-foreground focus:border-ember focus:outline-none focus:ring-2 focus:ring-ember/25"
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="btn-lux btn-lux-primary w-full whitespace-nowrap disabled:pointer-events-none disabled:opacity-60 sm:w-auto"
+          className="btn-lux btn-lux-primary min-h-11 w-full whitespace-nowrap disabled:pointer-events-none disabled:opacity-60 sm:w-auto"
         >
           {status === "loading" ? "One moment…" : "Begin Here"}
         </button>

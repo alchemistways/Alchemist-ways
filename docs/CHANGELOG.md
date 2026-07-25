@@ -1,5 +1,19 @@
 # Changelog
 
+## Responsive polish across phone → desktop
+
+- Header: 44px menu control, safe-area padding, tablet hamburger through `lg`, Clarity Call hides under ~400px width to avoid overflow
+- Hero / Book: fluid headline clamp, safer plate height, full-width CTAs, safe-area gutters
+- Gallery scenes: taller mobile crops (`4/3` → `16/9`) so blend edges don’t shear the book
+- Map sticky: `100svh` fit, compact stack through tablet (`≤1023`), progress cue clear of home indicator; glow left quiet
+- Begin carousel: larger slide basis, 44px dots/arrows; equal `lg` columns unchanged
+- Waitlist: keep `text-base` inputs (no iOS zoom); footer/forms get safe-area padding
+- Global: `img/picture` max-width guard; overflow-x clip retained
+- Pages sync: `scripts/sync-pages-root.mjs` rewrites stale `index`/`routes`/`styles` hashes to match the build (prevents white-screen)
+- Synced root entry: `index-DQjhWMVF.js`, `routes-4T2VbT-4.js`, `styles-C5sNGI0m.css`
+
+---
+
 ## Sync Pages entry after CircularMap glow fix
 
 - Align root `index.html` + hashed assets with glow-polish build (`index-BMFExvvv.js`, `routes-Cn6DNmWk.js`, `styles-Ay_fwO51.css`)
