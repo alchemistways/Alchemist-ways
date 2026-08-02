@@ -1,5 +1,12 @@
 # Changelog
 
+## Cloudflare proxy runbook (branch1)
+
+- Added `docs/CLOUDFLARE.md` — put Cloudflare in front of GitHub Pages (DNS, SSL/HSTS, security headers / CSP, WAF, verify, rollback)
+- Hosting stays on GitHub Pages until nameservers are switched; no CF account change from the repo
+
+---
+
 ## Book plate quality, reviews, Begin redesign, secrets hygiene
 
 - Main book plate: Lanczos rebuild of `book-plate-{960…4096}.{jpg,webp}` at JPEG ~92 / WebP ~88 (4:4:4) — 4096 ~1.0MB (was ~0.8MB mush); no AI upscale; limited by existing corridor master

@@ -16,6 +16,7 @@
 | `src/components/` | CircularMap, WaitlistForm, BookPlateImage, etc. |
 | `src/assets/` | Book plate + portrait media |
 | `docs/` | BRIEF, BRAND, blueprint, client inputs, changelog |
+| `docs/CLOUDFLARE.md` | Optional Cloudflare proxy + security headers (GoDaddy → CF → GitHub Pages) |
 | `CNAME` | Custom domain record for hosting |
 
 ## Agent rules of thumb
