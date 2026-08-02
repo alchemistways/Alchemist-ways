@@ -16,7 +16,8 @@ const WEBP_SRCSET = `${plate960Webp} 960w, ${plate1280Webp} 1280w, ${plate1920We
 export function BookPlateImage({
   alt,
   priority = false,
-  objectPositionClassName = "object-[78%_48%] sm:object-[72%_48%] md:object-[68%_50%] lg:object-[62%_48%]",
+  /** Bias toward the book so cover type stays in the sharp zone under object-cover. */
+  objectPositionClassName = "object-[80%_46%] sm:object-[74%_46%] md:object-[70%_48%] lg:object-[64%_46%]",
 }: {
   alt: string;
   priority?: boolean;
