@@ -48,3 +48,6 @@ service-account*.json
 *.sln
 *.sw?
 .cursor/settings.json
+
+# Higgsfield letter-QA scratch crops
+src/assets/scenes/qa/

@@ -44,7 +44,7 @@ function LandingPage() {
 
         {/* Hero — Higgsfield book on the right; copy sits in the open left wall */}
         <section id="top" className="relative overflow-hidden bg-[#d4c4b0] md:min-h-[100svh]">
-          <div className="relative h-[min(48svh,420px)] w-full sm:h-[min(52svh,480px)] md:absolute md:inset-0 md:h-full">
+          <div className="relative h-[min(54svh,460px)] w-full sm:h-[min(56svh,520px)] md:absolute md:inset-0 md:h-full">
             <BookPlateImage
               priority
               alt="Meet Yourself, Differently. Alchemist Ways hardcover"
@@ -53,10 +53,10 @@ function LandingPage() {
               aria-hidden
               className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent md:hidden"
             />
-            {/* Soft left wash so copy stays legible without covering the book */}
+            {/* Soft left wash — longer, lower-contrast, matches plate bg to avoid banding */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(48%,34rem)] bg-gradient-to-r from-[#cfc0ab]/75 via-[#cfc0ab]/25 to-transparent md:block"
+              className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(58%,40rem)] bg-[linear-gradient(to_right,rgb(212_196_176/0.55)_0%,rgb(212_196_176/0.28)_38%,rgb(212_196_176/0.10)_68%,transparent_100%)] md:block"
             />
           </div>
 
@@ -384,7 +384,7 @@ function LandingPage() {
           {/* The Book — full-bleed environment; copy left, book visible on right */}
           <Reveal className="mt-10 sm:mt-12">
             <div id="book" className="relative scroll-mt-28 overflow-hidden bg-[#d4c4b0]">
-              <div className="relative h-[min(46svh,400px)] w-full md:absolute md:inset-0 md:h-full">
+              <div className="relative h-[min(54svh,460px)] w-full md:absolute md:inset-0 md:h-full">
                 <BookPlateImage
                   alt="Meet Yourself, Differently. Hardcover standing in a sand corridor"
                   objectPositionClassName="object-[80%_48%] sm:object-[74%_48%] md:object-[70%_46%] lg:object-[64%_44%]"
@@ -395,7 +395,7 @@ function LandingPage() {
                 />
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(52%,36rem)] bg-gradient-to-r from-[#cfc0ab]/80 via-[#cfc0ab]/35 to-transparent md:block"
+                  className="pointer-events-none absolute inset-y-0 left-0 hidden w-[min(58%,40rem)] bg-[linear-gradient(to_right,rgb(212_196_176/0.50)_0%,rgb(212_196_176/0.26)_38%,rgb(212_196_176/0.10)_68%,transparent_100%)] md:block"
                 />
               </div>
 

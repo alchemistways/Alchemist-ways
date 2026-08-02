@@ -1,5 +1,15 @@
 # Changelog
 
+## Hero plate quality pipeline — native 2K master (branch1)
+
+- Regenerated corridor hero with `nano_banana_pro` **2k** (job `436a1b03`); front cover letter-QA’d; rejected NSFW sibling; optional 4K blocked (Plus)
+- Lossless master: `src/assets/scenes/hf-corridor-hero-master.png` (2752×1536)
+- Encode ladder Lanczos-down only: `book-plate-{960,1280,1920,2560,2752}.{jpg,webp}` JPEG q92 4:4:4 / WebP q92 — retired fake `4096` plates
+- `BookPlateImage` srcset widths match native max (2752w)
+- Softer left wash (`#d4c4b0` multi-stop) + taller mobile plate (`min(54–56svh)`) on hero + The Book
+
+---
+
 ## Gallery image edge dissolve (branch1)
 
 - `SceneImage` blend uses a four-edge CSS mask so mid-page book stills fade into cream with no hard square crop
