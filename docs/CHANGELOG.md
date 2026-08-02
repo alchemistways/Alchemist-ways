@@ -1,5 +1,11 @@
 # Changelog
 
+## Gallery image edge dissolve (branch1)
+
+- `SceneImage` blend uses a four-edge CSS mask so mid-page book stills fade into cream with no hard square crop
+
+---
+
 ## Cloudflare proxy runbook (branch1)
 
 - Added `docs/CLOUDFLARE.md` — put Cloudflare in front of GitHub Pages (DNS, SSL/HSTS, security headers / CSP, WAF, verify, rollback)
