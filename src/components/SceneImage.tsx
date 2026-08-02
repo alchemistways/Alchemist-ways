@@ -11,7 +11,7 @@ export function SceneImage({
   className = "",
   imgClassName = "h-full w-full object-cover",
   priority = false,
-  /** Soft edge fades so dark floors / hard crops melt into the page. */
+  /** Soft edge fades so hard crops melt into the page — no visible square. */
   blend = false,
   blendFromClassName = "from-background",
 }: {
@@ -52,34 +52,48 @@ export function SceneImage({
 
   if (!blend) return picture;
 
+  /* Four-edge dissolve → cream shows through; corners never read as a hard rect */
+  const edgeMask =
+    "linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%)";
+
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {picture}
-      {/* Warm the dull black floor before page color takes over — kept light */}
+    <div className={`relative ${className}`}>
+      <div
+        className="relative overflow-hidden"
+        style={{
+          WebkitMaskImage: edgeMask,
+          WebkitMaskComposite: "source-in",
+          maskImage: edgeMask,
+          maskComposite: "intersect",
+          WebkitMaskSize: "100% 100%",
+          maskSize: "100% 100%",
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+        }}
+      >
+        {picture}
+        {/* Warm floor tint under the book, still inside the mask */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[36%] bg-gradient-to-t from-[rgba(58,42,32,0.2)] via-[rgba(180,140,110,0.08)] to-transparent"
+        />
+      </div>
+      {/* Extra page-color wash outside the mask for a longer fade */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[32%] bg-gradient-to-t from-[rgba(58,42,32,0.18)] via-[rgba(180,140,110,0.06)] to-transparent"
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-[28%] bg-gradient-to-t ${blendFromClassName} to-transparent opacity-80`}
       />
-      {/* Soft merge: bottom floor + side edges into page color */}
       <div
         aria-hidden
-        className={`pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t ${blendFromClassName} via-transparent to-transparent opacity-70`}
+        className={`pointer-events-none absolute inset-y-0 right-0 w-[22%] bg-gradient-to-l ${blendFromClassName} to-transparent opacity-65`}
       />
       <div
         aria-hidden
-        className={`pointer-events-none absolute inset-y-0 right-0 w-[18%] bg-gradient-to-l ${blendFromClassName} via-transparent to-transparent opacity-45`}
+        className={`pointer-events-none absolute inset-y-0 left-0 w-[14%] bg-gradient-to-r ${blendFromClassName} to-transparent opacity-55`}
       />
       <div
         aria-hidden
-        className={`pointer-events-none absolute inset-y-0 left-0 w-[8%] bg-gradient-to-r ${blendFromClassName} via-transparent to-transparent opacity-30`}
-      />
-      <div
-        aria-hidden
-        className={`pointer-events-none absolute inset-x-0 top-0 h-[10%] bg-gradient-to-b ${blendFromClassName} via-transparent to-transparent opacity-25`}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0_-20px_36px_-10px_rgba(250,246,240,0.55)]"
+        className={`pointer-events-none absolute inset-x-0 top-0 h-[16%] bg-gradient-to-b ${blendFromClassName} to-transparent opacity-50`}
       />
     </div>
   );
