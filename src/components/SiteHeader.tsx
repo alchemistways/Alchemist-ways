@@ -2,13 +2,13 @@ import { useEffect, useId, useState } from "react";
 
 /**
  * Top navigation — fixed glass bar over the ivory hero.
- * Nav: The Map · The Book · Conversations · About · Book a Clarity Call.
+ * Nav: The Map · The Book · Self-Discovery · About · Book a Clarity Call.
  * Mobile: menu panel so every section stays reachable.
  */
 const navLinks = [
   { href: "#map", label: "The Map" },
   { href: "#book", label: "The Book" },
-  { href: "#conversations", label: "Conversations" },
+  { href: "#self-discovery", label: "Self-Discovery" },
   { href: "#about", label: "About" },
 ] as const;
 

@@ -2,24 +2,26 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const CONVERSATIONS_URL = "https://www.youtube.com/@alchemistwaysofficial";
+const SELF_DISCOVERY_URL = "https://www.youtube.com/@alchemistwaysofficial";
 const CLARITY_FREE_URL = "https://calendly.com/alchemistways/conversation";
 const CLARITY_PAID_URL = "https://calendly.com/alchemistways/clarity-session";
 const COMMUNITY_URL = "https://www.skool.com/alchemist-ways-1974/about";
 
 const SLIDES = [
   {
-    id: "conversations",
-    label: "Conversations",
-    body: "Watch the philosophy come alive through reflections, teachings, and real conversations.",
+    id: "self-discovery",
+    marker: "01",
+    label: "Self-Discovery Program",
+    body: "Watch the philosophy come alive through reflections, teachings, and real conversations — a guided path into meeting yourself differently.",
     cta: {
-      href: CONVERSATIONS_URL,
-      text: "Watch Conversations",
+      href: SELF_DISCOVERY_URL,
+      text: "Explore the Program",
       variant: "sand" as const,
     },
   },
   {
     id: "clarity-call",
+    marker: "02",
     label: "A Clarity Call",
     body: "An honest conversation about where you are, what patterns keep repeating, and whether this work feels like the right next step.",
     ctas: [
@@ -37,6 +39,7 @@ const SLIDES = [
   },
   {
     id: "community",
+    marker: "03",
     label: "The Community",
     body: "Walk alongside others learning to meet their inner lives with greater awareness, honesty, and choice.",
     cta: {
@@ -47,15 +50,17 @@ const SLIDES = [
   },
 ] as const;
 
+/** Legacy hash aliases still resolve to the renamed first panel. */
 const HASH_TO_INDEX: Record<string, number> = {
+  "self-discovery": 0,
   conversations: 0,
   "clarity-call": 1,
   community: 2,
 };
 
 /**
- * Ways to Begin — Conversations / Clarity Call / Community.
- * Equal-height cards; CTAs pinned to the bottom for even columns.
+ * Ways to Begin — Self-Discovery Program / Clarity Call / Community.
+ * Soft panels, equal CTA rails; Embla on mobile keeps the same language.
  */
 export function BeginCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -95,7 +100,7 @@ export function BeginCarousel() {
       } else {
         setSelected(index);
       }
-      const el = document.getElementById(raw);
+      const el = document.getElementById(raw) ?? document.getElementById(SLIDES[index].id);
       el?.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
@@ -106,8 +111,8 @@ export function BeginCarousel() {
 
   return (
     <div className="relative">
-      {/* Desktop ≥1024: equal cards in a row */}
-      <div className="hidden items-stretch gap-6 lg:grid lg:grid-cols-3 lg:gap-8">
+      {/* Desktop ≥1024: equal panels in a row */}
+      <div className="hidden items-stretch gap-5 lg:grid lg:grid-cols-3 lg:gap-6">
         {SLIDES.map((slide) => (
           <BeginCard key={slide.id} slide={slide} />
         ))}
@@ -191,12 +196,17 @@ function BeginCard({ slide }: { slide: Slide }) {
   return (
     <article
       id={slide.id}
-      className="flex h-full min-h-[18rem] scroll-mt-28 flex-col border-t border-border/60 pt-6 sm:min-h-[20rem] sm:pt-8"
+      className="flex h-full min-h-[20rem] scroll-mt-28 flex-col rounded-2xl border border-border/70 bg-card/60 px-5 py-6 sm:min-h-[22rem] sm:px-6 sm:py-7"
     >
-      <div className="text-sm font-semibold uppercase tracking-[0.2em] text-ember-deep sm:text-base">
-        {slide.label}
+      <div className="flex items-baseline justify-between gap-3">
+        <span className="font-display text-xs font-semibold tabular-nums tracking-[0.18em] text-ember/70">
+          {slide.marker}
+        </span>
       </div>
-      <p className="mt-4 flex-1 text-base leading-relaxed text-ink/80 sm:mt-5 sm:text-[1.05rem]">
+      <h3 className="mt-3 font-display text-lg font-semibold leading-snug text-ink sm:text-xl">
+        {slide.label}
+      </h3>
+      <p className="mt-3 flex-1 text-base leading-relaxed text-ink/75 sm:mt-4 sm:text-[1.02rem]">
         {slide.body}
       </p>
 

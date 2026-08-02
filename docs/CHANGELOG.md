@@ -1,5 +1,16 @@
 # Changelog
 
+## Book plate quality, reviews, Begin redesign, secrets hygiene
+
+- Main book plate: Lanczos rebuild of `book-plate-{960…4096}.{jpg,webp}` at JPEG ~92 / WebP ~88 (4:4:4) — 4096 ~1.0MB (was ~0.8MB mush); no AI upscale; limited by existing corridor master
+- SceneImage: real `srcset` ladders (960/1280/1920/2752) from PNG masters; lighter edge blend; gallery strip no longer uses ultra-wide `2.4/1` crush (`16/9` → `2/1`)
+- Book section: dual CTAs via `src/lib/offers.ts` — primary **Explore the Map** (`#map` / `MAP_DOWNLOAD_URL`), secondary **Get the Book** (`#waitlist` / `BOOK_PURCHASE_URL` until Gumroad)
+- Reviews band (option A): curated rotating quotes + Share a review form under The Book — submissions moderated only, never auto-published
+- Ways to Begin: soft `rounded-2xl` panels with `01/02/03` markers; **Conversations** → **Self-Discovery Program**; SiteHeader hash `#self-discovery` (legacy `#conversations` still resolves)
+- Secrets hygiene: `.gitignore` ignores `.env*`, key material, `.cursor/settings.json`; Kit form URL remains intentional public form action (not an API secret)
+
+---
+
 ## Responsive polish across phone → desktop
 
 - Header: 44px menu control, safe-area padding, tablet hamburger through `lg`, Clarity Call hides under ~400px width to avoid overflow

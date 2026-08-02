@@ -3,15 +3,34 @@ import { Instagram, Youtube } from "lucide-react";
 import malekPortrait from "@/assets/malek-portrait.jpg";
 import sceneDropletJpg from "@/assets/scene-droplet.jpg";
 import sceneDropletWebp from "@/assets/scene-droplet.webp";
+import sceneDroplet960Jpg from "@/assets/scene-droplet-960.jpg";
+import sceneDroplet960Webp from "@/assets/scene-droplet-960.webp";
+import sceneDroplet1280Jpg from "@/assets/scene-droplet-1280.jpg";
+import sceneDroplet1280Webp from "@/assets/scene-droplet-1280.webp";
+import sceneDroplet1920Jpg from "@/assets/scene-droplet-1920.jpg";
+import sceneDroplet1920Webp from "@/assets/scene-droplet-1920.webp";
 import sceneGalleryJpg from "@/assets/scene-gallery.jpg";
 import sceneGalleryWebp from "@/assets/scene-gallery.webp";
+import sceneGallery960Jpg from "@/assets/scene-gallery-960.jpg";
+import sceneGallery960Webp from "@/assets/scene-gallery-960.webp";
+import sceneGallery1280Jpg from "@/assets/scene-gallery-1280.jpg";
+import sceneGallery1280Webp from "@/assets/scene-gallery-1280.webp";
+import sceneGallery1920Jpg from "@/assets/scene-gallery-1920.jpg";
+import sceneGallery1920Webp from "@/assets/scene-gallery-1920.webp";
 import { BeginCarousel } from "@/components/BeginCarousel";
 import { BookPlateImage } from "@/components/BookPlateImage";
+import { BookReviews } from "@/components/BookReviews";
 import { MapScrollJourney } from "@/components/MapScrollJourney";
 import { PageEntrance, Reveal } from "@/components/PageMotion";
 import { SceneImage } from "@/components/SceneImage";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WaitlistForm } from "@/components/WaitlistForm";
+import { OFFER_CTAS } from "@/lib/offers";
+
+const SCENE_GALLERY_JPG_SRCSET = `${sceneGallery960Jpg} 960w, ${sceneGallery1280Jpg} 1280w, ${sceneGallery1920Jpg} 1920w, ${sceneGalleryJpg} 2752w`;
+const SCENE_GALLERY_WEBP_SRCSET = `${sceneGallery960Webp} 960w, ${sceneGallery1280Webp} 1280w, ${sceneGallery1920Webp} 1920w, ${sceneGalleryWebp} 2752w`;
+const SCENE_DROPLET_JPG_SRCSET = `${sceneDroplet960Jpg} 960w, ${sceneDroplet1280Jpg} 1280w, ${sceneDroplet1920Jpg} 1920w, ${sceneDropletJpg} 2752w`;
+const SCENE_DROPLET_WEBP_SRCSET = `${sceneDroplet960Webp} 960w, ${sceneDroplet1280Webp} 1280w, ${sceneDroplet1920Webp} 1920w, ${sceneDropletWebp} 2752w`;
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -60,12 +79,12 @@ function LandingPage() {
               </p>
 
               <div className="mt-9 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
-                <a href="#map" className="btn-lux btn-lux-primary w-full sm:w-auto">
-                  Explore The Map
+                <a href={OFFER_CTAS.exploreMap.href} className="btn-lux btn-lux-primary w-full sm:w-auto">
+                  {OFFER_CTAS.exploreMap.label}
                   <span aria-hidden>↓</span>
                 </a>
                 <a href="#book" className="btn-lux btn-lux-sand w-full sm:w-auto">
-                  Get the Book
+                  {OFFER_CTAS.getBook.label}
                 </a>
               </div>
             </div>
@@ -204,6 +223,8 @@ function LandingPage() {
               <SceneImage
                 jpg={sceneGalleryJpg}
                 webp={sceneGalleryWebp}
+                jpgSrcSet={SCENE_GALLERY_JPG_SRCSET}
+                webpSrcSet={SCENE_GALLERY_WEBP_SRCSET}
                 alt="Meet Yourself, Differently. — hardcover standing in a gallery interior"
                 width={2752}
                 height={1536}
@@ -316,6 +337,9 @@ function LandingPage() {
             <SceneImage
               jpg={sceneDropletJpg}
               webp={sceneDropletWebp}
+              jpgSrcSet={SCENE_DROPLET_JPG_SRCSET}
+              webpSrcSet={SCENE_DROPLET_WEBP_SRCSET}
+              sizes="100vw"
               alt=""
               width={2752}
               height={1536}
@@ -363,7 +387,7 @@ function LandingPage() {
               <div className="relative h-[min(46svh,400px)] w-full md:absolute md:inset-0 md:h-full">
                 <BookPlateImage
                   alt="Meet Yourself, Differently. Hardcover standing in a sand corridor"
-                  objectPositionClassName="object-[78%_50%] sm:object-[72%_50%] md:object-[68%_48%] lg:object-[62%_45%]"
+                  objectPositionClassName="object-[80%_48%] sm:object-[74%_48%] md:object-[70%_46%] lg:object-[64%_44%]"
                 />
                 <div
                   aria-hidden
@@ -396,10 +420,21 @@ function LandingPage() {
                   <p className="mt-4 text-base text-ink/75 sm:text-lg md:text-[#3a2a1f]/75">
                     Begin here if you&apos;d like to explore the work quietly, at your own pace.
                   </p>
-                  <a href="#waitlist" className="btn-lux btn-lux-primary mt-6 inline-flex w-full justify-center sm:w-fit">
-                    Explore the Book
-                    <span aria-hidden>→</span>
-                  </a>
+                  <div className="mt-6 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
+                    <a
+                      href={OFFER_CTAS.exploreMap.href}
+                      className="btn-lux btn-lux-primary w-full justify-center sm:w-auto"
+                    >
+                      {OFFER_CTAS.exploreMap.label}
+                      <span aria-hidden>↓</span>
+                    </a>
+                    <a
+                      href={OFFER_CTAS.getBook.href}
+                      className="btn-lux btn-lux-sand w-full justify-center sm:w-auto"
+                    >
+                      {OFFER_CTAS.getBook.label}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -411,17 +446,23 @@ function LandingPage() {
               <SceneImage
                 jpg={sceneGalleryJpg}
                 webp={sceneGalleryWebp}
+                jpgSrcSet={SCENE_GALLERY_JPG_SRCSET}
+                webpSrcSet={SCENE_GALLERY_WEBP_SRCSET}
                 alt="Meet Yourself, Differently. hardcover standing in a gallery interior"
                 width={2752}
                 height={1536}
                 blend
                 blendFromClassName="from-background"
-                imgClassName="aspect-[16/10] w-full object-cover object-[52%_40%] sm:aspect-[2.2/1] md:aspect-[2.4/1]"
+                imgClassName="aspect-[4/3] w-full object-cover object-[52%_40%] sm:aspect-[16/10] md:aspect-[16/9]"
               />
               <p className="max-w-xs text-sm leading-relaxed text-ink/70 sm:text-base md:pb-3">
                 Meet Yourself, Differently. — A Map from Emotional Reactivity to Creative Agency.
               </p>
             </div>
+          </Reveal>
+
+          <Reveal delay={40} className="mt-10 sm:mt-12">
+            <BookReviews />
           </Reveal>
 
           <div className="mx-auto mt-12 max-w-5xl px-5 sm:mt-16 sm:px-8">
