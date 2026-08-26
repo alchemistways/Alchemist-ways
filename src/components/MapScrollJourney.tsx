@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { CircularMap, MOVEMENT_COUNT } from "@/components/CircularMap";
 
-/** Desktop: roomier per chapter. Phone/tablet compact: shorter track. */
-function stepVh(compact: boolean) {
-  return compact ? 82 : 100;
+/** Desktop sticky chapters only — room for a full viewport pin. */
+function stepVh() {
+  return 100;
 }
 
 function prefersReducedMotion() {
@@ -12,30 +12,33 @@ function prefersReducedMotion() {
 }
 
 /**
- * Sticky scroll chapter: map stays pinned while scroll walks each circle.
- * Continues the doorway → book → walk narrative (no hard visual break).
+ * Desktop (lg+): sticky scroll chapter — map stays pinned while scroll walks each circle.
+ * Phone/tablet: normal landing section — tap nodes, keep scrolling the page.
  */
 export function MapScrollJourney() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [scrollDriven, setScrollDriven] = useState(true);
-  /** Stack map + panel through tablet; side-by-side only at lg+. */
-  const [compactViewport, setCompactViewport] = useState(false);
+  /** Sticky journey only on large screens without reduced motion. */
+  const [scrollDriven, setScrollDriven] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    const sync = () => setCompactViewport(mq.matches);
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const sync = () => {
+      setScrollDriven(mq.matches && !prefersReducedMotion());
+    };
     sync();
     mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    motion.addEventListener("change", sync);
+    return () => {
+      mq.removeEventListener("change", sync);
+      motion.removeEventListener("change", sync);
+    };
   }, []);
 
   useEffect(() => {
-    if (prefersReducedMotion()) {
-      setScrollDriven(false);
-      return;
-    }
+    if (!scrollDriven) return;
 
     const track = trackRef.current;
     if (!track) return;
@@ -66,11 +69,11 @@ export function MapScrollJourney() {
       window.removeEventListener("resize", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [scrollDriven, compactViewport]);
+  }, [scrollDriven]);
 
   function scrollToStep(index: number) {
     const track = trackRef.current;
-    if (!track) {
+    if (!track || !scrollDriven) {
       setActive(index);
       return;
     }
@@ -83,6 +86,7 @@ export function MapScrollJourney() {
     });
   }
 
+  /* Phone / tablet / reduced-motion: normal landing block */
   if (!scrollDriven) {
     return (
       <section className="bg-gradient-to-b from-secondary/25 via-background to-background">
@@ -96,22 +100,23 @@ export function MapScrollJourney() {
     );
   }
 
-  const trackHeight = MOVEMENT_COUNT * stepVh(compactViewport);
+  const trackHeight = MOVEMENT_COUNT * stepVh();
 
   return (
     <section className="bg-gradient-to-b from-secondary/25 via-background to-background">
       <div ref={trackRef} className="relative" style={{ height: `${trackHeight}vh` }}>
-        <div className="sticky top-0 z-10 flex h-[100svh] max-h-[100dvh] flex-col overflow-hidden pt-[calc(3.75rem+env(safe-area-inset-top,0px))] sm:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
-          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-[max(1rem,env(safe-area-inset-left))] py-2 pr-[max(1rem,env(safe-area-inset-right))] sm:px-8 sm:py-5 lg:py-8">
-            <MapIntro scrollHint compact />
+        <div className="sticky top-0 z-10 flex h-[100svh] max-h-[100dvh] flex-col overflow-hidden pt-[calc(7.25rem+env(safe-area-inset-top,0px))]">
+          <div className="mx-auto flex h-full w-full min-w-0 max-w-6xl flex-col px-8 py-5 pr-8">
+            <div className="relative z-20 shrink-0 bg-gradient-to-b from-secondary/25 from-60% to-transparent pb-3">
+              <MapIntro scrollHint compact />
+            </div>
 
-            <div className="mt-1.5 flex min-h-0 min-w-0 flex-1 items-stretch sm:mt-4 sm:items-center sm:pb-2 lg:mt-6">
+            <div className="relative z-0 mt-3 flex min-h-0 min-w-0 flex-1 items-center justify-center overflow-hidden">
               <CircularMap
                 activeIndex={active}
                 onActiveChange={scrollToStep}
                 scrollProgress={progress}
                 scrollDriven
-                compactMobile={compactViewport}
               />
             </div>
 
@@ -132,29 +137,28 @@ function MapIntro({
 }) {
   return (
     <div className="mx-auto w-full max-w-2xl shrink-0 text-left">
-      <div className="text-sm font-semibold uppercase tracking-[0.22em] text-ember-deep sm:text-base">
-        The Map
-      </div>
+      <p className="aw-eyebrow text-[0.65rem] sm:text-[0.7rem]">The Map</p>
       <h2
-        className={`font-display font-semibold leading-tight text-ink ${
+        className={`font-display font-semibold leading-[1.12] tracking-[-0.02em] text-ink ${
           compact
-            ? "mt-1 text-lg sm:mt-2 sm:text-3xl md:text-[2.2rem]"
+            ? "mt-1.5 text-xl sm:mt-2 sm:text-3xl md:text-[2.15rem]"
             : "mt-3 text-3xl sm:text-4xl md:text-5xl"
         }`}
       >
         Walk what the book maps
       </h2>
       {scrollHint ? (
-        <p className="mt-1.5 max-w-xl text-[0.75rem] leading-relaxed text-ink/70 sm:mt-2 sm:text-sm">
+        <p className="mt-2 max-w-xl text-[0.8rem] leading-relaxed text-ink/65 sm:mt-2.5 sm:text-[0.9rem]">
           Five movements from Emotional Reactivity to Creative Agency.{" "}
-          <span className="text-ink/50">Click a step · 1–{MOVEMENT_COUNT}</span>
+          <span className="text-ink/45">Click a step · 1–{MOVEMENT_COUNT}</span>
         </p>
       ) : (
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-ink/75 sm:text-lg">
-          The book names the path. The Map is how you walk it — five movements for learning the
-          language of your own experience. Meet yourself, differently.
+        <p className="aw-lede mt-4">
+          A map that reveals what has quietly been shaping your inner experience — and how your
+          relationship to it can change.
         </p>
       )}
+      <div className="mt-3 h-px w-full max-w-xl bg-border/50 sm:mt-4" aria-hidden />
     </div>
   );
 }
@@ -162,7 +166,7 @@ function MapIntro({
 function ScrollCue({ progress, active }: { progress: number; active: number }) {
   const done = active >= MOVEMENT_COUNT - 1 && progress > 0.92;
   return (
-    <div className="mt-1.5 flex w-full shrink-0 flex-col items-start gap-1.5 border-t border-border/35 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:mt-5 sm:gap-3 sm:pt-5">
+    <div className="mt-5 flex w-full shrink-0 flex-col items-start gap-3 border-t border-border/35 pt-5 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
       <div
         className="grid w-full max-w-[13.5rem] grid-cols-5 gap-2"
         role="progressbar"
@@ -174,13 +178,13 @@ function ScrollCue({ progress, active }: { progress: number; active: number }) {
         {Array.from({ length: MOVEMENT_COUNT }).map((_, i) => (
           <span
             key={i}
-            className={`h-1.5 rounded-full transition-colors duration-300 sm:h-1 ${
+            className={`h-1 rounded-full transition-colors duration-300 ${
               i < active ? "bg-ember/60" : i === active ? "bg-ember" : "bg-border"
             }`}
           />
         ))}
       </div>
-      <p className="text-[0.6rem] uppercase tracking-[0.22em] text-muted-foreground sm:text-[0.65rem]">
+      <p className="text-[0.65rem] uppercase tracking-[0.22em] text-muted-foreground">
         {done ? "Continue scrolling ↓" : "Scroll to walk the map ↓"}
       </p>
     </div>

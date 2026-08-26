@@ -1,5 +1,11 @@
 # Alchemist Ways — Page Blueprint (Phase 1)
 
+> **Superseded (client FINAL PDF, 27 pp.):** this blueprint’s waitlist-primary CTA rules and
+> section flow are historical. Live flow: Nav (Map / Book / Practice / About / Book Clarity
+> Call) → question arc → Map → Reveals → Fruits → Creative Agency → Founder teaser → Begin
+> Where You Are → World → extensions (`#map-deep`, `#founder`, `#clarity`, `#tool`, `#book`).
+> Do not reimpose waitlist-primary against the FINAL PDF.
+
 ## Nav
 
 | Item | Target |

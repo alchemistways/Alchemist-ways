@@ -1,5 +1,10 @@
 # Alchemist Ways — Phase 1 Brief
 
+> **Superseded (client FINAL PDF, 27 pp.):** the waitlist-primary CTA hierarchy below is
+> historical. The live flow is Clarity Call (nav CTA) + Begin Where You Are
+> ($14 Tool / $28 Book / Work with Malek); waitlist is demoted off the main path.
+> See `docs/CHANGELOG.md` (“PDF FINAL landing flow redesign”) and `docs/CLIENT-INPUTS.md`.
+
 ## Goal
 
 Build trust around the book and vision, and convert visitors into waitlist email leads. A 1-on-1 call is a secondary action only.

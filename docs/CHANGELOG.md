@@ -1,5 +1,37 @@
 # Changelog
 
+## Instant landing feel (local; not pushed)
+
+- Removed scroll fade-ins: `Reveal` / `PageEntrance` are passthroughs; `.reveal` / `.hero-stagger` neutralized — copy paints immediately
+- Phone/tablet Map is a normal section (tap nodes); sticky scroll-driven Map only on desktop `lg+`
+
+---
+
+## Centered brand header + CircularMap alignment (local; not pushed)
+
+- Sticky `SiteHeader` restyled to Royalmount stack: large centered wordmark row → centered nav row with bird chevrons → Clarity Call as in-nav highlight → EN|FR far right
+- Mobile: centered wordmark + quiet full-screen menu (links → Clarity Call → locale); 44px touch targets
+- Locale preference via `src/lib/locale.ts` (localStorage); EN live, FR stores preference only until client copy ships
+- Hero: removed duplicate Alchemist Ways eyebrow so the header owns the brand
+- Map sticky offset + `scroll-padding-top` raised for the taller two-row header
+- CircularMap: hub label optically centered (tracking-compensated padding); no active-node scale warp; equal `lg:grid-cols-2` + vertical mid-align with detail panel; light MapScrollJourney balance tweak
+- Editorial typography pass (Royalmount-inspired): airy left-aligned `aw-*` prose system, hairlines, rails, Emotional Reactivity 3-col restored with site-reference copy, Map intro restyled (“Walk what the book maps”)
+
+---
+
+## PDF FINAL landing flow redesign (local; not pushed)
+
+- Restructured the single-page flow to the client FINAL PDF (27 pp.): main scroll = pp. 1–10, long copy in anchored extensions `#map-deep` (11–21), `#founder` (22–24), `#clarity` (25), `#tool` (26), `#book` (27) — client copy verbatim
+- CTA model: nav **Book Clarity Call** → `#clarity`; hero single CTA **Explore the Map ↓**; Begin Where You Are = **$14 Tool / $28 Book / Work with Malek**
+- Nav: The Map · The Book · **Practice** (`#practice`) · About; waitlist link removed from mobile menu
+- `offers.ts`: `TOOL_PURCHASE_URL` / `BOOK_PURCHASE_URL` placeholders (`#tool` / `#book` anchors) until real payment links ship; Calendly free 30-min + paid 90-min and Skool community URLs centralized
+- New `BeginWhereYouAre` (3 columns, PDF p. 9) replaces `BeginCarousel` usage; CircularMap stages retuned to PDF Automatic / Visible / Met / Choosable / Available copy
+- Stopped rendering (components + assets kept in repo): Kit waitlist band, `BookReviews`, `BeginCarousel`, Invitation droplet closer, pattern band, Emotional Reactivity columns, gallery scene beats
+- Image quality preserved: `BookPlateImage` hero + Book plates, srcset ladders, `malek-portrait.jpg` untouched; droplet scene reused as Creative Agency atmosphere
+- Still needed from client: real $14 Tool + $28 Book payment links (see CLIENT-INPUTS)
+
+---
+
 ## Hero plate quality pipeline — native 2K master (branch1)
 
 - Regenerated corridor hero with `nano_banana_pro` **2k** (job `436a1b03`); front cover letter-QA’d; rejected NSFW sibling; optional 4K blocked (Plus)
