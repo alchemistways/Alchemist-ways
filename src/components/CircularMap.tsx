@@ -343,11 +343,11 @@ export function CircularMap({
                 <button
                   type="button"
                   onClick={() => select(i)}
-                  className={`text-[0.6rem] uppercase tracking-[0.18em] transition-colors ${
+                  className={`aw-hud text-[0.58rem] tracking-[0.2em] transition-colors ${
                     i === active ? "text-ember-deep" : "text-ink/55 hover:text-ember-deep"
                   }`}
                 >
-                  <span className="tabular-nums text-ember/70">
+                  <span className="aw-stage-num text-[0.58rem]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="ml-1.5">{m.label}</span>
@@ -384,16 +384,16 @@ export function CircularMap({
             className={`text-left ${scrollDriven ? undefined : "motion-safe:animate-map-panel"}`}
           >
             <div className="flex items-baseline gap-3">
-              <span className="font-display text-sm font-semibold tabular-nums tracking-[0.12em] text-ember-deep sm:text-base">
+              <span className="aw-stage-num text-sm sm:text-base">
                 {String(active + 1).padStart(2, "0")}
               </span>
-              <span className="text-[0.6rem] tabular-nums text-muted-foreground">
-                {active + 1} / {movements.length}
+              <span className="aw-hud text-[0.58rem] tracking-[0.2em]">
+                {String(active + 1).padStart(2, "0")} / {String(movements.length).padStart(2, "0")}
               </span>
             </div>
 
             <h3
-              className={`mt-2 font-display font-semibold uppercase leading-tight tracking-[0.06em] text-ink ${
+              className={`mt-2 font-display font-semibold uppercase leading-tight tracking-[0.08em] text-ink ${
                 compactMobile ? "text-base sm:text-xl" : "mt-3 text-2xl sm:text-3xl"
               }`}
             >

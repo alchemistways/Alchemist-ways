@@ -206,7 +206,7 @@ export function SiteHeader() {
                   {...("external" in link && link.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className="px-1 py-1 text-[0.72rem] font-medium uppercase tracking-[0.2em] text-ink/80 transition-colors hover:text-ember-deep"
+                  className="px-1 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-ink/75 transition-colors hover:text-ember-deep"
                 >
                   {link.label}
                 </a>

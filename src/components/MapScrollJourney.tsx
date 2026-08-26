@@ -189,8 +189,8 @@ function ScrollCue({ progress, active }: { progress: number; active: number }) {
           />
         ))}
       </div>
-      <p className="text-[0.65rem] uppercase tracking-[0.22em] text-muted-foreground">
-        {done ? "Continue scrolling ↓" : "Scroll to walk the map ↓"}
+      <p className="aw-hud">
+        {done ? "Continue ↓" : "Walk the map ↓"}
       </p>
     </div>
   );

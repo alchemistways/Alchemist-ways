@@ -1,5 +1,11 @@
 # Changelog
 
+## Soft game-adjacent type touch
+
+- Sharper system labels: wider tracking on eyebrows/CTAs/nav; Map stage `01` + `02 / 05` HUD-style indexes (`.aw-hud` / `.aw-stage-num`); cue “Walk the map ↓” — no gaming slang or UI chrome
+
+---
+
 ## REVISED PDF landing flow (local; not pushed)
 
 - Rebuilt main scroll to client **REVISED PDF** (18 pp.): Hero → S1–S10 poetic stacks → final closer
