@@ -45,6 +45,7 @@ See also: [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md) for distinctive-design cr
 ## Typography
 
 - **Trial (client interest):** Helvetica Neue / Helvetica for display + body (system stack). Semibold headlines, tight tracking, uppercase CTAs — sharp / slightly game-adjacent without game UI chrome.
+- **Light game-adjacent touch (live):** wider tracking on eyebrows/CTAs/nav; Map stage indexes as `01` / `02 / 05` tabular HUD labels (`.aw-hud`, `.aw-stage-num`). No pixel fonts, glows, or gamer slang in body copy.
 - Prior: Fraunces (display) + Inter (body) via Google Fonts — kept in git history if we revert.
 - Letter-spacing used for the A · C mark and small uppercase labels.
 

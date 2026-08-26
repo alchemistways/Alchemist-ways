@@ -222,10 +222,29 @@
 }
 
 .aw-eyebrow {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
+  color: var(--ember-deep);
+}
+
+/* Soft game-adjacent system labels — sharp + tabular, no HUD chrome */
+.aw-hud {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in oklab, var(--ink) 55%, transparent);
+}
+
+.aw-stage-num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.16em;
   color: var(--ember-deep);
 }
 
@@ -354,10 +373,11 @@
   gap: 0.5rem;
   border-radius: 999px;
   padding: 0.85rem 1.5rem;
-  font-size: 0.8125rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
   transform: translateY(0);
   transition:
     transform var(--dur-fast) var(--ease-out-soft),
