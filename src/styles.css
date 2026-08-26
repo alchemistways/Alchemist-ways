@@ -92,10 +92,16 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: calc(4.75rem + env(safe-area-inset-top, 0px));
+    scroll-padding-top: calc(5rem + env(safe-area-inset-top, 0px));
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     overflow-x: clip;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-top: calc(7.5rem + env(safe-area-inset-top, 0px));
+    }
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -159,30 +165,160 @@
   }
 }
 
-/* —— Page entrance —— */
-/* Opacity only — transform on this wrapper breaks position: sticky below */
-.page-entrance {
-  opacity: 0;
-  transition: opacity var(--dur-slow) var(--ease-out-expo);
-}
-
+/* —— Page entrance / scroll reveal: DISABLED (instant copy) —— */
+.page-entrance,
 .page-entrance.is-ready {
   opacity: 1;
 }
 
-/* —— Scroll reveal —— */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.85s var(--ease-out-expo),
-    transform 0.85s var(--ease-out-expo);
-  will-change: opacity, transform;
-}
-
+.reveal,
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+/* —— Editorial prose (Royalmount-inspired: airy, left-aligned, clear hierarchy) —— */
+.aw-section {
+  padding-block: clamp(2.75rem, 7vw, 6.5rem);
+}
+
+.aw-measure {
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
+  padding-inline: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
+}
+
+.aw-measure-wide {
+  max-width: 56rem;
+}
+
+.aw-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ember-deep);
+}
+
+.aw-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  font-size: clamp(1.65rem, 4.2vw, 2.75rem);
+}
+
+.aw-display-caps {
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+@media (max-width: 639px) {
+  .aw-display {
+    font-size: clamp(1.45rem, 7.5vw, 1.85rem);
+    line-height: 1.18;
+  }
+
+  .aw-line {
+    font-size: 1.1rem;
+  }
+
+  .aw-cols {
+    gap: 1.75rem;
+  }
+}
+
+.aw-lede {
+  margin-top: 1.5rem;
+  max-width: 36rem;
+  font-size: clamp(1.02rem, 1.6vw, 1.125rem);
+  line-height: 1.7;
+  color: color-mix(in oklab, var(--ink) 78%, transparent);
+}
+
+.aw-body {
+  font-size: clamp(1.02rem, 1.5vw, 1.125rem);
+  line-height: 1.75;
+  color: color-mix(in oklab, var(--ink) 78%, transparent);
+}
+
+.aw-body + .aw-body {
+  margin-top: 1.35rem;
+}
+
+.aw-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.aw-stack-loose {
+  gap: 1.15rem;
+}
+
+.aw-line {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.aw-pull {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.aw-rule {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  margin-block: 2.25rem 2rem;
+  background: color-mix(in oklab, var(--ember) 45%, transparent);
+  border: 0;
+}
+
+.aw-rail {
+  border-left: 1.5px solid color-mix(in oklab, var(--ember) 42%, transparent);
+  padding-left: 1.15rem;
+}
+
+@media (min-width: 640px) {
+  .aw-rail {
+    padding-left: 1.35rem;
+  }
+}
+
+.aw-cols {
+  display: grid;
+  gap: 2rem 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .aw-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.aw-col-rule {
+  border-top: 1px solid color-mix(in oklab, var(--ember) 28%, transparent);
+  padding-top: 1.25rem;
+}
+
+.aw-col-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
 }
 
 /* —— Premium pill buttons —— */
@@ -361,22 +497,26 @@
 }
 
 @keyframes hero-stagger {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 1; transform: none; }
+  to { opacity: 1; transform: none; }
 }
 
 .hero-stagger > * {
-  opacity: 0;
-  animation: hero-stagger 1s var(--ease-out-expo) both;
+  opacity: 1;
+  animation: none;
 }
 
-.page-entrance.is-ready .hero-stagger > *:nth-child(1) { animation-delay: 0.08s; }
-.page-entrance.is-ready .hero-stagger > *:nth-child(2) { animation-delay: 0.2s; }
-.page-entrance.is-ready .hero-stagger > *:nth-child(3) { animation-delay: 0.32s; }
-.page-entrance.is-ready .hero-stagger > *:nth-child(4) { animation-delay: 0.44s; }
+.page-entrance.is-ready .hero-stagger > *:nth-child(1),
+.page-entrance.is-ready .hero-stagger > *:nth-child(2),
+.page-entrance.is-ready .hero-stagger > *:nth-child(3),
+.page-entrance.is-ready .hero-stagger > *:nth-child(4) {
+  animation: none;
+  animation-delay: 0s;
+}
 
 .page-entrance:not(.is-ready) .hero-stagger > * {
   animation: none;
+  opacity: 1;
 }
 
 /* Contained active-node ring — opacity only so glow never blooms inward over center labels */

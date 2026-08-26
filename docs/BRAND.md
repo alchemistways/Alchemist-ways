@@ -32,14 +32,15 @@ See also: [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md) for distinctive-design cr
 
 ## Brand mark
 
-- Logo presentation (hero): **A · C  Alchemist Ways** — small caps tracking, top-left.
-- Top nav pills: **Book a Call** · **Join Waitlist**.
+- **Umbrella brand lives in the sticky header** — Royalmount-style stack: large centered **Alchemist Ways** wordmark on its own row; nav centered on the row below with bird-chevron separators; **Book Clarity Call** as the in-nav highlight pill; **EN | FR** pinned far right (preference only until FR copy ships — see `src/lib/locale.ts`).
+- Mobile: centered wordmark + hamburger; menu carries links, Clarity Call, then locale.
 - Never show Lovable or other builder branding.
 
 ## Opening hero
 
 - Full-bleed book-in-corridor plate via `BookPlateImage` (`src/assets/book-plate-*`).
-- Headline + waitlist CTA on the open wall; secondary book CTA muted.
+- Headline + single Explore the Map CTA on the open wall — no duplicate brand eyebrow (header owns the name).
+- Signature below: CircularMap ring stays geometrically centered (optical hub label, no active-node scale warp).
 
 ## Typography
 

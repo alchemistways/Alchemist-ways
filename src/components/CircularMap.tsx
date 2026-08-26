@@ -1,39 +1,40 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 
+/** Stage copy verbatim from the client FINAL PDF (p. 4). */
 export const movements = [
   {
     key: "reactivity",
     label: "Reactivity",
-    short: "Automatic survival patterns run your life.",
-    body: "Life begins to feel as though it is happening to you. An event occurs. A meaning forms. Emotion rises. The body reacts. An old pattern takes over. Reactivity isn’t the problem. It’s communication that hasn’t yet been understood.",
+    short: "Automatic",
+    body: "The pattern is happening before you can see it.",
     explore: "Explore Reactivity",
   },
   {
     key: "awareness",
     label: "Awareness",
-    short: "You see the patterns that were once invisible.",
-    body: "Seeing is not the same as meeting. You can recognize a pattern and still remain caught inside it. Awareness begins the conversation.",
+    short: "Visible",
+    body: "What was automatic becomes something you can observe.",
     explore: "Explore Awareness",
   },
   {
     key: "integration",
     label: "Integration",
-    short: "You meet and accept what was once rejected.",
-    body: "What you’ve been fighting may be trying to protect you. It rarely changes until it’s understood. Integration begins when protection becomes conversation.",
+    short: "Met",
+    body: "What became visible can be met differently.",
     explore: "Explore Integration",
   },
   {
     key: "sovereignty",
     label: "Sovereignty",
-    short: "You act from your values, not from protection.",
-    body: "Freedom isn’t the absence of old patterns. It’s discovering that you can choose from somewhere deeper.",
+    short: "Choosable",
+    body: "What once chose for you no longer has to determine your response.",
     explore: "Explore Sovereignty",
   },
   {
     key: "agency",
     label: "Creative Agency",
-    short: "Your energy is free to create and express what is uniquely yours.",
-    body: "As your relationship with yourself changes, energy once devoted to protection becomes available for creation. Creative Agency is what becomes possible when survival is no longer consuming your attention.",
+    short: "Available",
+    body: "Energy once organized around protection becomes increasingly available for life.",
     explore: "Explore Creative Agency",
   },
 ] as const;
@@ -73,8 +74,9 @@ export function CircularMap({
   const [panelKey, setPanelKey] = useState(0);
   const tipId = useId();
   const detailRef = useRef<HTMLDivElement>(null);
-  /* Keep nodes on the ring with clear air around center labels */
-  const radius = 40;
+  /* Single viewBox coordinate system — ring, arrows, and nodes share this radius */
+  const ringR = 36;
+  const nodeR = 5.4;
 
   const controlled = typeof activeIndex === "number";
   const active = controlled ? activeIndex : internalActive;
@@ -117,173 +119,219 @@ export function CircularMap({
   const pathUnits = scrollDriven
     ? Math.min(movements.length, Math.max(0, scrollProgress * movements.length))
     : active;
+  const circumference = 2 * Math.PI * ringR;
 
   return (
     <div
       className={
         scrollDriven
           ? compactMobile
-            ? "grid h-full min-h-0 min-w-0 grid-rows-[minmax(0,auto)_minmax(0,1fr)] gap-2 sm:gap-4"
-            : "grid h-full min-h-0 min-w-0 grid-cols-1 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16"
+            ? "grid h-full min-h-0 w-full min-w-0 grid-rows-[minmax(0,auto)_minmax(0,1fr)] gap-2 sm:gap-4"
+            : "grid h-full min-h-0 w-full min-w-0 grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16"
           : "grid min-w-0 items-start gap-10 sm:gap-12 lg:grid-cols-2 lg:items-center lg:gap-16"
       }
     >
       <div
-        className={`flex min-h-0 min-w-0 flex-col items-center justify-center self-stretch ${
-          compactMobile ? "px-0" : "px-2 sm:px-4"
+        className={`flex min-h-0 min-w-0 flex-col items-center justify-center ${
+          compactMobile
+            ? "overflow-hidden px-0 py-1"
+            : scrollDriven
+              ? "overflow-hidden px-2 py-2 sm:px-4 sm:py-3"
+              : "px-1 sm:px-2 lg:self-center"
         }`}
       >
         <div
-          className={`relative aspect-square shrink-0 ${
+          className={`relative mx-auto aspect-square shrink-0 ${
             compactMobile
-              ? "w-[min(68vw,14.5rem)] sm:w-[min(52vw,17rem)]"
+              ? "w-[min(62vw,13.5rem)] sm:w-[min(48vw,16rem)]"
               : scrollDriven
-                ? "w-[min(100%,min(32rem,58vh))]"
+                ? "w-[min(100%,min(22rem,38svh))]"
                 : "w-[min(100%,32rem)]"
           }`}
           role="listbox"
           aria-label="Alchemist Ways map movements"
           aria-activedescendant={`map-node-${movements[active].key}`}
         >
+          {/* One SVG: track, progress, arrows, nodes, hub — same cx/cy/r */}
           <svg
             className="pointer-events-none absolute inset-0 h-full w-full"
             viewBox="0 0 100 100"
+            overflow="visible"
             aria-hidden
           >
             <circle
               cx="50"
               cy="50"
-              r={radius}
+              r={ringR}
               fill="none"
               stroke="currentColor"
-              strokeWidth="0.22"
-              className="text-ember/25"
+              strokeWidth="0.35"
+              className="text-ember/30"
             />
             <circle
               cx="50"
               cy="50"
-              r={radius}
+              r={ringR}
               fill="none"
               stroke="currentColor"
-              strokeWidth="0.75"
+              strokeWidth="0.9"
               strokeLinecap="round"
               className="text-ember"
               style={{
-                strokeDasharray: 2 * Math.PI * radius,
-                strokeDashoffset: 2 * Math.PI * radius * (1 - arcProgress),
+                strokeDasharray: circumference,
+                strokeDashoffset: circumference * (1 - arcProgress),
                 transition: scrollDriven
                   ? "none"
                   : "stroke-dashoffset 400ms cubic-bezier(0.22, 1, 0.36, 1)",
               }}
               transform="rotate(-90 50 50)"
             />
+
             {movements.map((_, i) => {
               const midAngle = ((i + 0.5) / movements.length) * 2 * Math.PI - Math.PI / 2;
-              const mx = 50 + radius * Math.cos(midAngle);
-              const my = 50 + radius * Math.sin(midAngle);
+              const mx = 50 + ringR * Math.cos(midAngle);
+              const my = 50 + ringR * Math.sin(midAngle);
               const tangentDeg = (midAngle * 180) / Math.PI + 90;
               const lit = Math.min(1, Math.max(0, pathUnits - i));
               return (
                 <path
-                  key={i}
-                  d="M -1.6 -1.5 L 1.4 0 L -1.6 1.5"
+                  key={`arrow-${i}`}
+                  d="M -1.5 -1.35 L 1.35 0 L -1.5 1.35"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="0.55"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   className="text-ember"
-                  opacity={0.3 + lit * 0.7}
+                  opacity={0.28 + lit * 0.72}
                   transform={`translate(${mx} ${my}) rotate(${tangentDeg})`}
                 />
               );
             })}
+
+            {movements.map((m, i) => {
+              const { x, y } = nodePosition(i, movements.length, ringR);
+              const isActive = i === active;
+              const isHovered = hovered === i;
+              const isCrossed = i < active;
+              const fill = isActive
+                ? "var(--ember, #c05a2e)"
+                : isCrossed
+                  ? "var(--ember-soft, #f3e4d8)"
+                  : "var(--card, #fffcf7)";
+              const stroke = isActive || isCrossed || isHovered ? "#c05a2e" : "rgba(192,90,46,0.45)";
+              const labelFill = isActive ? "#fffcf7" : "#c05a2e";
+              return (
+                <g key={`node-${m.key}`}>
+                  {isActive ? (
+                    <circle
+                      cx={x}
+                      cy={y}
+                      r={nodeR + 1.1}
+                      fill="none"
+                      stroke="rgba(192,90,46,0.28)"
+                      strokeWidth="0.45"
+                    />
+                  ) : null}
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r={nodeR}
+                    fill={fill}
+                    stroke={stroke}
+                    strokeWidth={isActive ? 0.55 : 0.4}
+                  />
+                  <text
+                    x={x}
+                    y={y}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    className="font-display"
+                    fill={labelFill}
+                    style={{ fontSize: "4.2px", fontWeight: 600 }}
+                  >
+                    {i + 1}
+                  </text>
+                </g>
+              );
+            })}
+
+            <text
+              x="50"
+              y="47.2"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              className="uppercase"
+              fill="#c05a2e"
+              style={{
+                fontSize: compactMobile ? "2.4px" : "2.8px",
+                letterSpacing: "0.32em",
+                fontWeight: 600,
+              }}
+            >
+              The Map
+            </text>
+            <text
+              x="50"
+              y="52.6"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              className="uppercase"
+              fill="rgba(26,24,20,0.62)"
+              style={{
+                fontSize: compactMobile ? "2px" : "2.3px",
+                letterSpacing: "0.26em",
+                fontWeight: 500,
+              }}
+            >
+              Alchemist Ways
+            </text>
           </svg>
 
+          {/* Invisible hit targets — same % coords as SVG nodes */}
           {movements.map((m, i) => {
-            const { x, y } = nodePosition(i, movements.length, radius);
+            const { x, y } = nodePosition(i, movements.length, ringR);
             const isActive = i === active;
             const isHovered = hovered === i;
-            const isCrossed = i < active;
-
             return (
-              <div
+              <button
                 key={m.key}
-                className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
-                style={{ left: `${x}%`, top: `${y}%` }}
-              >
-                <button
-                  id={`map-node-${m.key}`}
-                  type="button"
-                  role="option"
-                  aria-selected={isActive}
-                  aria-label={m.label}
-                  aria-describedby={
-                    !compactMobile && (isHovered || isActive) ? tipId : undefined
-                  }
-                  onClick={() => select(i)}
-                  onMouseEnter={() => setHovered(i)}
-                  onMouseLeave={() => setHovered(null)}
-                  onFocus={() => setHovered(i)}
-                  onBlur={() => setHovered(null)}
-                  onKeyDown={(e) => onKeyRing(e, i)}
-                  className={`relative flex items-center justify-center rounded-full border bg-card font-display outline-none transition-[transform,background-color,border-color,box-shadow,color] duration-300 ${
-                    compactMobile
-                      ? "h-11 w-11 text-sm sm:h-12 sm:w-12"
-                      : "h-12 w-12 text-base sm:h-14 sm:w-14 sm:text-lg"
-                  } ${
-                    isActive
-                      ? "scale-105 border-ember bg-ember text-primary-foreground shadow-[0_0_0_2px_rgba(192,90,46,0.28)]"
-                      : isCrossed
-                        ? "border-ember/80 bg-ember-soft text-ember-deep"
-                        : isHovered
-                          ? "scale-[1.04] border-ember bg-card text-ember-deep shadow-[0_0_0_1.5px_rgba(192,90,46,0.2)]"
-                          : "border-ember/40 text-ember hover:border-ember"
-                  } focus-visible:ring-2 focus-visible:ring-ember/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
-                >
-                  {i + 1}
-                  {isActive && (
-                    <span
-                      className="pointer-events-none absolute inset-[-3px] rounded-full border border-ember/30 motion-safe:animate-map-pulse"
-                      aria-hidden
-                    />
-                  )}
-                </button>
-              </div>
+                id={`map-node-${m.key}`}
+                type="button"
+                role="option"
+                aria-selected={isActive}
+                aria-label={m.label}
+                aria-describedby={!compactMobile && (isHovered || isActive) ? tipId : undefined}
+                onClick={() => select(i)}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                onFocus={() => setHovered(i)}
+                onBlur={() => setHovered(null)}
+                onKeyDown={(e) => onKeyRing(e, i)}
+                className="absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                style={{
+                  left: `${x}%`,
+                  top: `${y}%`,
+                  width: `${nodeR * 2.4}%`,
+                  height: `${nodeR * 2.4}%`,
+                }}
+              />
             );
           })}
 
-          {/* Above node glows so center brand copy never reads under the halo */}
-          <div className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center px-8 text-center sm:px-10">
-            <span
-              className={`uppercase tracking-[0.36em] text-ember ${
-                compactMobile ? "text-[0.55rem]" : "text-[0.65rem] sm:text-sm sm:tracking-[0.4em]"
-              }`}
-            >
-              The Map
-            </span>
-            <span
-              className={`mt-1 uppercase tracking-[0.28em] text-ink/70 ${
-                compactMobile ? "text-[0.5rem]" : "text-[0.55rem] sm:text-[0.65rem]"
-              }`}
-            >
-              Alchemist Ways
-            </span>
-          </div>
-
           {!compactMobile && (
-          <div
-            id={tipId}
-            role="status"
-            className={`pointer-events-none absolute inset-x-3 bottom-0 z-30 mx-auto max-w-[14rem] rounded-xl border border-border/50 bg-card/95 px-3 py-2.5 text-center backdrop-blur-sm transition-all duration-300 md:hidden ${
-              hovered !== null ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
-            }`}
-          >
-            <p className="font-display text-sm text-ink">{preview.label}</p>
-            <p className="mt-0.5 text-[0.7rem] leading-snug text-muted-foreground">
-              {preview.short}
-            </p>
-          </div>
+            <div
+              id={tipId}
+              role="status"
+              className={`pointer-events-none absolute inset-x-3 bottom-0 z-30 mx-auto max-w-[14rem] rounded-xl border border-border/50 bg-card/95 px-3 py-2.5 text-center backdrop-blur-sm transition-all duration-300 md:hidden ${
+                hovered !== null ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
+              }`}
+            >
+              <p className="font-display text-sm text-ink">{preview.label}</p>
+              <p className="mt-0.5 text-[0.7rem] leading-snug text-muted-foreground">
+                {preview.short}
+              </p>
+            </div>
           )}
         </div>
 
@@ -312,13 +360,19 @@ export function CircularMap({
 
       <div
         ref={detailRef}
-        className={`mx-auto w-full min-w-0 max-w-md md:max-w-none ${
-          scrollDriven ? "min-h-0 self-stretch sm:self-center" : ""
+        className={`mx-auto flex w-full min-w-0 max-w-md flex-col justify-center md:max-w-none ${
+          scrollDriven
+            ? compactMobile
+              ? "min-h-0"
+              : "min-h-0 self-center lg:max-w-lg"
+            : ""
         }`}
       >
         <div
           className={`relative overflow-hidden border-y border-border/50 bg-transparent ${
-            compactMobile ? "h-full min-h-0 overflow-y-auto overscroll-contain px-0 py-2" : "px-1 py-5 sm:px-2 sm:py-6"
+            compactMobile
+              ? "h-full min-h-0 overflow-y-auto overscroll-contain px-0 py-2"
+              : "px-1 py-5 sm:px-2 sm:py-6"
           } ${
             scrollDriven && !compactMobile
               ? "max-h-[min(42vh,22rem)] overflow-y-auto overscroll-contain sm:max-h-[min(48vh,26rem)]"
@@ -354,7 +408,9 @@ export function CircularMap({
             </p>
             <p
               className={`mt-2.5 leading-relaxed text-ink/80 ${
-                compactMobile ? "text-[0.875rem] sm:text-[0.95rem]" : "mt-4 text-[0.95rem] sm:text-base"
+                compactMobile
+                  ? "text-[0.875rem] sm:text-[0.95rem]"
+                  : "mt-4 text-[0.95rem] sm:text-base"
               }`}
             >
               {current.body}
