@@ -181,7 +181,32 @@
 
 /* —— Editorial prose (Royalmount-inspired: airy, left-aligned, clear hierarchy) —— */
 .aw-section {
-  padding-block: clamp(2.75rem, 7vw, 6.5rem);
+  /* Tighter REVISED rhythm — less empty band between short poetic beats */
+  padding-block: clamp(2rem, 4.5vw, 3.5rem);
+}
+
+.aw-verse {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.aw-verse p {
+  margin: 0;
+  font-size: clamp(1.02rem, 1.5vw, 1.125rem);
+  line-height: 1.55;
+  color: color-mix(in oklab, var(--ink) 78%, transparent);
+}
+
+.aw-verse-display p {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.aw-rule-tight {
+  margin-block: 1.35rem 1.15rem;
 }
 
 .aw-measure {

@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useState, type MouseEvent } from "react";
 import {
   getStoredLocale,
   LOCALES,
@@ -14,7 +14,11 @@ import {
 const navLinks = [
   { href: "#map", label: "The Map" },
   { href: "#book", label: "The Book" },
-  { href: "#practice", label: "Practice" },
+  {
+    href: "https://www.youtube.com/@alchemistwaysofficial",
+    label: "Conversations",
+    external: true,
+  },
   { href: "#about", label: "About" },
 ] as const;
 
@@ -199,6 +203,9 @@ export function SiteHeader() {
                 ) : null}
                 <a
                   href={link.href}
+                  {...("external" in link && link.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                   className="px-1 py-1 text-[0.72rem] font-medium uppercase tracking-[0.2em] text-ink/80 transition-colors hover:text-ember-deep"
                 >
                   {link.label}
@@ -210,7 +217,7 @@ export function SiteHeader() {
               href="#clarity"
               className="btn-lux btn-lux-primary btn-lux-nav ml-1 whitespace-nowrap"
             >
-              Book Clarity Call
+              Book a Clarity Call
             </a>
           </nav>
 
@@ -247,19 +254,26 @@ export function SiteHeader() {
           }`}
         >
           <nav className="mx-auto flex max-w-6xl flex-col gap-1" aria-label="Mobile">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  go(link.href);
-                }}
-                className="min-h-12 rounded-xl px-3 py-3.5 text-center text-[0.8rem] font-medium uppercase tracking-[0.18em] text-ink/85 transition-colors hover:bg-ember-soft/60 hover:text-ember-deep"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const external = "external" in link && link.external;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  {...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {
+                        onClick: (e: MouseEvent) => {
+                          e.preventDefault();
+                          go(link.href);
+                        },
+                      })}
+                  className="min-h-12 rounded-xl px-3 py-3.5 text-center text-[0.8rem] font-medium uppercase tracking-[0.18em] text-ink/85 transition-colors hover:bg-ember-soft/60 hover:text-ember-deep"
+                >
+                  {link.label}
+                </a>
+              );
+            })}
             <a
               href="#clarity"
               onClick={(e) => {
@@ -268,7 +282,7 @@ export function SiteHeader() {
               }}
               className="btn-lux btn-lux-primary mt-4 min-h-12 w-full"
             >
-              Book Clarity Call
+              Book a Clarity Call
             </a>
             <div className="mt-6 flex justify-center border-t border-[#3a2a1f]/10 pt-5">
               <LocaleControl

@@ -1,5 +1,17 @@
 # Changelog
 
+## REVISED PDF landing flow (local; not pushed)
+
+- Rebuilt main scroll to client **REVISED PDF** (18 pp.): Hero → S1–S10 poetic stacks → final closer
+- Hero: subline *A practical map for discovering a different relationship with yourself*; primary **Explore The Map** → `#map`, secondary muted **Get the Book** → `#book`
+- Nav: The Map · The Book · **Conversations** (YouTube `@alchemistwaysofficial`) · About + **Book a Clarity Call**
+- Ways to Begin = Book · Conversations · Clarity Call (free 30 / paid 90) · Community (Skool) — unrendered from main path: `#map-deep` novel, Fruits, Begin Where You Are $14/$28 triad, World band as separate
+- CircularMap / MapScrollJourney intro + stage blurbs retuned to REVISED Map copy; phone Map remains static/tap
+- Tighter `.aw-section` padding + `aw-verse` short-line stacks (less empty whitespace)
+- Instant text kept (`Reveal` passthrough)
+
+---
+
 ## Instant landing feel (local; not pushed)
 
 - Removed scroll fade-ins: `Reveal` / `PageEntrance` are passthroughs; `.reveal` / `.hero-stagger` neutralized — copy paints immediately
