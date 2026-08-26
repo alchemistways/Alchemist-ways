@@ -1,12 +1,12 @@
 # Alchemist Ways — Page Blueprint (Phase 1)
 
-> **Superseded (client FINAL PDF, 27 pp.):** this blueprint’s waitlist-primary CTA rules and
-> section flow are historical. Live flow: Nav (Map / Book / Practice / About / Book Clarity
-> Call) → question arc → Map → Reveals → Fruits → Creative Agency → Founder teaser → Begin
-> Where You Are → World → extensions (`#map-deep`, `#founder`, `#clarity`, `#tool`, `#book`).
-> Do not reimpose waitlist-primary against the FINAL PDF.
+> **Superseded (client REVISED PDF, 18 pp.):** this blueprint’s waitlist-primary CTA rules and
+> earlier FINAL-PDF section flow are historical. **Live flow = REVISED PDF:** Nav (Map / Book /
+> Conversations / About / Book a Clarity Call) → Hero → S1–S6 poetic beats → Map → About Malek →
+> Invitation → Ways to Begin (Book / Conversations / Clarity / Community) → final closer.
+> Do not reimpose waitlist-primary or the long FINAL `#map-deep` / Fruits / Begin triad on the main path.
 
-## Nav
+## Nav (historical — see supersession note)
 
 | Item | Target |
 |------|--------|
@@ -16,7 +16,7 @@
 | Community | `#community` (or waitlist community tease until real community exists) |
 | Join Waitlist | `#waitlist` |
 
-## Section flow
+## Section flow (historical)
 
 ```
 Nav → Hero → Book/Vision → Circular Map → Trust (“Why Alchemist Ways”) → Final Waitlist CTA
@@ -58,7 +58,7 @@ Nav → Hero → Book/Vision → Circular Map → Trust (“Why Alchemist Ways�
 - Success message on-page
 - Secondary: muted “Book a 1-on-1 Call” text link (placeholder `href` until booking URL provided)
 
-## CTA rules
+## CTA rules (historical)
 
 - **Primary everywhere:** Join the Waitlist
 - **Secondary only** in final section: 1-on-1 call (muted, not button-equal)

@@ -1,10 +1,10 @@
 /**
- * Offer destinations — PDF FINAL flow (Clarity Call + Tool / Book / Practice).
- * Payment placeholders anchor to the on-page extensions until the client
- * supplies real checkout links — ask before inventing URLs.
+ * Offer destinations — REVISED PDF flow (Book / Conversations / Clarity / Community).
+ * Payment placeholders anchor on-page until the client supplies real checkout links —
+ * ask before inventing URLs.
  */
 
-/** $14 Meet What’s Here — placeholder until the real payment link ships. */
+/** $14 Meet What’s Here — kept for possible reintroduction; not on REVISED main path. */
 export const TOOL_PURCHASE_URL = "#tool";
 
 /** $28 Meet Yourself, Differently. — placeholder until the real payment link ships. */
@@ -16,7 +16,10 @@ export const CLARITY_CALL_URL = "https://calendly.com/alchemistways/conversation
 /** Paid 90-minute Clarity Session (live Calendly). */
 export const CLARITY_SESSION_URL = "https://calendly.com/alchemistways/clarity-session";
 
-/** The World of Alchemist Ways — Skool community. */
+/** Conversations — YouTube channel. */
+export const CONVERSATIONS_URL = "https://www.youtube.com/@alchemistwaysofficial";
+
+/** Community — Skool. */
 export const COMMUNITY_URL = "https://www.skool.com/alchemist-ways-1974/about";
 
 export const TOOL_PRICE = "$14";

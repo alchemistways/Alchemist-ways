@@ -1,40 +1,40 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 
-/** Stage copy verbatim from the client FINAL PDF (p. 4). */
+/** Stage copy verbatim from the client REVISED PDF (Map section). */
 export const movements = [
   {
     key: "reactivity",
     label: "Reactivity",
-    short: "Automatic",
-    body: "The pattern is happening before you can see it.",
+    short: "Happening to you",
+    body: "Life begins to feel as though it is happening to you. An event occurs. A meaning forms. Emotion rises. The body reacts. An old pattern takes over.\n\nReactivity isn’t the problem. It’s communication that hasn’t yet been understood.",
     explore: "Explore Reactivity",
   },
   {
     key: "awareness",
     label: "Awareness",
-    short: "Visible",
-    body: "What was automatic becomes something you can observe.",
+    short: "Seeing is not meeting",
+    body: "Seeing is not the same as meeting. You can recognize a pattern and still remain caught inside it.\n\nAwareness begins the conversation.",
     explore: "Explore Awareness",
   },
   {
     key: "integration",
     label: "Integration",
-    short: "Met",
-    body: "What became visible can be met differently.",
+    short: "Protection becomes conversation",
+    body: "What you’ve been fighting may be trying to protect you. It rarely changes until it’s understood.\n\nIntegration begins when protection becomes conversation.",
     explore: "Explore Integration",
   },
   {
     key: "sovereignty",
     label: "Sovereignty",
-    short: "Choosable",
-    body: "What once chose for you no longer has to determine your response.",
+    short: "Choose from somewhere deeper",
+    body: "Freedom isn’t the absence of old patterns. It’s discovering that you can choose from somewhere deeper.",
     explore: "Explore Sovereignty",
   },
   {
     key: "agency",
     label: "Creative Agency",
-    short: "Available",
-    body: "Energy once organized around protection becomes increasingly available for life.",
+    short: "Available for creation",
+    body: "As your relationship with yourself changes, energy once devoted to protection becomes available for creation.\n\nCreative Agency is what becomes possible when survival is no longer consuming your attention.",
     explore: "Explore Creative Agency",
   },
 ] as const;
@@ -407,7 +407,7 @@ export function CircularMap({
               {current.short}
             </p>
             <p
-              className={`mt-2.5 leading-relaxed text-ink/80 ${
+              className={`mt-2.5 whitespace-pre-line leading-relaxed text-ink/80 ${
                 compactMobile
                   ? "text-[0.875rem] sm:text-[0.95rem]"
                   : "mt-4 text-[0.95rem] sm:text-base"
