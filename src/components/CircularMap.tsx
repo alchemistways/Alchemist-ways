@@ -1,40 +1,40 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 
-/** Stage copy verbatim from the client REVISED PDF (Map section). */
+/** Stage copy verbatim from the client FINAL PDF (p. 4). */
 export const movements = [
   {
     key: "reactivity",
     label: "Reactivity",
-    short: "Happening to you",
-    body: "Life begins to feel as though it is happening to you. An event occurs. A meaning forms. Emotion rises. The body reacts. An old pattern takes over.\n\nReactivity isn’t the problem. It’s communication that hasn’t yet been understood.",
+    short: "Automatic",
+    body: "The pattern is happening before you can see it.",
     explore: "Explore Reactivity",
   },
   {
     key: "awareness",
     label: "Awareness",
-    short: "Seeing is not meeting",
-    body: "Seeing is not the same as meeting. You can recognize a pattern and still remain caught inside it.\n\nAwareness begins the conversation.",
+    short: "Visible",
+    body: "What was automatic becomes something you can observe.",
     explore: "Explore Awareness",
   },
   {
     key: "integration",
     label: "Integration",
-    short: "Protection becomes conversation",
-    body: "What you’ve been fighting may be trying to protect you. It rarely changes until it’s understood.\n\nIntegration begins when protection becomes conversation.",
+    short: "Met",
+    body: "What became visible can be met differently.",
     explore: "Explore Integration",
   },
   {
     key: "sovereignty",
     label: "Sovereignty",
-    short: "Choose from somewhere deeper",
-    body: "Freedom isn’t the absence of old patterns. It’s discovering that you can choose from somewhere deeper.",
+    short: "Choosable",
+    body: "What once chose for you no longer has to determine your response.",
     explore: "Explore Sovereignty",
   },
   {
     key: "agency",
     label: "Creative Agency",
-    short: "Available for creation",
-    body: "As your relationship with yourself changes, energy once devoted to protection becomes available for creation.\n\nCreative Agency is what becomes possible when survival is no longer consuming your attention.",
+    short: "Available",
+    body: "Energy once organized around protection becomes increasingly available for life.",
     explore: "Explore Creative Agency",
   },
 ] as const;

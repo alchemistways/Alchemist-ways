@@ -1,70 +1,70 @@
 # Alchemist Ways — Page Blueprint (Phase 1)
 
-> **Superseded (client REVISED PDF, 18 pp.):** this blueprint’s waitlist-primary CTA rules and
-> earlier FINAL-PDF section flow are historical. **Live flow = REVISED PDF:** Nav (Map / Book /
-> Conversations / About / Book a Clarity Call) → Hero → S1–S6 poetic beats → Map → About Malek →
+> **Live (client FINAL PDF, hero→Map):** Nav (Map / Book / Conversations / About / Book a Clarity
+> Call) → Hero (*Meet Yourself, Differently.* · map-from-reactivity subline · Explore the Map) →
+> protect / why / meet / why-it-matters → Map bridge → Map (Automatic → Available) → About Malek →
 > Invitation → Ways to Begin (Book / Conversations / Clarity / Community) → final closer.
-> Do not reimpose waitlist-primary or the long FINAL `#map-deep` / Fruits / Begin triad on the main path.
+> **REVISED PDF** is archive only (spacing / poetic S1–S6 reference). Do not reimpose waitlist-primary
+> or the long FINAL `#map-deep` / Fruits / Begin triad on the main path unless asked.
 
-## Nav (historical — see supersession note)
+## Nav (live)
 
 | Item | Target |
 |------|--------|
 | Logo / brand | Top of page / hero |
-| Book | `#book` |
-| Vision | `#vision` |
-| Community | `#community` (or waitlist community tease until real community exists) |
-| Join Waitlist | `#waitlist` |
+| The Map | `#map` |
+| The Book | `#book` |
+| Conversations | YouTube `@alchemistwaysofficial` (FINAL “Practice” undefined — keep wired label) |
+| About | `#about` |
+| Book a Clarity Call | `#clarity` / Calendly |
 
-## Section flow (historical)
+## Section flow (live)
 
 ```
-Nav → Hero → Book/Vision → Circular Map → Trust (“Why Alchemist Ways”) → Final Waitlist CTA
+Nav → Hero → Protect → Why protect → Meet yourself → Why it matters → Map bridge → Map
+  → About → Invitation → Ways to Begin → Closer
 ```
 
 ### 1. Hero
 
-- Brand as hero-level signal (not just nav text)
-- Short book/vision line (use `[BOOK TITLE]` / placeholder promise until client copy arrives)
-- One primary CTA: Join the Waitlist
-- No equal secondary button (no “Explore the Map” competing in hero)
+- Brand as hero-level signal (centered `SiteHeader` owns the wordmark)
+- Headline: *Meet Yourself, Differently.*
+- Subline: *A map from emotional reactivity to creative agency* (FINAL)
+- Primary CTA: Explore the Map → `#map`
+- Optional muted: Get the Book → `#book`
 
-### 2. Book / Vision (`#book`)
+### 2. Narrative (FINAL pp. 1–3)
 
-- Feature the book and core vision
-- Cover imagery + placeholder title/blurb until client assets arrive
-- Benefit bullets may use placeholders
+- How did you learn to protect yourself? + *Perhaps by…* list + closing lede
+- Why did I learn to do that? (safety learning / automatic protection)
+- And how did you learn to meet yourself? + *Perhaps with…* list
+- Why does the way I meet myself matter? + *What protects you also shapes what becomes possible*
 
-### 3. Circular journey map (`#map`)
+### 3. Map bridge + Circular journey map (`#map`)
 
-- Five existing stages as a symbolic circular ring (CSS only)
-- Stages: Reactivity → Awareness → Integration → Sovereignty → Creative Agency
-- Gold/orange ring + nodes; subtle motion
-- Mobile: stack cleanly (not forced circle on small screens)
+- Bridge: *What if you could meet yourself differently?*
+- Five stages: Reactivity → Awareness → Integration → Sovereignty → Creative Agency
+- Stage shorts: Automatic / Visible / Met / Choosable / Available (FINAL blurbs)
+- Mobile: static / tap; desktop `lg+`: sticky scroll chapter
 
-### 4. Why Alchemist Ways / Vision & trust (`#vision`)
+### 4. About / Invitation / Ways to Begin
 
-- Why the project exists
-- Two strong trust blocks (no empty placeholder cards)
-- Provisional grounded copy until client-approved language arrives
+- About Malek portrait + story
+- Invitation beat
+- Ways to Begin: Book · Conversations · Clarity Call · Community — not waitlist-primary
 
-### 5. Community tease (`#community`) optional link target
+## CTA rules (live)
 
-- Light community promise or waitlist as community entry — not a full product
-
-### 6. Final CTA (`#waitlist`)
-
-- Email-only waitlist form (primary)
-- Success message on-page
-- Secondary: muted “Book a 1-on-1 Call” text link (placeholder `href` until booking URL provided)
-
-## CTA rules (historical)
-
-- **Primary everywhere:** Join the Waitlist
-- **Secondary only** in final section: 1-on-1 call (muted, not button-equal)
-- Form: email field only; no name/intention on Phase 1 first ship
+- **Primary in hero:** Explore the Map
+- **Nav highlight:** Book a Clarity Call
+- **Do not** reintroduce waitlist as the primary CTA on the main path
 
 ## Placeholders vs provisional copy
 
-- Keep machine-facing placeholders only where wiring is truly unknown: `[BOOKING URL]`, `[FORM_ENDPOINT]`.
-- Prefer provisional grounded copy (clearly noted in `CLIENT-INPUTS.md` / `CHANGELOG.md`) for book title, blurbs, waitlist benefit, and vision — empty `[PLACEHOLDER]` cards hurt client confidence.
+- Keep machine-facing placeholders only where wiring is truly unknown: book payment URL.
+- Prefer client FINAL / approved copy; do not invent FR translations or checkout URLs.
+
+## Historical note
+
+Earlier blueprints (waitlist-primary, REVISED poetic S1–S6 as live) are superseded by the FINAL
+hero→Map restore (client Aug 26 feedback). See `docs/CHANGELOG.md` and `docs/CLIENT-INPUTS.md`.
