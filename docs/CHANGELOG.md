@@ -1,13 +1,13 @@
 # Changelog
 
-## Restore FINAL hero→Map copy (local; not pushed)
+## Restore FINAL hero→Map copy
 
 - Swapped live hero→Map narrative from REVISED poetic S1–S6 back to **FINAL PDF** protect / meet / Map arc (client Aug 26: “nothing within you…” flagged as old)
 - Hero subline: *A map from emotional reactivity to creative agency*; primary **Explore the Map**; muted **Get the Book** kept
 - Removed REVISED-only blocks: poetic opener, Emotional Reactivity 3-col, *Your Triggers Are the Doorway*
 - CircularMap stage shorts/blurbs: Automatic / Visible / Met / Choosable / Available (FINAL p. 4); MapScrollJourney intro lede retuned
 - Kept centered Royalmount header, Conversations→YouTube, Ways to Begin (Book / Conversations / Clarity / Community)
-- Docs: FINAL = live copy source; REVISED = archive. Push `branch1` → `main` when asked
+- Docs: FINAL = live copy source; REVISED = archive
 
 ---
 
