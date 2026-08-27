@@ -19,9 +19,11 @@ export const Route = createFileRoute("/")({
 });
 
 /**
- * Landing flow per the client REVISED PDF (18 pp.):
- * Hero → sections 1–10 → final closer. Copy is client-verbatim poetic stacks.
- * Anchors kept for CTAs: #map, #about, #book, #clarity, #community.
+ * Landing flow per the client FINAL PDF (27 pp.):
+ * Hero → protect / why / meet / why-it-matters → Map bridge → Map →
+ * About → Invitation → Ways to Begin → closer.
+ * Hero→Map copy is FINAL-verbatim; post-Map offers keep Conversations (YouTube).
+ * Anchors: #map, #about, #book, #clarity, #community.
  */
 function LandingPage() {
   return (
@@ -29,7 +31,7 @@ function LandingPage() {
       <div className="min-h-screen bg-background text-foreground">
         <SiteHeader />
 
-        {/* Hero — REVISED p.1 */}
+        {/* Hero — FINAL p.1 */}
         <section id="top" className="relative overflow-hidden bg-[#d4c4b0] md:min-h-[100svh]">
           <div className="relative h-[min(54svh,460px)] w-full sm:h-[min(56svh,520px)] md:absolute md:inset-0 md:h-full">
             <BookPlateImage priority alt="Meet Yourself, Differently. Alchemist Ways hardcover" />
@@ -55,12 +57,16 @@ function LandingPage() {
                 </span>
               </h1>
               <p className="mt-6 max-w-sm text-[1.02rem] leading-relaxed text-ink/80 sm:text-lg md:text-[#3a2a1f]/85">
-                A practical map for discovering a different relationship with yourself.
+                A map
+                <br />
+                from emotional reactivity
+                <br />
+                to creative agency
               </p>
 
               <div className="mt-9 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center">
                 <a href="#map" className="btn-lux btn-lux-primary w-full sm:w-auto">
-                  Explore The Map
+                  Explore the Map
                   <span aria-hidden>↓</span>
                 </a>
                 <a href="#book" className="btn-lux btn-lux-ghost w-full sm:w-auto">
@@ -71,196 +77,142 @@ function LandingPage() {
           </div>
         </section>
 
-        {/* S1 */}
+        {/* FINAL p.1 — How did you learn to protect yourself? */}
         <section className="aw-section">
           <div className="aw-measure">
             <Reveal>
-              <Verse
-                display
-                lines={[
-                  "What if nothing within you is against you…",
-                  "And everything within you is communicating with you?",
-                ]}
-              />
+              <h2 className="aw-display">How did you learn to protect yourself?</h2>
             </Reveal>
             <Reveal>
-              <hr className="aw-rule aw-rule-tight" />
-              <Verse
-                lines={[
-                  "What if every emotion…",
-                  "every reaction…",
-                  "every recurring pattern…",
-                  "has been trying to tell you something?",
-                ]}
-              />
-              <Verse className="mt-6" lines={["If that’s true…", "have I learned how to listen?"]} />
+              <p className="mt-8 font-display text-lg italic text-ink/55 sm:text-xl">Perhaps by…</p>
             </Reveal>
-          </div>
-        </section>
-
-        {/* S2 */}
-        <section className="border-y border-border/40 bg-secondary/30">
-          <div className="aw-measure aw-section">
-            <Reveal>
-              <div className="space-y-8">
-                <Verse
-                  display
-                  lines={["The conversation ended three days ago.", "You’re still running it."]}
-                />
-                <Verse display lines={["You said yes.", "You meant something different."]} />
-                <Verse display lines={["You understand yourself clearly.", "Nothing has changed."]} />
-                <Verse
-                  display
-                  lines={["You promised yourself it wouldn’t happen again.", "It did."]}
-                />
-                <Verse display lines={["You keep reacting in ways you don’t fully understand."]} />
-              </div>
-            </Reveal>
-            <Reveal>
-              <hr className="aw-rule aw-rule-tight" />
-              <Verse
-                display
-                lines={[
-                  "These aren’t failures.",
-                  "They’re intelligent ways you learned to protect yourself.",
-                ]}
-              />
-            </Reveal>
-          </div>
-        </section>
-
-        {/* S3 */}
-        <section className="aw-section">
-          <div className="aw-measure">
-            <Reveal>
-              <Verse
-                display
-                lines={[
-                  "The patterns you’ve been fighting—",
-                  "the overthinking,",
-                  "the people-pleasing,",
-                  "the reactive anger,",
-                  "the endless self-monitoring—",
-                  "didn’t appear randomly.",
-                ]}
-              />
-            </Reveal>
-            <Reveal>
-              <Verse
-                className="mt-8"
-                lines={[
-                  "They formed in conditions where those responses served a purpose.",
-                  "They helped you stay safe.",
-                  "Preserve connection.",
-                  "Anticipate conflict.",
-                  "Manage what your environment couldn’t hold.",
-                ]}
-              />
-              <Verse
-                className="mt-6"
-                lines={["At one time,", "they made perfect sense."]}
-              />
-              <Verse
-                className="mt-6"
-                lines={[
-                  "The difficulty is that they remained",
-                  "long after they were needed.",
-                ]}
-              />
-            </Reveal>
-          </div>
-        </section>
-
-        {/* S4 */}
-        <section className="border-y border-border/40 bg-secondary/25">
-          <div className="aw-measure aw-section">
-            <Reveal>
-              <Verse
-                display
-                lines={[
-                  "Everything begins…",
-                  "with meeting yourself differently.",
-                ]}
-              />
-              <Verse
-                className="mt-6"
-                lines={["Learning how to listen", "is where that relationship begins."]}
-              />
-            </Reveal>
-          </div>
-        </section>
-
-        {/* S5 — Emotional Reactivity */}
-        <section className="aw-section">
-          <div className="aw-measure aw-measure-wide">
-            <Reveal>
-              <h2 className="aw-display aw-display-caps">Emotional Reactivity</h2>
-              <Verse
-                className="mt-6 max-w-2xl"
-                lines={[
-                  "Emotional Reactivity doesn’t always look dramatic.",
-                  "Sometimes it becomes obvious.",
-                  "Sometimes it becomes invisible.",
-                  "Sometimes it simply becomes the way we’ve learned to survive.",
-                  "It may express itself through…",
-                ]}
-              />
-            </Reveal>
-            <div className="aw-cols mt-10 sm:mt-12">
-              {reactivityModes.map((mode) => (
-                <Reveal key={mode.title}>
-                  <div className="aw-col-rule">
-                    <h3 className="aw-col-title">{mode.title}</h3>
-                    <Verse className="mt-3" lines={mode.lines} />
-                  </div>
+            <div className="aw-stack aw-stack-loose mt-6">
+              {protectWays.map((way) => (
+                <Reveal key={way}>
+                  <p className="aw-line">{way}</p>
                 </Reveal>
               ))}
             </div>
             <Reveal>
-              <hr className="aw-rule aw-rule-tight" />
-              <Verse
-                display
-                lines={["Different expressions.", "The same invitation."]}
-              />
-              <Verse
-                className="mt-3"
-                lines={["To understand what your protective system has been carrying."]}
-              />
+              <hr className="aw-rule" />
+              <p className="aw-lede mt-0">
+                Without even knowing it, these ways of protecting yourself may once have helped you
+                navigate the environment in which they developed.
+              </p>
             </Reveal>
           </div>
         </section>
 
-        {/* S6 */}
+        {/* FINAL p.2 — Why did I learn to do that? */}
         <section className="border-y border-border/40 bg-secondary/30">
           <div className="aw-measure aw-section">
             <Reveal>
-              <h2 className="aw-display aw-display-caps">
-                Your Triggers Are the Doorway.
-              </h2>
-              <Verse
-                className="mt-6"
-                lines={[
-                  "A trigger is rarely only about what is happening now.",
-                  "It often reveals",
-                  "what the past taught you to expect.",
-                  "To protect.",
-                  "To suppress.",
-                  "To become.",
-                ]}
-              />
-              <Verse
-                className="mt-6"
-                lines={[
-                  "The invitation isn’t to eliminate the reaction.",
-                  "It’s to understand",
-                  "what it has been carrying.",
-                ]}
-              />
+              <h2 className="aw-display">Why did I learn to do that?</h2>
+            </Reveal>
+            <div className="mt-8 space-y-6">
+              <Reveal>
+                <p className="aw-body">
+                  The ways you learned to protect yourself were shaped by what your system learned
+                  was safest.
+                </p>
+              </Reveal>
+              <Reveal>
+                <p className="aw-body">
+                  Growing up, your mind and body were continually learning:{" "}
+                  <span className="font-display italic text-ink">
+                    “Given the world I’m experiencing, what is the safest way to be?”
+                  </span>
+                </p>
+              </Reveal>
+              <Reveal>
+                <div className="aw-rail aw-stack">
+                  <p className="aw-body !mt-0">Maybe staying quiet kept connection.</p>
+                  <p className="aw-body !mt-0">Maybe perfection brought approval.</p>
+                  <p className="aw-body !mt-0">Maybe people-pleasing kept the peace.</p>
+                  <p className="aw-body !mt-0">Maybe independence protected vulnerability.</p>
+                  <p className="aw-body !mt-0">
+                    Maybe shutting down made overwhelming feelings more manageable.
+                  </p>
+                </div>
+              </Reveal>
+              <Reveal>
+                <p className="aw-body">
+                  These responses weren’t random. They helped you navigate the world you were in.
+                </p>
+              </Reveal>
+              <Reveal>
+                <p className="aw-pull">
+                  The problem is not that protection exists. It’s that ways of protecting yourself
+                  can become automatic—and continue shaping how you meet life even when the
+                  circumstances around you have changed.
+                </p>
+              </Reveal>
+              <Reveal>
+                <p className="aw-body">
+                  What once helped you adapt to the world as a child may no longer be how you want
+                  to meet yourself—and life—as an adult.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* FINAL p.3 — Meet yourself + why it matters */}
+        <section className="aw-section">
+          <div className="aw-measure">
+            <Reveal>
+              <h2 className="aw-display">And how did you learn to meet yourself?</h2>
+            </Reveal>
+            <Reveal>
+              <p className="mt-8 font-display text-lg italic text-ink/55 sm:text-xl">Perhaps with…</p>
+            </Reveal>
+            <div className="aw-stack aw-stack-loose mt-6">
+              {meetWays.map((way) => (
+                <Reveal key={way}>
+                  <p className="aw-line">{way}</p>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal>
+              <p className="aw-lede">
+                These patterns didn’t only shape how you met the world. They shaped how you learned
+                to meet yourself.
+              </p>
+            </Reveal>
+
+            <Reveal>
+              <hr className="aw-rule" />
+              <h2 className="aw-display">Why does the way I meet myself matter?</h2>
+            </Reveal>
+            <Reveal>
+              <p className="aw-lede">
+                Because the relationship you have with yourself shapes how you meet everything else.
+              </p>
+            </Reveal>
+            <div className="aw-stack aw-stack-loose mt-8">
+              {meetShapes.map((line) => (
+                <Reveal key={line}>
+                  <p className="aw-line">{line}</p>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal>
+              <p className="aw-pull mt-10">What protects you also shapes what becomes possible.</p>
             </Reveal>
           </div>
         </section>
 
-        {/* S7 — The Map */}
+        {/* FINAL p.4 — Map bridge */}
+        <section className="aw-section pb-8 sm:pb-10">
+          <div className="aw-measure">
+            <Reveal>
+              <div className="aw-rail">
+                <h2 className="aw-display">What if you could meet yourself differently?</h2>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
         <div id="map" className="scroll-mt-28 lg:scroll-mt-32">
           <MapScrollJourney />
         </div>
@@ -289,7 +241,7 @@ function LandingPage() {
               <Reveal>
                 <p className="aw-eyebrow">About Malek</p>
               </Reveal>
-              <Reveal>
+            <Reveal>
                 <Verse
                   className="mt-5"
                   lines={[
@@ -502,43 +454,43 @@ function LandingPage() {
                     ]}
                   />
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-                    <a
-                      href={CLARITY_CALL_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-lux btn-lux-primary"
-                    >
-                      Book a Clarity Call
-                      <span aria-hidden>→</span>
-                    </a>
-                  </div>
+                  <a
+                    href={CLARITY_CALL_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-lux btn-lux-primary"
+                  >
+                    Book a Clarity Call
+                    <span aria-hidden>→</span>
+                  </a>
+                </div>
                   <ul className="mt-5 space-y-2 text-sm text-ink/70">
                     <li>
-                      <a
-                        href={CLARITY_CALL_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                <a
+                  href={CLARITY_CALL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                         className="underline-offset-4 transition-colors hover:text-ember-deep hover:underline"
-                      >
+                >
                         Option 1. Clarity Conversation (Free · 30 min)
-                      </a>
+                </a>
                     </li>
                     <li>
-                      <a
-                        href={CLARITY_SESSION_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                <a
+                  href={CLARITY_SESSION_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                         className="underline-offset-4 transition-colors hover:text-ember-deep hover:underline"
-                      >
+                >
                         Option 2. Clarity Session (Paid · 90 min)
-                      </a>
+                </a>
                     </li>
                   </ul>
                 </article>
-              </Reveal>
+            </Reveal>
 
               {/* Community */}
-              <Reveal>
+            <Reveal>
                 <article id="community" className="scroll-mt-28 lg:scroll-mt-32">
                   <p className="aw-eyebrow">The Community</p>
                   <Verse
@@ -560,11 +512,11 @@ function LandingPage() {
                       className="btn-lux btn-lux-ghost"
                     >
                       Explore the Community
-                      <span aria-hidden>→</span>
-                    </a>
-                  </div>
+                  <span aria-hidden>→</span>
+                </a>
+              </div>
                 </article>
-              </Reveal>
+            </Reveal>
             </div>
           </div>
         </section>
@@ -649,7 +601,40 @@ function LandingPage() {
   );
 }
 
-/* ————— REVISED PDF poetic helpers ————— */
+/* ————— FINAL PDF list copy (client-verbatim) ————— */
+
+const protectWays = [
+  "Staying quiet.",
+  "Being perfect.",
+  "Being defensive.",
+  "Avoiding vulnerability.",
+  "People-pleasing.",
+  "Controlling.",
+  "Hiding.",
+  "Withdrawing.",
+  "Being independent.",
+  "Shutting down.",
+] as const;
+
+const meetWays = [
+  "Self-doubt.",
+  "Self-judgment.",
+  "Shame.",
+  "Comparison.",
+  "Holding back parts of yourself.",
+  "Self-abandonment.",
+  "Never quite feeling enough.",
+] as const;
+
+const meetShapes = [
+  "Your emotions.",
+  "Your thoughts.",
+  "Your body.",
+  "Your relationships.",
+  "Your work.",
+  "Your creativity.",
+  "Your life.",
+] as const;
 
 function Verse({
   lines,
@@ -668,33 +653,6 @@ function Verse({
     </div>
   );
 }
-
-const reactivityModes = [
-  {
-    title: "Acting Out",
-    lines: [
-      "When energy moves outward",
-      "before awareness has a chance to respond.",
-    ],
-  },
-  {
-    title: "Shutting Down",
-    lines: ["When the nervous system withdraws", "from experience."],
-  },
-  {
-    title: "Suppressing",
-    lines: [
-      "When thoughts,",
-      "emotions,",
-      "needs,",
-      "or impulses",
-      "are continually pushed aside",
-      "to preserve safety,",
-      "connection,",
-      "or control.",
-    ],
-  },
-] as const;
 
 function TikTokIcon() {
   return (

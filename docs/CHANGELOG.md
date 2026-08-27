@@ -1,5 +1,16 @@
 # Changelog
 
+## Restore FINAL hero→Map copy
+
+- Swapped live hero→Map narrative from REVISED poetic S1–S6 back to **FINAL PDF** protect / meet / Map arc (client Aug 26: “nothing within you…” flagged as old)
+- Hero subline: *A map from emotional reactivity to creative agency*; primary **Explore the Map**; muted **Get the Book** kept
+- Removed REVISED-only blocks: poetic opener, Emotional Reactivity 3-col, *Your Triggers Are the Doorway*
+- CircularMap stage shorts/blurbs: Automatic / Visible / Met / Choosable / Available (FINAL p. 4); MapScrollJourney intro lede retuned
+- Kept centered Royalmount header, Conversations→YouTube, Ways to Begin (Book / Conversations / Clarity / Community)
+- Docs: FINAL = live copy source; REVISED = archive
+
+---
+
 ## Soft game-adjacent type touch
 
 - Sharper system labels: wider tracking on eyebrows/CTAs/nav; Map stage `01` + `02 / 05` HUD-style indexes (`.aw-hud` / `.aw-stage-num`); cue “Walk the map ↓” — no gaming slang or UI chrome
@@ -15,6 +26,7 @@
 - CircularMap / MapScrollJourney intro + stage blurbs retuned to REVISED Map copy; phone Map remains static/tap
 - Tighter `.aw-section` padding + `aw-verse` short-line stacks (less empty whitespace)
 - Instant text kept (`Reveal` passthrough)
+- **Superseded for hero→Map** by FINAL restore above; REVISED retained as archive reference
 
 ---
 

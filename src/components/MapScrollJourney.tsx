@@ -139,7 +139,7 @@ function MapIntro({
     <div className="mx-auto w-full max-w-2xl shrink-0 text-left">
       <p className="aw-eyebrow text-[0.65rem] sm:text-[0.7rem]">The Map</p>
       <h2
-        className={`font-display font-semibold uppercase leading-[1.12] tracking-[0.04em] text-ink ${
+        className={`font-display font-semibold leading-[1.12] tracking-[-0.02em] text-ink ${
           compact
             ? "mt-1.5 text-xl sm:mt-2 sm:text-3xl md:text-[2.15rem]"
             : "mt-3 text-3xl sm:text-4xl md:text-5xl"
@@ -149,19 +149,14 @@ function MapIntro({
       </h2>
       {scrollHint ? (
         <p className="mt-2 max-w-xl text-[0.8rem] leading-relaxed text-ink/65 sm:mt-2.5 sm:text-[0.9rem]">
-          Five movements. One relationship. Meet yourself, differently.{" "}
+          Five movements from Emotional Reactivity to Creative Agency.{" "}
           <span className="text-ink/45">Click a step · 1–{MOVEMENT_COUNT}</span>
         </p>
       ) : (
-        <div className="aw-verse mt-4 max-w-xl">
-          <p>The Map isn’t something to master.</p>
-          <p>It’s a way of learning</p>
-          <p>the language</p>
-          <p>of your own experience.</p>
-          <p className="mt-3">Five movements.</p>
-          <p>One relationship.</p>
-          <p>Meet yourself, differently.</p>
-        </div>
+        <p className="aw-lede mt-4">
+          A map that reveals what has quietly been shaping your inner experience — and how your
+          relationship to it can change.
+        </p>
       )}
       <div className="mt-3 h-px w-full max-w-xl bg-border/50 sm:mt-4" aria-hidden />
     </div>
