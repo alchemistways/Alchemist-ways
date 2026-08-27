@@ -1,20 +1,23 @@
 /**
- * Locale preference — EN is live; FR (and future locales) store a preference
- * until client-supplied copy ships. Do not invent translated page copy here.
+ * Locale preference + Canadian French (fr-CA) catalogs.
+ * EN and FR are both live; FR serves fr-CA copy.
  */
+
+import { catalogs, type Messages } from "@/lib/i18n/messages";
 
 export type Locale = "en" | "fr";
 
 export type LocaleOption = {
   code: Locale;
   label: string;
-  /** When false, selecting stores preference only (light “coming” UI). */
+  /** BCP 47 tag for <html lang>. */
+  htmlLang: string;
   live: boolean;
 };
 
 export const LOCALES: readonly LocaleOption[] = [
-  { code: "en", label: "EN", live: true },
-  { code: "fr", label: "FR", live: false },
+  { code: "en", label: "EN", htmlLang: "en", live: true },
+  { code: "fr", label: "FR", htmlLang: "fr-CA", live: true },
 ] as const;
 
 const STORAGE_KEY = "alchemist-ways-locale";
@@ -40,4 +43,21 @@ export function setStoredLocale(locale: Locale): void {
   } catch {
     /* private mode / quota — preference is best-effort */
   }
+}
+
+export function getMessages(locale: Locale): Messages {
+  return catalogs[locale];
+}
+
+export function getHtmlLang(locale: Locale): string {
+  return LOCALES.find((l) => l.code === locale)?.htmlLang ?? "en";
+}
+
+export function applyDocumentLocale(locale: Locale): void {
+  if (typeof document === "undefined") return;
+  document.documentElement.lang = getHtmlLang(locale);
+  const m = getMessages(locale);
+  if (document.title !== m.meta.title) document.title = m.meta.title;
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc) desc.setAttribute("content", m.meta.description);
 }

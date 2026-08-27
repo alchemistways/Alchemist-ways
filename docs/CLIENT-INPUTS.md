@@ -18,7 +18,7 @@ Items needed to remove provisional copy / wiring placeholders and go fully live 
 |-------|--------|-------|
 | **$28 Book payment link** (Meet Yourself, Differently.) | **Needed** | `BOOK_PURCHASE_URL` in `src/lib/offers.ts` anchors to `#book` until then |
 | Gumroad / checkout pages | Needed with the above | Do not invent URLs — ask the client |
-| **French (FR) page copy** | **Needed** | EN|FR control ships in header (`src/lib/locale.ts`); FR stores preference only until client supplies translations — do not invent FR copy |
+| **French Canadian (FR / fr-CA)** | **Done** | Live EN\|FR toggle; catalogs in `src/lib/i18n/messages.ts` (`fr` → fr-CA). Brand + book title kept EN. Client may refine wording. |
 
 ## Demoted / deferred
 

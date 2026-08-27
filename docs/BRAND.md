@@ -32,7 +32,7 @@ See also: [DESIGN-PRINCIPLES.md](DESIGN-PRINCIPLES.md) for distinctive-design cr
 
 ## Brand mark
 
-- **Umbrella brand lives in the sticky header** — Royalmount-style stack: large centered **Alchemist Ways** wordmark on its own row; nav centered on the row below with bird-chevron separators; **Book Clarity Call** as the in-nav highlight pill; **EN | FR** pinned far right (preference only until FR copy ships — see `src/lib/locale.ts`).
+- **Umbrella brand lives in the sticky header** — Royalmount-style stack: large centered **Alchemist Ways** wordmark on its own row; nav centered on the row below with bird-chevron separators; **Book Clarity Call** as the in-nav highlight pill; **EN | FR** far right (FR serves Canadian French / `fr-CA` via `src/lib/i18n/messages.ts`).
 - Mobile: centered wordmark + hamburger; menu carries links, Clarity Call, then locale.
 - Never show Lovable or other builder branding.
 

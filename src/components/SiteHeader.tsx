@@ -1,27 +1,12 @@
 import { useEffect, useId, useState, type MouseEvent } from "react";
-import {
-  getStoredLocale,
-  LOCALES,
-  setStoredLocale,
-  type Locale,
-} from "@/lib/locale";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { LOCALES, type Locale } from "@/lib/locale";
 
 /**
  * Sticky header — Royalmount-inspired stack:
  * large centered wordmark → centered nav row → locale far right.
  * Clarity Call is the in-nav highlight (like Royalmount’s seasonal pill).
  */
-const navLinks = [
-  { href: "#map", label: "The Map" },
-  { href: "#book", label: "The Book" },
-  {
-    href: "https://www.youtube.com/@alchemistwaysofficial",
-    label: "Conversations",
-    external: true,
-  },
-  { href: "#about", label: "About" },
-] as const;
-
 /** Soft bird-wing chevron between nav labels (client liked the “little birds”). */
 function BirdChevron({ className }: { className?: string }) {
   return (
@@ -47,21 +32,17 @@ function LocaleControl({
   locale,
   onChange,
   className = "",
-  showComingHint = false,
 }: {
   locale: Locale;
   onChange: (next: Locale) => void;
   className?: string;
-  showComingHint?: boolean;
 }) {
-  const selected = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
-  const showComing = showComingHint && !selected.live;
-
+  const { t } = useLocale();
   return (
     <div className={`flex flex-col items-end gap-0.5 ${className}`}>
       <div
         role="group"
-        aria-label="Language"
+        aria-label={t.a11y.language}
         className="flex items-center gap-0.5 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink/70"
       >
         {LOCALES.map((opt, i) => (
@@ -74,11 +55,7 @@ function LocaleControl({
             <button
               type="button"
               aria-pressed={locale === opt.code}
-              aria-label={
-                opt.live
-                  ? `Language: ${opt.label}`
-                  : `Language: ${opt.label} (coming soon)`
-              }
+              aria-label={`Language: ${opt.label}`}
               onClick={() => onChange(opt.code)}
               className={`min-h-11 min-w-11 rounded-sm px-1.5 transition-colors hover:text-ember-deep sm:min-h-9 sm:min-w-0 sm:py-1 ${
                 locale === opt.code ? "text-ink" : "text-ink/40"
@@ -89,22 +66,26 @@ function LocaleControl({
           </span>
         ))}
       </div>
-      {showComing ? (
-        <p className="text-[0.55rem] uppercase tracking-[0.14em] text-ink/40">Coming soon</p>
-      ) : null}
     </div>
   );
 }
 
 export function SiteHeader() {
+  const { locale, setLocale, t } = useLocale();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [locale, setLocale] = useState<Locale>("en");
   const menuId = useId();
 
-  useEffect(() => {
-    setLocale(getStoredLocale());
-  }, []);
+  const navLinks = [
+    { href: "#map", label: t.nav.map },
+    { href: "#book", label: t.nav.book },
+    {
+      href: "https://www.youtube.com/@alchemistwaysofficial",
+      label: t.nav.conversations,
+      external: true,
+    },
+    { href: "#about", label: t.nav.about },
+  ] as const;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -135,11 +116,6 @@ export function SiteHeader() {
     });
   }
 
-  function chooseLocale(next: Locale) {
-    setLocale(next);
-    setStoredLocale(next);
-  }
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
       <div
@@ -149,17 +125,16 @@ export function SiteHeader() {
             : "border-[#3a2a1f]/08 bg-[#faf6f0]/85 supports-[backdrop-filter]:bg-[#faf6f0]/72"
         }`}
       >
-        {/* Row 1 — centered wordmark (Royalmount: brand alone, large) */}
         <div className="relative mx-auto flex max-w-7xl items-center justify-center px-[max(1rem,env(safe-area-inset-left))] pt-4 pr-[max(1rem,env(safe-area-inset-right))] sm:pt-5 sm:px-8">
           <button
             type="button"
             className="absolute left-[max(1rem,env(safe-area-inset-left))] top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-[#3a2a1f]/12 text-ink transition-colors hover:border-ember hover:text-ember-deep sm:left-8 lg:hidden"
             aria-expanded={open}
             aria-controls={menuId}
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? t.a11y.closeMenu : t.a11y.openMenu}
             onClick={() => setOpen((v) => !v)}
           >
-            <span className="sr-only">{open ? "Close" : "Menu"}</span>
+            <span className="sr-only">{open ? t.a11y.closeMenu : t.a11y.openMenu}</span>
             <span aria-hidden className="relative block h-3.5 w-4">
               <span
                 className={`absolute left-0 top-0 block h-px w-full bg-current transition-transform duration-200 ${
@@ -190,11 +165,10 @@ export function SiteHeader() {
           </a>
         </div>
 
-        {/* Row 2 — centered nav + far-right locale (desktop) */}
         <div className="relative mx-auto hidden max-w-7xl items-center justify-center px-8 pb-4 pt-3 lg:flex">
           <nav
             className="flex flex-wrap items-center justify-center gap-x-1 gap-y-2"
-            aria-label="Primary"
+            aria-label={t.a11y.primaryNav}
           >
             {navLinks.map((link, i) => (
               <span key={link.href} className="flex items-center">
@@ -217,31 +191,25 @@ export function SiteHeader() {
               href="#clarity"
               className="btn-lux btn-lux-primary btn-lux-nav ml-1 whitespace-nowrap"
             >
-              Book a Clarity Call
+              {t.nav.clarityCall}
             </a>
           </nav>
 
           <div className="absolute right-8 top-1/2 -translate-y-1/2">
-            <LocaleControl
-              locale={locale}
-              onChange={chooseLocale}
-              showComingHint
-            />
+            <LocaleControl locale={locale} onChange={setLocale} />
           </div>
         </div>
 
-        {/* Mobile: breathing room under wordmark only */}
         <div className="pb-3 lg:hidden" aria-hidden />
       </div>
 
-      {/* Mobile menu */}
       <div
         id={menuId}
         className={`lg:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}
       >
         <button
           type="button"
-          aria-label="Dismiss menu"
+          aria-label={t.a11y.dismissMenu}
           tabIndex={open ? 0 : -1}
           className={`fixed inset-0 z-40 bg-[#1a1814]/25 transition-opacity duration-200 ${
             open ? "opacity-100" : "opacity-0"
@@ -253,7 +221,7 @@ export function SiteHeader() {
             open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
           }`}
         >
-          <nav className="mx-auto flex max-w-6xl flex-col gap-1" aria-label="Mobile">
+          <nav className="mx-auto flex max-w-6xl flex-col gap-1" aria-label={t.a11y.mobileNav}>
             {navLinks.map((link) => {
               const external = "external" in link && link.external;
               return (
@@ -282,15 +250,10 @@ export function SiteHeader() {
               }}
               className="btn-lux btn-lux-primary mt-4 min-h-12 w-full"
             >
-              Book a Clarity Call
+              {t.nav.clarityCall}
             </a>
             <div className="mt-6 flex justify-center border-t border-[#3a2a1f]/10 pt-5">
-              <LocaleControl
-                locale={locale}
-                onChange={chooseLocale}
-                className="items-center"
-                showComingHint
-              />
+              <LocaleControl locale={locale} onChange={setLocale} className="items-center" />
             </div>
           </nav>
         </div>

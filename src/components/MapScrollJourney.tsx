@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CircularMap, MOVEMENT_COUNT } from "@/components/CircularMap";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 /** Desktop sticky chapters only — room for a full viewport pin. */
 function stepVh() {
@@ -86,7 +87,6 @@ export function MapScrollJourney() {
     });
   }
 
-  /* Phone / tablet / reduced-motion: normal landing block */
   if (!scrollDriven) {
     return (
       <section className="bg-gradient-to-b from-secondary/25 via-background to-background">
@@ -135,9 +135,10 @@ function MapIntro({
   scrollHint?: boolean;
   compact?: boolean;
 }) {
+  const { t } = useLocale();
   return (
     <div className="mx-auto w-full max-w-2xl shrink-0 text-left">
-      <p className="aw-eyebrow text-[0.65rem] sm:text-[0.7rem]">The Map</p>
+      <p className="aw-eyebrow text-[0.65rem] sm:text-[0.7rem]">{t.map.eyebrow}</p>
       <h2
         className={`font-display font-semibold leading-[1.12] tracking-[-0.02em] text-ink ${
           compact
@@ -145,18 +146,15 @@ function MapIntro({
             : "mt-3 text-3xl sm:text-4xl md:text-5xl"
         }`}
       >
-        From Emotional Reactivity to Creative Agency
+        {t.map.title}
       </h2>
       {scrollHint ? (
         <p className="mt-2 max-w-xl text-[0.8rem] leading-relaxed text-ink/65 sm:mt-2.5 sm:text-[0.9rem]">
-          Five movements from Emotional Reactivity to Creative Agency.{" "}
-          <span className="text-ink/45">Click a step · 1–{MOVEMENT_COUNT}</span>
+          {t.map.scrollHint}{" "}
+          <span className="text-ink/45">{t.map.clickStep(MOVEMENT_COUNT)}</span>
         </p>
       ) : (
-        <p className="aw-lede mt-4">
-          A map that reveals what has quietly been shaping your inner experience — and how your
-          relationship to it can change.
-        </p>
+        <p className="aw-lede mt-4">{t.map.lede}</p>
       )}
       <div className="mt-3 h-px w-full max-w-xl bg-border/50 sm:mt-4" aria-hidden />
     </div>
@@ -164,6 +162,7 @@ function MapIntro({
 }
 
 function ScrollCue({ progress, active }: { progress: number; active: number }) {
+  const { t } = useLocale();
   const done = active >= MOVEMENT_COUNT - 1 && progress > 0.92;
   return (
     <div className="mt-5 flex w-full shrink-0 flex-col items-start gap-3 border-t border-border/35 pt-5 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
@@ -173,7 +172,7 @@ function ScrollCue({ progress, active }: { progress: number; active: number }) {
         aria-valuemin={1}
         aria-valuemax={MOVEMENT_COUNT}
         aria-valuenow={active + 1}
-        aria-label={`Map movement ${active + 1} of ${MOVEMENT_COUNT}`}
+        aria-label={t.a11y.mapProgress(active + 1, MOVEMENT_COUNT)}
       >
         {Array.from({ length: MOVEMENT_COUNT }).map((_, i) => (
           <span
@@ -184,9 +183,7 @@ function ScrollCue({ progress, active }: { progress: number; active: number }) {
           />
         ))}
       </div>
-      <p className="aw-hud">
-        {done ? "Continue ↓" : "Walk the map ↓"}
-      </p>
+      <p className="aw-hud">{done ? t.map.continue : t.map.walk}</p>
     </div>
   );
 }
