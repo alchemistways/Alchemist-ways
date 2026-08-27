@@ -1,45 +1,8 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
 
-/** Stage copy verbatim from the client FINAL PDF (p. 4). */
-export const movements = [
-  {
-    key: "reactivity",
-    label: "Reactivity",
-    short: "Automatic",
-    body: "The pattern is happening before you can see it.",
-    explore: "Explore Reactivity",
-  },
-  {
-    key: "awareness",
-    label: "Awareness",
-    short: "Visible",
-    body: "What was automatic becomes something you can observe.",
-    explore: "Explore Awareness",
-  },
-  {
-    key: "integration",
-    label: "Integration",
-    short: "Met",
-    body: "What became visible can be met differently.",
-    explore: "Explore Integration",
-  },
-  {
-    key: "sovereignty",
-    label: "Sovereignty",
-    short: "Choosable",
-    body: "What once chose for you no longer has to determine your response.",
-    explore: "Explore Sovereignty",
-  },
-  {
-    key: "agency",
-    label: "Creative Agency",
-    short: "Available",
-    body: "Energy once organized around protection becomes increasingly available for life.",
-    explore: "Explore Creative Agency",
-  },
-] as const;
-
-export const MOVEMENT_COUNT = movements.length;
+/** Five Map stages — copy from locale catalogs (FINAL PDF). */
+export const MOVEMENT_COUNT = 5;
 
 function nodePosition(index: number, total: number, radius: number) {
   const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
@@ -69,6 +32,8 @@ export function CircularMap({
   scrollDriven = false,
   compactMobile = false,
 }: Props = {}) {
+  const { t } = useLocale();
+  const movements = t.map.movements;
   const [internalActive, setInternalActive] = useState(0);
   const [hovered, setHovered] = useState<number | null>(null);
   const [panelKey, setPanelKey] = useState(0);
@@ -80,9 +45,9 @@ export function CircularMap({
 
   const controlled = typeof activeIndex === "number";
   const active = controlled ? activeIndex : internalActive;
-  const current = movements[active];
+  const current = movements[active] ?? movements[0];
   const previewIndex = hovered ?? active;
-  const preview = movements[previewIndex];
+  const preview = movements[previewIndex] ?? movements[0];
 
   useEffect(() => {
     setPanelKey((k) => k + 1);
@@ -149,8 +114,8 @@ export function CircularMap({
                 : "w-[min(100%,32rem)]"
           }`}
           role="listbox"
-          aria-label="Alchemist Ways map movements"
-          aria-activedescendant={`map-node-${movements[active].key}`}
+          aria-label={t.a11y.mapMovements}
+          aria-activedescendant={`map-node-${current.key}`}
         >
           {/* One SVG: track, progress, arrows, nodes, hub — same cx/cy/r */}
           <svg
@@ -434,7 +399,7 @@ export function CircularMap({
                           ? "bg-ember/50"
                           : "bg-border hover:bg-ember/30"
                     }`}
-                    aria-label={`Go to ${m.label}`}
+                    aria-label={t.a11y.goToStage(m.label)}
                   />
                 ))}
               </div>
@@ -445,14 +410,14 @@ export function CircularMap({
                   onClick={() => select((active - 1 + movements.length) % movements.length)}
                   className="min-h-11 rounded-full border border-border px-4 py-2.5 text-xs text-ink transition-colors hover:border-ember hover:text-ember-deep"
                 >
-                  Previous
+                  {t.a11y.previous}
                 </button>
                 <button
                   type="button"
                   onClick={() => select((active + 1) % movements.length)}
                   className="min-h-11 rounded-full bg-ember px-4 py-2.5 text-xs text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  Next movement
+                  {t.a11y.nextMovement}
                 </button>
               </div>
             </>

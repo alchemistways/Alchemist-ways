@@ -1,5 +1,13 @@
 # Changelog
 
+## Canadian French (fr-CA) locale live
+
+- EN|FR toggle now switches full landing copy (hero→Map→offers→footer); `html lang="fr-CA"` when FR selected
+- Catalogs: `src/lib/i18n/messages.ts` + `LocaleProvider`; brand + book title stay English
+- Removed “Coming soon” FR hint; preference persists in localStorage
+
+---
+
 ## Restore FINAL hero→Map copy
 
 - Swapped live hero→Map narrative from REVISED poetic S1–S6 back to **FINAL PDF** protect / meet / Map arc (client Aug 26: “nothing within you…” flagged as old)
