@@ -58,24 +58,13 @@ function LandingPage() {
             <div className="hero-stagger flex w-full min-w-0 flex-1 flex-col justify-center md:max-w-[min(100%,24rem)] lg:max-w-[26rem]">
               <h1 className="flex flex-col items-start gap-1 font-display text-[clamp(1.85rem,8vw,2.15rem)] font-semibold uppercase leading-[0.98] tracking-[-0.04em] text-ink sm:text-5xl md:text-[2.75rem] lg:text-[3.25rem]">
                 <span>{t.hero.line1}</span>
-                <span className="font-semibold text-ember-deep">{t.hero.line2}</span>
-              </h1>
-              {/* Mirrored echo of the headline on a thin reflective line — book-cover graphic */}
-              <div aria-hidden className="flex w-fit select-none flex-col">
-                <span className="mt-1 block h-px w-full bg-gradient-to-r from-ember/50 via-ember/30 to-transparent" />
                 <span
-                  className="block font-display text-[clamp(1.15rem,5vw,1.35rem)] font-semibold uppercase leading-[0.98] tracking-[-0.04em] text-ember-deep/50 sm:text-3xl md:text-[1.72rem] lg:text-[2rem]"
-                  style={{
-                    transform: "scaleY(-1)",
-                    transformOrigin: "top",
-                    maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 78%)",
-                    WebkitMaskImage:
-                      "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 78%)",
-                  }}
+                  className="origin-center font-semibold text-ember-deep"
+                  style={{ transform: "rotate(180deg)" }}
                 >
                   {t.hero.line2}
                 </span>
-              </div>
+              </h1>
               <p className="mt-5 max-w-sm text-[1.02rem] leading-relaxed text-ink/80 sm:text-lg md:text-[#3a2a1f]/85">
                 {t.hero.subline.map((line, i) => (
                   <span key={line}>
