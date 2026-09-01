@@ -149,12 +149,22 @@ function MapIntro({
         {t.map.title}
       </h2>
       {scrollHint ? (
-        <p className="mt-2 max-w-xl text-[0.8rem] leading-relaxed text-ink/65 sm:mt-2.5 sm:text-[0.9rem]">
-          {t.map.scrollHint}{" "}
-          <span className="text-ink/45">{t.map.clickStep(MOVEMENT_COUNT)}</span>
-        </p>
+        <>
+          <p className="mt-2 max-w-xl text-[0.8rem] leading-relaxed text-ink/65 sm:mt-2.5 sm:text-[0.9rem]">
+            {t.map.scrollHint}{" "}
+            <span className="text-ink/45">{t.map.clickStep(MOVEMENT_COUNT)}</span>
+          </p>
+          <p className="mt-2 max-w-xl font-display text-[0.85rem] italic text-ink/60 sm:text-[0.95rem]">
+            {t.map.invitationLine}
+          </p>
+        </>
       ) : (
-        <p className="aw-lede mt-4">{t.map.lede}</p>
+        <>
+          <p className="aw-lede mt-4">{t.map.lede}</p>
+          <p className="mt-4 font-display text-lg italic text-ink/70 sm:text-xl">
+            {t.map.invitationLine}
+          </p>
+        </>
       )}
       <div className="mt-3 h-px w-full max-w-xl bg-border/50 sm:mt-4" aria-hidden />
     </div>

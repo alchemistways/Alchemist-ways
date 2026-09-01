@@ -21,9 +21,20 @@
 ## Section flow (live)
 
 ```
-Nav → Hero → Protect → Why protect → Meet yourself → Why it matters → Map bridge → Map
-  → About → Invitation → Ways to Begin → Closer
+/           Nav → Hero (upright “Differently.” + mirrored echo) → Book card ($28 CTA)
+              → Protect (6-way grid + Discover more) → Why protect (pull + Discover more)
+              → Meet (6-way grid + pull + Discover more) → Droplet divider → Map bridge → Map
+              → About (teaser + Discover more) → Invitation (droplet watermark)
+              → Ways to Begin (condensed card grid + Discover more) → Closer (no tagline)
+/discover   Intro → #protect (full ways + lede) → #why (full body + rails)
+              → #meet (full ways + why-it-matters + shapes) → #about (all verses)
+              → #book (buying card) → #begin (full offer details) → footer
 ```
+
+Long FINAL narrative is kept verbatim on `/discover`; the landing shows short grid teasers
+with styled **Discover more** deep links. Section backgrounds alternate cream / secondary
+wash / near-white; pull-quotes share the `.aw-pull` ember-rail treatment. Protect/Meet grid
+items use circular numbered markers echoing the CircularMap nodes.
 
 ### 1. Hero
 

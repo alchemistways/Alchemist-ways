@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { type ReactNode } from "react";
 
+import { en } from "@/lib/i18n/messages";
 import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
 import appCss from "../styles.css?url";
 
@@ -76,8 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Alchemist Ways — Meet Yourself, Differently." },
       {
         name: "description",
-        content:
-          "A practical map for discovering a different relationship with yourself. From Emotional Reactivity to Creative Agency.",
+        content: en.meta.description,
       },
       { name: "author", content: "Malek Najm Ghaleb" },
       {
@@ -86,8 +86,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         property: "og:description",
-        content:
-          "A practical map for discovering a different relationship with yourself. From Emotional Reactivity to Creative Agency.",
+        content: en.meta.description,
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "/brand/ac-logo.png" },
