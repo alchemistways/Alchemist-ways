@@ -16,6 +16,10 @@ export type Messages = {
     title: string;
     description: string;
   };
+  common: {
+    readMore: string;
+    readLess: string;
+  };
   a11y: {
     language: string;
     openMenu: string;
@@ -77,6 +81,7 @@ export type Messages = {
     eyebrow: string;
     title: string;
     lede: string;
+    invitationLine: string;
     scrollHint: string;
     clickStep: (n: number) => string;
     walk: string;
@@ -119,6 +124,14 @@ export type Messages = {
     lines: readonly string[];
     tagline: string;
   };
+  discover: {
+    linkLabel: string;
+    metaTitle: string;
+    metaDescription: string;
+    eyebrow: string;
+    title: string;
+    back: string;
+  };
   footer: {
     rights: string;
   };
@@ -127,8 +140,11 @@ export type Messages = {
 export const en: Messages = {
   meta: {
     title: "Alchemist Ways — Meet Yourself, Differently.",
-    description:
-      "A practical map for discovering a different relationship with yourself. From Emotional Reactivity to Creative Agency.",
+    description: "A map from emotional reactivity to creative agency",
+  },
+  common: {
+    readMore: "Read more",
+    readLess: "Read less",
   },
   a11y: {
     language: "Language",
@@ -169,7 +185,7 @@ export const en: Messages = {
       "People-pleasing.",
       "Controlling.",
       "Hiding.",
-      "Withdrawing.",
+      "withdrawing.",
       "Being independent.",
       "Shutting down.",
     ],
@@ -224,6 +240,7 @@ export const en: Messages = {
     eyebrow: "The Map",
     title: "From Emotional Reactivity to Creative Agency",
     lede: "A map that reveals what has quietly been shaping your inner experience — and how your relationship to it can change.",
+    invitationLine: "Alchemist Ways is an invitation to meet yourself, differently.",
     scrollHint: "Five movements from Emotional Reactivity to Creative Agency.",
     clickStep: (n) => `Click a step · 1–${n}`,
     walk: "Walk the map ↓",
@@ -271,8 +288,20 @@ export const en: Messages = {
     portraitAlt: "Malek Najm Ghaleb",
     displayVerseIndex: 2,
     verses: [
-      ["For years,", "I thought I was searching", "for freedom.", "Validation.", "Creativity.", "Love."],
-      ["Yet beneath all those desires", "was something quieter.", "Something", "I couldn’t yet see."],
+      [
+        "For years,",
+        "I thought I was searching",
+        "for freedom.",
+        "Validation.",
+        "Creativity.",
+        "Love.",
+      ],
+      [
+        "Yet beneath all those desires",
+        "was something quieter.",
+        "Something",
+        "I couldn’t yet see.",
+      ],
       ["I was searching", "for inner safety."],
       [
         "Not physical safety.",
@@ -398,6 +427,14 @@ export const en: Messages = {
     ],
     tagline: "A practical map from Emotional Reactivity to Creative Agency.",
   },
+  discover: {
+    linkLabel: "Discover more",
+    metaTitle: "Discover — Alchemist Ways",
+    metaDescription: "The full Alchemist Ways narrative — the book, and the ways to begin.",
+    eyebrow: "Discover",
+    title: "Discover more",
+    back: "Back to home",
+  },
   footer: {
     rights: "All rights reserved.",
   },
@@ -407,8 +444,11 @@ export const en: Messages = {
 export const frCA: Messages = {
   meta: {
     title: "Alchemist Ways — Meet Yourself, Differently.",
-    description:
-      "Une carte concrète pour découvrir une autre relation avec soi. De la réactivité émotionnelle à l’agentivité créative.",
+    description: "Une carte de la réactivité émotionnelle à l’agentivité créative",
+  },
+  common: {
+    readMore: "Lire la suite",
+    readLess: "Réduire",
   },
   a11y: {
     language: "Langue",
@@ -485,7 +525,8 @@ export const frCA: Messages = {
     ],
     lede: "Ces schémas n’ont pas seulement façonné ta façon de rencontrer le monde. Ils ont façonné comment tu as appris à te rencontrer.",
     whyTitle: "Pourquoi la façon dont je me rencontre compte-t-elle?",
-    whyLede: "Parce que la relation que tu as avec toi-même façonne ta façon de rencontrer tout le reste.",
+    whyLede:
+      "Parce que la relation que tu as avec toi-même façonne ta façon de rencontrer tout le reste.",
     shapes: [
       "Tes émotions.",
       "Tes pensées.",
@@ -504,6 +545,7 @@ export const frCA: Messages = {
     eyebrow: "La Carte",
     title: "De la réactivité émotionnelle à l’agentivité créative",
     lede: "Une carte qui révèle ce qui façonne discrètement ton expérience intérieure — et comment ta relation à cela peut changer.",
+    invitationLine: "Alchemist Ways est une invitation à te rencontrer autrement.",
     scrollHint: "Cinq mouvements, de la réactivité émotionnelle à l’agentivité créative.",
     clickStep: (n) => `Clique un pas · 1–${n}`,
     walk: "Parcourir la carte ↓",
@@ -638,12 +680,7 @@ export const frCA: Messages = {
     bookEyebrow: "Le Livre",
     bookTitle: "Meet Yourself, Differently.",
     bookSub: "Une carte de la réactivité émotionnelle à l’agentivité créative.",
-    bookVerse: [
-      "Commence ici",
-      "si tu veux explorer le travail",
-      "en silence,",
-      "à ton rythme.",
-    ],
+    bookVerse: ["Commence ici", "si tu veux explorer le travail", "en silence,", "à ton rythme."],
     bookCta: "Explorer le livre",
     conversationsEyebrow: "Conversations",
     conversationsVerse: [
@@ -694,6 +731,14 @@ export const frCA: Messages = {
       "Laisse ce qui ne l’est pas.",
     ],
     tagline: "Une carte concrète de la réactivité émotionnelle à l’agentivité créative.",
+  },
+  discover: {
+    linkLabel: "Découvrir davantage",
+    metaTitle: "Découvrir — Alchemist Ways",
+    metaDescription: "Le récit complet d’Alchemist Ways — le livre et les façons de commencer.",
+    eyebrow: "Découvrir",
+    title: "Découvrir davantage",
+    back: "Retour à l’accueil",
   },
   footer: {
     rights: "Tous droits réservés.",

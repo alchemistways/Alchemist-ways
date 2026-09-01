@@ -76,15 +76,16 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const menuId = useId();
 
+  /* Root-relative hashes so anchors resolve from /discover as well as the landing */
   const navLinks = [
-    { href: "#map", label: t.nav.map },
-    { href: "#book", label: t.nav.book },
+    { href: "/#map", label: t.nav.map },
+    { href: "/#book", label: t.nav.book },
     {
       href: "https://www.youtube.com/@alchemistwaysofficial",
       label: t.nav.conversations,
       external: true,
     },
-    { href: "#about", label: t.nav.about },
+    { href: "/#about", label: t.nav.about },
   ] as const;
 
   useEffect(() => {
@@ -111,8 +112,14 @@ export function SiteHeader() {
   function go(href: string) {
     setOpen(false);
     window.requestAnimationFrame(() => {
-      const id = href.replace("#", "");
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const id = href.slice(href.indexOf("#") + 1);
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        // Anchor lives on another route (e.g. header used on /discover)
+        window.location.href = href;
+      }
     });
   }
 
@@ -155,7 +162,7 @@ export function SiteHeader() {
           </button>
 
           <a
-            href="#top"
+            href="/#top"
             onClick={() => setOpen(false)}
             className="group flex flex-col items-center py-1 text-center"
           >
@@ -172,9 +179,7 @@ export function SiteHeader() {
           >
             {navLinks.map((link, i) => (
               <span key={link.href} className="flex items-center">
-                {i > 0 ? (
-                  <BirdChevron className="mx-2.5 h-2.5 w-3.5 shrink-0 text-ink/25" />
-                ) : null}
+                {i > 0 ? <BirdChevron className="mx-2.5 h-2.5 w-3.5 shrink-0 text-ink/25" /> : null}
                 <a
                   href={link.href}
                   {...("external" in link && link.external

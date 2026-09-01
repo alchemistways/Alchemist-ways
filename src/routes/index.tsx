@@ -2,9 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Instagram, Youtube } from "lucide-react";
 import malekPortrait from "@/assets/malek-portrait.jpg";
 import { BookPlateImage } from "@/components/BookPlateImage";
+import { CircleMarker } from "@/components/CircleMarker";
+import { DiscoverLink } from "@/components/DiscoverLink";
+import { DropletDivider, DropletMark } from "@/components/DropletMark";
 import { MapScrollJourney } from "@/components/MapScrollJourney";
 import { PageEntrance, Reveal } from "@/components/PageMotion";
 import { SiteHeader } from "@/components/SiteHeader";
+import { Verse } from "@/components/Verse";
+import { MotionReveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import {
   BOOK_PRICE,
@@ -20,10 +25,11 @@ export const Route = createFileRoute("/")({
 });
 
 /**
- * Landing flow per the client FINAL PDF (27 pp.):
- * Hero → protect / why / meet / why-it-matters → Map bridge → Map →
- * About → Invitation → Ways to Begin → closer.
- * Copy via EN / fr-CA catalogs (`useLocale`).
+ * Landing flow per the client FINAL PDF (27 pp.), condensed for scanning:
+ * Hero → Book card (offer up front) → protect / why / meet teasers with
+ * "Discover more" links into /discover (client copy kept verbatim there) →
+ * Map bridge → Map → About (teaser) → Invitation → Ways to Begin (condensed)
+ * → closer. Copy via EN / fr-CA catalogs (`useLocale`).
  */
 function LandingPage() {
   const { t } = useLocale();
@@ -51,14 +57,25 @@ function LandingPage() {
             <div className="hero-stagger flex w-full min-w-0 flex-1 flex-col justify-center md:max-w-[min(100%,24rem)] lg:max-w-[26rem]">
               <h1 className="flex flex-col items-start gap-1 font-display text-[clamp(1.85rem,8vw,2.15rem)] font-semibold uppercase leading-[0.98] tracking-[-0.04em] text-ink sm:text-5xl md:text-[2.75rem] lg:text-[3.25rem]">
                 <span>{t.hero.line1}</span>
+                <span className="font-semibold text-ember-deep">{t.hero.line2}</span>
+              </h1>
+              {/* Mirrored echo of the headline on a thin reflective line — book-cover graphic */}
+              <div aria-hidden className="flex w-fit select-none flex-col">
+                <span className="mt-1 block h-px w-full bg-gradient-to-r from-ember/50 via-ember/30 to-transparent" />
                 <span
-                  className="origin-center font-semibold text-ember-deep"
-                  style={{ transform: "rotate(180deg)" }}
+                  className="block font-display text-[clamp(1.15rem,5vw,1.35rem)] font-semibold uppercase leading-[0.98] tracking-[-0.04em] text-ember-deep/50 sm:text-3xl md:text-[1.72rem] lg:text-[2rem]"
+                  style={{
+                    transform: "scaleY(-1)",
+                    transformOrigin: "top",
+                    maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 78%)",
+                    WebkitMaskImage:
+                      "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 78%)",
+                  }}
                 >
                   {t.hero.line2}
                 </span>
-              </h1>
-              <p className="mt-6 max-w-sm text-[1.02rem] leading-relaxed text-ink/80 sm:text-lg md:text-[#3a2a1f]/85">
+              </div>
+              <p className="mt-5 max-w-sm text-[1.02rem] leading-relaxed text-ink/80 sm:text-lg md:text-[#3a2a1f]/85">
                 {t.hero.subline.map((line, i) => (
                   <span key={line}>
                     {i > 0 ? <br /> : null}
@@ -80,115 +97,113 @@ function LandingPage() {
           </div>
         </section>
 
-        <section className="aw-section">
-          <div className="aw-measure">
+        {/* Book availability card — offer visible in the first scroll */}
+        <section className="border-b border-border/40 bg-secondary/20">
+          <div className="mx-auto max-w-6xl px-[max(1.25rem,env(safe-area-inset-left))] py-10 pr-[max(1.25rem,env(safe-area-inset-right))] sm:px-8 sm:py-12">
             <Reveal>
-              <h2 className="aw-display">{t.protect.title}</h2>
+              <div className="grid overflow-hidden border border-border/60 bg-card sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+                <div className="relative h-44 sm:h-auto sm:min-h-[15rem]">
+                  <BookPlateImage alt={t.hero.bookAlt} objectPositionClassName="object-[72%_46%]" />
+                </div>
+                <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+                  <p className="aw-eyebrow">{t.begin.bookEyebrow}</p>
+                  <h2 className="mt-2 font-display text-xl font-semibold uppercase tracking-[0.04em] text-ink sm:text-2xl">
+                    {t.begin.bookTitle}
+                  </h2>
+                  <p className="mt-1 text-sm text-ink/60">{t.begin.bookSub}</p>
+                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <a href={BOOK_PURCHASE_URL} className="btn-lux btn-lux-primary">
+                      {BOOK_PRICE} · {t.begin.bookCta}
+                      <span aria-hidden>→</span>
+                    </a>
+                    <a href="#map" className="btn-lux btn-lux-ghost">
+                      {t.hero.exploreMap}
+                      <span aria-hidden>↓</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </Reveal>
-            <Reveal>
+          </div>
+        </section>
+
+        {/* Protect — ways as a staggered grid with circular markers (full list on /discover) */}
+        <section className="aw-section bg-background">
+          <div className="aw-measure aw-measure-wide">
+            <MotionReveal>
+              <h2 className="aw-display">{t.protect.title}</h2>
+            </MotionReveal>
+            <MotionReveal>
               <p className="mt-8 font-display text-lg italic text-ink/55 sm:text-xl">
                 {t.protect.perhapsBy}
               </p>
-            </Reveal>
-            <div className="aw-stack aw-stack-loose mt-6">
-              {t.protect.ways.map((way) => (
-                <Reveal key={way}>
+            </MotionReveal>
+            <Stagger className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+              {t.protect.ways.slice(0, 6).map((way, i) => (
+                <StaggerItem key={way} className="flex items-center gap-3.5">
+                  <CircleMarker n={i + 1} />
                   <p className="aw-line">{way}</p>
-                </Reveal>
+                </StaggerItem>
               ))}
-            </div>
-            <Reveal>
-              <hr className="aw-rule" />
-              <p className="aw-lede mt-0">{t.protect.lede}</p>
-            </Reveal>
+            </Stagger>
+            <MotionReveal>
+              <DiscoverLink hash="protect" className="mt-8" />
+            </MotionReveal>
           </div>
         </section>
 
-        <section className="border-y border-border/40 bg-secondary/30">
+        {/* Why protect — pull-quote visible; full body on /discover */}
+        <section className="border-y border-border/40 bg-secondary/40">
           <div className="aw-measure aw-section">
-            <Reveal>
+            <MotionReveal>
               <h2 className="aw-display">{t.whyProtect.title}</h2>
-            </Reveal>
-            <div className="mt-8 space-y-6">
-              <Reveal>
-                <p className="aw-body">{t.whyProtect.p1}</p>
-              </Reveal>
-              <Reveal>
-                <p className="aw-body">
-                  {t.whyProtect.p2Before}{" "}
-                  <span className="font-display italic text-ink">{t.whyProtect.p2Quote}</span>
-                </p>
-              </Reveal>
-              <Reveal>
-                <div className="aw-rail aw-stack">
-                  {t.whyProtect.rails.map((line) => (
-                    <p key={line} className="aw-body !mt-0">
-                      {line}
-                    </p>
-                  ))}
-                </div>
-              </Reveal>
-              <Reveal>
-                <p className="aw-body">{t.whyProtect.p3}</p>
-              </Reveal>
-              <Reveal>
-                <p className="aw-pull">{t.whyProtect.pull}</p>
-              </Reveal>
-              <Reveal>
-                <p className="aw-body">{t.whyProtect.p4}</p>
-              </Reveal>
-            </div>
+            </MotionReveal>
+            <MotionReveal>
+              <p className="aw-pull mt-8">{t.whyProtect.pull}</p>
+            </MotionReveal>
+            <MotionReveal>
+              <DiscoverLink hash="why" className="mt-8" />
+            </MotionReveal>
           </div>
         </section>
 
-        <section className="aw-section">
-          <div className="aw-measure">
-            <Reveal>
+        {/* Meet — ways as a staggered grid (full list + shapes on /discover) */}
+        <section className="aw-section bg-card">
+          <div className="aw-measure aw-measure-wide">
+            <MotionReveal>
               <h2 className="aw-display">{t.meet.title}</h2>
-            </Reveal>
-            <Reveal>
+            </MotionReveal>
+            <MotionReveal>
               <p className="mt-8 font-display text-lg italic text-ink/55 sm:text-xl">
                 {t.meet.perhapsWith}
               </p>
-            </Reveal>
-            <div className="aw-stack aw-stack-loose mt-6">
-              {t.meet.ways.map((way) => (
-                <Reveal key={way}>
+            </MotionReveal>
+            <Stagger className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+              {t.meet.ways.slice(0, 6).map((way, i) => (
+                <StaggerItem key={way} className="flex items-center gap-3.5">
+                  <CircleMarker n={i + 1} />
                   <p className="aw-line">{way}</p>
-                </Reveal>
+                </StaggerItem>
               ))}
-            </div>
-            <Reveal>
-              <p className="aw-lede">{t.meet.lede}</p>
-            </Reveal>
-
-            <Reveal>
-              <hr className="aw-rule" />
-              <h2 className="aw-display">{t.meet.whyTitle}</h2>
-            </Reveal>
-            <Reveal>
-              <p className="aw-lede">{t.meet.whyLede}</p>
-            </Reveal>
-            <div className="aw-stack aw-stack-loose mt-8">
-              {t.meet.shapes.map((line) => (
-                <Reveal key={line}>
-                  <p className="aw-line">{line}</p>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal>
-              <p className="aw-pull mt-10">{t.meet.pull}</p>
-            </Reveal>
+            </Stagger>
+            <MotionReveal>
+              <DiscoverLink hash="meet" className="mt-8" />
+            </MotionReveal>
+            <MotionReveal>
+              <p className="aw-pull mt-12">{t.meet.pull}</p>
+            </MotionReveal>
           </div>
         </section>
 
-        <section className="aw-section pb-8 sm:pb-10">
+        <DropletDivider className="bg-background pt-10 sm:pt-12" />
+
+        <section className="aw-section bg-background pb-8 sm:pb-10">
           <div className="aw-measure">
-            <Reveal>
+            <MotionReveal>
               <div className="aw-rail">
                 <h2 className="aw-display">{t.mapBridge.title}</h2>
               </div>
-            </Reveal>
+            </MotionReveal>
           </div>
         </section>
 
@@ -198,10 +213,10 @@ function LandingPage() {
 
         <section
           id="about"
-          className="scroll-mt-28 lg:scroll-mt-32 aw-section border-t border-border/40"
+          className="scroll-mt-28 lg:scroll-mt-32 aw-section border-t border-border/40 bg-card"
         >
           <div className="mx-auto grid max-w-6xl gap-8 px-[max(1.25rem,env(safe-area-inset-left))] pr-[max(1.25rem,env(safe-area-inset-right))] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-12 sm:px-8">
-            <Reveal>
+            <MotionReveal>
               <div className="mx-auto w-full max-w-sm lg:mx-0 lg:max-w-md">
                 <img
                   src={malekPortrait}
@@ -213,14 +228,12 @@ function LandingPage() {
                   className="aspect-[4/5] w-full object-cover object-top"
                 />
               </div>
-            </Reveal>
+            </MotionReveal>
 
             <div>
-              <Reveal>
+              <MotionReveal>
                 <p className="aw-eyebrow">{t.about.eyebrow}</p>
-              </Reveal>
-              <Reveal>
-                {t.about.verses.map((lines, i) => (
+                {t.about.verses.slice(0, t.about.displayVerseIndex + 1).map((lines, i) => (
                   <Verse
                     key={lines[0]}
                     className="mt-5"
@@ -228,51 +241,59 @@ function LandingPage() {
                     lines={lines}
                   />
                 ))}
-                <p className="mt-8 font-display text-xl italic text-ink">{t.about.signoff}</p>
-              </Reveal>
+                <DiscoverLink hash="about" className="mt-6" />
+                <p className="mt-6 font-display text-xl italic text-ink">{t.about.signoff}</p>
+              </MotionReveal>
             </div>
           </div>
         </section>
 
-        <section className="border-y border-border/40 bg-secondary/25">
-          <div className="aw-measure aw-section">
-            <Reveal>
+        {/* Invitation — droplet watermark behind the verse */}
+        <section className="relative overflow-hidden border-y border-border/40 bg-secondary/40">
+          <DropletMark
+            filled
+            className="pointer-events-none absolute -right-10 top-1/2 h-[130%] w-auto -translate-y-1/2 text-ember-soft/60 sm:right-8"
+          />
+          <div className="aw-measure aw-section relative">
+            <MotionReveal>
               <p className="aw-eyebrow">{t.invitation.eyebrow}</p>
               <Verse className="mt-5" display lines={t.invitation.lines} />
               <Verse className="mt-8" lines={t.invitation.closer} />
-            </Reveal>
+            </MotionReveal>
           </div>
         </section>
 
-        <section className="aw-section">
+        {/* Ways to Begin — condensed; full detail lives on /discover */}
+        <section className="aw-section bg-background">
           <div className="aw-measure aw-measure-wide">
-            <Reveal>
+            <MotionReveal>
               <h2 className="aw-display aw-display-caps">{t.begin.title}</h2>
-            </Reveal>
+            </MotionReveal>
 
-            <div className="mt-10 space-y-12 sm:mt-12 sm:space-y-14">
-              <Reveal>
-                <article id="book" className="scroll-mt-28 lg:scroll-mt-32">
+            <Stagger className="mt-8 grid gap-6 sm:mt-10 sm:grid-cols-2">
+              <StaggerItem>
+                <article
+                  id="book"
+                  className="flex h-full scroll-mt-28 flex-col border border-border/60 bg-card p-6 sm:p-7 lg:scroll-mt-32"
+                >
                   <p className="aw-eyebrow">{t.begin.bookEyebrow}</p>
-                  <h3 className="mt-2 font-display text-xl font-semibold uppercase tracking-[0.04em] text-ink sm:text-2xl">
+                  <h3 className="mt-2 font-display text-lg font-semibold uppercase tracking-[0.04em] text-ink sm:text-xl">
                     {t.begin.bookTitle}
                   </h3>
                   <p className="mt-1 text-sm text-ink/60">{t.begin.bookSub}</p>
-                  <Verse className="mt-5" lines={t.begin.bookVerse} />
-                  <div className="mt-6">
+                  <div className="mt-auto pt-6">
                     <a href={BOOK_PURCHASE_URL} className="btn-lux btn-lux-primary">
                       {BOOK_PRICE} · {t.begin.bookCta}
                       <span aria-hidden>→</span>
                     </a>
                   </div>
                 </article>
-              </Reveal>
+              </StaggerItem>
 
-              <Reveal>
-                <article>
+              <StaggerItem>
+                <article className="flex h-full flex-col border border-border/60 bg-card p-6 sm:p-7">
                   <p className="aw-eyebrow">{t.begin.conversationsEyebrow}</p>
-                  <Verse className="mt-4" lines={t.begin.conversationsVerse} />
-                  <div className="mt-6">
+                  <div className="mt-auto pt-6">
                     <a
                       href={CONVERSATIONS_URL}
                       target="_blank"
@@ -284,14 +305,15 @@ function LandingPage() {
                     </a>
                   </div>
                 </article>
-              </Reveal>
+              </StaggerItem>
 
-              <Reveal>
-                <article id="clarity" className="scroll-mt-28 lg:scroll-mt-32">
+              <StaggerItem>
+                <article
+                  id="clarity"
+                  className="flex h-full scroll-mt-28 flex-col border border-border/60 bg-card p-6 sm:p-7 lg:scroll-mt-32"
+                >
                   <p className="aw-eyebrow">{t.begin.clarityEyebrow}</p>
-                  <Verse className="mt-4" lines={t.begin.clarityVerse} />
-                  <Verse className="mt-5" lines={t.begin.clarityTone} />
-                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <div className="mt-auto pt-6">
                     <a
                       href={CLARITY_CALL_URL}
                       target="_blank"
@@ -302,36 +324,16 @@ function LandingPage() {
                       <span aria-hidden>→</span>
                     </a>
                   </div>
-                  <ul className="mt-5 space-y-2 text-sm text-ink/70">
-                    <li>
-                      <a
-                        href={CLARITY_CALL_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline-offset-4 transition-colors hover:text-ember-deep hover:underline"
-                      >
-                        {t.begin.clarityOpt1}
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href={CLARITY_SESSION_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline-offset-4 transition-colors hover:text-ember-deep hover:underline"
-                      >
-                        {t.begin.clarityOpt2}
-                      </a>
-                    </li>
-                  </ul>
                 </article>
-              </Reveal>
+              </StaggerItem>
 
-              <Reveal>
-                <article id="community" className="scroll-mt-28 lg:scroll-mt-32">
+              <StaggerItem>
+                <article
+                  id="community"
+                  className="flex h-full scroll-mt-28 flex-col border border-border/60 bg-card p-6 sm:p-7 lg:scroll-mt-32"
+                >
                   <p className="aw-eyebrow">{t.begin.communityEyebrow}</p>
-                  <Verse className="mt-4" lines={t.begin.communityVerse} />
-                  <div className="mt-6">
+                  <div className="mt-auto pt-6">
                     <a
                       href={COMMUNITY_URL}
                       target="_blank"
@@ -343,22 +345,25 @@ function LandingPage() {
                     </a>
                   </div>
                 </article>
-              </Reveal>
-            </div>
+              </StaggerItem>
+            </Stagger>
+
+            <MotionReveal>
+              <DiscoverLink hash="begin" className="mt-8" />
+            </MotionReveal>
           </div>
         </section>
 
         <section className="border-t border-border/40 bg-secondary/30">
           <div className="aw-measure aw-section text-left">
-            <Reveal>
+            <MotionReveal>
               <Verse display lines={t.final.lines} />
               <div className="mt-10">
                 <p className="font-display text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-ink">
                   Alchemist Ways
                 </p>
-                <p className="mt-2 max-w-sm text-sm text-muted-foreground">{t.final.tagline}</p>
               </div>
-            </Reveal>
+            </MotionReveal>
           </div>
         </section>
 
@@ -410,24 +415,6 @@ function LandingPage() {
         </footer>
       </div>
     </PageEntrance>
-  );
-}
-
-function Verse({
-  lines,
-  display = false,
-  className = "",
-}: {
-  lines: readonly string[];
-  display?: boolean;
-  className?: string;
-}) {
-  return (
-    <div className={`aw-verse ${display ? "aw-verse-display" : ""} ${className}`.trim()}>
-      {lines.map((line) => (
-        <p key={line}>{line}</p>
-      ))}
-    </div>
   );
 }
 

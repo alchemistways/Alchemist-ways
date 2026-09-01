@@ -313,12 +313,23 @@
   color: var(--ink);
 }
 
+/* Unified pull-quote — left ember rail + larger display type + air (used on both routes) */
 .aw-pull {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.15rem, 2vw, 1.35rem);
-  line-height: 1.4;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  line-height: 1.45;
   color: var(--ink);
+  border-left: 1.5px solid color-mix(in oklab, var(--ember) 42%, transparent);
+  padding-left: 1.15rem;
+  padding-block: 0.35rem;
+  max-width: 38rem;
+}
+
+@media (min-width: 640px) {
+  .aw-pull {
+    padding-left: 1.35rem;
+  }
 }
 
 .aw-rule {

@@ -1,5 +1,40 @@
 # Changelog
 
+## Landing art direction + /discover route (local; not pushed)
+
+- **New `/discover` route** (`src/routes/discover.tsx`): full long-form FINAL copy that was hidden in `ReadMore` disclosures now lives here verbatim — full protect ways + lede (`#protect`), why-protect body + rails (`#why`), full meet ways / why-it-matters / shapes (`#meet`), all About verses (`#about`) — plus book buying card (`#book`, `@/lib/offers` price/URL) and full Ways-to-Begin offer details (`#begin`). Landing replaces every `ReadMore` toggle with a styled **Discover more** link deep-linking into those anchors (`src/components/DiscoverLink.tsx`); `ReadMore.tsx` is now unused but kept
+- **Motion**: `framer-motion` installed; `src/components/motion/Reveal.tsx` adds `MotionReveal` / `Stagger` / `StaggerItem` `whileInView` primitives (all collapse to static markup under `prefers-reduced-motion`)
+- **Grids**: Protect and Meet “ways” lists are now responsive staggered grids (`sm:grid-cols-2 lg:grid-cols-3`, 6 items on landing, full lists on /discover) with circular numbered markers echoing the CircularMap node style (`src/components/CircleMarker.tsx`)
+- **Hero**: “Differently.” now upright in ember-deep with a smaller `scaleY(-1)` mirrored echo beneath, faded by a gradient mask and sitting on a thin reflective ember line (replaces the old `rotate(180deg)` treatment)
+- **Pull-quotes unified**: `.aw-pull` now carries the left ember rail + larger display type everywhere (why-protect pull, “What protects you also shapes what becomes possible”, /discover pulls)
+- **Section rhythm**: alternating background tones — cream (`bg-background`) / secondary wash (`bg-secondary/40`) / near-white (`bg-card`) — across both routes
+- **Droplet motif**: new `src/components/DropletMark.tsx` (minimal inline SVG droplet in ember) used as hairline section divider and faint watermark (invitation band, /discover intro)
+- **Ways to Begin condensed** on landing to a 2-col card grid (eyebrow + CTA; book keeps title/sub/price); full verses/options on /discover
+- **Duplicate tagline removed** from the final closer; footer instance kept
+- Header anchors made root-relative (`/#map` etc.) + logo `/#top` so nav works from /discover; mobile menu falls back to full navigation when the anchor isn’t on the current page
+- i18n: new `discover` strings (link label, meta, eyebrow/title, back) in EN + fr-CA; no approved copy wording changed
+- Contrast QA: muted `#70614f` = 5.55:1 on cream, 4.99:1 on `#f3e9dd` (both ≥ 4.5:1 AA; washes render at /30–/40 over cream, landing between those values) — no palette change needed
+
+---
+
+## Scannable, conversion-first landing
+
+- New book availability card directly after the hero (plate crop · title · $28 CTA · Explore-the-Map ghost) so the offer is visible in the first scroll; `#book` article in Ways to Begin remains the anchor
+- Long FINAL narrative collapsed behind accessible `ReadMore` disclosures (client copy kept verbatim): protect (3 ways visible), why-protect (pull line visible), meet (3 ways visible; pull kept visible), About (first verses through *inner safety* visible)
+- New `src/components/ReadMore.tsx` (aria-expanded, grid-rows height transition, motion-safe); `common.readMore/readLess` labels EN + fr-CA
+- Ways to Begin vertical rhythm tightened (space-y-12/14 → 9/10)
+- **Build fix:** `build:pages` now deletes the stale root `index.html` before `vite build` — the committed Pages output was being consumed as the SPA shell template, recirculating stale head meta (old REVISED description survived rebuilds)
+
+---
+
+## FINAL copy alignment (meta + Map intro)
+
+- SEO meta (`__root.tsx`, `en`/`frCA` catalogs): REVISED subline replaced with FINAL *A map from emotional reactivity to creative agency*
+- `protect.ways`: *withdrawing.* lowercase per FINAL PDF
+- Map intro: added FINAL p.4 line *Alchemist Ways is an invitation to meet yourself, differently.* (`map.invitationLine`)
+
+---
+
 ## Canadian French (fr-CA) locale live
 
 - EN|FR toggle now switches full landing copy (hero→Map→offers→footer); `html lang="fr-CA"` when FR selected
