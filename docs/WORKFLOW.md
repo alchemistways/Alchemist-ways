@@ -13,7 +13,7 @@
 | Path | Role |
 |------|------|
 | `src/routes/` | TanStack file routes (`index.tsx` = landing) |
-| `src/components/` | CircularMap, WaitlistForm, BookPlateImage, etc. |
+| `src/components/` | CircularMap, BookPlateImage, BookOfferCard, MapScrollJourney, etc. |
 | `src/assets/` | Book plate + portrait media |
 | `docs/` | BRIEF, BRAND, blueprint, client inputs, changelog |
 | `docs/CLOUDFLARE.md` | Optional Cloudflare proxy + security headers (GoDaddy → CF → GitHub Pages) |

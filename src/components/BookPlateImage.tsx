@@ -1,13 +1,13 @@
-import plate960 from "@/assets/book-plate-960.jpg";
-import plate1280 from "@/assets/book-plate-1280.jpg";
-import plate1920 from "@/assets/book-plate-1920.jpg";
-import plate2560 from "@/assets/book-plate-2560.jpg";
-import plate2752 from "@/assets/book-plate-2752.jpg";
-import plate960Webp from "@/assets/book-plate-960.webp";
-import plate1280Webp from "@/assets/book-plate-1280.webp";
-import plate1920Webp from "@/assets/book-plate-1920.webp";
-import plate2560Webp from "@/assets/book-plate-2560.webp";
-import plate2752Webp from "@/assets/book-plate-2752.webp";
+import plate960 from "@/assets/plates/book-plate-960.jpg";
+import plate1280 from "@/assets/plates/book-plate-1280.jpg";
+import plate1920 from "@/assets/plates/book-plate-1920.jpg";
+import plate2560 from "@/assets/plates/book-plate-2560.jpg";
+import plate2752 from "@/assets/plates/book-plate-2752.jpg";
+import plate960Webp from "@/assets/plates/book-plate-960.webp";
+import plate1280Webp from "@/assets/plates/book-plate-1280.webp";
+import plate1920Webp from "@/assets/plates/book-plate-1920.webp";
+import plate2560Webp from "@/assets/plates/book-plate-2560.webp";
+import plate2752Webp from "@/assets/plates/book-plate-2752.webp";
 
 const JPG_SRCSET = `${plate960} 960w, ${plate1280} 1280w, ${plate1920} 1920w, ${plate2560} 2560w, ${plate2752} 2752w`;
 const WEBP_SRCSET = `${plate960Webp} 960w, ${plate1280Webp} 1280w, ${plate1920Webp} 1920w, ${plate2560Webp} 2560w, ${plate2752Webp} 2752w`;

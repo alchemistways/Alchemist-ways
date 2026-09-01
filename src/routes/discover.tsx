@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import malekPortrait from "@/assets/malek-portrait.jpg";
-import { BookPlateImage } from "@/components/BookPlateImage";
+import malekPortrait from "@/assets/portraits/malek-portrait.jpg";
+import { BookOfferCard } from "@/components/BookOfferCard";
 import { CircleMarker } from "@/components/CircleMarker";
 import { DropletDivider, DropletMark } from "@/components/DropletMark";
 import { PageEntrance } from "@/components/PageMotion";
@@ -208,25 +208,20 @@ function DiscoverPage() {
         >
           <div className="mx-auto max-w-6xl px-[max(1.25rem,env(safe-area-inset-left))] py-10 pr-[max(1.25rem,env(safe-area-inset-right))] sm:px-8 sm:py-14">
             <MotionReveal>
-              <div className="grid overflow-hidden border border-border/60 bg-card sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-                <div className="relative h-44 sm:h-auto sm:min-h-[16rem]">
-                  <BookPlateImage alt={t.hero.bookAlt} objectPositionClassName="object-[72%_46%]" />
-                </div>
-                <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-                  <p className="aw-eyebrow">{t.begin.bookEyebrow}</p>
-                  <h2 className="mt-2 font-display text-xl font-semibold uppercase tracking-[0.04em] text-ink sm:text-2xl">
-                    {t.begin.bookTitle}
-                  </h2>
-                  <p className="mt-1 text-sm text-ink/60">{t.begin.bookSub}</p>
-                  <Verse className="mt-5" lines={t.begin.bookVerse} />
-                  <div className="mt-6">
-                    <a href={BOOK_PURCHASE_URL} className="btn-lux btn-lux-primary">
-                      {BOOK_PRICE} · {t.begin.bookCta}
-                      <span aria-hidden>→</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <BookOfferCard
+                imageAlt={t.hero.bookAlt}
+                eyebrow={t.begin.bookEyebrow}
+                title={t.begin.bookTitle}
+                subtitle={t.begin.bookSub}
+                actions={
+                  <a href={BOOK_PURCHASE_URL} className="btn-lux btn-lux-primary">
+                    {BOOK_PRICE} · {t.begin.bookCta}
+                    <span aria-hidden>→</span>
+                  </a>
+                }
+              >
+                <Verse className="mt-5" lines={t.begin.bookVerse} />
+              </BookOfferCard>
             </MotionReveal>
           </div>
         </section>

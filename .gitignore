@@ -51,3 +51,7 @@ service-account*.json
 
 # Higgsfield letter-QA scratch crops
 src/assets/scenes/qa/
+
+# Local tooling / scratch
+.tmp-pdf-venv/
+hf_*.png

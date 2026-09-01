@@ -1,6 +1,17 @@
 # Changelog
 
-## Landing art direction + /discover route
+## Repo cleanup — assets, dead code, source organization
+
+- **Removed ~70MB unused media:** legacy `scene-gallery` / `scene-droplet` / `scene-closeup` ladders, Higgsfield masters moved from `src/assets/scenes/` to `docs/source/masters/`, root `hf_*` scratch PNGs deleted
+- **Organized live assets:** `src/assets/plates/` (hero), `cards/` (offer card), `portraits/` (About); README in each tree
+- **Client reference → `docs/source/`:** PDFs (`pdfs/`), `BOOK_MAP DESIGN/` → `book-map-design/`
+- **Deleted unused components:** `ReadMore`, `BeginWhereYouAre`, `BeginCarousel`, `BookReviews`, `SceneImage`, `WaitlistForm`, `src/data/book-reviews.ts`
+- **Removed `embla-carousel-react`** (only used by deleted `BeginCarousel`)
+- **Cleared local caches:** `.output`, `.tanstack`, `.tmp-pdf-venv`
+- **Removed unused `public/brand/ac-icon-512.png`**
+
+---
+
 
 - **New `/discover` route** (`src/routes/discover.tsx`): full long-form FINAL copy that was hidden in `ReadMore` disclosures now lives here verbatim — full protect ways + lede (`#protect`), why-protect body + rails (`#why`), full meet ways / why-it-matters / shapes (`#meet`), all About verses (`#about`) — plus book buying card (`#book`, `@/lib/offers` price/URL) and full Ways-to-Begin offer details (`#begin`). Landing replaces every `ReadMore` toggle with a styled **Discover more** link deep-linking into those anchors (`src/components/DiscoverLink.tsx`); `ReadMore.tsx` is now unused but kept
 - **Motion**: `framer-motion` installed; `src/components/motion/Reveal.tsx` adds `MotionReveal` / `Stagger` / `StaggerItem` `whileInView` primitives (all collapse to static markup under `prefers-reduced-motion`)

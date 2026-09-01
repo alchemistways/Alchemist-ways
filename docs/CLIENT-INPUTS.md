@@ -5,11 +5,11 @@ Items needed to remove provisional copy / wiring placeholders and go fully live 
 | Input | Status | Notes |
 |-------|--------|-------|
 | Book title | **Done** | *Meet Yourself, Differently.* |
-| Landing copy | **Done** | **FINAL PDF is the live hero→Map source** (`Alchemist Ways_Landing Page Design_ [FINAL] .pdf`); REVISED PDF is archive / spacing reference only |
-| Cover / book art | **Done** | `BOOK_MAP DESIGN/` + `book-plate` assets |
+| Landing copy | **Done** | **FINAL PDF is the live hero→Map source** (`docs/source/pdfs/Alchemist Ways_Landing Page Design_ [FINAL] .pdf`); REVISED PDF is archive / spacing reference only |
+| Cover / book art | **Done** | `docs/source/book-map-design/` + `src/assets/plates/` + `src/assets/cards/` |
 | Booking URL | **Done** | Calendly free 30min (`#clarity` CTA) + paid 90min Clarity Session |
 | Social links | **Done** | IG / YT / TikTok @alchemistways; Conversations → YouTube; Community → Skool |
-| About portrait | **Done** | `Malek Portrait_ABOUT SECTION.jpg` → `src/assets/malek-portrait.jpg` |
+| About portrait | **Done** | `Malek Portrait_ABOUT SECTION.jpg` → `src/assets/portraits/malek-portrait.jpg` |
 | Map visual references | **Done** | Client MAP artwork — CircularMap restyled; stage copy from FINAL PDF (Automatic / Visible / Met / Choosable / Available) |
 
 ## Still needed
@@ -24,9 +24,9 @@ Items needed to remove provisional copy / wiring placeholders and go fully live 
 
 | Input | Status | Notes |
 |-------|--------|-------|
-| Kit waitlist | **Demoted** | Not on the main path; `WaitlistForm` + Kit form `9699624` kept in repo for possible reintroduction |
-| $14 Tool (Meet What’s Here) | **Demoted** | FINAL Begin triad not on live Ways to Begin; `BeginWhereYouAre` / `#tool` kept in repo, unrendered |
-| Book reviews band | Demoted | `BookReviews` unrendered, kept in repo |
+| Kit waitlist | **Removed** | Was demoted; component deleted in repo cleanup |
+| $14 Tool (Meet What’s Here) | **Removed** | Was demoted; `BeginWhereYouAre` deleted |
+| Book reviews band | **Removed** | Was demoted; `BookReviews` deleted |
 | FINAL PDF long `#map-deep` / Fruits / World band | Demoted | Unrendered from main path; files kept if useful later |
 | Nav “Practice” label | Deferred | FINAL PDF nav says Practice; live keeps **Conversations** → YouTube until Practice destination is defined |
 | Multi-route split | Deferred | Single-page flow; split only if needed later |

@@ -1,5 +1,5 @@
 /**
- * Offer destinations — REVISED PDF flow (Book / Conversations / Clarity / Community).
+ * Offer destinations — Book / Conversations / Clarity / Community.
  * Payment placeholders anchor on-page until the client supplies real checkout links —
  * ask before inventing URLs.
  */
@@ -24,10 +24,3 @@ export const COMMUNITY_URL = "https://www.skool.com/alchemist-ways-1974/about";
 
 export const TOOL_PRICE = "$14";
 export const BOOK_PRICE = "$28";
-
-/**
- * Moderated book-review intake (BookReviews is currently unrendered but kept).
- * Prefer a Kit form `https://app.kit.com/forms/…/subscriptions` when the client creates one.
- * `mailto:` opens the visitor’s mail client with a prefilled draft — never auto-publishes.
- */
-export const REVIEW_FORM_ACTION = "mailto:?subject=Book%20review%20%E2%80%94%20Alchemist%20Ways";
