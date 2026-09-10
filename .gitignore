@@ -16,26 +16,9 @@ dist-ssr
 .nitro
 *.local
 
-# Environment / secrets
-.env
-.env.*
-!.env.example
-.dev.vars
-*.pem
-*.p12
-*.key
-id_rsa
-id_rsa.pub
-id_ed25519
-id_ed25519.pub
-credentials.json
-service-account*.json
-*_secret*
-*secrets.json
-*.secret
-
 # Wrangler / Cloudflare
 .wrangler/
+.dev.vars
 
 # Editor directories and files
 .vscode/*
@@ -47,11 +30,3 @@ service-account*.json
 *.njsproj
 *.sln
 *.sw?
-.cursor/settings.json
-
-# Higgsfield letter-QA scratch crops
-src/assets/scenes/qa/
-
-# Local tooling / scratch
-.tmp-pdf-venv/
-hf_*.png

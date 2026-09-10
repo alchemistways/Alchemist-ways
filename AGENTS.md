@@ -1,10 +1,10 @@
-# Alchemist Ways — agent notes
-
-This repo is the **Alchemist Ways** site (TanStack Start + Vite + React). It is owned and developed here 
-
-## Rules of thumb
-
-- Brand: **A•C** mark with **Alchemist Ways** wordmark. No third-party product logos or editor badges.
-- Primary CTA: waitlist / email. Secondary: 1-on-1 call (when booking URL is set).
-- Read `docs/BRIEF.md`, `docs/BRAND.md`, and `docs/WORKFLOW.md` before structural changes.
-- Test locally (`bun run dev` or `npm run dev`) before any push to `main`.
+<!-- LOVABLE:BEGIN -->
+> [!IMPORTANT]
+> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
+> published git history — force pushing, or rebasing/amending/squashing commits
+> that are already pushed — as it rewrites history on Lovable's side and the
+> user will likely lose their project history.
+>
+> Commits you push to the connected branch sync back to Lovable and show up in
+> the editor, so keep the branch in a working state.
+<!-- LOVABLE:END -->
