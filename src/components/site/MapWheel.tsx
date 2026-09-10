@@ -39,7 +39,7 @@ export default function MapWheel({
   compact?: boolean;
 }) {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center pt-10 sm:pt-12 lg:pt-14">
       {/* Circular diagram — shown on every screen size */}
       <div
         className={`relative aspect-square w-full max-w-[10.5rem] xs:max-w-[11.5rem] sm:max-w-[20rem] ${

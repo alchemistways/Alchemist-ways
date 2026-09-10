@@ -9,10 +9,9 @@ import { content } from "@/i18n/content";
 import { Rich, useLang } from "@/i18n/language";
 
 
-// Local bundled images only — Lovable `.asset.json` / `__l5e` URLs 404 on GitHub Pages.
-import heroRoom from "@/assets/sky-terrace.jpg";
-import bookLeft from "@/assets/pedestal-explore.png";
-import portrait from "@/assets/pedestal-practice.png";
+import heroRoom from "@/assets/hero-room.jpg";
+import bookLeft from "@/assets/book-left.png";
+import portrait from "@/assets/founder-portrait.jpg";
 import dunes from "@/assets/dunes-hd.jpg";
 import skyTerrace from "@/assets/sky-terrace.jpg";
 import pedestalExplore from "@/assets/pedestal-explore.png";

@@ -7,11 +7,10 @@
     "dev": "vite dev",
     "build": "vite build",
     "build:dev": "vite build --mode development",
-    "build:static": "vite build && cp .output/public/index.html .output/public/404.html",
+    "build:static": "vite build && rm -rf dist/client && mkdir -p dist && cp -R .output/public dist/client && cp dist/client/index.html dist/client/404.html",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write .",
-    "build:pages": "node -e \"const fs=require('node:fs'); fs.rmSync('index.html',{force:true}); fs.rmSync('assets',{recursive:true,force:true});\" && vite build && node scripts/sync-pages-root.mjs"
+    "format": "prettier --write ."
   },
   "overrides": {
     "rolldown": "1.2.1"

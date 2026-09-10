@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import beige from "@/assets/dunes-hd.jpg";
+import beige from "@/assets/beige2.jpg";
 
 export function PlasterSection({
   children,

@@ -1,5 +1,5 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
+// The shared Vite/TanStack config package already includes the following — do NOT add them
+// manually or the app will break with duplicate plugins:
 //   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
 //     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
 //     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
@@ -7,11 +7,6 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  // Relative asset URLs so the site works on both
-  // https://alchemistways.github.io/Alchemist-ways/ and alchemistways.com
-  vite: {
-    base: "./",
-  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
@@ -19,6 +14,6 @@ export default defineConfig({
     // The site is fully static, so every page is rendered to HTML at build time.
     // This is what makes the GitHub Pages deploy work.
     pages: [{ path: "/" }],
-    prerender: { enabled: true, autoStaticPathsDiscovery: false },
+    prerender: { enabled: true, autoStaticPathsDiscovery: false, concurrency: 4 },
   },
 });
