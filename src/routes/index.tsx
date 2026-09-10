@@ -9,9 +9,10 @@ import { content } from "@/i18n/content";
 import { Rich, useLang } from "@/i18n/language";
 
 
-import heroRoom from "@/assets/hero-room.jpg.asset.json";
-import bookLeft from "@/assets/book-left.png.asset.json";
-import portrait from "@/assets/founder-portrait.jpg.asset.json";
+// Local bundled images only — Lovable `.asset.json` / `__l5e` URLs 404 on GitHub Pages.
+import heroRoom from "@/assets/sky-terrace.jpg";
+import bookLeft from "@/assets/pedestal-explore.png";
+import portrait from "@/assets/pedestal-practice.png";
 import dunes from "@/assets/dunes-hd.jpg";
 import skyTerrace from "@/assets/sky-terrace.jpg";
 import pedestalExplore from "@/assets/pedestal-explore.png";
@@ -182,7 +183,7 @@ function Index() {
       <section
         className="relative overflow-hidden bg-sand pb-16 lg:pb-24"
         style={{
-          backgroundImage: `url(${heroRoom.url})`,
+          backgroundImage: `url(${heroRoom})`,
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
         }}
@@ -209,7 +210,7 @@ function Index() {
             {/* Book */}
             <div className="order-3 mt-10 flex justify-center lg:order-none lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0 lg:justify-end">
               <img
-                src={bookLeft.url}
+                src={bookLeft}
                 width={1466}
                 height={2306}
                 alt={t.hero.bookAlt}
@@ -475,7 +476,7 @@ function Index() {
 
         <div className="order-3 lg:order-2">
           <img
-            src={portrait.url}
+            src={portrait}
             alt={t.founder.portraitAlt}
             loading="lazy"
             width={1481}

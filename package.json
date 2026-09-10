@@ -10,7 +10,8 @@
     "build:static": "vite build && cp .output/public/index.html .output/public/404.html",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build:pages": "node -e \"const fs=require('node:fs'); fs.rmSync('index.html',{force:true}); fs.rmSync('assets',{recursive:true,force:true});\" && vite build && node scripts/sync-pages-root.mjs"
   },
   "overrides": {
     "rolldown": "1.2.1"

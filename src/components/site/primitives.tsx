@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import beige from "@/assets/beige2.jpg.asset.json";
+import beige from "@/assets/dunes-hd.jpg";
 
 export function PlasterSection({
   children,
@@ -15,7 +15,7 @@ export function PlasterSection({
       id={id}
       className={`relative overflow-hidden bg-sand ${className}`}
       style={{
-        backgroundImage: `url(${beige.url})`,
+        backgroundImage: `url(${beige})`,
         backgroundSize: "cover",
         backgroundPosition: "left top",
       }}
