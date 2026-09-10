@@ -64,9 +64,11 @@ function rewriteEntryHashes(html, dir) {
 /** Make asset URLs relative so project Pages (/Alchemist-ways/) and custom domains both work. */
 function toRelativeAssetUrls(html) {
   return html
+    .replace(/\/\.\/assets\//g, "./assets/")
     .replace(/(href|src)="\/assets\//g, '$1="./assets/')
     .replace(/href="\/favicon\.png"/g, 'href="./favicon.png"')
-    .replace(/"\/assets\//g, '"./assets/');
+    .replace(/"\/assets\//g, '"./assets/')
+    .replace(/"\.\/\.\/assets\//g, '"./assets/');
 }
 
 /** Inside bundled JS under /assets/, rewrite absolute /assets/X to ./X (same folder). */
