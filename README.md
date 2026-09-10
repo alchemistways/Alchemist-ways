@@ -20,7 +20,7 @@ Then open the address shown in the terminal (usually http://localhost:8080).
 bun run build:static
 ```
 
-Everything that needs to be published ends up in the `dist/client` folder.
+Everything that needs to be published ends up in the `.output/public` folder.
 
 ## Publishing to GitHub Pages
 
