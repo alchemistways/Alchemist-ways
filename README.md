@@ -24,17 +24,19 @@ Everything that needs to be published ends up in the `dist/client` folder.
 
 ## Publishing to GitHub Pages
 
-This repository already contains everything needed:
+This repository is set up for **Deploy from branch → `main` /`** (legacy Pages):
 
-- `.github/workflows/deploy.yml` builds and publishes the site automatically on every push
-  to the `main` branch.
+- `.github/workflows/deploy-pages.yml` builds on every push to `main`, then commits
+  `index.html`, `assets/`, `CNAME`, `.nojekyll`, etc. into the repo root so Pages serves
+  the site instead of the README.
 - `public/CNAME` holds the domain `alchemistways.com`.
 - `public/.nojekyll` stops GitHub from stripping files it doesn't recognise.
 
 One-time setup in the repository that hosts the domain:
 
 1. Go to **Settings → Pages**.
-2. Under **Build and deployment → Source**, choose **GitHub Actions**.
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**, branch
+   `main`, folder `/` (root).
 3. Under **Custom domain**, enter `alchemistways.com` and save, then tick **Enforce HTTPS**
    once the certificate is ready.
 
