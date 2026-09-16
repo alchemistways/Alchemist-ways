@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import landingBackground from "@/assets/landing-page-background.png";
+import landingBackground from "@/assets/landing-page-background.jpg";
 
 export function PlasterSection({
   children,

@@ -10,14 +10,14 @@ import { content } from "@/i18n/content";
 import { Rich, useLang } from "@/i18n/language";
 
 
-import landingBackground from "@/assets/landing-page-background.png";
-import bookLeft from "@/assets/book-left.png";
+import landingBackground from "@/assets/landing-page-background.jpg";
+import bookLeft from "@/assets/book-left.webp";
 import portrait from "@/assets/founder-portrait.jpg";
 import dunes from "@/assets/dunes-hd.jpg";
 import skyTerrace from "@/assets/sky-terrace.jpg";
-import pedestalExplore from "@/assets/pedestal-explore.png";
-import pedestalUnderstand from "@/assets/pedestal-understand.png";
-import pedestalPractice from "@/assets/pedestal-practice.png";
+import pedestalExplore from "@/assets/pedestal-explore.webp";
+import pedestalUnderstand from "@/assets/pedestal-understand.webp";
+import pedestalPractice from "@/assets/pedestal-practice.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -209,9 +209,12 @@ function Index() {
             <div className="order-3 mt-10 flex justify-center lg:order-none lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-4 lg:justify-center lg:self-end">
               <img
                 src={bookLeft}
-                width={1466}
-                height={2306}
+                width={1100}
+                height={1730}
+                decoding="async"
+                fetchPriority="high"
                 alt={t.hero.bookAlt}
+
                 className="w-40 select-none xs:w-48 sm:w-56 md:w-64 lg:w-full lg:max-w-[28rem] xl:max-w-[30rem]"
                 style={{ filter: "drop-shadow(0 30px 40px rgba(63, 48, 34, 0.22))" }}
               />
@@ -477,8 +480,10 @@ function Index() {
             src={portrait}
             alt={t.founder.portraitAlt}
             loading="lazy"
-            width={1481}
-            height={1920}
+            width={1200}
+            height={1556}
+            decoding="async"
+
             className="h-[32rem] w-full object-cover object-[50%_18%] sm:h-[42rem] lg:h-full lg:min-h-[48rem]"
           />
         </div>

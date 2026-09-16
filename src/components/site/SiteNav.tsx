@@ -101,7 +101,7 @@ export default function SiteNav() {
           </a>
         </div>
 
-        <nav className="mt-6 flex items-center justify-center gap-8 xl:gap-12">
+        <nav className="mt-7 flex items-center justify-center gap-8 xl:gap-12">
           {links.map((l) => (
             <a
               key={l.label}
@@ -116,11 +116,12 @@ export default function SiteNav() {
             href={SOCIAL.skool}
             target="_blank"
             rel="noopener noreferrer"
-            className="eyebrow flex items-center gap-1.5 rounded-full bg-ember px-7 py-3 text-[0.72rem] text-cream transition-opacity hover:opacity-90"
+            className="eyebrow ml-2 flex min-w-44 items-center justify-center gap-1.5 rounded-full bg-ember px-7 py-3 text-[0.72rem] text-cream transition-opacity hover:opacity-90 xl:ml-4"
           >
             {t.begin}
             <ChevronDown className="h-3.5 w-3.5" strokeWidth={1.5} />
           </a>
+          <LangToggle className="ml-2 text-[0.68rem] xl:ml-4" />
         </nav>
       </div>
 

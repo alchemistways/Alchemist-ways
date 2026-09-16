@@ -1,4 +1,4 @@
-import logo from "@/assets/alchemist-ways-logo.png";
+import logo from "@/assets/alchemist-ways-logo.webp";
 
 export default function BrandWordmark({ className = "" }: { className?: string }) {
   return (
