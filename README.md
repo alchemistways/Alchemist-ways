@@ -14,29 +14,27 @@ bun run dev
 
 Then open the address shown in the terminal (usually http://localhost:8080).
 
-## Build the finished site
+## Build the branch-root site
 
 ```sh
-bun run build:static
+bun run build:pages
 ```
 
-Everything that needs to be published ends up in the `dist/client` folder.
+The built page and its assets are copied into the repository root for GitHub Pages.
 
 ## Publishing to GitHub Pages
 
-This repository is set up for **Deploy from branch → `main` /`** (legacy Pages):
+This repository already contains everything needed:
 
-- `.github/workflows/deploy-pages.yml` builds on every push to `main`, then commits
-  `index.html`, `assets/`, `CNAME`, `.nojekyll`, etc. into the repo root so Pages serves
-  the site instead of the README.
+- `.github/workflows/deploy-pages.yml` rebuilds and commits the root site on every source push
+  to the `main` branch.
 - `public/CNAME` holds the domain `alchemistways.com`.
 - `public/.nojekyll` stops GitHub from stripping files it doesn't recognise.
 
 One-time setup in the repository that hosts the domain:
 
 1. Go to **Settings → Pages**.
-2. Under **Build and deployment → Source**, choose **Deploy from a branch**, branch
-   `main`, folder `/` (root).
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**, then `main` and `/ (root)`.
 3. Under **Custom domain**, enter `alchemistways.com` and save, then tick **Enforce HTTPS**
    once the certificate is ready.
 
@@ -50,4 +48,4 @@ DNS records to set at the domain registrar:
 | A     | @     | 185.199.111.153                                            |
 | CNAME | www   | `<your-github-username>.github.io`                          |
 
-After the first push, the workflow runs on its own and the site goes live at the domain.
+After a push, the workflow regenerates the root files and GitHub Pages serves them from `main`.

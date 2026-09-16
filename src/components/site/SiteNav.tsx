@@ -3,6 +3,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 
 import { content } from "@/i18n/content";
 import { setLang, useLang } from "@/i18n/language";
+import BrandWordmark from "./BrandWordmark";
 
 function LangToggle({ className = "" }: { className?: string }) {
   const lang = useLang();
@@ -60,24 +61,25 @@ export default function SiteNav() {
 
   return (
     <header className="relative z-30 px-5 pt-6 sm:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-7xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 lg:block">
+      {/* Mobile header */}
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between lg:hidden">
         <button
           type="button"
           aria-label={open ? t.close : t.menu}
           onClick={() => setOpen((v) => !v)}
-          className="shrink-0 text-ember lg:hidden"
+          className="shrink-0 text-ember"
         >
           <Menu className="h-6 w-6" strokeWidth={1.5} />
         </button>
 
         <a
           href="#top"
-          className="eyebrow truncate text-center text-ember text-[0.95rem] leading-none xs:text-[1.05rem] sm:text-[1.4rem] lg:block lg:text-[1.75rem]"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center leading-none"
         >
-          Alchemist Ways
+          <BrandWordmark className="h-6 xs:h-7 sm:h-7" />
         </a>
 
-        <div className="flex shrink-0 flex-col items-center gap-1.5 lg:hidden">
+        <div className="flex shrink-0 flex-col items-center gap-1.5">
           <a
             href={SOCIAL.skool}
             target="_blank"
@@ -89,8 +91,17 @@ export default function SiteNav() {
           </a>
           <LangToggle />
         </div>
+      </div>
 
-        <nav className="mt-6 hidden items-center justify-center gap-8 lg:flex xl:gap-12">
+      {/* Desktop header */}
+        <div className="mx-auto hidden max-w-7xl lg:block">
+        <div className="flex justify-center">
+          <a href="#top" className="inline-block text-center leading-none">
+            <BrandWordmark className="h-8" />
+          </a>
+        </div>
+
+        <nav className="mt-6 flex items-center justify-center gap-8 xl:gap-12">
           {links.map((l) => (
             <a
               key={l.label}
@@ -113,10 +124,11 @@ export default function SiteNav() {
         </nav>
       </div>
 
+
       {open && (
         <div className="fixed inset-0 z-50 bg-cream px-6 py-6 lg:hidden">
           <div className="flex items-center justify-between">
-            <span className="eyebrow text-[1.05rem] text-ember">Alchemist Ways</span>
+            <BrandWordmark className="h-5" />
             <button type="button" aria-label={t.close} onClick={() => setOpen(false)}>
               <X className="h-6 w-6 text-ink" />
             </button>

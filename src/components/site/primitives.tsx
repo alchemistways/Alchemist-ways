@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import beige from "@/assets/beige2.jpg";
+import type { CSSProperties, ReactNode } from "react";
+import landingBackground from "@/assets/landing-page-background.png";
 
 export function PlasterSection({
   children,
@@ -13,14 +13,9 @@ export function PlasterSection({
   return (
     <section
       id={id}
-      className={`relative overflow-hidden bg-sand ${className}`}
-      style={{
-        backgroundImage: `url(${beige})`,
-        backgroundSize: "cover",
-        backgroundPosition: "left top",
-      }}
+      className={`editorial-surface relative overflow-hidden ${className}`}
+      style={{ "--editorial-texture": `url(${landingBackground})` } as CSSProperties}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[oklch(0.93_0.014_75)]/55" />
       <div className="relative">{children}</div>
     </section>
   );

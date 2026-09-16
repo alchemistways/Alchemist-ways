@@ -72,12 +72,12 @@
 
 :root {
   --radius: 0.25rem;
-  --ink: oklch(0.28 0.045 258);
+  --ink: oklch(0.235 0.048 258);
   --ember: oklch(0.52 0.16 36);
   --ember-soft: oklch(0.93 0.03 40);
-  --sand: oklch(0.93 0.014 75);
-  --cream: oklch(0.975 0.008 80);
-  --background: oklch(0.975 0.008 80);
+  --sand: oklch(0.953 0.012 76);
+  --cream: oklch(0.982 0.007 82);
+  --background: oklch(0.982 0.007 82);
   --foreground: oklch(0.28 0.045 258);
 
   --card: oklch(1 0 0);
@@ -160,11 +160,35 @@
   }
 }
 
+@utility editorial-surface {
+  background-color: var(--sand);
+  background-image:
+    linear-gradient(
+      color-mix(in oklab, var(--cream) 16%, transparent),
+      color-mix(in oklab, var(--cream) 4%, transparent)
+    ),
+    var(--editorial-texture);
+  background-position: center bottom;
+  background-size: cover;
+}
+
+@utility hero-surface {
+  background-color: var(--sand);
+  background-image:
+    linear-gradient(
+      color-mix(in oklab, var(--cream) 4%, transparent),
+      transparent
+    ),
+    var(--hero-texture);
+  background-position: center bottom;
+  background-size: cover;
+}
+
 @utility eyebrow {
   font-family: var(--font-sans);
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 @utility rule-diamond {

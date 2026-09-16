@@ -30,3 +30,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# GitHub Pages is published from generated files in the repository root.
+!index.html
+!404.html
+!assets/
+!assets/**
+!CNAME
+!.nojekyll
+!favicon.png
+!robots.txt

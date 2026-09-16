@@ -39,11 +39,11 @@ export default function MapWheel({
   compact?: boolean;
 }) {
   return (
-    <div className="flex justify-center pt-10 sm:pt-12 lg:pt-14">
+    <div className="flex justify-center pt-10 sm:pt-12 lg:pt-8">
       {/* Circular diagram — shown on every screen size */}
       <div
         className={`relative aspect-square w-full max-w-[10.5rem] xs:max-w-[11.5rem] sm:max-w-[20rem] ${
-          compact ? "lg:max-w-[22rem] xl:max-w-[26rem]" : "lg:max-w-[34rem]"
+          compact ? "lg:max-w-[28rem] xl:max-w-[30rem]" : "lg:max-w-[31rem] xl:max-w-[33rem]"
         }`}
       >
         <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full text-ember">
@@ -83,7 +83,7 @@ export default function MapWheel({
                 <div
                   className={`grid place-items-center rounded-full bg-ember-soft font-serif text-ember ${
                     compact
-                      ? "h-8 w-8 text-[0.8rem] sm:h-10 sm:w-10 sm:text-base lg:h-11 lg:w-11"
+                      ? "h-8 w-8 text-[0.8rem] sm:h-10 sm:w-10 sm:text-base lg:h-12 lg:w-12 lg:text-lg"
                       : "h-8 w-8 text-[0.8rem] sm:h-11 sm:w-11 sm:text-base lg:h-12 lg:w-12 lg:text-lg"
                   }`}
                 >
@@ -99,16 +99,16 @@ export default function MapWheel({
                   }
                 >
                   <p
-                    className={`eyebrow text-ink text-[0.5rem] leading-[1.15] sm:text-[0.7rem] ${
-                      compact ? "" : "lg:text-sm"
+                    className={`eyebrow font-medium text-ink text-[0.5rem] leading-[1.15] sm:text-[0.7rem] ${
+                      compact ? "lg:text-xs" : "lg:text-sm"
                     }`}
                   >
                     {node.title}
                   </p>
                   {node.sub && (
                     <p
-                      className={`mt-0.5 font-serif italic text-ember text-[0.6rem] leading-[1.15] sm:text-[0.95rem] sm:leading-5 ${
-                        compact ? "" : "lg:text-base"
+                      className={`mt-0.5 font-serif font-medium italic text-ember text-[0.6rem] leading-[1.15] sm:text-[0.95rem] sm:leading-5 ${
+                        compact ? "lg:text-[0.95rem]" : "lg:text-base"
                       }`}
                     >
                       {node.sub}

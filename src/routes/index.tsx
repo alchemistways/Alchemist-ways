@@ -1,15 +1,16 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ArrowUp, Instagram, Youtube, Music2, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Instagram, Youtube, Music2, Users } from "lucide-react";
 
 import SiteNav, { siteLinks } from "@/components/site/SiteNav";
+import BrandWordmark from "@/components/site/BrandWordmark";
 import MapWheel, { type WheelNode } from "@/components/site/MapWheel";
 import { Diamond, Hairline, PlasterSection, RuleDiamond, Star } from "@/components/site/primitives";
 import { content } from "@/i18n/content";
 import { Rich, useLang } from "@/i18n/language";
 
 
-import heroRoom from "@/assets/hero-room.jpg";
+import landingBackground from "@/assets/landing-page-background.png";
 import bookLeft from "@/assets/book-left.png";
 import portrait from "@/assets/founder-portrait.jpg";
 import dunes from "@/assets/dunes-hd.jpg";
@@ -33,6 +34,8 @@ export const Route = createFileRoute("/")({
         content:
           "A Map from emotional reactivity to Creative Agency. Explore the tool, the book, and working with Malek.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -134,9 +137,9 @@ function BeginCarousel({ cards }: { cards: readonly BeginCard[] }) {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="eyebrow mt-6 inline-flex items-center justify-center gap-2 border border-ember px-6 py-3 text-[0.68rem] text-ember"
+                className="eyebrow mt-6 inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap border border-ember px-5 text-[0.65rem] text-ember"
               >
-                {c.cta} <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                {c.cta} <ArrowRight className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
               </a>
             </div>
           );
@@ -180,57 +183,53 @@ function Index() {
     <main id="top" className="bg-cream">
       {/* ── Hero ─────────────────────────────────────────── */}
       <section
-        className="relative overflow-hidden bg-sand pb-16 lg:pb-24"
-        style={{
-          backgroundImage: `url(${heroRoom})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center bottom",
-        }}
+        className="hero-surface relative min-h-[46rem] overflow-hidden pb-14 sm:min-h-[52rem] lg:min-h-[44rem] lg:pb-10"
+        style={{ "--hero-texture": `url(${landingBackground})` } as CSSProperties}
       >
         <SiteNav />
-        <div className="mx-auto max-w-7xl px-5 pt-8 sm:px-8 lg:pt-10">
-          <div className="flex flex-col lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-end lg:gap-x-14">
+        <div className="mx-auto max-w-[86rem] px-5 pt-8 sm:px-8 lg:px-12 lg:pt-7">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 lg:items-end lg:gap-x-10 xl:gap-x-14">
             {/* Heading */}
-            <div className="order-1 text-center lg:order-none lg:col-start-2 lg:row-start-1 lg:self-start lg:pt-4">
-              <h1 className="font-serif text-4xl tracking-wide text-ink sm:text-5xl lg:text-6xl">
+            <div className="order-1 text-center lg:order-none lg:col-start-2 lg:row-start-1 lg:self-start">
+              <h1 className="font-serif text-4xl font-medium tracking-wide text-ink sm:text-5xl lg:text-[3.45rem]">
                 {t.hero.title}
               </h1>
               <RuleDiamond className="mt-4" />
-              <p className="mx-auto mt-4 max-w-md font-serif text-base text-ink sm:text-xl">
+              <p className="mx-auto mt-4 max-w-lg font-serif text-base font-medium text-ink sm:text-xl lg:text-[1.35rem]">
                 <Rich text={t.hero.tagline} />
               </p>
             </div>
 
             {/* Map wheel */}
-            <div className="order-2 mt-10 lg:order-none lg:col-start-2 lg:row-start-2 lg:mt-8">
-              <MapWheel nodes={toWheel(t.mapNodes)} compact />
+            <div className="order-2 mt-8 lg:order-none lg:col-start-2 lg:row-start-2 lg:mt-3">
+              <MapWheel nodes={toWheel(t.stageNodes)} compact />
             </div>
 
             {/* Book */}
-            <div className="order-3 mt-10 flex justify-center lg:order-none lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0 lg:justify-end">
+            <div className="order-3 mt-10 flex justify-center lg:order-none lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-4 lg:justify-center lg:self-end">
               <img
                 src={bookLeft}
                 width={1466}
                 height={2306}
                 alt={t.hero.bookAlt}
-                className="w-40 select-none xs:w-48 sm:w-56 md:w-64 lg:w-full lg:max-w-[26rem]"
+                className="w-40 select-none xs:w-48 sm:w-56 md:w-64 lg:w-full lg:max-w-[28rem] xl:max-w-[30rem]"
                 style={{ filter: "drop-shadow(0 30px 40px rgba(63, 48, 34, 0.22))" }}
               />
             </div>
 
             {/* CTAs */}
-            <div className="order-4 mt-8 flex items-center justify-center gap-3 lg:order-none lg:col-start-2 lg:row-start-3 lg:pb-6">
+            <div className="order-4 mt-8 flex items-center justify-center gap-3 lg:order-none lg:col-start-2 lg:row-start-3 lg:mt-5 lg:pb-4">
               <a
                 href="#begin"
-                className="eyebrow inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-cream px-4 py-3.5 text-[0.6rem] text-ink shadow-sm transition-colors hover:text-ember sm:flex-none sm:gap-3 sm:px-8 sm:py-4 sm:text-[0.72rem]"
+                className="inline-flex min-h-14 flex-1 items-center justify-center gap-3 rounded-full border border-ink/10 bg-cream px-4 py-3.5 font-sans text-[0.68rem] font-medium uppercase leading-none tracking-[0.12em] text-ink shadow-md transition-colors hover:border-ember/30 hover:text-ember sm:flex-none sm:min-w-56 sm:gap-5 sm:px-9 sm:py-5 sm:text-sm"
               >
-                <ArrowLeft className="h-4 w-4 shrink-0" strokeWidth={1.5} /> {t.hero.ctaBook}
+                <BookOpen className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" strokeWidth={1.5} /> {t.hero.ctaBook}
               </a>
               <a
                 href="#the-map"
-                className="eyebrow inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-cream px-4 py-3.5 text-[0.6rem] text-ink shadow-sm transition-colors hover:text-ember sm:flex-none sm:gap-3 sm:px-8 sm:py-4 sm:text-[0.72rem]"
+                className="inline-flex min-h-14 flex-1 items-center justify-center gap-3 rounded-full border border-ink/10 bg-cream px-4 py-3.5 font-sans text-[0.68rem] font-medium uppercase leading-none tracking-[0.12em] text-ink shadow-md transition-colors hover:border-ember/30 hover:text-ember sm:flex-none sm:min-w-56 sm:gap-5 sm:px-9 sm:py-5 sm:text-sm"
               >
-                <ArrowUp className="h-4 w-4 shrink-0" strokeWidth={1.5} /> {t.hero.ctaMap}
+                <ArrowUpRight className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" strokeWidth={1.5} /> {t.hero.ctaMap}
               </a>
             </div>
           </div>
@@ -238,7 +237,7 @@ function Index() {
       </section>
 
       {/* ── Protection strategies ────────────────────────── */}
-      <PlasterSection className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <PlasterSection className="px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
         <p className="eyebrow mx-auto max-w-2xl text-center text-[0.72rem] leading-6 text-ember sm:text-sm">
           {t.protection.eyebrow}
         </p>
@@ -268,12 +267,12 @@ function Index() {
               >
                 <div className="mx-auto grid aspect-square w-full max-w-[13rem] place-items-center rounded-full border border-ember/60 sm:h-28 sm:w-28">
                   <div>
-                    <p className="eyebrow text-base text-ember sm:text-[0.72rem]">{p.name}</p>
+                    <p className="font-serif text-xl uppercase tracking-[0.12em] text-ink sm:text-sm">{p.name}</p>
                     <Diamond className="mt-2 h-1.5 w-1.5 rotate-0 rounded-full" />
                   </div>
                 </div>
-                <Hairline className="mt-7" />
-                <p className="mt-6 font-serif text-lg text-ink">{p.line}</p>
+                <RuleDiamond className="mt-7 [&::after]:w-20 [&::before]:w-20" />
+                <p className="mt-8 font-serif text-xl leading-snug text-ink">{p.line}</p>
                 <Hairline className="mt-6" />
                 <p className="mt-6 whitespace-pre-line font-serif text-[1.05rem] leading-7 text-ink/85">
                   {p.words}
@@ -293,7 +292,7 @@ function Index() {
       </PlasterSection>
 
       {/* ── These responses weren't random ───────────────── */}
-      <PlasterSection className="px-5 py-20 sm:px-8 lg:py-28">
+      <PlasterSection className="px-5 py-20 sm:px-8 lg:py-32">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-serif text-xl text-ink sm:text-2xl">{t.childhood.lead}</p>
           <p className="mt-6 font-serif text-lg leading-relaxed text-ink/85 sm:text-xl">
@@ -320,7 +319,7 @@ function Index() {
       </PlasterSection>
 
       {/* ── It just feels like you ───────────────────────── */}
-      <PlasterSection className="px-5 py-20 sm:px-8 lg:py-28">
+      <PlasterSection className="px-5 py-20 sm:px-8 lg:py-32">
         <div className="mx-auto max-w-3xl text-center">
           <ul className="space-y-8 font-serif text-lg leading-relaxed text-ink sm:text-xl">
             {t.automatic.pairs.map(([a, b]) => (
@@ -347,7 +346,7 @@ function Index() {
       </PlasterSection>
 
       {/* ── The Map (stages) ─────────────────────────────── */}
-      <PlasterSection id="the-map" className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <PlasterSection id="the-map" className="px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
         <h2 className="text-center font-serif text-4xl tracking-wide text-ink sm:text-5xl lg:text-6xl">
           {t.map.title}
         </h2>
@@ -391,7 +390,7 @@ function Index() {
       </PlasterSection>
 
       {/* ── What becomes available ───────────────────────── */}
-      <PlasterSection className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <PlasterSection className="px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
         <h2 className="text-center font-serif text-3xl tracking-wide text-ink sm:text-4xl lg:text-5xl">
           <Rich text={t.available.heading} />
         </h2>
@@ -437,8 +436,8 @@ function Index() {
       </PlasterSection>
 
       {/* ── Founder story ────────────────────────────────── */}
-      <section id="founder" className="grid grid-cols-1 bg-cream lg:grid-cols-2">
-        <div className="order-2 px-5 py-16 sm:px-10 lg:order-1 lg:px-16 lg:py-24">
+      <section id="founder" className="grid grid-cols-1 bg-sand lg:min-h-[48rem] lg:grid-cols-2">
+        <div className="order-1 px-5 py-16 sm:px-10 lg:px-16 lg:py-24 xl:px-24">
           <p className="eyebrow text-[0.72rem] text-ember">{t.founder.eyebrow}</p>
           <Hairline className="ml-0 mt-4" />
           <h2 className="mt-6 font-serif text-3xl leading-tight text-ink sm:text-4xl lg:text-5xl">
@@ -473,14 +472,14 @@ function Index() {
           </a>
         </div>
 
-        <div className="order-3 lg:order-2">
+        <div className="order-2">
           <img
             src={portrait}
             alt={t.founder.portraitAlt}
             loading="lazy"
             width={1481}
             height={1920}
-            className="h-96 w-full object-cover object-[50%_20%] sm:h-[480px] lg:h-full"
+            className="h-[32rem] w-full object-cover object-[50%_18%] sm:h-[42rem] lg:h-full lg:min-h-[48rem]"
           />
         </div>
       </section>
@@ -507,8 +506,18 @@ function Index() {
       </section>
 
       {/* ── Creative agency ──────────────────────────────── */}
-      <PlasterSection className="px-5 py-20 sm:px-8 lg:py-28">
-        <div className="mx-auto max-w-2xl text-center">
+      <section className="relative overflow-hidden px-5 py-20 sm:px-8 lg:py-32">
+        <img
+          src={dunes}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          width={1920}
+          height={832}
+          className="absolute inset-0 h-full w-full object-cover object-[50%_55%]"
+        />
+        <div className="absolute inset-0 bg-cream/25" />
+        <div className="relative mx-auto max-w-2xl text-center">
           <h2 className="eyebrow text-sm text-ember sm:text-base">{t.creative.heading}</h2>
           <RuleDiamond className="mt-5" />
           <p className="mt-8 font-serif text-xl leading-relaxed text-ink sm:text-3xl">
@@ -522,7 +531,7 @@ function Index() {
             <Rich text={t.creative.closing} />
           </p>
         </div>
-      </PlasterSection>
+      </section>
 
       {/* ── Begin where you are ──────────────────────────── */}
 
@@ -537,9 +546,9 @@ function Index() {
           height={1088}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-cream/25" />
+        <div className="absolute inset-0 bg-cream/35" />
 
-        <div className="relative px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <div className="relative px-5 py-20 sm:px-8 lg:px-12 lg:py-32">
           <h2 className="text-center font-serif text-3xl tracking-wide text-ink sm:text-4xl lg:text-5xl">
             {t.begin.heading}
           </h2>
@@ -568,7 +577,7 @@ function Index() {
                     height={816}
                     className="h-40 w-40 object-contain sm:h-48 sm:w-48"
                   />
-                  <div className="mt-6 flex h-full w-full flex-col bg-cream/70 px-4 py-8 backdrop-blur-sm">
+                  <div className="mt-6 flex h-full w-full flex-col bg-cream/75 px-4 py-8 backdrop-blur-sm">
                     <h3 className="eyebrow text-base text-ink sm:text-lg">{c.title}</h3>
                     <p className="eyebrow mt-3 text-[0.72rem] leading-5 text-ember">{c.kicker}</p>
                     <Hairline className="mt-4" />
@@ -581,9 +590,9 @@ function Index() {
                       href={href}
                       target={href.startsWith("http") ? "_blank" : undefined}
                       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="eyebrow mt-auto flex w-full items-center justify-center gap-2 border border-ember px-6 py-3 text-center text-[0.68rem] text-ember transition-colors hover:bg-ember hover:text-cream"
+                      className="eyebrow mt-auto flex h-12 w-full items-center justify-center gap-2 whitespace-nowrap border border-ember px-5 text-center text-[0.65rem] text-ember transition-colors hover:bg-ember hover:text-cream"
                     >
-                      {c.cta} <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                      {c.cta} <ArrowRight className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
                     </a>
                   </div>
                 </div>
@@ -601,7 +610,7 @@ function Index() {
 
       {/* ── Footer ───────────────────────────────────────── */}
       <footer className="bg-cream px-5 py-14 text-center sm:px-8">
-        <p className="eyebrow text-base text-ember sm:text-lg">Alchemist Ways</p>
+        <BrandWordmark className="mx-auto h-5 sm:h-6" />
 
         <nav className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
           {[
