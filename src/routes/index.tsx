@@ -1,4 +1,4 @@
-import { useRef, useState, type CSSProperties } from "react";
+import { useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Instagram, Youtube, Music2, Users } from "lucide-react";
 
@@ -9,8 +9,6 @@ import { Diamond, Hairline, PlasterSection, RuleDiamond, Star } from "@/componen
 import { content } from "@/i18n/content";
 import { Rich, useLang } from "@/i18n/language";
 
-
-import landingBackground from "@/assets/landing-page-background.jpg";
 import bookLeft from "@/assets/book-left.webp";
 import portrait from "@/assets/founder-portrait.jpg";
 import dunes from "@/assets/dunes-hd.jpg";
@@ -182,10 +180,7 @@ function Index() {
   return (
     <main id="top" className="bg-cream">
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section
-        className="hero-surface relative min-h-[46rem] overflow-hidden pb-14 sm:min-h-[52rem] lg:min-h-[44rem] lg:pb-10"
-        style={{ "--hero-texture": `url(${landingBackground})` } as CSSProperties}
-      >
+      <section className="hero-surface relative min-h-[46rem] overflow-hidden pb-14 sm:min-h-[52rem] lg:min-h-[44rem] lg:pb-10">
         <SiteNav />
         <div className="mx-auto max-w-[86rem] px-5 pt-8 sm:px-8 lg:px-12 lg:pt-7">
           <div className="flex flex-col lg:grid lg:grid-cols-2 lg:items-end lg:gap-x-10 xl:gap-x-14">

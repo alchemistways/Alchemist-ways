@@ -162,12 +162,13 @@
 
 @utility editorial-surface {
   background-color: var(--sand);
+  /* url() must live here so Vite resolves it vs this CSS file, not /assets/assets/... */
   background-image:
     linear-gradient(
       color-mix(in oklab, var(--cream) 16%, transparent),
       color-mix(in oklab, var(--cream) 4%, transparent)
     ),
-    var(--editorial-texture);
+    url("./assets/landing-page-background.jpg");
   background-position: center bottom;
   background-size: cover;
 }
@@ -179,7 +180,7 @@
       color-mix(in oklab, var(--cream) 4%, transparent),
       transparent
     ),
-    var(--hero-texture);
+    url("./assets/landing-page-background.jpg");
   background-position: center bottom;
   background-size: cover;
 }

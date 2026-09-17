@@ -1,5 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
-import landingBackground from "@/assets/landing-page-background.jpg";
+import type { ReactNode } from "react";
 
 export function PlasterSection({
   children,
@@ -14,7 +13,6 @@ export function PlasterSection({
     <section
       id={id}
       className={`editorial-surface relative overflow-hidden ${className}`}
-      style={{ "--editorial-texture": `url(${landingBackground})` } as CSSProperties}
     >
       <div className="relative">{children}</div>
     </section>
