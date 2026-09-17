@@ -61,8 +61,8 @@ export default function SiteNav() {
 
   return (
     <header className="relative z-30 px-5 pt-6 sm:px-8 lg:px-12">
-      {/* Mobile header */}
-      <div className="relative mx-auto flex max-w-7xl items-center justify-between lg:hidden">
+      {/* Mobile header — flex so the wordmark shrinks between menu and Begin */}
+      <div className="mx-auto flex max-w-7xl items-center gap-2 sm:gap-3 lg:hidden">
         <button
           type="button"
           aria-label={open ? t.close : t.menu}
@@ -72,19 +72,16 @@ export default function SiteNav() {
           <Menu className="h-6 w-6" strokeWidth={1.5} />
         </button>
 
-        <a
-          href="#top"
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center leading-none"
-        >
-          <BrandWordmark className="h-6 xs:h-7 sm:h-7" />
+        <a href="#top" className="min-w-0 flex-1 text-center leading-none">
+          <BrandWordmark className="mx-auto h-4 max-w-full xs:h-5 sm:h-6" />
         </a>
 
-        <div className="flex shrink-0 flex-col items-center gap-1.5">
+        <div className="flex shrink-0 flex-col items-center gap-1">
           <a
             href={SOCIAL.skool}
             target="_blank"
             rel="noopener noreferrer"
-            className="eyebrow flex items-center gap-1 rounded-full bg-ember px-4 py-2 text-[0.62rem] text-cream xs:px-5 xs:text-[0.68rem]"
+            className="eyebrow flex items-center gap-0.5 rounded-full bg-ember px-3 py-1.5 text-[0.58rem] text-cream xs:gap-1 xs:px-4 xs:py-2 xs:text-[0.62rem] sm:px-5 sm:text-[0.68rem]"
           >
             {t.begin}
             <ChevronDown className="h-3 w-3" strokeWidth={1.5} />
