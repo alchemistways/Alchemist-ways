@@ -57,8 +57,18 @@ for (const page of ["index.html", "404.html"]) {
     page,
     html
       .replaceAll('/./assets/', './assets/')
-      .replaceAll('href="/favicon.png"', 'href="./favicon.png"'),
+      .replaceAll('href="/favicon.png"', 'href="./favicon.png"')
+      // The page is fully prerendered and needs no framework JS (the menu uses a tiny
+      // inline script), so drop the hydration bundle links and bootstrap script.
+      .replace(/<link rel="modulepreload"[^>]*>/g, "")
+      .replace(/<script>\(self\.\$R=[\s\S]*?<\/script>/g, ""),
   );
+}
+
+// Remove JS chunks nothing references any more.
+const pages = (await readFile("index.html", "utf8")) + (await readFile("404.html", "utf8"));
+for (const file of await readdir("assets")) {
+  if (file.endsWith(".js") && !pages.includes(file)) await rm(join("assets", file));
 }
 
 console.log(`Synced GitHub Pages files from ${source}: ${(await readdir("assets")).length} assets.`);

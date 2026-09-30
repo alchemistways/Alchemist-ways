@@ -1,7 +1,8 @@
-import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, createRootRoute, HeadContent } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import poppins400 from "@fontsource/poppins/files/poppins-latin-400-normal.woff2?url";
 
 const SITE_URL = "https://alchemistways.com/";
 const TITLE = "Alchemist Ways | Meet Yourself, Differently.";
@@ -47,6 +48,13 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: `${SITE_URL}og-image.jpg` },
     ],
     links: [
+      {
+        rel: "preload",
+        href: poppins400,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
       { rel: "stylesheet", href: appCss },
       { rel: "canonical", href: SITE_URL },
       { rel: "icon", href: "./favicon.png", type: "image/png" },
@@ -62,12 +70,15 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        {/* Open at the top on refresh instead of restoring the old scroll position. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "history.scrollRestoration='manual';if(!location.hash)scrollTo(0,0);",
+          }}
+        />
         <HeadContent />
       </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

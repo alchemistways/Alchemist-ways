@@ -12,7 +12,8 @@ const pagePath = typeof window === "undefined" ? "/" : window.location.pathname;
 export const getRouter = () =>
   createRouter({
     routeTree,
-    scrollRestoration: true,
+    // Always open at the top (or at #hash); never restore a previous scroll position.
+    scrollRestoration: false,
     defaultPreloadStaleTime: 0,
     rewrite: {
       input: ({ url }) => {

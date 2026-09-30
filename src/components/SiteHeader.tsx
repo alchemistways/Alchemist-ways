@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import logo from "../assets/logo.webp";
 import { EXTERNAL, LINKS } from "../content/links";
 import { SocialIcons } from "./SocialIcons";
@@ -13,27 +11,16 @@ const NAV = [
   { href: EXTERNAL.conversation, label: "Book a Conversation" },
 ];
 
+const MENU_SCRIPT = `(()=>{const m=document.getElementById("site-menu"),o=document.querySelector("[data-menu-open]");if(!m||!o)return;const set=v=>{m.hidden=!v;o.setAttribute("aria-expanded",String(v));document.body.style.overflow=v?"hidden":"";(v?m.querySelector("[data-menu-close]"):o).focus({preventScroll:true})};o.addEventListener("click",()=>set(true));m.addEventListener("click",e=>{if(e.target.closest("[data-menu-close],a"))set(false)});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!m.hidden)set(false)})})();`;
+
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
   return (
     <header className="absolute inset-x-0 top-0 z-40">
       <div className="mx-auto grid grid-cols-[48px_1fr_auto] items-center gap-3 px-4 pt-4 sm:grid-cols-[1fr_auto_1fr] sm:px-8 lg:px-[5%] lg:pt-[clamp(20px,3vw,48px)]">
         <button
           type="button"
-          onClick={() => setOpen(true)}
-          aria-expanded={open}
+          data-menu-open
+          aria-expanded="false"
           aria-controls="site-menu"
           aria-label="Open menu"
           className="-ml-2 flex h-12 w-12 items-center justify-center justify-self-start text-rust"
@@ -68,60 +55,59 @@ export function SiteHeader() {
         </a>
       </div>
 
-      {open && (
-        <div
-          id="site-menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Site menu"
-          className="fixed inset-0 z-50 flex flex-col bg-cream/97 px-6 pt-4 pb-10 backdrop-blur"
-        >
-          <div className="flex items-center justify-between">
-            <img
-              src={logo}
-              alt=""
-              width={695}
-              height={60}
-              className="h-auto w-[170px] sm:w-[220px]"
-            />
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              aria-label="Close menu"
-              className="flex h-12 w-12 items-center justify-center text-rust"
-              autoFocus
-            >
-              <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-                <path
-                  d="M5 5l14 14M19 5L5 19"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
-          </div>
-          <nav aria-label="Primary" className="flex flex-1 items-center justify-center">
-            <ul className="space-y-5 text-center">
-              {NAV.map((n) => (
-                <li key={n.href}>
-                  <a
-                    href={n.href}
-                    onClick={() => setOpen(false)}
-                    {...(n.href.startsWith("http")
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                    className="text-2xl font-medium tracking-[0.08em] text-ink uppercase hover:text-rust md:text-3xl"
-                  >
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <SocialIcons />
+      <div
+        id="site-menu"
+        hidden
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        className="fixed inset-0 z-50 flex flex-col bg-cream/97 px-6 pt-4 pb-10 backdrop-blur"
+      >
+        <div className="flex items-center justify-between">
+          <img
+            src={logo}
+            alt=""
+            width={695}
+            height={60}
+            className="h-auto w-[170px] sm:w-[220px]"
+          />
+          <button
+            type="button"
+            data-menu-close
+            aria-label="Close menu"
+            className="flex h-12 w-12 items-center justify-center text-rust"
+          >
+            <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
+              <path
+                d="M5 5l14 14M19 5L5 19"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
         </div>
-      )}
+        <nav aria-label="Primary" className="flex flex-1 items-center justify-center">
+          <ul className="space-y-5 text-center">
+            {NAV.map((n) => (
+              <li key={n.href}>
+                <a
+                  href={n.href}
+                  {...(n.href.startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="text-2xl font-medium tracking-[0.08em] text-ink uppercase hover:text-rust md:text-3xl"
+                >
+                  {n.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <SocialIcons />
+      </div>
+      {/* The page ships without a JS framework; this is the only script it needs. */}
+      <script dangerouslySetInnerHTML={{ __html: MENU_SCRIPT }} />
     </header>
   );
 }

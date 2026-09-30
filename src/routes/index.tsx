@@ -6,17 +6,34 @@ import { HERO_ART } from "../content/heroArt";
 import { MapDiagram, MAP_STAGES } from "../components/MapDiagram";
 import { LINKS, isExternal } from "../content/links";
 
+/* Responsive image sets: the browser picks the smallest file that is sharp at the
+   displayed size × device pixel ratio. `sizes` mirrors each image's CSS width. */
+const HERO_SRCSET = `${hero900} 900w, ${hero1280} 1280w, ${hero1686} 1686w, ${hero2400} 2400w`;
+// Phone: square crop (~181vw wide), tablet 16:10 crop (~113vw), desktop covers the hero.
+const HERO_SIZES = "(max-width: 639px) 181vw, (max-width: 1023px) 113vw, max(100vw, 1084px)";
+const MAP_SRCSET = `${map900} 900w, ${map1280} 1280w, ${map1672} 1672w, ${map2400} 2400w`;
+// Below lg the artwork is drawn at 240% of a ≤560px frame.
+const MAP_SIZES = "(min-width: 1024px) 100vw, min(1344px, 225vw)";
+const AVAILABLE_SRCSET = `${available900} 900w, ${available1280} 1280w, ${available1767} 1767w`;
+const AVAILABLE_SIZES = "(max-width: 639px) 155vw, 100vw";
+
 const ext = (href: string) =>
   isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
-import hero from "../assets/hero.webp";
 import hero900 from "../assets/hero-900.webp";
+import hero1280 from "../assets/hero-1280.webp";
+import hero1686 from "../assets/hero-1686.webp";
+import hero2400 from "../assets/hero-2400.webp";
 import eclipse from "../assets/eclipse.webp";
-import mapArt from "../assets/map.webp";
-import mapArt900 from "../assets/map-900.webp";
-import available from "../assets/available.webp";
+import map900 from "../assets/map-900.webp";
+import map1280 from "../assets/map-1280.webp";
+import map1672 from "../assets/map-1672.webp";
+import map2400 from "../assets/map-2400.webp";
 import available900 from "../assets/available-900.webp";
-import founder from "../assets/founder.webp";
+import available1280 from "../assets/available-1280.webp";
+import available1767 from "../assets/available-1767.webp";
+import founder390 from "../assets/founder-390.webp";
+import founder780 from "../assets/founder-780.webp";
 import beginBg from "../assets/begin-bg.webp";
 import beginBg900 from "../assets/begin-bg-900.webp";
 
@@ -101,17 +118,17 @@ function Hero() {
         agency.
       </h1>
       <div className="relative lg:static">
-        <picture>
-          <source media="(max-width: 900px)" srcSet={hero900} />
-          <img
-            src={hero}
-            alt="The book Meet Yourself, Differently. A Map from Emotional Reactivity to Creative Agency, by Malek Najm Ghaleb, standing on a sunlit surface."
-            width={1686}
-            height={933}
-            fetchPriority="high"
-            className="block aspect-square w-full object-cover object-[22%_62%] sm:aspect-[16/10] sm:object-[20%_60%] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:object-[left_center]"
-          />
-        </picture>
+        <img
+          src={hero1686}
+          srcSet={HERO_SRCSET}
+          sizes={HERO_SIZES}
+          alt="The book Meet Yourself, Differently. A Map from Emotional Reactivity to Creative Agency, by Malek Najm Ghaleb, standing on a sunlit surface."
+          width={1686}
+          height={933}
+          fetchPriority="high"
+          decoding="async"
+          className="block aspect-square w-full object-cover object-[22%_62%] sm:aspect-[16/10] sm:object-[20%_60%] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:object-[left_center]"
+        />
         <div
           className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-b from-transparent to-[#f1e6d6] lg:hidden"
           aria-hidden="true"
@@ -152,9 +169,10 @@ function Eclipse({ children, size = "md" }: { children: React.ReactNode; size?: 
       <img
         src={eclipse}
         alt=""
-        width={395}
-        height={395}
+        width={440}
+        height={440}
         loading="lazy"
+        decoding="async"
         className="absolute inset-0 h-full w-full"
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center px-3 text-center text-white">
@@ -487,17 +505,17 @@ function MapSteps({ overlay }: { overlay: boolean }) {
 function MapArt() {
   return (
     <>
-      <picture>
-        <source media="(max-width: 700px)" srcSet={mapArt900} />
-        <img
-          src={mapArt}
-          alt="Seen from above, a circle of people sit together on golden desert sand."
-          width={1672}
-          height={941}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full"
-        />
-      </picture>
+      <img
+        src={map1672}
+        srcSet={MAP_SRCSET}
+        sizes={MAP_SIZES}
+        alt="Seen from above, a circle of people sit together on golden desert sand."
+        width={1672}
+        height={941}
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full"
+      />
       <MapDiagram />
     </>
   );
@@ -511,8 +529,8 @@ function TheMap() {
         <div className="mx-auto max-w-[640px]">
           <MapIntro />
         </div>
-        <div className="relative mx-auto mt-10 aspect-[1/0.86] max-w-[640px] overflow-hidden rounded-lg">
-          <div className="absolute top-1/2 left-[-76%] aspect-[1672/941] w-[200%] -translate-y-[40%] [container-type:inline-size]">
+        <div className="relative mx-auto mt-10 aspect-square max-w-[560px] overflow-hidden rounded-lg">
+          <div className="absolute top-1/2 left-[-97%] aspect-[1672/941] w-[240%] -translate-y-[43.5%] [container-type:inline-size]">
             <MapArt />
           </div>
         </div>
@@ -600,17 +618,17 @@ function Available() {
         </ul>
       </div>
       <div className="relative -mt-[18%] min-h-[300px] sm:-mt-[14%] md:-mt-[33%]">
-        <picture>
-          <source media="(max-width: 900px)" srcSet={available900} />
-          <img
-            src={available}
-            alt="A person sits alone on a dune ridge, facing the sun rising over desert mountains."
-            width={1767}
-            height={890}
-            loading="lazy"
-            className="block h-full min-h-[300px] w-full object-cover object-[50%_75%] saturate-[0.8] sepia-[0.12]"
-          />
-        </picture>
+        <img
+          src={available1767}
+          srcSet={AVAILABLE_SRCSET}
+          sizes={AVAILABLE_SIZES}
+          alt="A person sits alone on a dune ridge, facing the sun rising over desert mountains."
+          width={1767}
+          height={890}
+          loading="lazy"
+          decoding="async"
+          className="block h-full min-h-[300px] w-full object-cover object-[50%_75%] saturate-[0.8] sepia-[0.12]"
+        />
         <div
           className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white to-transparent"
           aria-hidden="true"
@@ -638,11 +656,14 @@ function Founder() {
       className="scroll-mt-4 bg-white px-5 py-16 text-center md:py-16"
     >
       <img
-        src={founder}
+        src={founder390}
+        srcSet={`${founder390} 390w, ${founder780} 780w`}
+        sizes="(min-width: 768px) clamp(238px, 20.9vw, 363px), 200px"
         alt="Portrait of Malek Najm Ghaleb, founder of Alchemist Ways, smiling in front of a stone wall."
-        width={640}
-        height={640}
+        width={390}
+        height={390}
         loading="lazy"
+        decoding="async"
         className="mx-auto h-[200px] w-[200px] rounded-full object-cover shadow-[0_10px_30px_rgb(0_0_0/0.12)] md:h-[clamp(238px,20.9vw,363px)] md:w-[clamp(238px,20.9vw,363px)]"
       />
       <p className="mt-12 text-xs font-medium tracking-[0.18em] uppercase md:mt-10 md:text-[clamp(13px,1.16vw,20px)]">
@@ -764,6 +785,7 @@ function Begin() {
           width={1671}
           height={1040}
           loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
       </picture>
