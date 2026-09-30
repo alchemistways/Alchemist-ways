@@ -1,7 +1,17 @@
 import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-const rootEntries = ["index.html", "404.html", "assets", "CNAME", ".nojekyll", "favicon.png", "robots.txt"];
+const rootEntries = [
+  "index.html",
+  "404.html",
+  "assets",
+  "CNAME",
+  ".nojekyll",
+  "favicon.png",
+  "apple-touch-icon.png",
+  "og-image.jpg",
+  "robots.txt",
+];
 
 if (process.argv.includes("--clean")) {
   await Promise.all(rootEntries.map((entry) => rm(entry, { recursive: true, force: true })));
