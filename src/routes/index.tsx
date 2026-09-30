@@ -1,9 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { SiteHeader } from "../components/SiteHeader";
-import { HeroWheel } from "../components/HeroWheel";
+import { SiteFooter } from "../components/SiteFooter";
+import { HERO_ART } from "../content/heroArt";
 import { MapDiagram, MAP_STAGES } from "../components/MapDiagram";
-import { LINKS } from "../content/links";
+import { LINKS, isExternal } from "../content/links";
+
+const ext = (href: string) =>
+  isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
 import hero from "../assets/hero.webp";
 import hero900 from "../assets/hero-900.webp";
@@ -13,8 +17,8 @@ import mapArt900 from "../assets/map-900.webp";
 import available from "../assets/available.webp";
 import available900 from "../assets/available-900.webp";
 import founder from "../assets/founder.webp";
-import dunes from "../assets/begin-dunes.webp";
-import dunes900 from "../assets/begin-dunes-900.webp";
+import beginBg from "../assets/begin-bg.webp";
+import beginBg900 from "../assets/begin-bg-900.webp";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -41,15 +45,7 @@ function Home() {
         <Founder />
         <Begin />
       </main>
-      <footer className="relative bg-white py-16 text-center md:py-24">
-        <div
-          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent"
-          aria-hidden="true"
-        />
-        <p className="font-display text-base tracking-[0.32em] text-ink uppercase md:text-lg">
-          Welcome to Alchemist Ways
-        </p>
-      </footer>
+      <SiteFooter />
     </>
   );
 }
@@ -78,12 +74,14 @@ function HeroButtons() {
     <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
       <a
         href={LINKS.getTheBook}
+        {...ext(LINKS.getTheBook)}
         className="btn-pill min-w-[150px] lg:min-w-[clamp(150px,12vw,220px)]"
       >
         Get the book
       </a>
       <a
         href={LINKS.exploreTheMap}
+        {...ext(LINKS.exploreTheMap)}
         className="btn-solid min-w-[150px] lg:min-w-[clamp(150px,12vw,220px)]"
       >
         Explore the map
@@ -96,7 +94,7 @@ function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative bg-[#f1e6d6] lg:h-[max(600px,55.68vw)] lg:overflow-hidden"
+      className="relative bg-[#f1e6d6] lg:h-[max(600px,min(55.68vw,100svh))] lg:overflow-hidden"
     >
       <h1 id="hero-title" className="sr-only">
         Alchemist Ways. Meet Yourself, Differently. A map from emotional reactivity to creative
@@ -120,9 +118,21 @@ function Hero() {
         />
       </div>
 
-      <div className="relative flex flex-col items-center gap-8 px-5 pt-8 pb-14 text-center lg:absolute lg:inset-0 lg:block lg:p-0">
-        <HeroWheel className="w-full max-w-[330px] sm:max-w-[380px] lg:absolute lg:top-[48%] lg:left-[67.5%] lg:w-[25%] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2" />
-        <div className="lg:absolute lg:top-[83.8%] lg:left-[67.5%] lg:-translate-x-1/2 lg:-translate-y-1/2">
+      <div className="relative flex flex-col items-center gap-7 px-5 pt-6 pb-12 text-center lg:absolute lg:inset-0 lg:block lg:p-0">
+        {/* Hero art slot: see src/content/heroArt.ts */}
+        <div
+          data-slot="hero-art"
+          className={`${HERO_ART.ready ? "block w-full max-w-[340px]" : "hidden"} aspect-square lg:absolute lg:top-[46%] lg:left-[67.5%] lg:block lg:w-[25%] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2`}
+        >
+          <img
+            src={HERO_ART.src}
+            alt={HERO_ART.alt}
+            width={800}
+            height={800}
+            className="h-full w-full object-contain"
+          />
+        </div>
+        <div className="lg:absolute lg:top-[83.8%] lg:left-[67.5%] lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2">
           <HeroButtons />
         </div>
         <Tagline className="lg:absolute lg:top-[93%] lg:left-[67.5%] lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2" />
@@ -135,8 +145,8 @@ function Hero() {
 function Eclipse({ children, size = "md" }: { children: React.ReactNode; size?: "md" | "lg" }) {
   const dims =
     size === "lg"
-      ? "w-[128px] sm:w-[150px] md:w-[clamp(130px,12vw,190px)]"
-      : "w-[108px] sm:w-[150px] md:w-[clamp(150px,13vw,200px)]";
+      ? "w-[140px] sm:w-[160px] md:w-[clamp(140px,14.2vw,220px)]"
+      : "w-[116px] sm:w-[160px] md:w-[clamp(160px,16.5vw,270px)]";
   return (
     <div className={`relative aspect-square ${dims}`}>
       <img
@@ -175,46 +185,46 @@ function Underline({ className = "" }: { className?: string }) {
 
 function Triggered() {
   return (
-    <section aria-labelledby="triggered-title" className="bg-white px-5 py-16 text-center md:py-24">
+    <section aria-labelledby="triggered-title" className="bg-white px-5 py-16 text-center md:py-12">
       <h2 id="triggered-title" className="mx-auto max-w-4xl">
-        <span className="tracked block text-[15px] font-normal tracking-[0.3em] sm:text-lg md:text-[clamp(18px,1.55vw,26px)]">
+        <span className="tracked block text-[15px] font-normal tracking-[0.3em] sm:text-lg md:text-[clamp(19px,1.89vw,32px)]">
           Something happens
         </span>
-        <span className="block text-[46px] leading-[1.05] font-semibold tracking-[-0.03em] sm:text-6xl md:text-[clamp(64px,5.8vw,96px)]">
+        <span className="-my-1 block text-[46px] leading-[1.02] font-bold tracking-[-0.045em] sm:text-6xl md:text-[clamp(69px,6.38vw,106px)]">
           Outside You.
         </span>
-        <span className="tracked mt-1 block text-[15px] font-normal tracking-[0.3em] sm:text-lg md:text-[clamp(18px,1.55vw,26px)]">
+        <span className="tracked mt-1 block text-[15px] font-normal tracking-[0.3em] sm:text-lg md:text-[clamp(19px,1.89vw,32px)]">
           Something in you is
         </span>
-        <span className="block text-[46px] leading-[1.1] font-bold tracking-[-0.03em] text-accent italic sm:text-6xl md:text-[clamp(64px,5.8vw,96px)]">
+        <span className="block text-[46px] leading-[1.1] font-bold tracking-[-0.03em] text-accent italic sm:text-6xl md:text-[clamp(69px,6.38vw,106px)]">
           Triggered.
         </span>
       </h2>
-      <p className="mt-3 text-base md:text-[clamp(16px,1.25vw,20px)]">Something contracts.</p>
-      <p className="mt-8 text-2xl font-semibold tracking-[0.04em] text-accent uppercase md:text-[clamp(26px,2.35vw,40px)]">
+      <p className="mt-3 text-base md:text-[clamp(17px,1.52vw,24px)]">Something contracts.</p>
+      <p className="mt-8 text-2xl font-semibold tracking-[0.04em] text-accent uppercase md:text-[clamp(28px,2.59vw,44px)]">
         Protection moves.
       </p>
-      <p className="mx-auto mt-2 max-w-[22em] text-base leading-snug md:text-[clamp(16px,1.35vw,22px)]">
+      <p className="mx-auto mt-2 max-w-[22em] text-base leading-snug md:text-[clamp(17px,1.65vw,27px)]">
         And sometimes, what happens next doesn’t look like protection.
       </p>
       <ul
-        className="mt-10 flex justify-center gap-1.5 sm:gap-8 md:mt-12 md:gap-[clamp(24px,2.4vw,44px)]"
+        className="mt-10 flex justify-center gap-1.5 sm:gap-8 md:mt-7 md:gap-[clamp(26px,2.64vw,48px)]"
         aria-label="Ways protection moves"
       >
         {["Explode", "Implode", "Shut down"].map((w) => (
           <li key={w}>
             <Eclipse>
-              <span className="text-[13px] font-semibold uppercase sm:text-base md:text-[clamp(15px,1.2vw,20px)]">
+              <span className="text-[13px] font-semibold uppercase sm:text-base md:text-[clamp(16px,1.46vw,24px)]">
                 {w}
               </span>
             </Eclipse>
           </li>
         ))}
       </ul>
-      <p className="mt-10 text-[26px] leading-tight font-medium tracking-[-0.02em] sm:text-4xl md:mt-12 md:text-[clamp(36px,3vw,52px)]">
+      <p className="mt-10 text-[26px] leading-tight font-medium tracking-[-0.02em] sm:text-4xl md:mt-7 md:text-[clamp(39px,3.3vw,57px)]">
         It can look and feel like who <em className="text-accent">you</em> are.
       </p>
-      <p className="tracked mt-6 text-[13px] leading-loose tracking-[0.24em] sm:text-base md:text-[clamp(16px,1.35vw,23px)]">
+      <p className="tracked mt-6 text-[13px] leading-loose tracking-[0.24em] sm:text-base md:text-[clamp(17px,1.65vw,28px)]">
         To protect what once{" "}
         <span className="text-accent">
           didn’t{" "}
@@ -238,27 +248,27 @@ const ADAPTATIONS = [
 ];
 
 function Adapt() {
-  const body = "text-[15px] leading-snug md:text-[clamp(15px,1.3vw,22px)]";
+  const body = "text-[15px] leading-snug md:text-[clamp(16px,1.59vw,27px)]";
   return (
     <section
       aria-labelledby="adapt-title"
-      className="bg-white px-5 pt-4 pb-16 text-center md:pb-24"
+      className="bg-white px-5 pt-4 pb-16 text-center md:pb-16"
     >
       <h2
         id="adapt-title"
-        className="text-[42px] leading-[1.02] font-bold tracking-[-0.01em] uppercase sm:text-6xl md:text-[clamp(64px,5.2vw,88px)]"
+        className="text-[42px] leading-[1.02] font-bold tracking-[-0.01em] uppercase sm:text-6xl md:text-[clamp(69px,5.72vw,97px)]"
       >
         You learned
         <br />
         to <em className="text-accent">adapt.</em>
       </h2>
       <div className={`mx-auto mt-5 max-w-[26em] ${body}`}>
-        <p className="text-lg leading-snug md:text-[clamp(18px,1.55vw,26px)]">
+        <p className="text-lg leading-snug md:text-[clamp(19px,1.89vw,32px)]">
           These ways of protecting
           <br />
           weren’t random.
         </p>
-        <p className="mt-1 text-lg font-medium text-accent italic md:text-[clamp(18px,1.55vw,26px)]">
+        <p className="mt-1 text-lg font-medium text-accent italic md:text-[clamp(19px,1.89vw,32px)]">
           As a child, you had needs.
         </p>
         <p className="mt-1">
@@ -267,22 +277,22 @@ function Adapt() {
           <br className="hidden sm:inline" /> they answered a question:
         </p>
       </div>
-      <p className="mt-6 text-[22px] leading-tight font-medium sm:text-3xl md:text-[clamp(30px,2.6vw,44px)]">
+      <p className="mt-6 text-[22px] leading-tight font-medium sm:text-3xl md:text-[clamp(32px,2.86vw,48px)]">
         Given the world I’m experiencing,
         <br />
         <em className="font-semibold text-accent">what is the safest way to be?</em>
       </p>
-      <ul className="mx-auto mt-10 grid max-w-[1400px] grid-cols-2 gap-x-3 gap-y-10 sm:grid-cols-3 md:grid-cols-5 md:gap-x-[clamp(8px,1.5vw,32px)]">
+      <ul className="mx-auto mt-10 grid max-w-[1400px] grid-cols-2 gap-x-3 gap-y-10 sm:grid-cols-3 md:grid-cols-5 md:gap-x-[clamp(9px,1.83vw,39px)]">
         {ADAPTATIONS.map((a, i) => (
           <li
             key={a.t}
             className={`flex flex-col items-center ${i === 4 ? "col-span-2 sm:col-span-1" : ""}`}
           >
             <Eclipse size="lg">
-              <span className="text-[15px] font-semibold uppercase md:text-[clamp(14px,1.3vw,22px)]">
+              <span className="text-[15px] font-semibold uppercase md:text-[clamp(15px,1.59vw,27px)]">
                 {a.t}
               </span>
-              <span className="text-[13px] text-gold italic md:text-[clamp(12px,1.1vw,19px)]">
+              <span className="text-[13px] text-gold italic md:text-[clamp(13px,1.34vw,23px)]">
                 {a.s}
               </span>
             </Eclipse>
@@ -290,8 +300,8 @@ function Adapt() {
           </li>
         ))}
       </ul>
-      <p className="mt-12 text-base md:text-[clamp(16px,1.35vw,22px)]">What helped you adapt</p>
-      <p className="tracked mt-1 text-xl tracking-[0.2em] text-accent md:text-[clamp(22px,1.9vw,32px)]">
+      <p className="mt-12 text-base md:text-[clamp(17px,1.65vw,27px)]">What helped you adapt</p>
+      <p className="tracked mt-1 text-xl tracking-[0.2em] text-accent md:text-[clamp(24px,2.32vw,39px)]">
         Can become automatic.
       </p>
     </section>
@@ -301,10 +311,10 @@ function Adapt() {
 /* ---------- 4. What became automatic ---------- */
 function Automatic() {
   return (
-    <section aria-labelledby="automatic-title" className="bg-white px-5 py-16 text-center md:py-24">
+    <section aria-labelledby="automatic-title" className="bg-white px-5 py-16 text-center md:py-12">
       <h2
         id="automatic-title"
-        className="text-[26px] leading-tight font-semibold uppercase sm:text-4xl md:text-[clamp(36px,3.1vw,54px)]"
+        className="text-[26px] leading-tight font-semibold uppercase sm:text-4xl md:text-[clamp(39px,3.41vw,59px)]"
       >
         What became automatic
         <br />
@@ -317,7 +327,7 @@ function Automatic() {
         </span>
       </h2>
       <ul
-        className="mx-auto mt-12 flex max-w-[1100px] flex-wrap justify-center gap-x-8 gap-y-3 text-xl font-semibold tracking-[0.02em] uppercase sm:gap-x-12 sm:text-3xl md:mt-16 md:gap-x-[clamp(48px,5.5vw,96px)] md:gap-y-6 md:text-[clamp(32px,3vw,52px)]"
+        className="mx-auto mt-12 flex max-w-[1100px] flex-wrap justify-center gap-x-8 gap-y-3 text-xl font-semibold tracking-[0.02em] uppercase sm:gap-x-12 sm:text-3xl md:mt-8 md:gap-x-[clamp(52px,6.05vw,106px)] md:gap-y-6 md:text-[clamp(35px,3.3vw,57px)]"
         aria-label="Areas of life"
       >
         {["Relationships", "Work", "Creativity"].map((w) => (
@@ -328,13 +338,13 @@ function Automatic() {
           <li key={w}>{w}</li>
         ))}
       </ul>
-      <div className="mt-12 text-base leading-snug md:mt-16 md:text-[clamp(16px,1.3vw,22px)]">
+      <div className="mt-12 text-base leading-snug md:mt-8 md:text-[clamp(17px,1.59vw,27px)]">
         <p>What you move toward.</p>
         <p>What you move away from.</p>
-        <p className="text-lg font-semibold md:text-[clamp(18px,1.6vw,28px)]">
+        <p className="text-lg font-semibold md:text-[clamp(19px,1.95vw,34px)]">
           What you allow yourself
         </p>
-        <p className="text-lg font-semibold text-accent italic md:text-[clamp(18px,1.6vw,28px)]">
+        <p className="text-lg font-semibold text-accent italic md:text-[clamp(19px,1.95vw,34px)]">
           to become.
         </p>
         <p className="mt-6">
@@ -342,12 +352,12 @@ function Automatic() {
           <br />
           for you long enough,
         </p>
-        <p className="mt-2 text-2xl leading-tight font-semibold text-accent uppercase md:text-[clamp(26px,2.35vw,40px)]">
+        <p className="mt-2 text-2xl leading-tight font-semibold text-accent uppercase md:text-[clamp(28px,2.59vw,44px)]">
           It can feel
           <br />
           like who you are.
         </p>
-        <p className="mt-8 text-xl text-accent italic md:text-[clamp(20px,1.8vw,30px)]">But…</p>
+        <p className="mt-8 text-xl text-accent italic md:text-[clamp(22px,2.2vw,37px)]">But…</p>
       </div>
     </section>
   );
@@ -358,16 +368,16 @@ function Visible() {
   return (
     <section
       aria-labelledby="visible-title"
-      className="bg-white px-5 pt-10 pb-20 text-center md:pb-28"
+      className="bg-white px-5 pt-10 pb-20 text-center md:pb-20"
     >
-      <p className="text-lg leading-snug font-light text-accent italic md:text-[clamp(20px,1.9vw,32px)]">
+      <p className="text-lg leading-snug font-light text-accent italic md:text-[clamp(22px,2.32vw,39px)]">
         what feels like who you are
         <br />
         could become visible as a pattern.
       </p>
       <h2
         id="visible-title"
-        className="mt-6 text-[32px] leading-[1.08] font-semibold uppercase sm:text-5xl md:text-[clamp(52px,4.5vw,76px)]"
+        className="mt-6 text-[32px] leading-[1.08] font-semibold uppercase sm:text-5xl md:text-[clamp(56px,4.95vw,84px)]"
       >
         What becomes visible
         <br />
@@ -380,12 +390,12 @@ function Visible() {
       >
         <path d="M0 -12 C1.2 -3 3 -1.2 12 0 C3 1.2 1.2 3 0 12 C-1.2 3 -3 1.2 -12 0 C-3 -1.2 -1.2 -3 0 -12 Z" />
       </svg>
-      <p className="text-2xl leading-tight font-medium text-accent uppercase sm:text-4xl md:text-[clamp(38px,3.3vw,56px)]">
+      <p className="text-2xl leading-tight font-medium text-accent uppercase sm:text-4xl md:text-[clamp(41px,3.63vw,62px)]">
         What can be met
         <br />
         becomes more choosable.
       </p>
-      <p className="mt-8 text-base leading-snug md:text-[clamp(17px,1.6vw,27px)]">
+      <p className="mt-8 text-base leading-snug md:text-[clamp(18px,1.95vw,33px)]">
         As your capacity to stay with what is here grows,
         <br className="hidden sm:inline" />{" "}
         <em className="text-accent">protection no longer has to lead.</em>
@@ -398,13 +408,13 @@ function Visible() {
 function MapIntro() {
   return (
     <div>
-      <p className="inline-block text-xs font-medium tracking-[0.18em] text-white uppercase md:text-[clamp(12px,0.95vw,16px)]">
+      <p className="inline-block text-xs font-medium tracking-[0.18em] text-white uppercase md:text-[clamp(12px,1.09vw,18px)]">
         The Map
         <span className="mt-1 block h-[5px] w-full bg-white" aria-hidden="true" />
       </p>
       <h2
         id="map-title"
-        className="mt-6 text-[26px] leading-[1.18] font-semibold uppercase lg:mt-[clamp(20px,2.2vw,40px)] lg:text-[clamp(24px,2.2vw,40px)]"
+        className="mt-6 text-[26px] leading-[1.18] font-semibold uppercase lg:mt-[clamp(20px,2.53vw,46px)] lg:text-[clamp(24px,2.53vw,46px)]"
       >
         See what’s been
         <br />
@@ -416,14 +426,15 @@ function MapIntro() {
           move through you.
         </span>
       </h2>
-      <p className="mt-5 text-base leading-snug lg:mt-[clamp(16px,2vw,36px)] lg:text-[clamp(14px,1.3vw,23px)]">
+      <p className="mt-5 text-base leading-snug lg:mt-[clamp(16px,2.3vw,41px)] lg:text-[clamp(14px,1.49vw,26px)]">
         A Map for meeting
         <br />
         what has been <em className="text-rust">moving you,</em> differently.
       </p>
       <a
         href={LINKS.exploreTheMapSection}
-        className="btn-outline mt-6 border-rust text-ink lg:mt-[clamp(16px,2vw,36px)] lg:text-[clamp(11px,0.85vw,15px)]"
+        {...ext(LINKS.exploreTheMapSection)}
+        className="btn-outline mt-6 border-rust text-ink lg:mt-[clamp(16px,2.3vw,41px)] lg:text-[clamp(11px,0.98vw,17px)]"
       >
         Explore the map <span aria-hidden="true">⟶</span>
       </a>
@@ -457,14 +468,14 @@ function MapSteps({ overlay }: { overlay: boolean }) {
               <span className="absolute top-1/2 left-1/2 h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-rust" />
             </span>
           )}
-          <span className="block text-xl font-normal lg:text-[clamp(18px,1.5vw,26px)]">{s.n}</span>
-          <span className="block text-sm font-medium tracking-[0.02em] uppercase lg:text-[clamp(11px,0.95vw,16px)]">
+          <span className="block text-xl font-normal lg:text-[clamp(18px,1.68vw,29px)]">{s.n}</span>
+          <span className="block text-sm font-medium tracking-[0.02em] uppercase lg:text-[clamp(11px,1.06vw,18px)]">
             {s.label}
           </span>
-          <span className="block text-sm text-rust italic lg:text-[clamp(11px,0.9vw,15px)]">
+          <span className="block text-sm text-rust italic lg:text-[clamp(11px,1.01vw,17px)]">
             {s.word}
           </span>
-          <span className="mx-auto mt-2 block max-w-[16em] text-sm leading-snug lg:text-[clamp(11px,0.9vw,15px)]">
+          <span className="mx-auto mt-2 block max-w-[16em] text-sm leading-snug lg:text-[clamp(11px,1.01vw,17px)]">
             {s.text}
           </span>
         </li>
@@ -557,23 +568,23 @@ function Available() {
     >
       <div className="relative z-10 px-5 pt-16 md:pt-20">
         <h2 id="available-title">
-          <span className="tracked block text-lg tracking-[0.3em] sm:text-2xl md:text-[clamp(26px,2.3vw,40px)]">
+          <span className="tracked block text-lg tracking-[0.3em] sm:text-2xl md:text-[clamp(28px,2.53vw,44px)]">
             What becomes
           </span>
-          <span className="block text-[54px] leading-[1] font-bold text-rust uppercase sm:text-7xl md:text-[clamp(76px,7vw,120px)]">
+          <span className="block text-[54px] leading-[1] font-bold text-rust uppercase sm:text-7xl md:text-[clamp(82px,7.7vw,132px)]">
             Available?
           </span>
         </h2>
-        <p className="mt-8 font-display text-lg tracking-[0.3em] uppercase md:mt-12 md:text-[clamp(18px,1.5vw,26px)]">
+        <p className="mt-8 font-display text-lg tracking-[0.3em] uppercase md:mt-9 md:text-[clamp(19px,1.83vw,32px)]">
           Greater capacity for
         </p>
         <ul className="mx-auto mt-8 grid max-w-[1400px] divide-y divide-[#d9a668] sm:grid-cols-2 sm:divide-y-0 md:grid-cols-5 md:divide-x">
           {CAPACITIES.map((c, i) => (
             <li
               key={c.t.join(" ")}
-              className={`px-4 py-5 md:px-[clamp(8px,1.6vw,32px)] md:py-1 ${i === 4 ? "sm:col-span-2 md:col-span-1" : ""}`}
+              className={`px-4 py-5 md:px-[clamp(9px,1.95vw,39px)] md:py-1 ${i === 4 ? "sm:col-span-2 md:col-span-1" : ""}`}
             >
-              <h3 className="text-lg leading-tight font-semibold tracking-[0.12em] uppercase md:text-[clamp(15px,1.5vw,26px)]">
+              <h3 className="text-lg leading-tight font-semibold tracking-[0.12em] uppercase md:text-[clamp(16px,1.83vw,32px)]">
                 {c.t.map((l, j) => (
                   <span key={j} className="md:block">
                     {l}
@@ -581,14 +592,14 @@ function Available() {
                   </span>
                 ))}
               </h3>
-              <p className="mx-auto mt-2 max-w-[17em] text-[15px] leading-snug md:mt-3 md:text-[clamp(13px,1.15vw,19px)]">
+              <p className="mx-auto mt-2 max-w-[17em] text-[15px] leading-snug md:mt-3 md:text-[clamp(14px,1.4vw,23px)]">
                 {c.d}
               </p>
             </li>
           ))}
         </ul>
       </div>
-      <div className="relative -mt-[18%] min-h-[300px] sm:-mt-[14%] md:-mt-[24%]">
+      <div className="relative -mt-[18%] min-h-[300px] sm:-mt-[14%] md:-mt-[33%]">
         <picture>
           <source media="(max-width: 900px)" srcSet={available900} />
           <img
@@ -608,7 +619,7 @@ function Available() {
           className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/45 to-transparent"
           aria-hidden="true"
         />
-        <p className="absolute inset-x-0 bottom-[7%] text-lg leading-snug font-medium tracking-[0.12em] text-white uppercase drop-shadow sm:text-2xl md:text-[clamp(24px,2.3vw,40px)]">
+        <p className="absolute inset-x-0 bottom-[7%] text-lg leading-snug font-medium tracking-[0.12em] text-white uppercase drop-shadow sm:text-2xl md:text-[clamp(26px,2.53vw,44px)]">
           More of you
           <br />
           <span className="font-semibold text-gold">Becomes available.</span>
@@ -624,7 +635,7 @@ function Founder() {
     <section
       id="founder"
       aria-labelledby="founder-title"
-      className="scroll-mt-4 bg-white px-5 py-16 text-center md:py-24"
+      className="scroll-mt-4 bg-white px-5 py-16 text-center md:py-16"
     >
       <img
         src={founder}
@@ -632,20 +643,20 @@ function Founder() {
         width={640}
         height={640}
         loading="lazy"
-        className="mx-auto h-[200px] w-[200px] rounded-full object-cover shadow-[0_10px_30px_rgb(0_0_0/0.12)] md:h-[clamp(220px,19vw,330px)] md:w-[clamp(220px,19vw,330px)]"
+        className="mx-auto h-[200px] w-[200px] rounded-full object-cover shadow-[0_10px_30px_rgb(0_0_0/0.12)] md:h-[clamp(238px,20.9vw,363px)] md:w-[clamp(238px,20.9vw,363px)]"
       />
-      <p className="mt-12 text-xs font-medium tracking-[0.18em] uppercase md:mt-16 md:text-[clamp(12px,0.95vw,16px)]">
+      <p className="mt-12 text-xs font-medium tracking-[0.18em] uppercase md:mt-10 md:text-[clamp(13px,1.16vw,20px)]">
         Founder story
       </p>
       <h2
         id="founder-title"
-        className="mt-5 text-[28px] leading-tight font-semibold uppercase md:text-[clamp(30px,2.4vw,42px)]"
+        className="mt-5 text-[28px] leading-tight font-semibold uppercase md:text-[clamp(32px,2.64vw,46px)]"
       >
         Why Alchemist Ways
         <br />
         <span className="text-accent">exists</span>
       </h2>
-      <div className="mx-auto mt-6 max-w-[34em] space-y-2 text-[15px] leading-snug md:text-[clamp(15px,1.2vw,20px)]">
+      <div className="mx-auto mt-6 max-w-[34em] space-y-2 text-[15px] leading-snug md:text-[clamp(16px,1.46vw,24px)]">
         <p>
           For years, I thought I was searching for freedom.
           <br />
@@ -677,11 +688,15 @@ function Founder() {
           Alchemist Ways grew from learning to meet those parts differently.
         </p>
       </div>
-      <p className="mt-10 text-[15px] font-semibold text-accent md:text-[clamp(15px,1.15vw,19px)]">
+      <p className="mt-10 text-[15px] font-semibold text-accent md:text-[clamp(16px,1.4vw,23px)]">
         Malek Najm Ghaleb
       </p>
-      <p className="text-sm italic md:text-[clamp(14px,1.05vw,17px)]">Founder, Alchemist Ways</p>
-      <a href={LINKS.founderStory} className="btn-outline mt-6 min-w-[min(100%,340px)] text-accent">
+      <p className="text-sm italic md:text-[clamp(15px,1.28vw,21px)]">Founder, Alchemist Ways</p>
+      <a
+        href={LINKS.founderStory}
+        {...ext(LINKS.founderStory)}
+        className="btn-outline mt-6 min-w-[min(100%,340px)] text-accent"
+      >
         Read the founder story <span aria-hidden="true">→</span>
       </a>
     </section>
@@ -739,59 +754,61 @@ function Begin() {
     <section
       id="begin"
       aria-labelledby="begin-title"
-      className="relative scroll-mt-4 overflow-hidden px-5 py-14 text-center md:py-[clamp(48px,4.5vw,80px)]"
+      className="relative scroll-mt-4 overflow-hidden px-5 py-14 text-center md:py-[clamp(52px,4.95vw,88px)]"
     >
       <picture>
-        <source media="(max-width: 900px)" srcSet={dunes900} />
+        <source media="(max-width: 900px)" srcSet={beginBg900} />
         <img
-          src={dunes}
+          src={beginBg}
           alt=""
-          width={1920}
-          height={832}
+          width={1671}
+          height={1040}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
       </picture>
       <div
-        className="absolute inset-0 [background:radial-gradient(ellipse_60%_45%_at_50%_22%,rgb(255_246_230/0.7),transparent),radial-gradient(ellipse_55%_30%_at_50%_92%,rgb(255_244_225/0.8),transparent)]"
+        className="absolute inset-0 [background:radial-gradient(ellipse_45%_30%_at_50%_20%,rgb(255_243_228/0.55),transparent),radial-gradient(ellipse_32%_22%_at_50%_90%,rgb(255_246_236/0.95),rgb(255_240_225/0.4)_60%,transparent)]"
         aria-hidden="true"
       />
       <div className="relative">
         <StarDivider />
         <h2
           id="begin-title"
-          className="mt-5 text-[40px] leading-[1.05] font-semibold tracking-[-0.03em] sm:text-6xl md:text-[clamp(60px,5.4vw,92px)]"
+          className="mt-5 text-[40px] leading-[1.05] font-semibold tracking-[-0.045em] sm:text-6xl md:text-[clamp(65px,5.94vw,101px)]"
         >
-          <span className="text-rust">Begin</span> Where You Are.
+          <span className="text-rust-deep">Begin</span> Where You Are.
         </h2>
-        <p className="tracked mt-3 text-[13px] leading-relaxed tracking-[0.24em] sm:text-lg md:text-[clamp(17px,1.5vw,26px)]">
+        <p className="tracked mt-3 text-[13px] leading-relaxed tracking-[0.24em] sm:text-lg md:text-[clamp(18px,1.83vw,32px)]">
           Three ways to meet yourself, <em className="font-medium text-rust">differently.</em>
         </p>
-        <ul className="mx-auto mt-10 grid max-w-[1320px] gap-5 md:grid-cols-3 md:gap-[clamp(16px,1.6vw,28px)]">
+        <ul className="mx-auto mt-10 grid max-w-[1320px] gap-5 md:mt-8 md:max-w-[min(100%,82vw,1480px)] md:grid-cols-3 md:gap-[clamp(14px,1.41vw,26px)]">
           {PATHS.map((p) => (
             <li
               key={p.n}
-              className="flex flex-col rounded-2xl bg-[#fbf7f1]/90 p-6 text-left shadow-[0_12px_30px_rgb(90_55_20/0.18)] backdrop-blur-sm lg:p-[clamp(24px,2vw,36px)]"
+              id={p.t.toLowerCase()}
+              className="scroll-mt-6 flex flex-col rounded-2xl bg-[#fbf7f1]/90 p-6 text-left shadow-[0_12px_30px_rgb(90_55_20/0.18)] backdrop-blur-sm lg:p-[clamp(26px,1.94vw,35px)]"
             >
-              <span className="text-2xl font-light text-ink/80 md:text-[clamp(22px,1.7vw,30px)]">
+              <span className="text-2xl font-light text-ink/80 md:text-[clamp(24px,1.82vw,33px)]">
                 {p.n}
               </span>
-              <h3 className="mt-1 text-2xl font-semibold tracking-[0.06em] uppercase md:text-[clamp(22px,1.8vw,32px)]">
+              <h3 className="mt-1 text-2xl font-semibold tracking-[0.06em] uppercase md:text-[clamp(24px,1.94vw,34px)]">
                 {p.t}
               </h3>
-              <p className="mt-1 text-xs font-medium tracking-[0.22em] text-rust uppercase md:text-[clamp(11px,0.95vw,16px)]">
+              <p className="mt-1 text-xs font-medium tracking-[0.22em] text-rust uppercase md:text-[clamp(12px,1.02vw,18px)]">
                 {p.s}
               </p>
-              <p className="mt-4 text-lg leading-snug font-medium md:text-[clamp(16px,1.3vw,22px)]">
+              <p className="mt-4 text-lg leading-snug font-medium md:text-[clamp(17px,1.4vw,24px)]">
                 {p.lead}
               </p>
-              <p className="mt-3 text-sm leading-snug text-ink/70 md:text-[clamp(13px,0.95vw,16px)]">
+              <p className="mt-3 text-sm leading-snug text-ink/70 md:text-[clamp(14px,1.02vw,18px)]">
                 {p.d}
               </p>
               <div className="mt-auto pt-6">
                 <a
                   href={p.href}
-                  className="btn-pill w-full border-ink/70 bg-transparent text-xs md:text-[clamp(11px,0.85vw,14px)]"
+                  {...ext(p.href)}
+                  className="btn-pill w-full border-ink bg-transparent text-xs font-semibold md:text-[clamp(11px,0.84vw,14px)]"
                 >
                   {p.cta} <span aria-hidden="true">→</span>
                 </a>
@@ -802,7 +819,7 @@ function Begin() {
         <div className="mt-12">
           <StarDivider />
         </div>
-        <p className="mt-5 text-lg leading-snug font-medium tracking-[0.14em] uppercase sm:text-2xl md:text-[clamp(24px,2.2vw,38px)]">
+        <p className="mt-5 text-lg leading-snug font-medium tracking-[0.14em] uppercase sm:text-2xl md:text-[clamp(26px,2.42vw,42px)]">
           What becomes possible
           <br />
           when <span className="text-rust">more of you</span>

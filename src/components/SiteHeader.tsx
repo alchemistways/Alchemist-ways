@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 
 import logo from "../assets/logo.webp";
-import { LINKS } from "../content/links";
+import { EXTERNAL, LINKS } from "../content/links";
+import { SocialIcons } from "./SocialIcons";
 
 const NAV = [
   { href: "#main", label: "Home" },
   { href: "#map", label: "The Map" },
   { href: "#founder", label: "Founder Story" },
   { href: "#begin", label: "Begin Where You Are" },
+  { href: EXTERNAL.community, label: "Community" },
+  { href: EXTERNAL.conversation, label: "Book a Conversation" },
 ];
 
 export function SiteHeader() {
@@ -99,12 +102,15 @@ export function SiteHeader() {
             </button>
           </div>
           <nav aria-label="Primary" className="flex flex-1 items-center justify-center">
-            <ul className="space-y-6 text-center">
+            <ul className="space-y-5 text-center">
               {NAV.map((n) => (
                 <li key={n.href}>
                   <a
                     href={n.href}
                     onClick={() => setOpen(false)}
+                    {...(n.href.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
                     className="text-2xl font-medium tracking-[0.08em] text-ink uppercase hover:text-rust md:text-3xl"
                   >
                     {n.label}
@@ -113,6 +119,7 @@ export function SiteHeader() {
               ))}
             </ul>
           </nav>
+          <SocialIcons />
         </div>
       )}
     </header>
