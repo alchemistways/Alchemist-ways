@@ -79,7 +79,7 @@ function arrows() {
 }
 
 /** Five-stage diagram laid over the circle of people in the Map artwork. */
-export function MapDiagram() {
+export function MapDiagram({ markerId = "map-arrow" }: { markerId?: string }) {
   return (
     <div className="absolute inset-0" aria-hidden="true">
       <svg
@@ -88,7 +88,7 @@ export function MapDiagram() {
       >
         <defs>
           <marker
-            id="map-arrow"
+            id={markerId}
             viewBox="0 0 10 10"
             refX="7"
             refY="5"
@@ -106,8 +106,8 @@ export function MapDiagram() {
             fill="none"
             stroke="currentColor"
             strokeWidth="0.13"
-            markerStart="url(#map-arrow)"
-            markerEnd="url(#map-arrow)"
+            markerStart={`url(#${markerId})`}
+            markerEnd={`url(#${markerId})`}
           />
         ))}
         <g transform={`translate(${c.x} ${c.y}) scale(0.13)`} fill="currentColor">

@@ -137,6 +137,20 @@ function Hero() {
         agency.
       </h1>
       <div className="relative lg:static">
+        {/* Desktop backdrop: the same file (already loaded), covering the section and anchored
+            at the floor line (76.7% down) so it continues the wall and floor to the right of the
+            main image when the viewport is wider than the artwork at full height. */}
+        <img
+          src={hero1686}
+          srcSet={HERO_SRCSET}
+          sizes={HERO_SIZES}
+          alt=""
+          aria-hidden="true"
+          width={1686}
+          height={933}
+          decoding="async"
+          className="absolute inset-0 hidden h-full w-full object-cover object-[left_76.7%] lg:block"
+        />
         <img
           src={hero1686}
           srcSet={HERO_SRCSET}
@@ -146,7 +160,7 @@ function Hero() {
           height={933}
           fetchPriority="high"
           decoding="async"
-          className="block aspect-square w-full object-cover object-[22%_62%] sm:aspect-[16/10] sm:object-[20%_60%] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:object-[left_center]"
+          className="relative block aspect-square w-full object-cover object-[22%_62%] sm:aspect-[16/10] sm:object-[20%_60%] lg:absolute lg:top-0 lg:left-0 lg:aspect-[1686/933] lg:h-full lg:w-auto lg:max-w-none lg:[mask-image:linear-gradient(to_right,#000_80%,transparent)]"
         />
         <div
           className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-b from-transparent to-[#f1e6d6] lg:hidden"
@@ -419,7 +433,7 @@ function Automatic() {
         </span>
       </h2>
       <ul
-        className="mx-auto mt-12 flex max-w-[1100px] flex-wrap justify-center gap-x-8 gap-y-3 text-xl font-semibold tracking-[0.02em] uppercase sm:gap-x-12 sm:text-3xl md:mt-8 md:gap-x-[clamp(52px,6.05vw,106px)] md:gap-y-6 md:text-[clamp(35px,3.3vw,57px)]"
+        className="mx-auto mt-12 flex max-w-[1400px] flex-wrap justify-center gap-x-4 gap-y-3 text-[min(1.25rem,calc((100vw-72px)/17.4))] font-semibold tracking-[0.02em] whitespace-nowrap uppercase sm:gap-x-12 sm:text-[min(1.875rem,4.5vw)] md:mt-8 md:gap-x-[clamp(52px,6.05vw,106px)] md:gap-y-6 md:text-[clamp(35px,3.3vw,57px)]"
         aria-label="Areas of life"
       >
         {["Relationships", "Work", "Creativity"].map((w) => (
@@ -497,7 +511,7 @@ function Visible() {
 }
 
 /* ---------- 6. The Map ---------- */
-function MapIntro() {
+function MapIntro({ titleId }: { titleId: string }) {
   return (
     <div>
       <p className="inline-block text-xs font-medium tracking-[0.18em] text-white uppercase md:text-[clamp(12px,1.09vw,18px)]">
@@ -505,7 +519,7 @@ function MapIntro() {
         <span className="mt-1 block h-[5px] w-full bg-white" aria-hidden="true" />
       </p>
       <h2
-        id="map-title"
+        id={titleId}
         className="mt-6 text-[26px] leading-[1.18] font-semibold uppercase lg:mt-[clamp(20px,2.53vw,46px)] lg:text-[clamp(24px,2.53vw,46px)]"
       >
         See what’s been
@@ -576,7 +590,7 @@ function MapSteps({ overlay }: { overlay: boolean }) {
   );
 }
 
-function MapArt() {
+function MapArt({ variant }: { variant: "sm" | "lg" }) {
   return (
     <>
       <img
@@ -590,7 +604,7 @@ function MapArt() {
         decoding="async"
         className="absolute inset-0 h-full w-full"
       />
-      <MapDiagram />
+      <MapDiagram markerId={`map-arrow-${variant}`} />
     </>
   );
 }
@@ -601,7 +615,7 @@ function TheMap() {
       {/* Phone & tablet: text, artwork crop, then stages */}
       <div className="px-5 pt-14 pb-14 lg:hidden">
         <div className="mx-auto max-w-[640px]">
-          <MapIntro />
+          <MapIntro titleId="map-title-sm" />
         </div>
         <div className="relative mx-auto mt-10 aspect-square max-w-[560px] overflow-hidden rounded-lg">
           {/* Artwork sized so MapDiagram CENTER (61.4%, 43.5%) lands at the square’s center. */}
@@ -609,7 +623,7 @@ function TheMap() {
             className="absolute aspect-[1672/941] w-[240%] [container-type:inline-size]"
             style={{ left: "50%", top: "50%", transform: "translate(-61.4%, -43.5%)" }}
           >
-            <MapArt />
+            <MapArt variant="sm" />
           </div>
         </div>
         <div className="mt-10">
@@ -618,7 +632,7 @@ function TheMap() {
       </div>
       {/* Desktop: full-bleed artwork with overlaid text, matching the design */}
       <div className="relative hidden aspect-[1672/941] w-full [container-type:inline-size] lg:block">
-        <MapArt />
+        <MapArt variant="lg" />
         <div
           className="absolute inset-y-0 left-0 w-[48%] bg-gradient-to-r from-[#f7ead3]/75 via-[#f7ead3]/35 to-transparent"
           aria-hidden="true"
@@ -628,7 +642,7 @@ function TheMap() {
           aria-hidden="true"
         />
         <div className="absolute top-[13.5%] left-[4.6%] w-[34%]">
-          <MapIntro />
+          <MapIntro titleId="map-title" />
         </div>
         <div className="absolute inset-x-[2.5%] top-[72.5%] bottom-[3%]">
           <MapSteps overlay />
@@ -678,9 +692,9 @@ function Available() {
           {CAPACITIES.map((c, i) => (
             <li
               key={c.t.join(" ")}
-              className={`px-4 py-5 md:px-[clamp(9px,1.95vw,39px)] md:py-1 ${i === 4 ? "sm:col-span-2 md:col-span-1" : ""}`}
+              className={`@container px-4 py-5 md:px-2 md:py-1 lg:px-[clamp(9px,1.2vw,20px)] ${i === 4 ? "sm:col-span-2 md:col-span-1" : ""}`}
             >
-              <h3 className="text-lg leading-tight font-semibold tracking-[0.12em] uppercase md:text-[clamp(16px,1.83vw,32px)]">
+              <h3 className="text-[min(1.125rem,11cqi)] leading-tight font-semibold tracking-[0.12em] uppercase md:text-[min(clamp(16px,1.83vw,32px),11cqi)]">
                 {c.t.map((l, j) => (
                   <span key={j} className="md:block">
                     {l}
@@ -937,7 +951,7 @@ function Begin() {
                   <a
                     href={p.href}
                     {...ext(p.href)}
-                    className="btn-pill w-full border-ink/80 bg-[#fbf7f1] text-xs font-semibold md:text-[clamp(11px,0.85vw,14px)]"
+                    className="btn-pill w-full border-ink/80 bg-[#fbf7f1] text-xs font-semibold whitespace-nowrap md:gap-1.5 md:px-[clamp(8px,1.2vw,28px)] md:text-[clamp(10.5px,0.85vw,14px)] md:tracking-[clamp(0.01em,0.04vw,0.04em)]"
                   >
                     {p.cta} <span aria-hidden="true">→</span>
                   </a>
