@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build-pages:
-    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message != 'chore: rebuild GitHub Pages root'
+    if: "${{ github.event_name == 'workflow_dispatch' || !startsWith(github.event.head_commit.message, 'chore: rebuild GitHub Pages root') }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
