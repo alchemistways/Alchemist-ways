@@ -16,6 +16,9 @@ const MAP_SRCSET = `${map900} 900w, ${map1280} 1280w, ${map1672} 1672w, ${map240
 const MAP_SIZES = "(min-width: 1024px) 100vw, min(1344px, 225vw)";
 const AVAILABLE_SRCSET = `${available900} 900w, ${available1280} 1280w, ${available1767} 1767w`;
 const AVAILABLE_SIZES = "(max-width: 639px) 155vw, 100vw";
+const BEGIN_BG_SRCSET = `${beginBg900} 900w, ${beginBg} 1671w, ${beginBg2200} 2200w`;
+const BEGIN_BG_SIZES = "100vw";
+const BEGIN_CARD_SIZES = "(min-width: 1024px) 28vw, (min-width: 768px) 40vw, 90vw";
 
 const ext = (href: string) =>
   isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
@@ -36,6 +39,16 @@ import founder390 from "../assets/founder-390.webp";
 import founder780 from "../assets/founder-780.webp";
 import beginBg from "../assets/begin-bg.webp";
 import beginBg900 from "../assets/begin-bg-900.webp";
+import beginBg2200 from "../assets/begin-bg-2200.webp";
+import beginDiscover480 from "../assets/begin-discover-480.webp";
+import beginDiscover800 from "../assets/begin-discover-800.webp";
+import beginDiscover1200 from "../assets/begin-discover-1200.webp";
+import beginUnderstand480 from "../assets/begin-understand-480.webp";
+import beginUnderstand800 from "../assets/begin-understand-800.webp";
+import beginUnderstand1200 from "../assets/begin-understand-1200.webp";
+import beginTransform480 from "../assets/begin-transform-480.webp";
+import beginTransform800 from "../assets/begin-transform-800.webp";
+import beginTransform1200 from "../assets/begin-transform-1200.webp";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -585,7 +598,11 @@ function TheMap() {
           <MapIntro />
         </div>
         <div className="relative mx-auto mt-10 aspect-square max-w-[560px] overflow-hidden rounded-lg">
-          <div className="absolute top-1/2 left-[-97%] aspect-[1672/941] w-[240%] -translate-y-[43.5%] [container-type:inline-size]">
+          {/* Artwork sized so MapDiagram CENTER (61.4%, 43.5%) lands at the square’s center. */}
+          <div
+            className="absolute aspect-[1672/941] w-[240%] [container-type:inline-size]"
+            style={{ left: "50%", top: "50%", transform: "translate(-61.4%, -43.5%)" }}
+          >
             <MapArt />
           </div>
         </div>
@@ -789,24 +806,33 @@ const PATHS = [
     d: "Take one reaction, feeling, or pattern and begin seeing the invisible architecture beneath it.",
     cta: "Discover the tool",
     href: LINKS.discoverTool,
+    img: beginDiscover800,
+    srcSet: `${beginDiscover480} 480w, ${beginDiscover800} 800w, ${beginDiscover1200} 1200w`,
+    alt: "A person sits in meditation before a circular opening looking out over a golden coastal sunset.",
   },
   {
     n: "02",
     t: "Understand",
-    s: "Explore the map.",
+    s: "Explore the book / map.",
     lead: "The complete Map, in book form.",
     d: "Go deeper into the hidden architecture beneath your patterns—and the movement from reactivity to Creative Agency.",
     cta: "Explore the book",
     href: LINKS.exploreBook,
+    img: beginUnderstand800,
+    srcSet: `${beginUnderstand480} 480w, ${beginUnderstand800} 800w, ${beginUnderstand1200} 1200w`,
+    alt: "An open book on desert sand showing The Map diagram from reactivity to creative agency.",
   },
   {
     n: "03",
     t: "Transform",
     s: "Bring it into life.",
     lead: "One-on-one work with Malek.",
-    d: "Bring the Map into lived experience—and work directly with what is ready to become visible, met, and more choosable.",
+    d: "Bring the Map into lived experience—see what moves you, meet it differently, and create more room for choice.",
     cta: "Work with Malek",
     href: LINKS.workWithMalek,
+    img: beginTransform800,
+    srcSet: `${beginTransform480} 480w, ${beginTransform800} 800w, ${beginTransform1200} 1200w`,
+    alt: "Two people sit facing each other on desert sand inside a glowing circular ring.",
   },
 ];
 
@@ -832,18 +858,17 @@ function Begin() {
       aria-labelledby="begin-title"
       className="relative scroll-mt-4 overflow-hidden px-5 py-14 text-center md:py-[clamp(52px,4.95vw,88px)]"
     >
-      <picture>
-        <source media="(max-width: 900px)" srcSet={beginBg900} />
-        <img
-          src={beginBg}
-          alt=""
-          width={1671}
-          height={1040}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-        />
-      </picture>
+      <img
+        src={beginBg}
+        srcSet={BEGIN_BG_SRCSET}
+        sizes={BEGIN_BG_SIZES}
+        alt=""
+        width={1671}
+        height={1040}
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
       <div
         className="absolute inset-0 [background:radial-gradient(ellipse_45%_30%_at_50%_20%,rgb(255_243_228/0.55),transparent),radial-gradient(ellipse_32%_22%_at_50%_90%,rgb(255_246_236/0.95),rgb(255_240_225/0.4)_60%,transparent)]"
         aria-hidden="true"
@@ -856,39 +881,61 @@ function Begin() {
         >
           <span className="text-rust-deep">Begin</span> Where You Are.
         </h2>
-        <p className="tracked mt-3 text-[13px] leading-relaxed tracking-[0.24em] sm:text-lg md:text-[clamp(18px,1.83vw,32px)]">
-          Three ways to meet yourself, <em className="font-medium text-rust">differently.</em>
+        <p className="tracked mt-3 text-[13px] leading-relaxed tracking-[0.24em] sm:text-lg md:text-[clamp(16px,1.6vw,28px)]">
+          Three ways to begin meeting yourself,{" "}
+          <em className="font-medium tracking-normal text-rust normal-case">Differently.</em>
         </p>
-        <ul className="mx-auto mt-10 grid max-w-[1320px] gap-5 md:mt-8 md:max-w-[min(100%,82vw,1480px)] md:grid-cols-3 md:gap-[clamp(14px,1.41vw,26px)]">
+        <ul className="mx-auto mt-10 grid max-w-[1320px] gap-6 md:mt-10 md:max-w-[min(100%,90vw,1480px)] md:grid-cols-3 md:gap-[clamp(16px,1.6vw,28px)]">
           {PATHS.map((p) => (
             <li
               key={p.n}
               id={p.t.toLowerCase()}
-              className="scroll-mt-6 flex flex-col rounded-2xl bg-[#fbf7f1]/90 p-6 text-left shadow-[0_12px_30px_rgb(90_55_20/0.18)] backdrop-blur-sm lg:p-[clamp(26px,1.94vw,35px)]"
+              className="scroll-mt-6 flex flex-col overflow-hidden rounded-2xl border border-rust/25 bg-[#fbf7f1]/95 text-left shadow-[0_12px_30px_rgb(90_55_20/0.16)] backdrop-blur-sm"
             >
-              <span className="text-2xl font-light text-ink/80 md:text-[clamp(24px,1.82vw,33px)]">
-                {p.n}
-              </span>
-              <h3 className="mt-1 text-2xl font-semibold tracking-[0.06em] uppercase md:text-[clamp(24px,1.94vw,34px)]">
-                {p.t}
-              </h3>
-              <p className="mt-1 text-xs font-medium tracking-[0.22em] text-rust uppercase md:text-[clamp(12px,1.02vw,18px)]">
-                {p.s}
-              </p>
-              <p className="mt-4 text-lg leading-snug font-medium md:text-[clamp(17px,1.4vw,24px)]">
-                {p.lead}
-              </p>
-              <p className="mt-3 text-sm leading-snug text-ink/70 md:text-[clamp(14px,1.02vw,18px)]">
-                {p.d}
-              </p>
-              <div className="mt-auto pt-6">
-                <a
-                  href={p.href}
-                  {...ext(p.href)}
-                  className="btn-pill w-full border-ink bg-transparent text-xs font-semibold md:text-[clamp(11px,0.84vw,14px)]"
-                >
-                  {p.cta} <span aria-hidden="true">→</span>
-                </a>
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={p.img}
+                  srcSet={p.srcSet}
+                  sizes={BEGIN_CARD_SIZES}
+                  alt={p.alt}
+                  width={800}
+                  height={443}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                />
+                <div
+                  className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/70 via-black/35 to-transparent"
+                  aria-hidden="true"
+                />
+                <span className="absolute top-3 left-3 text-lg font-light tracking-wide text-white/90 md:text-[clamp(16px,1.3vw,22px)]">
+                  {p.n}
+                </span>
+                <div className="absolute inset-x-0 bottom-0 px-4 pt-8 pb-4 text-center text-white">
+                  <h3 className="text-xl font-semibold tracking-[0.14em] uppercase md:text-[clamp(18px,1.5vw,26px)]">
+                    {p.t}
+                  </h3>
+                  <p className="mt-1 text-[11px] font-medium tracking-[0.16em] uppercase italic md:text-[clamp(11px,0.95vw,15px)]">
+                    {p.s}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-1 flex-col px-5 pt-5 pb-5 md:px-[clamp(18px,1.4vw,28px)] md:pt-6 md:pb-6">
+                <p className="text-center text-base leading-snug font-semibold md:text-[clamp(15px,1.2vw,20px)]">
+                  {p.lead}
+                </p>
+                <p className="mt-3 text-center text-sm leading-snug text-ink/75 md:text-[clamp(13px,1.0vw,17px)]">
+                  {p.d}
+                </p>
+                <div className="mt-auto pt-5">
+                  <a
+                    href={p.href}
+                    {...ext(p.href)}
+                    className="btn-pill w-full border-ink/80 bg-[#fbf7f1] text-xs font-semibold md:text-[clamp(11px,0.85vw,14px)]"
+                  >
+                    {p.cta} <span aria-hidden="true">→</span>
+                  </a>
+                </div>
               </div>
             </li>
           ))}
