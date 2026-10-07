@@ -40,14 +40,14 @@ import founder780 from "../assets/founder-780.webp";
 import beginBg from "../assets/begin-bg.webp";
 import beginBg900 from "../assets/begin-bg-900.webp";
 import beginBg2200 from "../assets/begin-bg-2200.webp";
-import beginDiscover480 from "../assets/begin-discover-480.webp";
-import beginDiscover800 from "../assets/begin-discover-800.webp";
+import beginDiscover600 from "../assets/begin-discover-600.webp";
+import beginDiscover900 from "../assets/begin-discover-900.webp";
 import beginDiscover1200 from "../assets/begin-discover-1200.webp";
-import beginUnderstand480 from "../assets/begin-understand-480.webp";
-import beginUnderstand800 from "../assets/begin-understand-800.webp";
+import beginUnderstand600 from "../assets/begin-understand-600.webp";
+import beginUnderstand900 from "../assets/begin-understand-900.webp";
 import beginUnderstand1200 from "../assets/begin-understand-1200.webp";
-import beginTransform480 from "../assets/begin-transform-480.webp";
-import beginTransform800 from "../assets/begin-transform-800.webp";
+import beginTransform600 from "../assets/begin-transform-600.webp";
+import beginTransform900 from "../assets/begin-transform-900.webp";
 import beginTransform1200 from "../assets/begin-transform-1200.webp";
 
 export const Route = createFileRoute("/")({
@@ -806,8 +806,8 @@ const PATHS = [
     d: "Take one reaction, feeling, or pattern and begin seeing the invisible architecture beneath it.",
     cta: "Discover the tool",
     href: LINKS.discoverTool,
-    img: beginDiscover800,
-    srcSet: `${beginDiscover480} 480w, ${beginDiscover800} 800w, ${beginDiscover1200} 1200w`,
+    img: beginDiscover900,
+    srcSet: `${beginDiscover600} 600w, ${beginDiscover900} 900w, ${beginDiscover1200} 1200w`,
     alt: "A person sits in meditation before a circular opening looking out over a golden coastal sunset.",
   },
   {
@@ -818,8 +818,8 @@ const PATHS = [
     d: "Go deeper into the hidden architecture beneath your patterns—and the movement from reactivity to Creative Agency.",
     cta: "Explore the book",
     href: LINKS.exploreBook,
-    img: beginUnderstand800,
-    srcSet: `${beginUnderstand480} 480w, ${beginUnderstand800} 800w, ${beginUnderstand1200} 1200w`,
+    img: beginUnderstand900,
+    srcSet: `${beginUnderstand600} 600w, ${beginUnderstand900} 900w, ${beginUnderstand1200} 1200w`,
     alt: "An open book on desert sand showing The Map diagram from reactivity to creative agency.",
   },
   {
@@ -830,8 +830,8 @@ const PATHS = [
     d: "Bring the Map into lived experience—see what moves you, meet it differently, and create more room for choice.",
     cta: "Work with Malek",
     href: LINKS.workWithMalek,
-    img: beginTransform800,
-    srcSet: `${beginTransform480} 480w, ${beginTransform800} 800w, ${beginTransform1200} 1200w`,
+    img: beginTransform900,
+    srcSet: `${beginTransform600} 600w, ${beginTransform900} 900w, ${beginTransform1200} 1200w`,
     alt: "Two people sit facing each other on desert sand inside a glowing circular ring.",
   },
 ];
@@ -892,17 +892,17 @@ function Begin() {
               id={p.t.toLowerCase()}
               className="scroll-mt-6 flex flex-col overflow-hidden rounded-2xl border border-rust/25 bg-[#fbf7f1]/95 text-left shadow-[0_12px_30px_rgb(90_55_20/0.16)] backdrop-blur-sm"
             >
-              <div className="relative aspect-[16/10] overflow-hidden">
+              <div className="relative aspect-square w-full overflow-hidden bg-[#1a120c]">
                 <img
                   src={p.img}
                   srcSet={p.srcSet}
                   sizes={BEGIN_CARD_SIZES}
                   alt={p.alt}
-                  width={800}
-                  height={443}
+                  width={900}
+                  height={900}
                   loading="lazy"
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover object-center"
+                  className="absolute inset-0 block h-[102%] w-[102%] max-w-none -translate-x-[1%] -translate-y-[1%] object-cover object-center"
                 />
                 <div
                   className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/70 via-black/35 to-transparent"
