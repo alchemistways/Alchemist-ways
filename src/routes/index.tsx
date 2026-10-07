@@ -17,8 +17,14 @@ const MAP_SIZES = "(min-width: 1024px) 100vw, min(1344px, 225vw)";
 const AVAILABLE_SRCSET = `${available900} 900w, ${available1280} 1280w, ${available1767} 1767w`;
 const AVAILABLE_SIZES = "(max-width: 639px) 155vw, 100vw";
 const BEGIN_BG_SRCSET = `${beginBg900} 900w, ${beginBg} 1671w, ${beginBg2200} 2200w`;
-const BEGIN_BG_SIZES = "100vw";
-const BEGIN_CARD_SIZES = "(min-width: 1024px) 28vw, (min-width: 768px) 40vw, 90vw";
+// The Begin background is object-cover over a section much taller than it is wide on
+// phones, so its drawn width is far larger than 100vw (≈3600px at 390px wide, ≈1.55×
+// the viewport on tablet/desktop). Ask for the width it is actually drawn at.
+const BEGIN_BG_SIZES = "(max-width: 767px) 400vw, 155vw";
+// Card art = one third of the min(90vw, 1480px) grid minus two clamp(16px,1.6vw,28px) gaps,
+// drawn at 102% to hide the rounded-corner bleed; phones show one card at 100vw − 40px.
+const BEGIN_CARD_SIZES =
+  "(min-width: 768px) calc((min(90vw, 1480px) - 3.2vw) * 0.34), calc((100vw - 40px) * 1.02)";
 
 const ext = (href: string) =>
   isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
