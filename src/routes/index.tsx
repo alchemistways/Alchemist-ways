@@ -265,6 +265,60 @@ const ADAPTATIONS = [
   { t: "Adapt", s: "Change for it.", d: "Change yourself to preserve safety or belonging." },
 ];
 
+const STREAM_WORDS = [
+  "SUPPRESS",
+  "CONTROL",
+  "DEFEND",
+  "HIDE",
+  "ADAPT",
+  "PLEASE",
+  "PERFORM",
+  "PROVE",
+  "PERFECT",
+  "ANTICIPATE",
+  "WITHDRAW",
+  "OVERTHINK",
+  "DISCONNECT",
+  "ESCAPE",
+] as const;
+
+function WordStreamList({ duplicate = false }: { duplicate?: boolean }) {
+  return (
+    <ul className="word-stream-list" aria-hidden={duplicate || undefined}>
+      {STREAM_WORDS.map((w, i) => (
+        <li key={`${duplicate ? "d" : "a"}-${w}`}>
+          {i > 0 && (
+            <span aria-hidden="true" className="word-stream-dot">
+              ·
+            </span>
+          )}
+          {w}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function WordStream() {
+  return (
+    <div
+      className="word-stream"
+      role="region"
+      aria-label="I have to: suppress, control, defend, hide, adapt, please, perform, prove, perfect, anticipate, withdraw, overthink, disconnect, escape"
+    >
+      <p className="word-stream-prefix">
+        I have to<span aria-hidden="true">…</span>
+      </p>
+      <div className="word-stream-viewport">
+        <div className="word-stream-track">
+          <WordStreamList />
+          <WordStreamList duplicate />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Adapt() {
   const body = "text-[15px] leading-snug md:text-[clamp(16px,1.59vw,27px)]";
   return (
@@ -300,6 +354,7 @@ function Adapt() {
         <br />
         <em className="font-semibold text-accent">what is the safest way to be?</em>
       </p>
+      <WordStream />
       <ul className="mx-auto mt-10 grid max-w-[1400px] grid-cols-2 gap-x-3 gap-y-10 sm:grid-cols-3 md:grid-cols-5 md:gap-x-[clamp(9px,1.83vw,39px)]">
         {ADAPTATIONS.map((a, i) => (
           <li
