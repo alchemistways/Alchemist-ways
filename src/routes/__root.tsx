@@ -2,7 +2,17 @@ import { Outlet, createRootRoute, HeadContent } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import poppins400 from "@fontsource/poppins/files/poppins-latin-400-normal.woff2?url";
+import figtree from "../assets/fonts/figtree-latin-wght-normal.woff2?url";
+import newsreader from "../assets/fonts/newsreader-latin-wght-normal.woff2?url";
+import newsreaderItalic from "../assets/fonts/newsreader-latin-wght-italic.woff2?url";
+
+const preloadFont = (href: string) => ({
+  rel: "preload",
+  href,
+  as: "font",
+  type: "font/woff2",
+  crossOrigin: "anonymous" as const,
+});
 
 const SITE_URL = "https://alchemistways.com/";
 const TITLE = "Alchemist Ways | Meet Yourself, Differently.";
@@ -12,7 +22,7 @@ const DESCRIPTION =
 function NotFoundComponent() {
   return (
     <main className="flex min-h-svh flex-col items-center justify-center gap-6 bg-white px-6 text-center">
-      <p className="font-display text-sm tracking-[0.35em] text-ink uppercase">Alchemist Ways</p>
+      <p className="font-mono text-sm tracking-[0.35em] text-ink uppercase">Alchemist Ways</p>
       <h1 className="text-3xl font-semibold text-ink">This page could not be found.</h1>
       <a href="./" className="btn-outline">
         Return home
@@ -48,13 +58,10 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: `${SITE_URL}og-image.jpg` },
     ],
     links: [
-      {
-        rel: "preload",
-        href: poppins400,
-        as: "font",
-        type: "font/woff2",
-        crossOrigin: "anonymous",
-      },
+      // Fonts used above the fold (hero headline + header/body).
+      preloadFont(figtree),
+      preloadFont(newsreader),
+      preloadFont(newsreaderItalic),
       { rel: "stylesheet", href: appCss },
       { rel: "canonical", href: SITE_URL },
       { rel: "icon", href: "./favicon.png", type: "image/png" },

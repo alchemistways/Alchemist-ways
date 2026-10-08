@@ -16,24 +16,24 @@ const MENU_SCRIPT = `(()=>{const m=document.getElementById("site-menu"),o=docume
 export function SiteHeader() {
   return (
     <header className="absolute inset-x-0 top-0 z-40">
-      <div className="mx-auto grid grid-cols-[48px_1fr_auto] items-center gap-3 px-4 pt-4 sm:grid-cols-[1fr_auto_1fr] sm:px-8 lg:px-[5%] lg:pt-[clamp(20px,3vw,48px)]">
+      <div className="mx-auto grid grid-cols-[52px_1fr_52px] items-center gap-3 px-4 pt-4 sm:grid-cols-[1fr_auto_1fr] sm:px-8 lg:px-[3.2%] lg:pt-[clamp(18px,2.7vw,52px)]">
         <button
           type="button"
           data-menu-open
           aria-expanded="false"
           aria-controls="site-menu"
           aria-label="Open menu"
-          className="-ml-2 flex h-12 w-12 items-center justify-center justify-self-start text-rust"
+          className="flex h-[52px] w-[52px] items-center justify-center justify-self-start rounded-full bg-[#0b0b0d] text-white shadow-[0_6px_16px_rgb(0_0_0/0.18)] transition-transform hover:scale-105 lg:h-[clamp(52px,5.9vw,100px)] lg:w-[clamp(52px,5.9vw,100px)]"
         >
           <svg
             viewBox="0 0 24 24"
-            className="h-6 w-6 lg:h-[clamp(24px,1.9vw,36px)] lg:w-[clamp(24px,1.9vw,36px)]"
+            className="h-[22px] w-[22px] lg:h-[clamp(22px,2.1vw,36px)] lg:w-[clamp(22px,2.1vw,36px)]"
             aria-hidden="true"
           >
             <path
               d="M3 6.5h18M3 12h18M3 17.5h18"
               stroke="currentColor"
-              strokeWidth="2.4"
+              strokeWidth="1.6"
               strokeLinecap="round"
             />
           </svg>
@@ -44,12 +44,12 @@ export function SiteHeader() {
             alt="Alchemist Ways"
             width={695}
             height={60}
-            className="block h-auto w-[min(100%,170px)] sm:w-[220px] lg:w-[clamp(220px,17vw,330px)]"
+            className="block h-auto w-[min(100%,170px)] sm:w-[210px] lg:w-[clamp(210px,15.5vw,320px)] lg:-translate-y-[clamp(4px,1vw,20px)]"
           />
         </a>
         <a
           href={LINKS.begin}
-          className="btn-solid justify-self-end px-5 sm:px-8 lg:min-h-[clamp(44px,2.9vw,56px)] lg:min-w-[clamp(110px,6.5vw,150px)] lg:text-[clamp(13px,0.85vw,16px)]"
+          className="flex h-[52px] w-[52px] items-center justify-center justify-self-end rounded-full text-[11px] font-medium tracking-[0.08em] text-[#e2491b] uppercase shadow-[0_0_18px_rgb(255_196_70/0.55)] transition-transform [background:radial-gradient(circle_at_42%_36%,#fff3b0_0%,#ffd75a_42%,#f9b92a_78%,#f2a01c_100%)] hover:scale-105 lg:h-[clamp(52px,5.6vw,96px)] lg:w-[clamp(52px,5.6vw,96px)] lg:text-[clamp(11px,1vw,19px)]"
         >
           Begin
         </a>

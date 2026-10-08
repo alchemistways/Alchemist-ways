@@ -26,6 +26,10 @@ export const LINKS = {
   exploreTheMap: "#map",
   /** Map section "Explore the map": the complete Map lives in the book. */
   exploreTheMapSection: "#understand",
+  /** Opening "Go deeper with the book": same destination as the hero "Get the book". */
+  goDeeperWithBook: "#understand",
+  /** Map section "The Community Field": the existing Skool community link. */
+  communityField: EXTERNAL.community,
   /** Founder "Read the founder story": no standalone story page yet; books a conversation with Malek. */
   founderStory: EXTERNAL.conversation,
   /** Begin card 01 "Discover the tool": the tool is offered through the free community. */
