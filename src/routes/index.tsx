@@ -3,14 +3,19 @@ import type { ReactNode } from "react";
 
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
-import { HeroDiagram, STAGES } from "../components/HeroDiagram";
 import { VideoBlock } from "../components/VideoBlock";
 import { EclipseArt, LineIcon, SunArt, WaveCircleArt, type IconName } from "../components/Art";
 import { LINKS, isExternal } from "../content/links";
+import { STAGES } from "../content/stages";
 
-import heroBg900 from "../assets/hero-bg-900.webp";
-import heroBg1280 from "../assets/hero-bg-1280.webp";
-import heroBg1677 from "../assets/hero-bg-1677.webp";
+import heroMap900 from "../assets/hero-map-900.webp";
+import heroMap1280 from "../assets/hero-map-1280.webp";
+import heroMap1677 from "../assets/hero-map-1677.webp";
+import heroBook420 from "../assets/hero-book-420.webp";
+import heroBook640 from "../assets/hero-book-640.webp";
+import heroDrawing540 from "../assets/hero-drawing-540.webp";
+import heroDrawing1080 from "../assets/hero-drawing-1080.webp";
+import heroBackdrop from "../assets/hero-backdrop-480.webp";
 import mapRing720 from "../assets/map-ring-720.webp";
 import mapRing1080 from "../assets/map-ring-1080.webp";
 import mapRing1440 from "../assets/map-ring-1440.webp";
@@ -29,10 +34,26 @@ import beginTransform1200 from "../assets/begin-transform-1200.webp";
 
 /* Responsive image sets: the browser picks the smallest file that is sharp at the
    displayed size × device pixel ratio. `sizes` mirrors each image's CSS width. */
-const HERO_SRCSET = `${heroBg900} 900w, ${heroBg1280} 1280w, ${heroBg1677} 1677w`;
-// Phones/tablets: 5:4 / 4:3 cover crop (drawn ≈143vw / ≈134vw wide). Desktop: the stage is
-// the artwork at full hero height, at least 1073px wide (600px min height).
-const HERO_SIZES = "(max-width: 639px) 143vw, (max-width: 1023px) 134vw, max(100vw, 1073px)";
+// Hero art = the book + hand-drawn Map on the peach wall (1677×938 source, no upscales).
+// Desktop: the whole picture on a stage at full hero height (≥ 1073px wide, ≤ 100vw / 178.8vh).
+// Tablet (768–1023): a book + drawing crop drawn at 147% of the width. Phones: art-directed to a
+// square crop of the book, with a separate native-resolution crop of the drawing under it.
+const HERO_SRCSET = `${heroMap900} 900w, ${heroMap1280} 1280w, ${heroMap1677} 1677w`;
+const HERO_SIZES = "(max-width: 1023px) 147vw, max(1073px, min(100vw, 178.8vh))";
+const HERO_MEDIA = "(min-width: 768px)";
+const HERO_BOOK_SRCSET = `${heroBook420} 420w, ${heroBook640} 640w`;
+const HERO_BOOK_SIZES = "min(100vw, 460px)";
+// Drawing crop: 540 = native pixels (wall evened to the section colour); 1080 = a light
+// Lanczos 2× (visibly crisper hand-lettering than browser upscaling on 2-3× phones).
+const HERO_DRAWING_SRCSET = `${heroDrawing540} 540w, ${heroDrawing1080} 1080w`;
+const HERO_DRAWING_SIZES = "min(100vw - 32px, 440px)";
+/** 1×1 transparent GIF: lets a <picture> skip its download where it is not shown. */
+const NO_IMAGE = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+const HERO_ALT =
+  "The book Meet Yourself, Differently. by Malek Najm Ghaleb, subtitled Turn emotional reactivity into creative agency, standing on a sunlit surface beside a hand-drawn circular map of five movements: " +
+  STAGES.map((s) => `${s.n} ${s.label}, ${s.word}`).join("; ") +
+  ".";
+
 const MAP_RING_SRCSET = `${mapRing720} 720w, ${mapRing1080} 1080w, ${mapRing1440} 1440w`;
 // Desktop: 46.9% of the band; below lg: the full column (≤ 560px).
 const MAP_RING_SIZES = "(min-width: 1024px) 46.9vw, min(100vw - 40px, 560px)";
@@ -45,6 +66,27 @@ const ext = (href: string) =>
   isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
 export const Route = createFileRoute("/")({
+  // Start the hero art download with the HTML, matching the <picture> sources exactly.
+  head: () => ({
+    links: [
+      {
+        rel: "preload",
+        as: "image",
+        imageSrcSet: HERO_SRCSET,
+        imageSizes: HERO_SIZES,
+        media: HERO_MEDIA,
+        fetchPriority: "high",
+      },
+      {
+        rel: "preload",
+        as: "image",
+        imageSrcSet: HERO_BOOK_SRCSET,
+        imageSizes: HERO_BOOK_SIZES,
+        media: "(max-width: 767px)",
+        fetchPriority: "high",
+      },
+    ],
+  }),
   component: Home,
 });
 
@@ -130,39 +172,40 @@ function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative overflow-hidden bg-[linear-gradient(#f2dcc2,#ecd2b4)] lg:h-[max(600px,min(55.9vw,100svh))]"
+      className="relative overflow-hidden bg-[linear-gradient(#f2d6bb,#efd3b6_70%,#f6e0c9)] lg:h-[max(600px,min(55.9vw,100svh))]"
     >
-      {/* Desktop backdrop: the same file (same srcset/sizes, so one download), covering the
-          section and anchored at the floor line (78.6% down) so wall and floor continue
-          beyond the centred stage on very wide or short viewports. */}
+      {/* Desktop only: soft wall-and-floor backdrop (the art without book or drawing, blurred,
+          inlined) so short or very wide viewports continue the scene beyond the stage. */}
       <img
-        src={heroBg1677}
-        srcSet={HERO_SRCSET}
-        sizes={HERO_SIZES}
+        src={heroBackdrop}
         alt=""
         aria-hidden="true"
-        width={1677}
-        height={938}
-        decoding="async"
+        width={480}
+        height={268}
         className="absolute inset-0 hidden h-full w-full object-cover object-[center_78.6%] lg:block"
       />
-      {/* Stage = the artwork at full hero height; everything is positioned on it so the
-          diagram and buttons stay put next to the book at every desktop size. */}
+      {/* Stage = the whole artwork at full hero height (never cropped); the headline and
+          buttons are positioned on it so they keep their place around the book and drawing. */}
       <div className="relative flex flex-col items-center pt-[92px] pb-12 [container-type:inline-size] sm:pt-[104px] lg:absolute lg:inset-y-0 lg:left-1/2 lg:block lg:aspect-[1677/938] lg:h-full lg:-translate-x-1/2 lg:p-0">
-        <img
-          src={heroBg1677}
-          srcSet={HERO_SRCSET}
-          sizes={HERO_SIZES}
-          alt="The book Meet Yourself, Differently. Turn emotional reactivity into creative agency, by Malek Najm Ghaleb, standing on a sunlit surface."
-          width={1677}
-          height={938}
-          fetchPriority="high"
-          decoding="async"
-          className="order-2 mt-4 block aspect-[5/4] w-full object-cover object-[29%_62%] [mask-image:linear-gradient(transparent,#000_14%,#000_86%,transparent)] sm:aspect-[4/3] sm:object-[29%_62%] lg:absolute lg:inset-0 lg:mt-0 lg:aspect-auto lg:h-full lg:[mask-image:linear-gradient(to_right,transparent,#000_4%,#000_96%,transparent)]"
-        />
+        <div className="relative order-2 mt-4 aspect-square w-full max-w-[460px] edge-fade [--fy:12%] min-[461px]:[--fx:12%] md:mt-6 md:aspect-[1140/690] md:max-w-none md:overflow-hidden md:[--fx:8%] md:[--fy:10%] lg:absolute lg:inset-0 lg:mt-0 lg:aspect-auto lg:overflow-visible lg:[--fx:4%] lg:[--fy:0%]">
+          <picture>
+            <source media={HERO_MEDIA} srcSet={HERO_SRCSET} sizes={HERO_SIZES} />
+            <img
+              src={heroBook640}
+              srcSet={HERO_BOOK_SRCSET}
+              sizes={HERO_BOOK_SIZES}
+              alt={HERO_ALT}
+              width={640}
+              height={640}
+              fetchPriority="high"
+              decoding="async"
+              className="block h-full w-full object-cover md:absolute md:top-[-30.4%] md:left-[-26.3%] md:h-auto md:w-[147.1%] md:max-w-none lg:inset-0 lg:h-full lg:w-full"
+            />
+          </picture>
+        </div>
         <h1
           id="hero-title"
-          className="relative z-10 order-1 px-5 text-center font-serif text-[34px] leading-[1.06] font-semibold tracking-[-0.02em] text-[#252421] sm:text-[46px] lg:absolute lg:inset-x-0 lg:top-[12.6%] lg:px-0 lg:text-[3.95cqi] lg:leading-[1.03]"
+          className="relative z-10 order-1 px-5 text-center font-serif text-[34px] leading-[1.06] font-semibold tracking-[-0.02em] text-[#252421] sm:text-[46px] lg:absolute lg:inset-x-0 lg:top-[11.2%] lg:px-0 lg:text-[3.7cqi] lg:leading-[1.03]"
         >
           What moves you
           <br />
@@ -171,10 +214,22 @@ function Hero() {
             choose for you.
           </em>
         </h1>
-        <div className="relative z-10 order-3 -mt-2 w-[min(100%-24px,560px)] lg:absolute lg:top-[54.4%] lg:left-[70.3%] lg:mt-0 lg:w-[47cqi] lg:-translate-x-1/2 lg:-translate-y-1/2">
-          <HeroDiagram className="block h-auto w-full overflow-visible" idPrefix="hero-map" />
-        </div>
-        <div className="relative z-10 order-4 mt-6 px-5 lg:absolute lg:top-[84%] lg:left-[69%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2 lg:px-0">
+        {/* Phones: the drawing again at its native resolution so the labels stay legible
+            (described by the hero image alt; tablets and desktop show it inside that image). */}
+        <picture className="relative order-3 -mt-1 block w-[min(100%-32px,440px)] edge-fade [--fx:10%] [--fy:10%] md:hidden">
+          <source media={HERO_MEDIA} srcSet={NO_IMAGE} />
+          <img
+            src={heroDrawing540}
+            srcSet={HERO_DRAWING_SRCSET}
+            sizes={HERO_DRAWING_SIZES}
+            alt=""
+            width={540}
+            height={490}
+            decoding="async"
+            className="block h-auto w-full"
+          />
+        </picture>
+        <div className="relative z-10 order-4 mt-6 px-5 md:mt-4 lg:absolute lg:top-[84%] lg:left-[68.6%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2 lg:px-0">
           <HeroButtons />
         </div>
       </div>

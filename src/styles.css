@@ -308,3 +308,19 @@
   backdrop-filter: blur(6px);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25);
 }
+
+/* Feathered edges for cropped art (hero). Set --fx / --fy to the fade width per breakpoint. */
+.edge-fade {
+  --fx: 0%;
+  --fy: 0%;
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent,
+      #000 var(--fx),
+      #000 calc(100% - var(--fx)),
+      transparent
+    ),
+    linear-gradient(transparent, #000 var(--fy), #000 calc(100% - var(--fy)), transparent);
+  mask-composite: intersect;
+}

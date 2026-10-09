@@ -16,18 +16,18 @@ const MENU_SCRIPT = `(()=>{const m=document.getElementById("site-menu"),o=docume
 export function SiteHeader() {
   return (
     <header className="absolute inset-x-0 top-0 z-40">
-      <div className="mx-auto grid grid-cols-[52px_1fr_52px] items-center gap-3 px-4 pt-4 sm:grid-cols-[1fr_auto_1fr] sm:px-8 lg:px-[3.2%] lg:pt-[clamp(18px,2.7vw,52px)]">
+      <div className="mx-auto grid grid-cols-[52px_1fr_52px] items-center gap-3 px-4 pt-4 sm:grid-cols-[1fr_auto_1fr] sm:px-8 lg:px-[3.2%] lg:pt-[clamp(18px,min(2.7vw,4.83svh),52px)]">
         <button
           type="button"
           data-menu-open
           aria-expanded="false"
           aria-controls="site-menu"
           aria-label="Open menu"
-          className="flex h-[52px] w-[52px] items-center justify-center justify-self-start rounded-full bg-[#0b0b0d] text-white shadow-[0_6px_16px_rgb(0_0_0/0.18)] transition-transform hover:scale-105 lg:h-[clamp(52px,5.9vw,100px)] lg:w-[clamp(52px,5.9vw,100px)]"
+          className="flex h-[52px] w-[52px] items-center justify-center justify-self-start rounded-full bg-[#0b0b0d] text-white shadow-[0_6px_16px_rgb(0_0_0/0.18)] transition-transform hover:scale-105 lg:h-[clamp(52px,min(5.9vw,10.55svh),100px)] lg:w-[clamp(52px,min(5.9vw,10.55svh),100px)]"
         >
           <svg
             viewBox="0 0 24 24"
-            className="h-[22px] w-[22px] lg:h-[clamp(22px,2.1vw,36px)] lg:w-[clamp(22px,2.1vw,36px)]"
+            className="h-[22px] w-[22px] lg:h-[clamp(22px,min(2.1vw,3.75svh),36px)] lg:w-[clamp(22px,min(2.1vw,3.75svh),36px)]"
             aria-hidden="true"
           >
             <path
@@ -44,12 +44,12 @@ export function SiteHeader() {
             alt="Alchemist Ways"
             width={695}
             height={60}
-            className="block h-auto w-[min(100%,170px)] sm:w-[210px] lg:w-[clamp(210px,15.5vw,320px)] lg:-translate-y-[clamp(4px,1vw,20px)]"
+            className="block h-auto w-[min(100%,170px)] sm:w-[210px] lg:w-[clamp(210px,min(15.5vw,27.71svh),320px)] lg:-translate-y-[clamp(4px,min(1vw,1.79svh),20px)]"
           />
         </a>
         <a
           href={LINKS.begin}
-          className="flex h-[52px] w-[52px] items-center justify-center justify-self-end rounded-full text-[11px] font-medium tracking-[0.08em] text-[#e2491b] uppercase shadow-[0_0_18px_rgb(255_196_70/0.55)] transition-transform [background:radial-gradient(circle_at_42%_36%,#fff3b0_0%,#ffd75a_42%,#f9b92a_78%,#f2a01c_100%)] hover:scale-105 lg:h-[clamp(52px,5.6vw,96px)] lg:w-[clamp(52px,5.6vw,96px)] lg:text-[clamp(11px,1vw,19px)]"
+          className="flex h-[52px] w-[52px] items-center justify-center justify-self-end rounded-full text-[11px] font-medium tracking-[0.08em] text-[#e2491b] uppercase shadow-[0_0_18px_rgb(255_196_70/0.55)] transition-transform [background:radial-gradient(circle_at_42%_36%,#fff3b0_0%,#ffd75a_42%,#f9b92a_78%,#f2a01c_100%)] hover:scale-105 lg:h-[clamp(52px,min(5.6vw,10.01svh),96px)] lg:w-[clamp(52px,min(5.6vw,10.01svh),96px)] lg:text-[clamp(11px,min(1vw,1.79svh),19px)]"
         >
           Begin
         </a>
