@@ -260,45 +260,45 @@ export function PlayIcon({ className = "" }: { className?: string }) {
 }
 
 /* --------------------------------------------------------------- Line icons */
+// Redrawn to match the client's reference sheet: thin single-weight black line art.
+const HAND =
+  "M11 24.7V20.84L4.12 12.7C3.24 11.52 2.5 9.89 3.09 8.56C3.68 7.3 5.46 7.52 6.05 8.71L9.89 15.44M9.89 15.44L8.41 12.85C7.97 11.67 9.16 10.78 10.04 11.37L14.19 16.7Q14.78 17.44 14.78 18.47V24.7";
 const ICON_PATHS = {
+  // Almond eye with a round iris over three long waves.
   presence: (
     <>
-      <path d="M4 11.5C7.6 6.6 11.6 4.5 16 4.5s8.4 2.1 12 7c-3.6 4.9-7.6 7-12 7s-8.4-2.1-12-7Z" />
-      <circle cx="16" cy="11.5" r="3.6" />
-      <path d="M5 21.5c2.2-1.6 4.4-1.6 6.6 0s4.4 1.6 6.6 0 4.4-1.6 6.6 0 2.2 1.6 3.2.8" />
-      <path d="M5 25.5c2.2-1.6 4.4-1.6 6.6 0s4.4 1.6 6.6 0 4.4-1.6 6.6 0 2.2 1.6 3.2.8" />
-      <path d="M5 29.3c2.2-1.6 4.4-1.6 6.6 0s4.4 1.6 6.6 0 4.4-1.6 6.6 0 2.2 1.6 3.2.8" />
+      <path d="M2.6 10C8 1.5 24 1.5 29.4 10C24 18.5 8 18.5 2.6 10Z" />
+      <circle cx="16" cy="10.4" r="3.8" />
+      <path d="M3 21.2C8 18 12 19 16 20.6S24 23.2 29 20" />
+      <path d="M3 25C8 21.8 12 22.8 16 24.4S24 27 29 23.8" />
+      <path d="M3 28.8C8 25.6 12 26.6 16 28.2S24 30.8 29 27.6" />
     </>
   ),
+  // Two open hands reaching upward, palms facing in (fingers together, thumbs raised).
   receiving: (
     <>
-      <path d="M8.6 29.5v-4.6C6 22.4 4.4 18.8 4 14.2c-.1-1.5 1.9-1.9 2.3-.4l1.1 4.4" />
-      <path d="M7.4 18.2 6.6 9.6c-.1-1.5 2-1.8 2.2-.2l.9 7" />
-      <path d="M9.7 16.4 9.5 7.3c0-1.5 2.1-1.5 2.2 0l.3 8.6" />
-      <path d="M12 15.9l.3-6c.1-1.4 2-1.2 2 .2v8.7c0 2.3-.8 4.2-2 5.9v4.8" />
-      <g transform="matrix(-1 0 0 1 32 0)">
-        <path d="M8.6 29.5v-4.6C6 22.4 4.4 18.8 4 14.2c-.1-1.5 1.9-1.9 2.3-.4l1.1 4.4" />
-        <path d="M7.4 18.2 6.6 9.6c-.1-1.5 2-1.8 2.2-.2l.9 7" />
-        <path d="M9.7 16.4 9.5 7.3c0-1.5 2.1-1.5 2.2 0l.3 8.6" />
-        <path d="M12 15.9l.3-6c.1-1.4 2-1.2 2 .2v8.7c0 2.3-.8 4.2-2 5.9v4.8" />
-      </g>
+      <path d={HAND} />
+      <path d={HAND} transform="matrix(-1 0 0 1 32 0)" />
     </>
   ),
+  // Lotus: tall centre petal and two open side petals meeting at one point.
   authenticity: (
     <>
-      <path d="M16 27c-3.6-3.2-4.6-7.4-3.2-11.6C13.6 13 14.6 11 16 9c1.4 2 2.4 4 3.2 6.4 1.4 4.2.4 8.4-3.2 11.6Z" />
-      <path d="M16 27c-4.8.2-8.7-1.4-10.5-5-.9-1.8-1.3-3.6-1.4-5.6 3.9.3 7.3 1.9 9.4 4.6" />
-      <path d="M16 27c4.8.2 8.7-1.4 10.5-5 .9-1.8 1.3-3.6 1.4-5.6-3.9.3-7.3 1.9-9.4 4.6" />
+      <path d="M16 26C9.3 19.5 9.3 11.5 16 5.5C22.7 11.5 22.7 19.5 16 26Z" />
+      <path d="M11 17C9 14.8 6 13.5 2.9 13.4C2.9 19.5 8.5 25.6 16 26" />
+      <path d="M21 17C23 14.8 26 13.5 29.1 13.4C29.1 19.5 23.5 25.6 16 26" />
     </>
   ),
+  // Two interlocking circles.
   relational: (
     <>
-      <circle cx="11.6" cy="16" r="7.6" />
-      <circle cx="20.4" cy="16" r="7.6" />
+      <circle cx="10.25" cy="16" r="7.85" />
+      <circle cx="21.75" cy="16" r="7.85" />
     </>
   ),
+  // Infinity with the over/under break at the crossing.
   creative: (
-    <path d="M16 16c-2.6-3.2-5.2-5.4-8.4-5.4a5.4 5.4 0 0 0 0 10.8c3.2 0 5.8-2.2 8.4-5.4s5.2-5.4 8.4-5.4a5.4 5.4 0 0 1 0 10.8c-3.2 0-5.8-2.2-8.4-5.4Z" />
+    <path d="M14.4 14.4C12.4 12.4 10 10.5 7 10.5C4 10.5 2 13 2 16C2 19 4 21.5 7 21.5C10 21.5 13 19.4 16 16C19 12.6 22 10.5 25 10.5C28 10.5 30 13 30 16C30 19 28 21.5 25 21.5C22 21.5 19.6 19.6 17.6 17.6" />
   ),
 } as const;
 
@@ -311,7 +311,7 @@ export function LineIcon({ name, className = "" }: { name: IconName; className?:
       className={className}
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1.15"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"

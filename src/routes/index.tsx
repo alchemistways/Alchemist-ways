@@ -7,62 +7,56 @@ import { VideoBlock } from "../components/VideoBlock";
 import { EclipseArt, LineIcon, SunArt, WaveCircleArt, type IconName } from "../components/Art";
 import { LINKS, isExternal } from "../content/links";
 import { STAGES } from "../content/stages";
+import { HeroDiagram } from "../components/HeroDiagram";
 
-import heroMap900 from "../assets/hero-map-900.webp";
-import heroMap1280 from "../assets/hero-map-1280.webp";
-import heroMap1677 from "../assets/hero-map-1677.webp";
-import heroBookPhone510 from "../assets/hero-book-phone-510.webp";
-import heroBookPhone1020 from "../assets/hero-book-phone-1020.webp";
-import heroDrawingPhone540 from "../assets/hero-drawing-phone-540.webp";
-import heroDrawingPhone1080 from "../assets/hero-drawing-phone-1080.webp";
+import heroScene900 from "../assets/hero-scene-900.webp";
+import heroScene1280 from "../assets/hero-scene-1280.webp";
+import heroScene1711 from "../assets/hero-scene-1711.webp";
 import heroBackdrop from "../assets/hero-backdrop-480.webp";
-import mapRing720 from "../assets/map-ring-720.webp";
-import mapRing1080 from "../assets/map-ring-1080.webp";
-import mapRing1440 from "../assets/map-ring-1440.webp";
+import heroWall from "../assets/hero-wall-760.webp";
+import heroBook432 from "../assets/hero-book-432.webp";
+import heroBook864 from "../assets/hero-book-864.webp";
+import mapGold640 from "../assets/map-gold-640.webp";
+import mapGold1006 from "../assets/map-gold-1006.webp";
+import mapGold1400 from "../assets/map-gold-1400.webp";
 import mapBackdrop from "../assets/map-backdrop-480.webp";
 import founder390 from "../assets/founder-390.webp";
 import founder780 from "../assets/founder-780.webp";
-import beginDiscover600 from "../assets/begin-discover-600.webp";
-import beginDiscover900 from "../assets/begin-discover-900.webp";
-import beginDiscover1200 from "../assets/begin-discover-1200.webp";
-import beginUnderstand600 from "../assets/begin-understand-600.webp";
-import beginUnderstand900 from "../assets/begin-understand-900.webp";
-import beginUnderstand1200 from "../assets/begin-understand-1200.webp";
-import beginTransform600 from "../assets/begin-transform-600.webp";
-import beginTransform900 from "../assets/begin-transform-900.webp";
-import beginTransform1200 from "../assets/begin-transform-1200.webp";
+import beginDiscover420 from "../assets/begin-discover-420.webp";
+import beginDiscover636 from "../assets/begin-discover-636.webp";
+import beginDiscover960 from "../assets/begin-discover-960.webp";
+import beginUnderstand420 from "../assets/begin-understand-420.webp";
+import beginUnderstand636 from "../assets/begin-understand-636.webp";
+import beginUnderstand960 from "../assets/begin-understand-960.webp";
+import beginTransform420 from "../assets/begin-transform-420.webp";
+import beginTransform636 from "../assets/begin-transform-636.webp";
+import beginTransform960 from "../assets/begin-transform-960.webp";
 
 /* Responsive image sets: the browser picks the smallest file that is sharp at the
    displayed size × device pixel ratio. `sizes` mirrors each image's CSS width. */
-// Hero art = the book + hand-drawn Map on the peach wall (1677×938 source, no upscales).
-// Desktop: the whole picture on a stage at full hero height (≥ 1073px wide, ≤ 100vw / 178.8vh).
-// Tablet (768–1023): a book + drawing crop drawn at 147% of the width, top/bottom faded into the
-// section colour. Phones: art-directed to a crop of the book with a separate crop of the drawing
-// under it; both carry feathered alpha edges so they dissolve into the section colour (no boxes).
-const HERO_SRCSET = `${heroMap900} 900w, ${heroMap1280} 1280w, ${heroMap1677} 1677w`;
-const HERO_SIZES = "(max-width: 1023px) 147vw, max(1073px, min(100vw, 178.8vh))";
-const HERO_MEDIA = "(min-width: 768px)";
-// Phones/tablets sit on #f4d3b5, the wall tone of the artwork around the book.
-const HERO_BOOK_SRCSET = `${heroBookPhone510} 510w, ${heroBookPhone1020} 1020w`;
-const HERO_BOOK_SIZES = "min(100vw, 460px)";
-// Drawing crop: 540 = native pixels (wall lighting evened to the section colour, alpha-feathered
-// outside the lettering); 1080 = a light Lanczos 2× (crisper hand-lettering on 2-3× phones).
-const HERO_DRAWING_SRCSET = `${heroDrawingPhone540} 540w, ${heroDrawingPhone1080} 1080w`;
-const HERO_DRAWING_SIZES = "min(100vw, 470px)";
+// Hero (desktop ≥ 1024): the client scene (pale wall with window light, floor, the book) with
+// the headline and the Map removed (1711×919); headline, Map diagram and buttons are live
+// HTML/SVG on an aspect-locked stage at full hero height (stage width = 1.862 × hero height).
+const HERO_SCENE_SRCSET = `${heroScene900} 900w, ${heroScene1280} 1280w, ${heroScene1711} 1711w`;
+const HERO_SCENE_SIZES = "max(1117px, min(100vw, 186.2vh))";
+const DESKTOP = "(min-width: 1024px)";
+// Phones/tablets: the book alone (cut out of the same scene, with its floor reflection) on a
+// CSS wall + floor, so the section has no box edges at any width.
+const HERO_BOOK_SRCSET = `${heroBook432} 432w, ${heroBook864} 864w`;
+const HERO_BOOK_SIZES = "(min-width: 768px) 260px, min(62vw, 280px)";
 /** 1×1 transparent GIF: lets a <picture> skip its download where it is not shown. */
 const NO_IMAGE = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-const HERO_ALT =
-  "The book Meet Yourself, Differently. by Malek Najm Ghaleb, subtitled Turn emotional reactivity into creative agency, standing on a sunlit surface beside a hand-drawn circular map of five movements: " +
-  STAGES.map((s) => `${s.n} ${s.label}, ${s.word}`).join("; ") +
-  ".";
+const BOOK_ALT =
+  "The book Meet Yourself, Differently. by Malek Najm Ghaleb, subtitled Turn emotional reactivity into creative agency, standing in soft window light.";
 
-const MAP_RING_SRCSET = `${mapRing720} 720w, ${mapRing1080} 1080w, ${mapRing1440} 1440w`;
-// Desktop: 46.9% of the band; below lg: the full column (≤ 560px).
-const MAP_RING_SIZES = "(min-width: 1024px) 46.9vw, min(100vw - 40px, 560px)";
-// Card art = one third of the min(91vw, 1520px) grid minus two 1.6vw gaps, drawn at 102% to
-// hide the rounded-corner bleed; phones show one card at 100vw − 40px.
+// The Map: golden sand disc with the meditating figure (labels baked in), cut out of its white
+// background (1006 px native; 1400 = Lanczos 2× for 2× desktop screens).
+const MAP_GOLD_SRCSET = `${mapGold640} 640w, ${mapGold1006} 1006w, ${mapGold1400} 1400w`;
+// Desktop: 40% of the band; below lg: the full column (≤ 560px).
+const MAP_GOLD_SIZES = "(min-width: 1024px) 40vw, min(100vw - 40px, 560px)";
+// Card art = one third of the min(91vw, 1520px) grid minus two 1.6vw gaps; phones one card.
 const BEGIN_CARD_SIZES =
-  "(min-width: 768px) calc((min(91vw, 1520px) - 3.2vw) * 0.34), calc((100vw - 40px) * 1.02)";
+  "(min-width: 768px) calc((min(91vw, 1520px) - 3.2vw) / 3), min(100vw - 40px, 560px)";
 
 const ext = (href: string) =>
   isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
@@ -74,9 +68,9 @@ export const Route = createFileRoute("/")({
       {
         rel: "preload",
         as: "image",
-        imageSrcSet: HERO_SRCSET,
-        imageSizes: HERO_SIZES,
-        media: HERO_MEDIA,
+        imageSrcSet: HERO_SCENE_SRCSET,
+        imageSizes: HERO_SCENE_SIZES,
+        media: DESKTOP,
         fetchPriority: "high",
       },
       {
@@ -84,7 +78,7 @@ export const Route = createFileRoute("/")({
         as: "image",
         imageSrcSet: HERO_BOOK_SRCSET,
         imageSizes: HERO_BOOK_SIZES,
-        media: "(max-width: 767px)",
+        media: "(max-width: 1023px)",
         fetchPriority: "high",
       },
     ],
@@ -174,68 +168,79 @@ function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative overflow-hidden bg-[#f4d3b5] lg:bg-[linear-gradient(#f2d6bb,#efd3b6_70%,#f6e0c9)] lg:h-[max(600px,min(55.9vw,100svh))]"
+      className="relative isolate overflow-hidden bg-[linear-gradient(#f8eeeb,#fbf5f3_40%,#f7efec)] lg:h-[max(600px,min(53.7vw,100svh))] lg:bg-[#efe4e0]"
     >
-      {/* Desktop only: soft wall-and-floor backdrop (the art without book or drawing, blurred,
-          inlined) so short or very wide viewports continue the scene beyond the stage. */}
+      {/* Desktop only: blurred wall-and-floor backdrop (the same scene, 1.5 KB) so short or very
+          wide viewports continue the scene beyond the stage. */}
       <img
         src={heroBackdrop}
         alt=""
         aria-hidden="true"
         width={480}
-        height={268}
-        className="absolute inset-0 hidden h-full w-full object-cover object-[center_78.6%] lg:block"
+        height={258}
+        className="absolute inset-0 hidden h-full w-full object-cover lg:block"
       />
-      {/* Stage = the whole artwork at full hero height (never cropped); the headline and
-          buttons are positioned on it so they keep their place around the book and drawing. */}
-      <div className="relative flex flex-col items-center pt-[92px] pb-12 [container-type:inline-size] sm:pt-[104px] lg:absolute lg:inset-y-0 lg:left-1/2 lg:block lg:aspect-[1677/938] lg:h-full lg:-translate-x-1/2 lg:p-0">
-        {/* Phones: the book crop's own alpha fades its wall/floor into the section colour; its
-            transparent top tucks under the headline. Tablet: top/bottom mask on the crop.
-            Desktop keeps the full uncropped stage (the opaque mask only preserves its rendering). */}
-        <div className="relative order-2 mt-[calc(min(100vw,460px)*-0.14)] aspect-[510/790] w-full max-w-[460px] md:mt-6 md:aspect-[1140/690] md:max-w-none md:overflow-hidden md:[mask-image:linear-gradient(transparent,#000_14%,#000_84%,transparent)] lg:absolute lg:inset-0 lg:mt-0 lg:aspect-auto lg:overflow-visible lg:[mask-image:linear-gradient(#000,#000)]">
-          <picture>
-            <source media={HERO_MEDIA} srcSet={HERO_SRCSET} sizes={HERO_SIZES} />
-            <img
-              src={heroBookPhone1020}
-              srcSet={HERO_BOOK_SRCSET}
-              sizes={HERO_BOOK_SIZES}
-              alt={HERO_ALT}
-              width={510}
-              height={790}
-              fetchPriority="high"
-              decoding="async"
-              className="block h-full w-full object-cover md:absolute md:top-[-30.4%] md:left-[-26.3%] md:h-auto md:w-[147.1%] md:max-w-none lg:inset-0 lg:h-full lg:w-full"
-            />
-          </picture>
-        </div>
+      {/* Stage. Phones/tablets: a centred column (headline, book, diagram, buttons) on a CSS
+          wall + floor. Desktop: the whole scene at full hero height (never cropped vertically),
+          with headline, diagram and buttons placed on it in % of the stage width (cqi). */}
+      <div className="relative flex flex-col items-center px-5 pt-[96px] pb-12 [container-type:inline-size] sm:pt-[108px] md:px-8 lg:absolute lg:inset-y-0 lg:left-1/2 lg:block lg:aspect-[1711/919] lg:h-full lg:-translate-x-1/2 lg:p-0">
+        <picture>
+          <source media={DESKTOP} srcSet={HERO_SCENE_SRCSET} sizes={HERO_SCENE_SIZES} />
+          <img
+            src={NO_IMAGE}
+            alt={BOOK_ALT}
+            width={1711}
+            height={919}
+            fetchPriority="high"
+            decoding="async"
+            className="hidden lg:absolute lg:inset-0 lg:block lg:h-full lg:w-full lg:[mask-image:linear-gradient(90deg,transparent,#000_3%,#000_97%,transparent)]"
+          />
+        </picture>
         <h1
           id="hero-title"
-          className="relative z-10 order-1 px-5 text-center font-serif text-[34px] leading-[1.06] font-semibold tracking-[-0.02em] text-[#252421] sm:text-[46px] lg:absolute lg:inset-x-0 lg:top-[11.2%] lg:px-0 lg:text-[3.7cqi] lg:leading-[1.03]"
+          className="relative z-10 text-center font-serif text-[34px] leading-[1.06] font-medium tracking-[-0.015em] text-[#24211f] sm:text-[46px] lg:absolute lg:inset-x-0 lg:top-[13.4%] lg:text-[3.95cqi] lg:leading-[1.02]"
         >
           What moves you
           <br />
-          <em className="font-semibold text-red">
+          <em className="font-medium text-red">
             doesn’t have to <br className="sm:hidden" />
             choose for you.
           </em>
         </h1>
-        {/* Phones: the drawing again at its native resolution so the labels stay legible
-            (described by the hero image alt; tablets and desktop show it inside that image).
-            Its feathered top overlaps the fading floor reflection of the book above. */}
-        <picture className="relative order-3 mt-[calc(min(100vw,470px)*-0.2)] block w-[min(100%,470px)] md:hidden">
-          <source media={HERO_MEDIA} srcSet={NO_IMAGE} />
-          <img
-            src={heroDrawingPhone540}
-            srcSet={HERO_DRAWING_SRCSET}
-            sizes={HERO_DRAWING_SIZES}
-            alt=""
-            width={540}
-            height={540}
-            decoding="async"
-            className="block h-auto w-full"
+        <div className="relative mt-6 flex w-full flex-col items-center md:mt-10 md:flex-row md:items-center md:justify-center md:gap-[4vw] lg:static lg:mt-0 lg:block">
+          {/* Book (phones/tablets). Its wrapper carries the wall: everything above the book’s
+              horizon line (25.5% up from the image bottom) is wall, below it the section floor. */}
+          <div className="relative w-[min(62vw,280px)] shrink-0 md:w-[260px] lg:hidden">
+            <div
+              aria-hidden="true"
+              className="absolute bottom-[25.5%] left-1/2 -z-10 h-[760px] w-[200vw] -translate-x-1/2 bg-[#f6ebe8] bg-cover bg-[position:50%_100%] [mask-image:linear-gradient(to_top,transparent,#000_10px)]"
+              style={{ backgroundImage: `url(${heroWall})` }}
+            />
+            <picture>
+              <source media={DESKTOP} srcSet={NO_IMAGE} />
+              <img
+                src={heroBook432}
+                srcSet={HERO_BOOK_SRCSET}
+                sizes={HERO_BOOK_SIZES}
+                alt={BOOK_ALT}
+                width={432}
+                height={623}
+                fetchPriority="high"
+                decoding="async"
+                className="block h-auto w-full drop-shadow-[8px_10px_14px_rgb(120_80_70/0.12)]"
+              />
+            </picture>
+          </div>
+          <HeroDiagram
+            variant="compact"
+            className="mt-6 block h-auto w-full max-w-[400px] md:mt-0 md:w-[420px] md:max-w-[52vw] lg:hidden"
           />
-        </picture>
-        <div className="relative z-10 order-4 mt-6 px-5 md:mt-4 lg:absolute lg:top-[84%] lg:left-[68.6%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2 lg:px-0">
+          <HeroDiagram
+            variant="wide"
+            className="hidden lg:absolute lg:top-[38%] lg:left-[47.46%] lg:block lg:h-auto lg:w-[38.09%]"
+          />
+        </div>
+        <div className="relative z-10 mt-8 lg:absolute lg:top-[89.6%] lg:left-[66.5%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2">
           <HeroButtons />
         </div>
       </div>
@@ -552,17 +557,20 @@ function TheMap() {
           </div>
         </div>
 
-        <div className="relative mx-auto mt-10 aspect-square w-full max-w-[560px] lg:absolute lg:top-[-0.4%] lg:left-[40.5%] lg:mt-0 lg:w-[46.9%] lg:max-w-none">
+        {/* The golden Map disc (stage labels are part of the artwork), cut out of its white
+            background so its glow sits directly on the section. Desktop: right of the copy and
+            fully above the cards. */}
+        <div className="relative mx-auto mt-10 aspect-square w-full max-w-[560px] lg:absolute lg:top-[2.6cqi] lg:left-[48%] lg:mt-0 lg:w-[40cqi] lg:max-w-none">
           <img
-            src={mapRing1440}
-            srcSet={MAP_RING_SRCSET}
-            sizes={MAP_RING_SIZES}
-            alt="The Map as a circle drawn in the sand around a person meditating, seen from above: 01 Reactivity (automatic), 02 Awareness (visible), 03 Integration (met), 04 Sovereignty (choosable), 05 Creative Agency (available)."
-            width={1440}
-            height={1440}
+            src={mapGold1006}
+            srcSet={MAP_GOLD_SRCSET}
+            sizes={MAP_GOLD_SIZES}
+            alt="The Map: a golden circle of sand seen from above around a person meditating, with arrows moving clockwise through 01 Reactivity (automatic), 02 Awareness (visible), 03 Integration (met), 04 Sovereignty (choosable) and 05 Creative Agency (available)."
+            width={1006}
+            height={1006}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover [mask-image:radial-gradient(closest-side,#000_84%,rgb(0_0_0/0.6)_93%,transparent_100%)]"
+            className="h-full w-full"
           />
         </div>
 
@@ -771,42 +779,47 @@ function Founder() {
 }
 
 /* ---------- 9. Begin where you are ---------- */
+// Card art: the client's card photos at their full composition (636×546 native from the
+// reference sheet, plus a Lanczos 960 for 2× desktop screens), never zoomed in.
 const PATHS = [
   {
     n: "01",
     t: "Discover",
     s: "Meet what’s here.",
+    tag: "10-minute practice",
     lead: "A 10-minute Emotional Awareness Tool.",
     d: "Take one reaction, feeling, or pattern and begin seeing the invisible architecture beneath it.",
     cta: "Discover the tool",
     href: LINKS.discoverTool,
-    img: beginDiscover900,
-    srcSet: `${beginDiscover600} 600w, ${beginDiscover900} 900w, ${beginDiscover1200} 1200w`,
+    img: beginDiscover636,
+    srcSet: `${beginDiscover420} 420w, ${beginDiscover636} 636w, ${beginDiscover960} 960w`,
     alt: "A person sits in meditation before a circular opening looking out over a golden coastal sunset.",
   },
   {
     n: "02",
     t: "Understand",
     s: "Explore the book / map.",
+    tag: "Self-guided book",
     lead: "The complete Map, in book form.",
-    d: "Go deeper into the hidden architecture beneath your patterns—and the movement from reactivity to Creative Agency.",
+    d: "Explore the patterns that move you and the process of relating to them differently.",
     cta: "Explore the book",
     href: LINKS.exploreBook,
-    img: beginUnderstand900,
-    srcSet: `${beginUnderstand600} 600w, ${beginUnderstand900} 900w, ${beginUnderstand1200} 1200w`,
+    img: beginUnderstand636,
+    srcSet: `${beginUnderstand420} 420w, ${beginUnderstand636} 636w, ${beginUnderstand960} 960w`,
     alt: "An open book on desert sand showing The Map diagram from reactivity to creative agency.",
   },
   {
     n: "03",
     t: "Transform",
     s: "Bring it into life.",
+    tag: "Personal guidance",
     lead: "One-on-one work with Malek.",
-    d: "Bring the Map into lived experience—see what moves you, meet it differently, and create more room for choice.",
+    d: "Bring the Map into lived experience, relationships, decisions, and creative expression.",
     cta: "Work with Malek",
     href: LINKS.workWithMalek,
-    img: beginTransform900,
-    srcSet: `${beginTransform600} 600w, ${beginTransform900} 900w, ${beginTransform1200} 1200w`,
-    alt: "Two people sit facing each other on desert sand inside a glowing circular ring.",
+    img: beginTransform636,
+    srcSet: `${beginTransform420} 420w, ${beginTransform636} 636w, ${beginTransform960} 960w`,
+    alt: "Two people sit facing each other on golden sand inside a glowing spiral ring.",
   },
 ];
 
@@ -829,55 +842,65 @@ function Begin() {
           Differently.
         </em>
       </p>
-      <ul className="mx-auto mt-10 grid max-w-[560px] gap-6 md:max-w-[min(91vw,1520px)] md:grid-cols-3 md:gap-[1.6vw] lg:mt-[3vw]">
+      {/* Three equal cards. From md the cards share one row grid (subgrid), so the photos,
+          labels, titles, copy and buttons line up across all three and the buttons sit on
+          one line at the bottom. */}
+      <ul className="mx-auto mt-10 grid max-w-[560px] gap-6 md:max-w-[min(91vw,1520px)] md:grid-cols-3 md:grid-rows-[auto_auto_auto_1fr_auto] md:gap-x-[1.6vw] md:gap-y-0 lg:mt-[3vw]">
         {PATHS.map((p) => (
           <li
             key={p.n}
             id={p.t.toLowerCase()}
-            className="flex scroll-mt-6 flex-col overflow-hidden rounded-[14px] border border-[#f3cfae] bg-[linear-gradient(180deg,#fdf7f1,#faefe3)] text-left"
+            className="flex scroll-mt-6 flex-col overflow-hidden rounded-[12px] border border-[#ecd8bf] bg-[#fcf7ef] text-left md:row-span-5 md:grid md:grid-rows-subgrid md:gap-0"
           >
-            <div className="relative aspect-[300/312] w-full overflow-hidden bg-[#1a120c]">
+            <div className="relative aspect-[636/546] w-full overflow-hidden bg-[#2a1d12]">
               <img
                 src={p.img}
                 srcSet={p.srcSet}
                 sizes={BEGIN_CARD_SIZES}
                 alt={p.alt}
-                width={900}
-                height={900}
+                width={636}
+                height={546}
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 block h-[102%] w-[102%] max-w-none -translate-x-[1%] -translate-y-[1%] object-cover object-center"
+                className="absolute inset-0 block h-full w-full object-cover"
               />
               <div
-                className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-black/60 via-black/25 to-transparent"
+                className="absolute inset-x-0 bottom-0 h-[52%] bg-gradient-to-t from-black/45 via-black/18 to-transparent"
                 aria-hidden="true"
               />
-              <span className="absolute top-3 left-4 text-[22px] font-light text-white/90 lg:top-[1vw] lg:left-[1.2vw] lg:text-[clamp(18px,1.75vw,33px)]">
-                {p.n}
-              </span>
-              <div className="absolute inset-x-0 bottom-0 px-4 pb-4 text-center text-white lg:pb-[1.6vw]">
-                <h3 className="text-[22px] font-normal tracking-[0.2em] uppercase lg:text-[clamp(18px,1.8vw,34px)]">
+              <div className="absolute inset-x-0 bottom-0 px-[24px] pb-[16px] text-white md:px-[2.4vw] md:pb-[1.5vw]">
+                <span className="block text-[17px] leading-none font-light tracking-[0.04em] text-white/90 md:text-[max(12px,1.15vw)]">
+                  {p.n}
+                </span>
+                <span
+                  className="mt-[8px] block h-px w-[22px] bg-white/80 md:mt-[0.7vw] md:w-[2vw]"
+                  aria-hidden="true"
+                />
+                <h3 className="mt-[12px] text-[25px] leading-none font-medium tracking-[0.16em] uppercase md:mt-[1.1vw] md:text-[max(15px,1.78vw)]">
                   {p.t}
                 </h3>
-                <p className="mt-1 font-serif text-[12px] tracking-[0.14em] uppercase italic lg:text-[clamp(11px,1.08vw,20px)]">
+                <p className="mt-[8px] font-serif text-[15px] leading-none font-medium tracking-[0.12em] uppercase italic md:mt-[0.75vw] md:text-[max(11px,1.12vw)]">
                   {p.s}
                 </p>
               </div>
             </div>
-            <div className="flex flex-1 flex-col px-6 pt-5 pb-6 lg:px-[1.5vw] lg:pt-[1.2vw] lg:pb-[2vw]">
-              <p className="text-[19px] leading-snug lg:text-[clamp(17px,1.72vw,33px)]">{p.lead}</p>
-              <p className="mt-3 text-[15px] leading-snug text-[#7d736b] lg:mt-[1.1vw] lg:text-[clamp(13px,1.2vw,23px)]">
-                {p.d}
-              </p>
-              <div className="mt-auto pt-6 text-center lg:pt-[3.6vw]">
-                <a
-                  href={p.href}
-                  {...ext(p.href)}
-                  className="inline-flex min-h-[48px] w-[86%] items-center justify-center gap-3 rounded-full border-[1.5px] border-ink/80 bg-white/40 text-[13px] font-semibold tracking-[0.02em] whitespace-nowrap text-ink uppercase transition-colors hover:bg-white lg:min-h-[clamp(44px,3.9vw,74px)] lg:text-[clamp(11px,1.08vw,20px)]"
-                >
-                  {p.cta} <span aria-hidden="true">→</span>
-                </a>
-              </div>
+            <p className="px-[24px] pt-[20px] text-[12px] font-semibold tracking-[0.12em] text-[#c4512a] uppercase md:px-[2.4vw] md:pt-[1.7vw] md:text-[max(10px,0.92vw)]">
+              {p.tag}
+            </p>
+            <p className="px-[24px] pt-[8px] text-[20px] leading-[1.22] font-semibold tracking-[-0.01em] text-[#1b1a1f] md:px-[2.4vw] md:pt-[0.6vw] md:text-[max(14px,1.5vw)]">
+              {p.lead}
+            </p>
+            <p className="px-[24px] pt-[10px] text-[16px] leading-[1.38] text-[#3f3b37] md:px-[2.4vw] md:pt-[0.8vw] md:text-[max(12px,1.22vw)]">
+              {p.d}
+            </p>
+            <div className="px-[24px] pt-[22px] pb-[24px] md:px-[2.4vw] md:pt-[1.9vw] md:pb-[2.2vw]">
+              <a
+                href={p.href}
+                {...ext(p.href)}
+                className="flex min-h-[50px] w-full items-center justify-center gap-3 rounded-full border-[1.5px] border-[#26221f] bg-transparent px-4 text-[14px] font-bold tracking-[0.06em] whitespace-nowrap text-[#1f1c1a] uppercase transition-colors hover:bg-white md:min-h-[max(40px,3.4vw)] md:text-[max(11px,1.08vw)]"
+              >
+                {p.cta} <span aria-hidden="true">→</span>
+              </a>
             </div>
           </li>
         ))}
