@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { VideoBlock } from "../components/VideoBlock";
-import { EclipseArt, LineIcon, SunArt, WaveCircleArt, type IconName } from "../components/Art";
+import { EclipseArt, LineIcon, WaveCircleArt, type IconName } from "../components/Art";
 import { LINKS, isExternal } from "../content/links";
 import { STAGES } from "../content/stages";
 import { HeroDiagram } from "../components/HeroDiagram";
@@ -20,6 +20,8 @@ import mapGold640 from "../assets/map-gold-640.webp";
 import mapGold1006 from "../assets/map-gold-1006.webp";
 import mapGold1400 from "../assets/map-gold-1400.webp";
 import mapBackdrop from "../assets/map-backdrop-480.webp";
+import sun516 from "../assets/sun-516.webp";
+import sun1032 from "../assets/sun-1032.webp";
 import founder390 from "../assets/founder-390.webp";
 import founder780 from "../assets/founder-780.webp";
 import beginDiscover420 from "../assets/begin-discover-420.webp";
@@ -34,16 +36,20 @@ import beginTransform960 from "../assets/begin-transform-960.webp";
 
 /* Responsive image sets: the browser picks the smallest file that is sharp at the
    displayed size × device pixel ratio. `sizes` mirrors each image's CSS width. */
-// Hero (desktop ≥ 1024): the client scene (pale wall with window light, floor, the book) with
-// the headline and the Map removed (1711×919); headline, Map diagram and buttons are live
-// HTML/SVG on an aspect-locked stage at full hero height (stage width = 1.862 × hero height).
+// Hero (desktop ≥ 1024): the client scene (pale wall with window light, floor) with the
+// headline, Map and book removed and the floor extended below the book (1711×1020), on an
+// aspect-locked stage at full hero height (stage width = 1.6775 × hero height). Book,
+// headline, Map diagram and buttons are placed on it in % of the stage.
 const HERO_SCENE_SRCSET = `${heroScene900} 900w, ${heroScene1280} 1280w, ${heroScene1711} 1711w`;
-const HERO_SCENE_SIZES = "max(1117px, min(100vw, 186.2vh))";
+const HERO_SCENE_SIZES = "max(1006px, min(100vw, 167.75vh))";
 const DESKTOP = "(min-width: 1024px)";
-// Phones/tablets: the book alone (cut out of the same scene, with its floor reflection) on a
-// CSS wall + floor, so the section has no box edges at any width.
+// The book, cut out of the mockup at its native size (432 = 1×, the sharpest source; 864 = a
+// sharpened Lanczos 2× for 2–3× screens), with a full mirrored floor reflection. The same
+// image is used at every width: on the desktop stage (25.25% of the stage width) and on
+// phones/tablets over a CSS wall + floor, so the whole book is always in view.
 const HERO_BOOK_SRCSET = `${heroBook432} 432w, ${heroBook864} 864w`;
-const HERO_BOOK_SIZES = "(min-width: 768px) 260px, min(62vw, 280px)";
+const HERO_BOOK_SIZES =
+  "(min-width: 1024px) max(254px, min(25.25vw, 42.36vh)), (min-width: 768px) 260px, min(62vw, 280px)";
 /** 1×1 transparent GIF: lets a <picture> skip its download where it is not shown. */
 const NO_IMAGE = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 const BOOK_ALT =
@@ -78,7 +84,6 @@ export const Route = createFileRoute("/")({
         as: "image",
         imageSrcSet: HERO_BOOK_SRCSET,
         imageSizes: HERO_BOOK_SIZES,
-        media: "(max-width: 1023px)",
         fetchPriority: "high",
       },
     ],
@@ -143,22 +148,23 @@ const BODY = "text-[17px] leading-[1.35] lg:text-[clamp(17px,1.44vw,27px)]";
 const EM_L = "em-serif text-[28px] leading-[1.08] lg:text-[clamp(28px,2.75vw,54px)]";
 
 /* ---------- 1. Hero ---------- */
+/** Solid “Explore the map” first (left / top when stacked), outlined “Get the book” second. */
 function HeroButtons() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3 lg:flex-nowrap lg:gap-[1.1cqi]">
-      <a
-        href={LINKS.getTheBook}
-        {...ext(LINKS.getTheBook)}
-        className="btn-pill min-w-[150px] lg:min-h-[max(40px,2.7cqi)] lg:min-w-[14.3cqi] lg:px-[1.6cqi] lg:text-[max(11px,0.82cqi)]"
-      >
-        Get the book
-      </a>
       <a
         href={LINKS.exploreTheMap}
         {...ext(LINKS.exploreTheMap)}
         className="btn-solid min-w-[150px] lg:min-h-[max(40px,2.7cqi)] lg:min-w-[14.6cqi] lg:px-[1.6cqi] lg:text-[max(11px,0.82cqi)]"
       >
         Explore the map
+      </a>
+      <a
+        href={LINKS.getTheBook}
+        {...ext(LINKS.getTheBook)}
+        className="btn-pill min-w-[150px] lg:min-h-[max(40px,2.7cqi)] lg:min-w-[14.3cqi] lg:px-[1.6cqi] lg:text-[max(11px,0.82cqi)]"
+      >
+        Get the book
       </a>
     </div>
   );
@@ -168,7 +174,7 @@ function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate overflow-hidden bg-[linear-gradient(#f8eeeb,#fbf5f3_40%,#f7efec)] lg:h-[max(600px,min(53.7vw,100svh))] lg:bg-[#efe4e0]"
+      className="relative isolate overflow-hidden bg-[linear-gradient(#f8eeeb,#fbf5f3_40%,#f7efec)] lg:h-[max(600px,min(59.6vw,100svh))] lg:bg-[#efe4e0]"
     >
       {/* Desktop only: blurred wall-and-floor backdrop (the same scene, 1.5 KB) so short or very
           wide viewports continue the scene beyond the stage. */}
@@ -183,14 +189,15 @@ function Hero() {
       {/* Stage. Phones/tablets: a centred column (headline, book, diagram, buttons) on a CSS
           wall + floor. Desktop: the whole scene at full hero height (never cropped vertically),
           with headline, diagram and buttons placed on it in % of the stage width (cqi). */}
-      <div className="relative flex flex-col items-center px-5 pt-[96px] pb-12 [container-type:inline-size] sm:pt-[108px] md:px-8 lg:absolute lg:inset-y-0 lg:left-1/2 lg:block lg:aspect-[1711/919] lg:h-full lg:-translate-x-1/2 lg:p-0">
+      <div className="relative flex flex-col items-center px-5 pt-[96px] pb-12 [container-type:inline-size] sm:pt-[108px] md:px-8 lg:absolute lg:inset-y-0 lg:left-1/2 lg:block lg:aspect-[1711/1020] lg:h-full lg:-translate-x-1/2 lg:p-0">
         <picture>
           <source media={DESKTOP} srcSet={HERO_SCENE_SRCSET} sizes={HERO_SCENE_SIZES} />
           <img
             src={NO_IMAGE}
-            alt={BOOK_ALT}
+            alt=""
+            aria-hidden="true"
             width={1711}
-            height={919}
+            height={1020}
             fetchPriority="high"
             decoding="async"
             className="hidden lg:absolute lg:inset-0 lg:block lg:h-full lg:w-full lg:[mask-image:linear-gradient(90deg,transparent,#000_3%,#000_97%,transparent)]"
@@ -198,7 +205,7 @@ function Hero() {
         </picture>
         <h1
           id="hero-title"
-          className="relative z-10 text-center font-serif text-[34px] leading-[1.06] font-medium tracking-[-0.015em] text-[#24211f] sm:text-[46px] lg:absolute lg:inset-x-0 lg:top-[13.4%] lg:text-[3.95cqi] lg:leading-[1.02]"
+          className="relative z-10 text-center font-serif text-[34px] leading-[1.06] font-medium tracking-[-0.015em] text-[#24211f] sm:text-[46px] lg:absolute lg:inset-x-0 lg:top-[12.07%] lg:text-[3.95cqi] lg:leading-[1.02]"
         >
           What moves you
           <br />
@@ -208,28 +215,27 @@ function Hero() {
           </em>
         </h1>
         <div className="relative mt-6 flex w-full flex-col items-center md:mt-10 md:flex-row md:items-center md:justify-center md:gap-[4vw] lg:static lg:mt-0 lg:block">
-          {/* Book (phones/tablets). Its wrapper carries the wall: everything above the book’s
-              horizon line (25.5% up from the image bottom) is wall, below it the section floor. */}
-          <div className="relative w-[min(62vw,280px)] shrink-0 md:w-[260px] lg:hidden">
+          {/* Book. Phones/tablets: in the column; its wrapper carries the wall (everything above
+              the horizon, 35.2% up from the image bottom, is wall; below it the section floor).
+              Desktop: placed on the stage where it stands in the scene. */}
+          <div className="relative w-[min(62vw,280px)] shrink-0 md:w-[260px] lg:absolute lg:top-[29.02%] lg:left-[18.469%] lg:w-[25.248%]">
             <div
               aria-hidden="true"
-              className="absolute bottom-[25.5%] left-1/2 -z-10 h-[760px] w-[200vw] -translate-x-1/2 bg-[#f6ebe8] bg-cover bg-[position:50%_100%] [mask-image:linear-gradient(to_top,transparent,#000_10px)]"
+              className="absolute bottom-[35.2%] left-1/2 -z-10 h-[760px] w-[200vw] -translate-x-1/2 bg-[#f6ebe8] bg-cover bg-[position:50%_100%] [mask-image:linear-gradient(to_top,transparent,#000_10px)] lg:hidden"
               style={{ backgroundImage: `url(${heroWall})` }}
             />
-            <picture>
-              <source media={DESKTOP} srcSet={NO_IMAGE} />
-              <img
-                src={heroBook432}
-                srcSet={HERO_BOOK_SRCSET}
-                sizes={HERO_BOOK_SIZES}
-                alt={BOOK_ALT}
-                width={432}
-                height={623}
-                fetchPriority="high"
-                decoding="async"
-                className="block h-auto w-full drop-shadow-[8px_10px_14px_rgb(120_80_70/0.12)]"
-              />
-            </picture>
+            <img
+              data-book
+              src={heroBook432}
+              srcSet={HERO_BOOK_SRCSET}
+              sizes={HERO_BOOK_SIZES}
+              alt={BOOK_ALT}
+              width={432}
+              height={716}
+              fetchPriority="high"
+              decoding="async"
+              className="block h-auto w-full"
+            />
           </div>
           <HeroDiagram
             variant="compact"
@@ -237,10 +243,10 @@ function Hero() {
           />
           <HeroDiagram
             variant="wide"
-            className="hidden lg:absolute lg:top-[38%] lg:left-[47.46%] lg:block lg:h-auto lg:w-[38.09%]"
+            className="hidden lg:absolute lg:top-[34.24%] lg:left-[47.46%] lg:block lg:h-auto lg:w-[38.09%]"
           />
         </div>
-        <div className="relative z-10 mt-8 lg:absolute lg:top-[89.6%] lg:left-[66.5%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2">
+        <div className="relative z-10 mt-8 lg:absolute lg:top-[84%] lg:left-[66.5%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2">
           <HeroButtons />
         </div>
       </div>
@@ -667,7 +673,20 @@ function Available() {
         More capacity to
       </p>
       <div className="mx-auto mt-10 max-w-[600px] lg:mt-[3.4vw] lg:grid lg:max-w-none lg:grid-cols-[33%_1fr] lg:items-center">
-        <SunArt className="mx-auto h-auto w-[min(86%,380px)] lg:w-[34vw] lg:max-w-[640px]" />
+        {/* Client sun (516 native; 1032 = sharpened Lanczos 2×). White background keyed to
+            alpha with an opaque disc, so it sits on the section with no box or halo edge. */}
+        <img
+          src={sun516}
+          srcSet={`${sun516} 516w, ${sun1032} 1032w`}
+          sizes="(min-width: 1024px) min(34vw, 640px), min(86vw, 380px)"
+          alt=""
+          aria-hidden="true"
+          width={516}
+          height={516}
+          loading="lazy"
+          decoding="async"
+          className="mx-auto block h-auto w-[min(86%,380px)] lg:w-[34vw] lg:max-w-[640px]"
+        />
         <ul className="mt-6 space-y-8 lg:mt-0 lg:space-y-[2.7vw]">
           {CAPACITIES.map((c) => (
             <li

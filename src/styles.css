@@ -127,15 +127,33 @@
     border-radius: 999px;
     border: 1.5px solid var(--color-red);
     color: var(--color-ink);
-    background: rgb(255 255 255 / 0.9);
+    background-color: rgb(255 255 255 / 0.9);
+    /* Hover/focus: the same red as the solid button sweeps in from the left. */
+    background-image: linear-gradient(var(--color-red), var(--color-red));
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 0% 100%;
     padding: 0 1.75rem;
     font-size: 0.8125rem;
     font-weight: 600;
     letter-spacing: 0.14em;
   }
-  .btn-pill:hover {
-    background: #fff;
+  .btn-pill:hover,
+  .btn-pill:focus-visible {
+    background-size: 100% 100%;
+    color: #fff;
     box-shadow: 0 4px 14px rgb(120 60 20 / 0.15);
+  }
+  .btn-pill {
+    transition:
+      background-size 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.5s ease 0.15s,
+      box-shadow 0.4s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-pill {
+      transition: none;
+    }
   }
   .btn-outline {
     border: 1.5px solid currentColor;
