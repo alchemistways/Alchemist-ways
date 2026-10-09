@@ -816,9 +816,9 @@ const PATHS = [
     cta: "Explore the book",
     href: LINKS.exploreBook,
     solid: false,
-    img: beginDiscover636,
-    srcSet: `${beginDiscover420} 420w, ${beginDiscover636} 636w, ${beginDiscover960} 960w`,
-    alt: "A person sits in meditation before a circular opening looking out over a golden coastal sunset.",
+    img: beginUnderstand636,
+    srcSet: `${beginUnderstand420} 420w, ${beginUnderstand636} 636w, ${beginUnderstand960} 960w`,
+    alt: "An open book on desert sand showing The Map diagram from reactivity to creative agency.",
   },
   {
     n: "02",
@@ -831,9 +831,9 @@ const PATHS = [
     cta: "Work with Malek",
     href: LINKS.workWithMalek,
     solid: false,
-    img: beginUnderstand636,
-    srcSet: `${beginUnderstand420} 420w, ${beginUnderstand636} 636w, ${beginUnderstand960} 960w`,
-    alt: "An open book on desert sand showing The Map diagram from reactivity to creative agency.",
+    img: beginTransform636,
+    srcSet: `${beginTransform420} 420w, ${beginTransform636} 636w, ${beginTransform960} 960w`,
+    alt: "Two people sit facing each other on golden sand inside a glowing spiral ring.",
   },
   {
     n: "03",
@@ -846,9 +846,9 @@ const PATHS = [
     cta: "Start 7 days free",
     href: LINKS.startFreeTrial,
     solid: true,
-    img: beginTransform636,
-    srcSet: `${beginTransform420} 420w, ${beginTransform636} 636w, ${beginTransform960} 960w`,
-    alt: "Two people sit facing each other on golden sand inside a glowing spiral ring.",
+    img: beginDiscover636,
+    srcSet: `${beginDiscover420} 420w, ${beginDiscover636} 636w, ${beginDiscover960} 960w`,
+    alt: "A person sits in meditation before a circular opening looking out over a golden coastal sunset.",
   },
 ];
 
