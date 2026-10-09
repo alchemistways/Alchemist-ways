@@ -9,7 +9,7 @@ export const SOCIAL = {
 } as const;
 
 export const EXTERNAL = {
-  /** Skool community (free). */
+  /** Skool community. */
   community: "https://www.skool.com/alchemist-ways-1974/about",
   /** Calendly: free conversation / clarity call. */
   conversation: "https://calendly.com/alchemistways/conversation",
@@ -32,12 +32,12 @@ export const LINKS = {
   communityField: EXTERNAL.community,
   /** Founder "Read the founder story": no standalone story page yet; books a conversation with Malek. */
   founderStory: EXTERNAL.conversation,
-  /** Begin card 01 "Discover the tool": the tool is offered through the free community. */
-  discoverTool: EXTERNAL.community,
-  /** Begin card 02 "Explore the book": no purchase URL supplied yet; joins the community. */
+  /** Begin card 01 "Explore the book": no purchase URL supplied yet; joins the community. */
   exploreBook: EXTERNAL.community,
-  /** Begin card 03 "Work with Malek": paid clarity session. */
+  /** Begin card 02 "Work with Malek": paid clarity session. */
   workWithMalek: EXTERNAL.claritySession,
+  /** Begin card 03 "Start 7 days free": the Skool community (7-day trial, then $44/month). */
+  startFreeTrial: EXTERNAL.community,
 } as const;
 
 export const isExternal = (href: string) => href.startsWith("http");

@@ -7,12 +7,11 @@ import { VideoBlock } from "../components/VideoBlock";
 import { EclipseArt, LineIcon, WaveCircleArt, type IconName } from "../components/Art";
 import { LINKS, isExternal } from "../content/links";
 import { STAGES } from "../content/stages";
-import { HeroDiagram } from "../components/HeroDiagram";
+import { DIAGRAM, HeroDiagram } from "../components/HeroDiagram";
 
 import heroScene900 from "../assets/hero-scene-900.webp";
 import heroScene1280 from "../assets/hero-scene-1280.webp";
 import heroScene1711 from "../assets/hero-scene-1711.webp";
-import heroBackdrop from "../assets/hero-backdrop-480.webp";
 import heroWall from "../assets/hero-wall-760.webp";
 import heroBook432 from "../assets/hero-book-432.webp";
 import heroBook864 from "../assets/hero-book-864.webp";
@@ -41,7 +40,9 @@ import beginTransform960 from "../assets/begin-transform-960.webp";
 // aspect-locked stage at full hero height (stage width = 1.6775 × hero height). Book,
 // headline, Map diagram and buttons are placed on it in % of the stage.
 const HERO_SCENE_SRCSET = `${heroScene900} 900w, ${heroScene1280} 1280w, ${heroScene1711} 1711w`;
-const HERO_SCENE_SIZES = "max(1006px, min(100vw, 167.75vh))";
+// The scene always spans the full hero width (scaled about the horizon when the stage is
+// narrower than the viewport), so it is max(stage width, 100vw).
+const HERO_SCENE_SIZES = "max(1006px, 100vw)";
 const DESKTOP = "(min-width: 1024px)";
 // The book, cut out of the mockup at its native size (432 = 1×, the sharpest source; 864 = a
 // sharpened Lanczos 2× for 2–3× screens), with a full mirrored floor reflection. The same
@@ -153,18 +154,18 @@ function HeroButtons() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3 lg:flex-nowrap lg:gap-[1.1cqi]">
       <a
-        href={LINKS.exploreTheMap}
-        {...ext(LINKS.exploreTheMap)}
-        className="btn-solid min-w-[150px] lg:min-h-[max(40px,2.7cqi)] lg:min-w-[14.6cqi] lg:px-[1.6cqi] lg:text-[max(11px,0.82cqi)]"
-      >
-        Explore the map
-      </a>
-      <a
         href={LINKS.getTheBook}
         {...ext(LINKS.getTheBook)}
-        className="btn-pill min-w-[150px] lg:min-h-[max(40px,2.7cqi)] lg:min-w-[14.3cqi] lg:px-[1.6cqi] lg:text-[max(11px,0.82cqi)]"
+        className="btn-solid min-w-[150px] lg:min-h-[max(40px,2.7cqi)] lg:min-w-[14.3cqi] lg:px-[1.6cqi] lg:text-[max(11px,0.82cqi)]"
       >
         Get the book
+      </a>
+      <a
+        href={LINKS.exploreTheMap}
+        {...ext(LINKS.exploreTheMap)}
+        className="btn-pill min-w-[150px] lg:min-h-[max(40px,2.7cqi)] lg:min-w-[14.6cqi] lg:px-[1.6cqi] lg:text-[max(11px,0.82cqi)]"
+      >
+        Explore the map
       </a>
     </div>
   );
@@ -176,20 +177,13 @@ function Hero() {
       aria-labelledby="hero-title"
       className="relative isolate overflow-hidden bg-[linear-gradient(#f8eeeb,#fbf5f3_40%,#f7efec)] lg:h-[max(600px,min(59.6vw,100svh))] lg:bg-[#efe4e0]"
     >
-      {/* Desktop only: blurred wall-and-floor backdrop (the same scene, 1.5 KB) so short or very
-          wide viewports continue the scene beyond the stage. */}
-      <img
-        src={heroBackdrop}
-        alt=""
-        aria-hidden="true"
-        width={480}
-        height={258}
-        className="absolute inset-0 hidden h-full w-full object-cover lg:block"
-      />
       {/* Stage. Phones/tablets: a centred column (headline, book, diagram, buttons) on a CSS
           wall + floor. Desktop: the whole scene at full hero height (never cropped vertically),
           with headline, diagram and buttons placed on it in % of the stage width (cqi). */}
       <div className="relative flex flex-col items-center px-5 pt-[96px] pb-12 [container-type:inline-size] sm:pt-[108px] md:px-8 lg:absolute lg:inset-y-0 lg:left-1/2 lg:block lg:aspect-[1711/1020] lg:h-full lg:-translate-x-1/2 lg:p-0">
+        {/* Scene: the stage’s own width when it fills the viewport; on short/wide screens it is
+            scaled up to the viewport width about its horizon line (74.5% down), so the wall
+            light runs edge to edge (no blurred side bands) and the book stays on the floor. */}
         <picture>
           <source media={DESKTOP} srcSet={HERO_SCENE_SRCSET} sizes={HERO_SCENE_SIZES} />
           <img
@@ -200,7 +194,7 @@ function Hero() {
             height={1020}
             fetchPriority="high"
             decoding="async"
-            className="hidden lg:absolute lg:inset-0 lg:block lg:h-full lg:w-full lg:[mask-image:linear-gradient(90deg,transparent,#000_3%,#000_97%,transparent)]"
+            className="hidden lg:absolute lg:left-1/2 lg:block lg:h-auto lg:w-[max(100cqi,100vw)] lg:max-w-none lg:-translate-x-1/2 lg:top-[calc((100cqi-max(100cqi,100vw))*0.44418)]"
           />
         </picture>
         <h1
@@ -241,9 +235,17 @@ function Hero() {
             variant="compact"
             className="mt-6 block h-auto w-full max-w-[400px] md:mt-0 md:w-[420px] md:max-w-[52vw] lg:hidden"
           />
+          {/* Desktop: ring centre at 66.5% / 57.2% of the stage, i.e. level with the middle of
+              the book’s cover (as in the mockup); the buttons are centred under it. One SVG unit
+              = 1/1024 of the stage width, the mockup’s scale. */}
           <HeroDiagram
             variant="wide"
-            className="hidden lg:absolute lg:top-[34.24%] lg:left-[47.46%] lg:block lg:h-auto lg:w-[38.09%]"
+            className="hidden lg:absolute lg:top-[57.2%] lg:left-[66.5%] lg:block lg:h-auto"
+            style={{
+              width: `${((DIAGRAM.wide.halfW * 2) / 1024) * 100}%`,
+              // shift up by the ring centre’s share of the height, so the ring (not the label box) is anchored
+              translate: `-50% -${(-DIAGRAM.wide.top / (DIAGRAM.wide.bottom - DIAGRAM.wide.top)) * 100}%`,
+            }}
           />
         </div>
         <div className="relative z-10 mt-8 lg:absolute lg:top-[84%] lg:left-[66.5%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2">
@@ -800,22 +802,12 @@ function Founder() {
 /* ---------- 9. Begin where you are ---------- */
 // Card art: the client's card photos at their full composition (636×546 native from the
 // reference sheet, plus a Lanczos 960 for 2× desktop screens), never zoomed in.
+// Card images stay in their slots (1: figure at the circular window, 2: book on sand,
+// 3: two people in the sand spiral); only the copy and buttons follow the client’s layout.
 const PATHS = [
   {
     n: "01",
-    t: "Discover",
-    s: "Meet what’s here.",
-    tag: "10-minute practice",
-    lead: "A 10-minute Emotional Awareness Tool.",
-    d: "Take one reaction, feeling, or pattern and begin seeing the invisible architecture beneath it.",
-    cta: "Discover the tool",
-    href: LINKS.discoverTool,
-    img: beginDiscover636,
-    srcSet: `${beginDiscover420} 420w, ${beginDiscover636} 636w, ${beginDiscover960} 960w`,
-    alt: "A person sits in meditation before a circular opening looking out over a golden coastal sunset.",
-  },
-  {
-    n: "02",
+    id: "understand",
     t: "Understand",
     s: "Explore the book / map.",
     tag: "Self-guided book",
@@ -823,12 +815,14 @@ const PATHS = [
     d: "Explore the patterns that move you and the process of relating to them differently.",
     cta: "Explore the book",
     href: LINKS.exploreBook,
-    img: beginUnderstand636,
-    srcSet: `${beginUnderstand420} 420w, ${beginUnderstand636} 636w, ${beginUnderstand960} 960w`,
-    alt: "An open book on desert sand showing The Map diagram from reactivity to creative agency.",
+    solid: false,
+    img: beginDiscover636,
+    srcSet: `${beginDiscover420} 420w, ${beginDiscover636} 636w, ${beginDiscover960} 960w`,
+    alt: "A person sits in meditation before a circular opening looking out over a golden coastal sunset.",
   },
   {
-    n: "03",
+    n: "02",
+    id: "transform",
     t: "Transform",
     s: "Bring it into life.",
     tag: "Personal guidance",
@@ -836,6 +830,22 @@ const PATHS = [
     d: "Bring the Map into lived experience, relationships, decisions, and creative expression.",
     cta: "Work with Malek",
     href: LINKS.workWithMalek,
+    solid: false,
+    img: beginUnderstand636,
+    srcSet: `${beginUnderstand420} 420w, ${beginUnderstand636} 636w, ${beginUnderstand960} 960w`,
+    alt: "An open book on desert sand showing The Map diagram from reactivity to creative agency.",
+  },
+  {
+    n: "03",
+    id: "practice",
+    t: "Practice",
+    s: "In community.",
+    tag: "Free trial — $44 / month",
+    lead: "Monthly subscription.",
+    d: "Join our Skool community to practice with others, access guided sessions, live calls, community discussions, and ongoing resources. Begin with 7 days free.",
+    cta: "Start 7 days free",
+    href: LINKS.startFreeTrial,
+    solid: true,
     img: beginTransform636,
     srcSet: `${beginTransform420} 420w, ${beginTransform636} 636w, ${beginTransform960} 960w`,
     alt: "Two people sit facing each other on golden sand inside a glowing spiral ring.",
@@ -868,7 +878,7 @@ function Begin() {
         {PATHS.map((p) => (
           <li
             key={p.n}
-            id={p.t.toLowerCase()}
+            id={p.id}
             className="flex scroll-mt-6 flex-col overflow-hidden rounded-[12px] border border-[#ecd8bf] bg-[#fcf7ef] text-left md:row-span-5 md:grid md:grid-rows-subgrid md:gap-0"
           >
             <div className="relative aspect-[636/546] w-full overflow-hidden bg-[#2a1d12]">
@@ -916,7 +926,11 @@ function Begin() {
               <a
                 href={p.href}
                 {...ext(p.href)}
-                className="flex min-h-[50px] w-full items-center justify-center gap-3 rounded-full border-[1.5px] border-[#26221f] bg-transparent px-4 text-[14px] font-bold tracking-[0.06em] whitespace-nowrap text-[#1f1c1a] uppercase transition-colors hover:bg-white md:min-h-[max(40px,3.4vw)] md:text-[max(11px,1.08vw)]"
+                className={`flex min-h-[50px] w-full items-center justify-center gap-3 rounded-full border-[1.5px] px-4 text-[14px] font-bold tracking-[0.06em] whitespace-nowrap uppercase transition-colors md:min-h-[max(40px,3.4vw)] md:text-[max(11px,1.08vw)] ${
+                  p.solid
+                    ? "border-[#a9502c] bg-[#a9502c] text-white hover:border-[#8f4223] hover:bg-[#8f4223]"
+                    : "border-[#26221f] bg-transparent text-[#1f1c1a] hover:bg-white"
+                }`}
               >
                 {p.cta} <span aria-hidden="true">→</span>
               </a>
