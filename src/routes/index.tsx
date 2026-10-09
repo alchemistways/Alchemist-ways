@@ -11,10 +11,10 @@ import { STAGES } from "../content/stages";
 import heroMap900 from "../assets/hero-map-900.webp";
 import heroMap1280 from "../assets/hero-map-1280.webp";
 import heroMap1677 from "../assets/hero-map-1677.webp";
-import heroBook420 from "../assets/hero-book-420.webp";
-import heroBook640 from "../assets/hero-book-640.webp";
-import heroDrawing540 from "../assets/hero-drawing-540.webp";
-import heroDrawing1080 from "../assets/hero-drawing-1080.webp";
+import heroBookPhone510 from "../assets/hero-book-phone-510.webp";
+import heroBookPhone1020 from "../assets/hero-book-phone-1020.webp";
+import heroDrawingPhone540 from "../assets/hero-drawing-phone-540.webp";
+import heroDrawingPhone1080 from "../assets/hero-drawing-phone-1080.webp";
 import heroBackdrop from "../assets/hero-backdrop-480.webp";
 import mapRing720 from "../assets/map-ring-720.webp";
 import mapRing1080 from "../assets/map-ring-1080.webp";
@@ -36,17 +36,19 @@ import beginTransform1200 from "../assets/begin-transform-1200.webp";
    displayed size × device pixel ratio. `sizes` mirrors each image's CSS width. */
 // Hero art = the book + hand-drawn Map on the peach wall (1677×938 source, no upscales).
 // Desktop: the whole picture on a stage at full hero height (≥ 1073px wide, ≤ 100vw / 178.8vh).
-// Tablet (768–1023): a book + drawing crop drawn at 147% of the width. Phones: art-directed to a
-// square crop of the book, with a separate native-resolution crop of the drawing under it.
+// Tablet (768–1023): a book + drawing crop drawn at 147% of the width, top/bottom faded into the
+// section colour. Phones: art-directed to a crop of the book with a separate crop of the drawing
+// under it; both carry feathered alpha edges so they dissolve into the section colour (no boxes).
 const HERO_SRCSET = `${heroMap900} 900w, ${heroMap1280} 1280w, ${heroMap1677} 1677w`;
 const HERO_SIZES = "(max-width: 1023px) 147vw, max(1073px, min(100vw, 178.8vh))";
 const HERO_MEDIA = "(min-width: 768px)";
-const HERO_BOOK_SRCSET = `${heroBook420} 420w, ${heroBook640} 640w`;
+// Phones/tablets sit on #f4d3b5, the wall tone of the artwork around the book.
+const HERO_BOOK_SRCSET = `${heroBookPhone510} 510w, ${heroBookPhone1020} 1020w`;
 const HERO_BOOK_SIZES = "min(100vw, 460px)";
-// Drawing crop: 540 = native pixels (wall evened to the section colour); 1080 = a light
-// Lanczos 2× (visibly crisper hand-lettering than browser upscaling on 2-3× phones).
-const HERO_DRAWING_SRCSET = `${heroDrawing540} 540w, ${heroDrawing1080} 1080w`;
-const HERO_DRAWING_SIZES = "min(100vw - 32px, 440px)";
+// Drawing crop: 540 = native pixels (wall lighting evened to the section colour, alpha-feathered
+// outside the lettering); 1080 = a light Lanczos 2× (crisper hand-lettering on 2-3× phones).
+const HERO_DRAWING_SRCSET = `${heroDrawingPhone540} 540w, ${heroDrawingPhone1080} 1080w`;
+const HERO_DRAWING_SIZES = "min(100vw, 470px)";
 /** 1×1 transparent GIF: lets a <picture> skip its download where it is not shown. */
 const NO_IMAGE = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 const HERO_ALT =
@@ -172,7 +174,7 @@ function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative overflow-hidden bg-[linear-gradient(#f2d6bb,#efd3b6_70%,#f6e0c9)] lg:h-[max(600px,min(55.9vw,100svh))]"
+      className="relative overflow-hidden bg-[#f4d3b5] lg:bg-[linear-gradient(#f2d6bb,#efd3b6_70%,#f6e0c9)] lg:h-[max(600px,min(55.9vw,100svh))]"
     >
       {/* Desktop only: soft wall-and-floor backdrop (the art without book or drawing, blurred,
           inlined) so short or very wide viewports continue the scene beyond the stage. */}
@@ -187,16 +189,19 @@ function Hero() {
       {/* Stage = the whole artwork at full hero height (never cropped); the headline and
           buttons are positioned on it so they keep their place around the book and drawing. */}
       <div className="relative flex flex-col items-center pt-[92px] pb-12 [container-type:inline-size] sm:pt-[104px] lg:absolute lg:inset-y-0 lg:left-1/2 lg:block lg:aspect-[1677/938] lg:h-full lg:-translate-x-1/2 lg:p-0">
-        <div className="relative order-2 mt-4 aspect-square w-full max-w-[460px] edge-fade [--fy:12%] min-[461px]:[--fx:12%] md:mt-6 md:aspect-[1140/690] md:max-w-none md:overflow-hidden md:[--fx:8%] md:[--fy:10%] lg:absolute lg:inset-0 lg:mt-0 lg:aspect-auto lg:overflow-visible lg:[--fx:4%] lg:[--fy:0%]">
+        {/* Phones: the book crop's own alpha fades its wall/floor into the section colour; its
+            transparent top tucks under the headline. Tablet: top/bottom mask on the crop.
+            Desktop keeps the full uncropped stage (the opaque mask only preserves its rendering). */}
+        <div className="relative order-2 mt-[calc(min(100vw,460px)*-0.14)] aspect-[510/790] w-full max-w-[460px] md:mt-6 md:aspect-[1140/690] md:max-w-none md:overflow-hidden md:[mask-image:linear-gradient(transparent,#000_14%,#000_84%,transparent)] lg:absolute lg:inset-0 lg:mt-0 lg:aspect-auto lg:overflow-visible lg:[mask-image:linear-gradient(#000,#000)]">
           <picture>
             <source media={HERO_MEDIA} srcSet={HERO_SRCSET} sizes={HERO_SIZES} />
             <img
-              src={heroBook640}
+              src={heroBookPhone1020}
               srcSet={HERO_BOOK_SRCSET}
               sizes={HERO_BOOK_SIZES}
               alt={HERO_ALT}
-              width={640}
-              height={640}
+              width={510}
+              height={790}
               fetchPriority="high"
               decoding="async"
               className="block h-full w-full object-cover md:absolute md:top-[-30.4%] md:left-[-26.3%] md:h-auto md:w-[147.1%] md:max-w-none lg:inset-0 lg:h-full lg:w-full"
@@ -215,16 +220,17 @@ function Hero() {
           </em>
         </h1>
         {/* Phones: the drawing again at its native resolution so the labels stay legible
-            (described by the hero image alt; tablets and desktop show it inside that image). */}
-        <picture className="relative order-3 -mt-1 block w-[min(100%-32px,440px)] edge-fade [--fx:10%] [--fy:10%] md:hidden">
+            (described by the hero image alt; tablets and desktop show it inside that image).
+            Its feathered top overlaps the fading floor reflection of the book above. */}
+        <picture className="relative order-3 mt-[calc(min(100vw,470px)*-0.2)] block w-[min(100%,470px)] md:hidden">
           <source media={HERO_MEDIA} srcSet={NO_IMAGE} />
           <img
-            src={heroDrawing540}
+            src={heroDrawingPhone540}
             srcSet={HERO_DRAWING_SRCSET}
             sizes={HERO_DRAWING_SIZES}
             alt=""
             width={540}
-            height={490}
+            height={540}
             decoding="async"
             className="block h-auto w-full"
           />
