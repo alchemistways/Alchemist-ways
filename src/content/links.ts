@@ -15,25 +15,27 @@ export const EXTERNAL = {
   conversation: "https://calendly.com/alchemistways/conversation",
   /** Calendly: paid clarity session (one-on-one work with Malek). */
   claritySession: "https://calendly.com/alchemistways/clarity-session",
+  /** Payhip: buy the book Meet Yourself, Differently. */
+  book: "https://payhip.com/Alchemist14",
 } as const;
 
 export const LINKS = {
   /** Header "Begin" button. */
   begin: "#begin",
-  /** Hero "Get the book": no purchase URL supplied yet, so it opens the book card. */
-  getTheBook: "#understand",
+  /** Hero "Get the book": the Payhip store. */
+  getTheBook: EXTERNAL.book,
   /** Hero "Explore the map". */
   exploreTheMap: "#map",
   /** Map section "Explore the map": the complete Map lives in the book. */
   exploreTheMapSection: "#understand",
-  /** Opening "Go deeper with the book": same destination as the hero "Get the book". */
-  goDeeperWithBook: "#understand",
+  /** Opening "Explore the book": the Payhip store. */
+  goDeeperWithBook: EXTERNAL.book,
   /** Map section "The Community Field": the existing Skool community link. */
   communityField: EXTERNAL.community,
   /** Founder "Read the founder story": no standalone story page yet; books a conversation with Malek. */
   founderStory: EXTERNAL.conversation,
-  /** Begin card 01 "Explore the book": no purchase URL supplied yet; joins the community. */
-  exploreBook: EXTERNAL.community,
+  /** Begin card 01 "Explore the book": the Payhip store. */
+  exploreBook: EXTERNAL.book,
   /** Begin card 02 "Work with Malek": paid clarity session. */
   workWithMalek: EXTERNAL.claritySession,
   /** Begin card 03 "Start 7 days free": the Skool community (7-day trial, then $44/month). */

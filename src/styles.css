@@ -319,3 +319,10 @@
   backdrop-filter: blur(6px);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25);
 }
+
+/* Map section (desktop): stage card i sits in the i-th dark panel of the artwork. */
+@media (min-width: 1024px) {
+  [data-stage] {
+    left: calc(2.928% + var(--i) * 19.034%);
+  }
+}
