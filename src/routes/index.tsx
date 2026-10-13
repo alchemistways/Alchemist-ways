@@ -7,13 +7,14 @@ import { VideoBlock } from "../components/VideoBlock";
 import { EclipseArt, LineIcon, WaveCircleArt, type IconName } from "../components/Art";
 import { LINKS, isExternal } from "../content/links";
 import { STAGES } from "../content/stages";
-import { DIAGRAM, HeroDiagram } from "../components/HeroDiagram";
 
 import heroScene900 from "../assets/hero-scene-900.webp";
 import heroScene1280 from "../assets/hero-scene-1280.webp";
 import heroScene1711 from "../assets/hero-scene-1711.webp";
 import heroRoomM560 from "../assets/hero-room-m-560.webp";
 import heroRoomM800 from "../assets/hero-room-m-800.webp";
+import heroSketch520 from "../assets/hero-sketch-520.webp";
+import heroSketch1040 from "../assets/hero-sketch-1040.webp";
 import heroBook432 from "../assets/hero-book-432.webp";
 import heroBook864 from "../assets/hero-book-864.webp";
 import mapSand1024 from "../assets/map-sand-1024.webp";
@@ -271,22 +272,19 @@ function Hero() {
               className="block h-auto w-full"
             />
           </div>
-          {/* Phones: the diagram sits above the book (client’s mobile concept), drawn as before. */}
-          <HeroDiagram
-            variant="compact"
-            className="order-first mb-4 block h-auto w-full max-w-[400px] md:order-none md:mb-0 md:w-[420px] md:max-w-[52vw] lg:hidden"
-          />
-          {/* Desktop: ring centre at 66.5% / 57.2% of the stage, i.e. level with the middle of
-              the book’s cover (as in the mockup); the buttons are centred under it. One SVG unit
-              = 1/1024 of the stage width, the mockup’s scale. */}
-          <HeroDiagram
-            variant="wide"
-            className="hidden lg:absolute lg:top-[57.2%] lg:left-[66.5%] lg:block lg:h-auto"
-            style={{
-              width: `${((DIAGRAM.wide.halfW * 2) / 1024) * 100}%`,
-              // shift up by the ring centre’s share of the height, so the ring (not the label box) is anchored
-              translate: `-50% -${(-DIAGRAM.wide.top / (DIAGRAM.wide.bottom - DIAGRAM.wide.top)) * 100}%`,
-            }}
+          {/* The client’s hand-sketched Map (cut out of hero-map-handdrawn.jpg on transparency,
+              520 px native; 1040 = sharpened Lanczos 2× for 2–3× screens). Phones: above the
+              book; tablets: beside it; desktop: centred at 66.5% / 57.2% of the stage, level with
+              the middle of the book cover, buttons centred under it. */}
+          <img
+            src={heroSketch520}
+            srcSet={`${heroSketch520} 520w, ${heroSketch1040} 1040w`}
+            sizes="(min-width: 1024px) max(312px, min(31vw, 51.9vh)), (min-width: 768px) 380px, min(86vw, 360px)"
+            alt={`The Map, hand-sketched: ${STAGES.map((st) => `${st.n} ${st.label}, ${st.word.toLowerCase()}`).join("; ")}.`}
+            width={520}
+            height={486}
+            decoding="async"
+            className="order-first mb-5 block h-auto w-[min(86vw,360px)] md:order-none md:mb-0 md:w-[380px] md:max-w-[48vw] lg:absolute lg:top-[57.2%] lg:left-[66.5%] lg:w-[31%] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2"
           />
         </div>
         <div className="relative z-10 mt-6 w-full lg:absolute lg:top-[84%] lg:left-[66.5%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2">
