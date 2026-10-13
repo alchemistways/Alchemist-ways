@@ -16,7 +16,7 @@ export const EXTERNAL = {
   /** Calendly: paid clarity session (one-on-one work with Malek). */
   claritySession: "https://calendly.com/alchemistways/clarity-session",
   /** Payhip: buy the book Meet Yourself, Differently. */
-  book: "https://payhip.com/Alchemist14",
+  book: "https://payhip.com/b/1PTaC",
 } as const;
 
 export const LINKS = {
