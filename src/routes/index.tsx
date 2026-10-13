@@ -234,7 +234,7 @@ function Hero() {
           <br />
           <em className="font-medium text-red">doesn’t have to choose for you.</em>
         </h1>
-        <div className="relative mt-3 flex w-full flex-col items-center md:mt-10 md:flex-row md:items-center md:justify-center md:gap-[4vw] lg:static lg:mt-0 lg:block">
+        <div className="relative mt-6 flex w-full flex-col items-center md:mt-10 md:flex-row md:items-center md:justify-center md:gap-[4vw] lg:static lg:mt-0 lg:block">
           {/* Book. Phones/tablets: in the column; its wrapper carries the wall (everything above
               the horizon, 35.2% up from the image bottom, is wall; below it the section floor).
               Desktop: placed on the stage where it stands in the scene. */}
@@ -250,13 +250,13 @@ function Hero() {
               <img
                 src={heroRoomM800}
                 srcSet={`${heroRoomM560} 560w, ${heroRoomM800} 800w`}
-                sizes="1000px"
+                sizes="1150px"
                 alt=""
                 aria-hidden="true"
                 width={800}
                 height={1020}
                 decoding="async"
-                className="absolute bottom-[calc(35.2%-325px)] left-1/2 -z-10 h-[1275px] w-[1000px] max-w-none -translate-x-1/2 [mask-image:linear-gradient(transparent,#000_220px,#000_calc(100%-190px),transparent)] md:bottom-[calc(35.2%-260px)] md:h-[1020px] md:w-[1711px] lg:hidden"
+                className="absolute bottom-[calc(35.2%-374px)] left-1/2 -z-10 h-[1466px] w-[1150px] max-w-none -translate-x-1/2 [mask-image:linear-gradient(#000_calc(100%-190px),transparent)] md:bottom-[calc(35.2%-260px)] md:[mask-image:linear-gradient(transparent,#000_220px,#000_calc(100%-190px),transparent)] md:h-[1020px] md:w-[1711px] lg:hidden"
               />
             </picture>
             <img
@@ -284,7 +284,7 @@ function Hero() {
             width={520}
             height={486}
             decoding="async"
-            className="order-first mb-5 block h-auto w-[min(86vw,360px)] md:order-none md:mb-0 md:w-[380px] md:max-w-[48vw] lg:absolute lg:top-[57.2%] lg:left-[66.5%] lg:w-[31%] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2"
+            className="order-first mb-8 block h-auto w-[min(86vw,360px)] translate-x-[1.27%] md:order-none md:translate-x-0 md:mb-0 md:w-[380px] md:max-w-[48vw] lg:absolute lg:top-[57.2%] lg:left-[66.5%] lg:w-[31%] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2"
           />
         </div>
         <div className="relative z-10 mt-6 w-full lg:absolute lg:top-[84%] lg:left-[66.5%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2">
