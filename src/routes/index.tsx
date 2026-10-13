@@ -271,14 +271,10 @@ function Hero() {
               className="block h-auto w-full"
             />
           </div>
-          {/* Phones: the diagram sits above the book (client’s mobile concept). */}
-          <HeroDiagram
-            variant="mobile"
-            className="order-first mb-4 block h-auto w-full max-w-[400px] md:hidden"
-          />
+          {/* Phones: the diagram sits above the book (client’s mobile concept), drawn as before. */}
           <HeroDiagram
             variant="compact"
-            className="hidden h-auto md:block md:w-[420px] md:max-w-[52vw] lg:hidden"
+            className="order-first mb-4 block h-auto w-full max-w-[400px] md:order-none md:mb-0 md:w-[420px] md:max-w-[52vw] lg:hidden"
           />
           {/* Desktop: ring centre at 66.5% / 57.2% of the stage, i.e. level with the middle of
               the book’s cover (as in the mockup); the buttons are centred under it. One SVG unit

@@ -28,7 +28,6 @@ type Geometry = {
   top: number;
   bottom: number;
   split: boolean; // “Creative Agency” on two lines
-  badge?: number; // phones: numbers as “01” in a soft pink disc of this radius
 };
 
 export const DIAGRAM = {
@@ -57,21 +56,6 @@ export const DIAGRAM = {
     top: -116,
     bottom: 92,
     split: true,
-  },
-  // Phones (client’s mobile concept): pink number discs, underlined words, faint centre rings.
-  mobile: {
-    R: 74,
-    num: 10.5,
-    label: 10.6,
-    word: 11.4,
-    gap: 6,
-    arcGap: 13,
-    star: 10,
-    halfW: 172,
-    top: -128,
-    bottom: 112,
-    split: true,
-    badge: 12.5,
   },
 } satisfies Record<string, Geometry>;
 
@@ -105,7 +89,7 @@ export function HeroDiagram({
 }) {
   const g: Geometry = DIAGRAM[variant];
   const { R } = g;
-  const reach = R + (g.badge ?? g.num * 0.5) + g.gap; // label distance from the centre, same for all five
+  const reach = R + g.num * 0.5 + g.gap; // label distance from the centre, same for all five
   const lineH = g.label * 1.2;
   return (
     <svg
@@ -136,53 +120,24 @@ export function HeroDiagram({
         })}
         <path d={star(g.star)} />
       </g>
-      {g.badge && (
-        <g fill="none" stroke="#e7c9c0" strokeWidth="0.6" aria-hidden="true">
-          {[16, 24, 32, 40].map((r) => (
-            <circle key={r} r={r} opacity={1 - r / 52} />
-          ))}
-        </g>
-      )}
-      {g.badge ? (
-        <g
-          fontFamily="Newsreader, ui-serif, Georgia, serif"
-          fontSize={g.num}
-          fontWeight="500"
-          textAnchor="middle"
-          dominantBaseline="central"
-        >
-          {STAGES.map((s, i) => {
-            const [x, y] = pt(ANG[i] ?? 0, R);
-            return (
-              <g key={s.n}>
-                <circle cx={x} cy={y} r={g.badge} fill="#fbdcd3" />
-                <text x={x} y={y} fill="#c23a1f">
-                  {s.n}
-                </text>
-              </g>
-            );
-          })}
-        </g>
-      ) : (
-        <g
-          fill="#9a9592"
-          fontFamily="Figtree, ui-sans-serif, system-ui, sans-serif"
-          fontStyle="italic"
-          fontWeight="600"
-          fontSize={g.num}
-          textAnchor="middle"
-          dominantBaseline="central"
-        >
-          {STAGES.map((s, i) => {
-            const [x, y] = pt(ANG[i] ?? 0, R);
-            return (
-              <text key={s.n} x={x} y={y}>
-                {Number(s.n)}
-              </text>
-            );
-          })}
-        </g>
-      )}
+      <g
+        fill="#9a9592"
+        fontFamily="Figtree, ui-sans-serif, system-ui, sans-serif"
+        fontStyle="italic"
+        fontWeight="600"
+        fontSize={g.num}
+        textAnchor="middle"
+        dominantBaseline="central"
+      >
+        {STAGES.map((s, i) => {
+          const [x, y] = pt(ANG[i] ?? 0, R);
+          return (
+            <text key={s.n} x={x} y={y}>
+              {Number(s.n)}
+            </text>
+          );
+        })}
+      </g>
       <g fontFamily="Newsreader, ui-serif, Georgia, serif" dominantBaseline="central">
         {STAGES.map((s, i) => {
           const a = ANG[i] ?? 0;
@@ -224,13 +179,6 @@ export function HeroDiagram({
               >
                 {s.word}
               </text>
-              {g.badge && (
-                <path
-                  d={`M${r2(anchor === "start" ? ax : anchor === "end" ? ax - 22 : ax - 11)} ${r2(y0 + lines.length * lineH + g.word * 0.85)}h22`}
-                  stroke="#cf3a1d"
-                  strokeWidth="0.7"
-                />
-              )}
             </g>
           );
         })}
