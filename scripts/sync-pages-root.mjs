@@ -11,6 +11,7 @@ const rootEntries = [
   "apple-touch-icon.png",
   "og-image.jpg",
   "robots.txt",
+  "sitemap.xml",
 ];
 
 if (process.argv.includes("--clean")) {

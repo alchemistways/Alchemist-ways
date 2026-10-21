@@ -15,9 +15,9 @@ const preloadFont = (href: string) => ({
 });
 
 const SITE_URL = "https://alchemistways.com/";
-const TITLE = "Alchemist Ways | Meet Yourself, Differently.";
+const TITLE = "Alchemist Ways — Meet Yourself, Differently | Malek Najm Ghaleb";
 const DESCRIPTION =
-  "A Map from emotional reactivity to creative agency. See what's been choosing for you, and free what wants to move through you.";
+  "Alchemist Ways by Malek Najm Ghaleb: the Map from Reactivity to Awareness, Integration, Sovereignty and Creative Agency, and the book Meet Yourself, Differently.";
 
 function NotFoundComponent() {
   return (
@@ -39,9 +39,11 @@ export const Route = createRootRoute({
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
       { name: "author", content: "Malek Najm Ghaleb" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       { name: "theme-color", content: "#f3e8d6" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Alchemist Ways" },
+      { property: "og:locale", content: "en_US" },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: SITE_URL },
@@ -56,6 +58,10 @@ export const Route = createRootRoute({
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
       { name: "twitter:image", content: `${SITE_URL}og-image.jpg` },
+      {
+        name: "twitter:image:alt",
+        content: "The book Meet Yourself, Differently. by Malek Najm Ghaleb",
+      },
     ],
     links: [
       // Fonts used above the fold (hero headline + header/body).

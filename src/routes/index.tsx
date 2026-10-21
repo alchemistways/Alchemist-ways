@@ -6,7 +6,7 @@ import { SiteFooter } from "../components/SiteFooter";
 import { VideoBlock } from "../components/VideoBlock";
 import { DIAGRAM, HeroDiagram } from "../components/HeroDiagram";
 import { EclipseArt, LineIcon, WaveCircleArt, type IconName } from "../components/Art";
-import { LINKS, isExternal } from "../content/links";
+import { EXTERNAL, LINKS, SOCIAL, isExternal } from "../content/links";
 import { STAGES } from "../content/stages";
 import {
   STORY_CLOSING,
@@ -16,6 +16,7 @@ import {
   STORY_TITLE,
 } from "../content/founderStory";
 
+import logoAsset from "../assets/logo.webp";
 import heroScene900 from "../assets/hero-scene-900.webp";
 import heroScene1280 from "../assets/hero-scene-1280.webp";
 import heroScene1711 from "../assets/hero-scene-1711.webp";
@@ -80,9 +81,57 @@ const BEGIN_CARD_SIZES =
 const ext = (href: string) =>
   isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
+/** JSON-LD structured data: only facts the page itself states (no prices, ratings or dates). */
+const SITE = "https://alchemistways.com/";
+const abs = (asset: string) => SITE + asset.replace(/^(\.?\/)+/, "");
+const STRUCTURED_DATA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE}#organization`,
+      name: "Alchemist Ways",
+      url: SITE,
+      logo: abs(logoAsset),
+      founder: { "@id": `${SITE}#malek` },
+      sameAs: Object.values(SOCIAL),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}#website`,
+      name: "Alchemist Ways",
+      url: SITE,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE}#organization` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE}#malek`,
+      name: "Malek Najm Ghaleb",
+      jobTitle: "Founder, Alchemist Ways",
+      image: abs(founder780),
+      worksFor: { "@id": `${SITE}#organization` },
+      url: SITE,
+    },
+    {
+      "@type": "Book",
+      "@id": `${SITE}#book`,
+      name: "Meet Yourself, Differently.",
+      alternativeHeadline: "Turn emotional reactivity into creative agency",
+      author: { "@id": `${SITE}#malek` },
+      publisher: { "@id": `${SITE}#organization` },
+      image: abs(heroBook864),
+      url: EXTERNAL.book,
+      inLanguage: "en",
+      about: "The Map: Reactivity → Awareness → Integration → Sovereignty → Creative Agency.",
+    },
+  ],
+};
+
 export const Route = createFileRoute("/")({
   // Start the hero art download with the HTML, matching the <picture> sources exactly.
   head: () => ({
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(STRUCTURED_DATA) }],
     links: [
       {
         rel: "preload",
