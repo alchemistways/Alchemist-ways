@@ -1074,14 +1074,12 @@ function Begin() {
           </li>
         ))}
       </ul>
-      <div className="mt-14 font-serif text-[#1b1a1f] lg:mt-[4vw]">
-        <p className="text-[13px] tracking-[0.14em] text-[#6f6a66] uppercase lg:text-[clamp(13px,1.05vw,20px)]">
-          What once kept choosing for you
-        </p>
-        <p className="mt-1 text-[38px] leading-[1.05] font-normal tracking-[-0.01em] text-rust lg:text-[clamp(38px,3.6vw,68px)]">
-          No longer has to.
-        </p>
-        <p className="mt-1 text-[18px] italic lg:mt-[0.3vw] lg:text-[clamp(18px,1.6vw,30px)]">
+      {/* Closing statement: client-specified type (Poppins / Playfair Display), desktop sizes
+          22 / 66 / 26 px, scaled down together on phones (see .closing-* in styles.css). */}
+      <div className="mt-14 lg:mt-[4vw]">
+        <p className="closing-eyebrow">What once kept choosing for you</p>
+        <p className="closing-statement mt-1">No longer has to.</p>
+        <p className="closing-question mt-1 lg:mt-[0.3vw]">
           What will you choose for yourself now?
         </p>
       </div>

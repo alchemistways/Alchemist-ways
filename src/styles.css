@@ -7,6 +7,27 @@
    Mono: DM Mono for small labels (founder pill, footer wordmark).
    Condensed: Barlow Condensed 600 italic for the Reactivity word stream only. */
 @font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("./assets/fonts/poppins-latin-300-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/poppins-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/playfair-display-latin-400-italic.woff2") format("woff2");
+}
+@font-face {
   font-family: "Figtree";
   font-style: normal;
   font-weight: 300 900;
@@ -93,6 +114,32 @@
 }
 
 @layer components {
+  /* Closing statement. Desktop: 22 / 66 / 26 px exactly; below ~660px wide all three scale by
+     the same factor (statement 10vw), so proportions and spacing stay identical. */
+  .closing-eyebrow {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(11px, 3.333vw, 22px);
+    font-weight: 400;
+    letter-spacing: clamp(0.4px, 0.1212vw, 0.8px);
+    color: #777777;
+    text-transform: uppercase;
+  }
+  .closing-statement {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(33px, 10vw, 66px);
+    font-weight: 300;
+    letter-spacing: clamp(-1.5px, -0.2273vw, -0.75px);
+    line-height: 1.1;
+    color: #ce4f25;
+  }
+  .closing-question {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(13px, 3.939vw, 26px);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #171717;
+  }
   /* Stay connected: warm cream with soft diagonal window-light shadows (CSS, so always sharp). */
   .stay-bg {
     background-color: #f3ebdf;
