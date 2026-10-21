@@ -1073,10 +1073,10 @@ function Begin() {
         ))}
       </ul>
       <div className="mt-14 font-serif text-[#1b1a1f] lg:mt-[4vw]">
-        <p className="text-[13px] tracking-[0.14em] uppercase lg:text-[clamp(13px,1.05vw,20px)]">
+        <p className="text-[13px] tracking-[0.14em] text-[#6f6a66] uppercase lg:text-[clamp(13px,1.05vw,20px)]">
           What once kept choosing for you
         </p>
-        <p className="mt-1 text-[38px] leading-[1.05] font-normal tracking-[-0.01em] text-[#c0321d] lg:text-[clamp(38px,3.6vw,68px)]">
+        <p className="mt-1 text-[38px] leading-[1.05] font-normal tracking-[-0.01em] text-rust lg:text-[clamp(38px,3.6vw,68px)]">
           No longer has to.
         </p>
         <p className="mt-1 text-[18px] italic lg:mt-[0.3vw] lg:text-[clamp(18px,1.6vw,30px)]">
