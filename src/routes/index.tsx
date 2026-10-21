@@ -180,19 +180,19 @@ function HeroButtons() {
           Explore the map <span aria-hidden="true">→</span>
         </a>
       </div>
-      {/* Desktop: Get the book (solid) left, Explore the map (outlined) right. */}
+      {/* Desktop: Get the book (outlined) left, Explore the map (solid) right, same colours as phones. */}
       <div className="hidden items-center justify-center lg:flex lg:flex-nowrap lg:gap-[1.1cqi]">
         <a
           href={LINKS.getTheBook}
           {...ext(LINKS.getTheBook)}
-          className={`btn-solid lg:min-w-[14.3cqi] ${HERO_BTN_LG}`}
+          className={`btn-pill lg:min-w-[14.3cqi] ${HERO_BTN_LG}`}
         >
           Get the book
         </a>
         <a
           href={LINKS.exploreTheMap}
           {...ext(LINKS.exploreTheMap)}
-          className={`btn-pill lg:min-w-[14.6cqi] ${HERO_BTN_LG}`}
+          className={`btn-solid lg:min-w-[14.6cqi] ${HERO_BTN_LG}`}
         >
           Explore the map
         </a>
@@ -1049,10 +1049,11 @@ function Begin() {
 }
 
 /* ---------- 11. Stay connected (newsletter) ---------- */
-// PLACEHOLDER: no newsletter / mailing-list service exists yet (none in the repo or the client's
-// files). The form posts nowhere; NEWSLETTER_SCRIPT only shows a "coming soon" note. Wire it by
-// setting LINKS.newsletter (form action) once the client picks a provider.
-const NEWSLETTER_SCRIPT = `(()=>{const f=document.querySelector("[data-newsletter-placeholder]");if(!f)return;f.addEventListener("submit",e=>{e.preventDefault();const s=f.querySelector("[data-newsletter-status]");if(s){s.hidden=false;s.textContent="Thank you. Newsletter sign-up is opening soon."}})})();`;
+// Posts to the client's Kit form "Alchemist Ways — Main Email List" (LINKS.newsletter):
+// email → email_address, name → fields[first_name]. The Kit form has no phone field, so the
+// phone number is not sent. Kit may answer "quarantined" (its bot check); the visitor then gets
+// a link to finish on Kit. Any network error falls back to a link to the Kit form page.
+const NEWSLETTER_SCRIPT = `(()=>{const f=document.querySelector("[data-newsletter]");if(!f)return;const s=f.querySelector("[data-newsletter-status]"),btn=f.querySelector("button[type=submit]"),say=(t,href)=>{s.hidden=false;s.textContent=t;if(href){const a=document.createElement("a");a.href=href;a.target="_blank";a.rel="noopener noreferrer";a.className="underline";a.textContent=" Continue on Kit →";s.append(a)}};f.addEventListener("submit",async e=>{e.preventDefault();if(!f.reportValidity())return;const d=new FormData(f),b=new URLSearchParams();b.set("email_address",String(d.get("email")||"").trim());const n=String(d.get("name")||"").trim();if(n)b.set("fields[first_name]",n);btn.disabled=true;try{const r=await fetch(f.action,{method:"POST",headers:{Accept:"application/json"},body:b}),j=await r.json().catch(()=>({}));if(j.status==="success"){f.querySelectorAll("input").forEach(i=>i.value="");say("Success! Now check your email to confirm your subscription.")}else if(j.status==="quarantined"&&j.url){say("Almost there. Please confirm you are human to finish subscribing.",j.url)}else{say("Something went wrong. Please try again, or sign up here:",f.dataset.fallback)}}catch(_){say("Something went wrong. Please try again, or sign up here:",f.dataset.fallback)}finally{btn.disabled=false}})})();`;
 
 function StayConnected() {
   return (
@@ -1078,7 +1079,10 @@ function StayConnected() {
           differently.
         </p>
         <form
-          data-newsletter-placeholder
+          data-newsletter
+          action={LINKS.newsletterAction}
+          method="post"
+          data-fallback={LINKS.newsletter}
           className="mt-8 grid gap-3 text-[15px] lg:mt-[2.6vw] lg:grid-cols-[1fr_1fr_1fr_1fr] lg:gap-[1.1vw] lg:text-[clamp(15px,1.05vw,20px)]"
         >
           <label className="relative block">
