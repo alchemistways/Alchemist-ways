@@ -7,6 +7,11 @@ export function SiteFooter() {
         Alchemist Ways
       </p>
       <SocialIcons className="mt-6 md:mt-8" />
+      <p className="mt-6 text-[13px] tracking-[0.04em] text-[#6f6a66] md:mt-8 md:text-[clamp(13px,0.9vw,16px)]">
+        <a href="/privacy-policy/" className="underline-offset-4 hover:text-ink hover:underline">
+          Privacy Policy
+        </a>
+      </p>
     </footer>
   );
 }

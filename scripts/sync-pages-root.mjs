@@ -12,6 +12,7 @@ const rootEntries = [
   "og-image.jpg",
   "robots.txt",
   "sitemap.xml",
+  "privacy-policy",
 ];
 
 if (process.argv.includes("--clean")) {
@@ -63,6 +64,25 @@ for (const page of ["index.html", "404.html"]) {
       // inline script), so drop the hydration bundle links and bootstrap script.
       .replace(/<link rel="modulepreload"[^>]*>/g, "")
       .replace(/<script>\(self\.\$R=[\s\S]*?<\/script>/g, ""),
+  );
+}
+
+// The Privacy Policy lives one folder down, so its relative asset URLs go up a level.
+{
+  const page = join("privacy-policy", "index.html");
+  const html = await readFile(page, "utf8");
+  await writeFile(
+    page,
+    html
+      .replaceAll('/./assets/', '../assets/')
+      .replaceAll('"./assets/', '"../assets/')
+      .replaceAll(' ./assets/', ' ../assets/')
+      .replaceAll('href="/favicon.png"', 'href="../favicon.png"')
+      .replaceAll('href="./favicon.png"', 'href="../favicon.png"')
+      .replaceAll('href="./apple-touch-icon.png"', 'href="../apple-touch-icon.png"')
+      .replace(/<link rel="modulepreload"[^>]*>/g, "")
+      .replace(/<script>\(self\.\$R=[\s\S]*?<\/script>/g, "")
+      .replace(/<script type="module"[^>]*>[\s\S]*?<\/script>/g, ""),
   );
 }
 

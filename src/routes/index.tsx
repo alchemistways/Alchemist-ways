@@ -131,8 +131,10 @@ const STRUCTURED_DATA = {
 export const Route = createFileRoute("/")({
   // Start the hero art download with the HTML, matching the <picture> sources exactly.
   head: () => ({
+    meta: [{ property: "og:url", content: SITE }],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(STRUCTURED_DATA) }],
     links: [
+      { rel: "canonical", href: SITE },
       {
         rel: "preload",
         as: "image",
@@ -1211,6 +1213,16 @@ function StayConnected() {
         </form>
         <p className="mt-5 text-[13px] text-[#5d5650] lg:mt-[1.6vw] lg:text-[clamp(13px,0.95vw,18px)]">
           Thoughtful reflections. No noise. Unsubscribe anytime.
+        </p>
+        <p className="mt-1.5 text-[12px] text-[#7a736c] lg:mt-[0.4vw] lg:text-[clamp(12px,0.85vw,16px)]">
+          By subscribing you agree to our{" "}
+          <a
+            href="/privacy-policy/"
+            className="underline decoration-1 underline-offset-2 hover:text-ink"
+          >
+            Privacy Policy
+          </a>
+          .
         </p>
       </div>
       <script dangerouslySetInnerHTML={{ __html: NEWSLETTER_SCRIPT }} />

@@ -18,7 +18,7 @@ export default defineConfig({
     server: { entry: "server" },
     // The site is fully static, so every page is rendered to HTML at build time.
     // This is what makes the GitHub Pages deploy work.
-    pages: [{ path: "/" }],
+    pages: [{ path: "/" }, { path: "/privacy-policy" }],
     prerender: { enabled: true, autoStaticPathsDiscovery: false, concurrency: 4 },
   },
 });

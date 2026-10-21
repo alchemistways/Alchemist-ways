@@ -17,11 +17,15 @@ export const getRouter = () =>
     defaultPreloadStaleTime: 0,
     rewrite: {
       input: ({ url }) => {
-        url.pathname = "/";
+        // The only other page is the Privacy Policy; everything else is the home page.
+        url.pathname = /\/privacy-policy\/?(index\.html)?$/.test(url.pathname)
+          ? "/privacy-policy"
+          : "/";
         return url;
       },
       output: ({ url }) => {
-        url.pathname = pagePath;
+        // Server (prerender): keep the real path so each page renders as itself.
+        if (typeof window !== "undefined") url.pathname = pagePath;
         return url;
       },
     },
