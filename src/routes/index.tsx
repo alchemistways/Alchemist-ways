@@ -4,17 +4,17 @@ import type { CSSProperties, ReactNode } from "react";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { VideoBlock } from "../components/VideoBlock";
+import { DIAGRAM, HeroDiagram } from "../components/HeroDiagram";
 import { EclipseArt, LineIcon, WaveCircleArt, type IconName } from "../components/Art";
 import { LINKS, isExternal } from "../content/links";
 import { STAGES } from "../content/stages";
+import { STORY_BLOCKS, STORY_SUBTITLE, STORY_TITLE } from "../content/founderStory";
 
 import heroScene900 from "../assets/hero-scene-900.webp";
 import heroScene1280 from "../assets/hero-scene-1280.webp";
 import heroScene1711 from "../assets/hero-scene-1711.webp";
 import heroRoomM560 from "../assets/hero-room-m-560.webp";
 import heroRoomM800 from "../assets/hero-room-m-800.webp";
-import heroSketch520 from "../assets/hero-sketch-520.webp";
-import heroSketch1040 from "../assets/hero-sketch-1040.webp";
 import heroBook432 from "../assets/hero-book-432.webp";
 import heroBook864 from "../assets/hero-book-864.webp";
 import mapSand1024 from "../assets/map-sand-1024.webp";
@@ -272,19 +272,21 @@ function Hero() {
               className="block h-auto w-full"
             />
           </div>
-          {/* The client’s hand-sketched Map (cut out of hero-map-handdrawn.jpg on transparency,
-              520 px native; 1040 = sharpened Lanczos 2× for 2–3× screens). Phones: above the
-              book; tablets: beside it; desktop: centred at 66.5% / 57.2% of the stage, level with
-              the middle of the book cover, buttons centred under it. */}
-          <img
-            src={heroSketch520}
-            srcSet={`${heroSketch520} 520w, ${heroSketch1040} 1040w`}
-            sizes="(min-width: 1024px) max(312px, min(31vw, 51.9vh)), (min-width: 768px) 380px, min(86vw, 360px)"
-            alt={`The Map, hand-sketched: ${STAGES.map((st) => `${st.n} ${st.label}, ${st.word.toLowerCase()}`).join("; ")}.`}
-            width={520}
-            height={486}
-            decoding="async"
-            className="order-first mb-8 block h-auto w-[min(86vw,360px)] translate-x-[1.27%] md:order-none md:translate-x-0 md:mb-0 md:w-[380px] md:max-w-[48vw] lg:absolute lg:top-[57.2%] lg:left-[66.5%] lg:w-[31%] lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2"
+          {/* The Map as vector (the clean ring from THE NEW HERO_14): phones/tablets get the
+              compact variant (larger labels), centred above / beside the book with no fade;
+              desktop gets the wide variant with its ring centre (the star) at 66.5% / 57.2% of
+              the stage, level with the middle of the book cover, buttons centred under it. */}
+          <HeroDiagram
+            variant="compact"
+            className="order-first mx-auto mb-6 block h-auto w-full max-w-[400px] md:order-none md:mx-0 md:mb-0 md:w-[420px] md:max-w-[52vw] lg:hidden"
+          />
+          <HeroDiagram
+            variant="wide"
+            className="hidden lg:absolute lg:top-[57.2%] lg:left-[66.5%] lg:block lg:h-auto"
+            style={{
+              width: `${((DIAGRAM.wide.halfW * 2) / 1024) * 100}%`,
+              translate: `-50% -${(-DIAGRAM.wide.top / (DIAGRAM.wide.bottom - DIAGRAM.wide.top)) * 100}%`,
+            }}
           />
         </div>
         <div className="relative z-10 mt-6 w-full lg:absolute lg:top-[84%] lg:left-[66.5%] lg:mt-0 lg:w-max lg:-translate-x-1/2 lg:-translate-y-1/2">
@@ -503,7 +505,8 @@ function Opening() {
           <br />
           <span className="text-red">can be related to differently.</span>
         </p>
-        <WaveCircleArt className="mx-auto mt-8 block h-auto w-[min(72%,300px)] lg:mt-[2.4vw] lg:w-[22vw] lg:max-w-[440px]" />
+        {/* Desktop: centred on the page axis like the eclipse (the column starts at 33.2%). */}
+        <WaveCircleArt className="relative mx-auto mt-8 block h-auto w-[min(72%,300px)] lg:left-[16.8vw] lg:mx-0 lg:mt-[2.4vw] lg:w-[22vw] lg:max-w-[440px] lg:-translate-x-1/2" />
         <div className="mt-6 lg:mt-[2.2vw]">
           <p className="text-[19px] leading-[1.6] font-semibold lg:text-[clamp(19px,1.75vw,34px)]">
             What moves within you
@@ -755,6 +758,9 @@ function Available() {
 }
 
 /* ---------- 8. Founder ---------- */
+/** Inline expand for the extended founder story (the page ships without a JS framework). */
+const STORY_SCRIPT = `(()=>{const b=document.querySelector("[data-story-toggle]"),m=document.getElementById("founder-story-more");if(!b||!m)return;const l=b.querySelector("[data-story-label]"),a=b.querySelector("[data-story-arrow]");b.addEventListener("click",()=>{const v=b.getAttribute("aria-expanded")!=="true";b.setAttribute("aria-expanded",String(v));m.setAttribute("aria-hidden",String(!v));m.classList.toggle("is-open",v);l.textContent=v?"SHOW LESS":"READ MY STORY";a.style.transform=v?"rotate(-90deg)":"";if(!v)b.scrollIntoView({block:"nearest"})})})();`;
+
 function Founder() {
   return (
     <section
@@ -822,17 +828,53 @@ function Founder() {
           <p className="text-[0.75em] tracking-[0.08em] text-ink-soft">Founder, Alchemist Ways</p>
         </div>
         <div className="pt-3 lg:pt-[1.2vw]">
-          <a
-            href={LINKS.founderStory}
-            {...ext(LINKS.founderStory)}
-            className="btn-outline min-h-[52px] gap-3 rounded-md border-[#e2401f] text-[#e2401f] lg:min-h-[clamp(52px,4vw,76px)] lg:px-[1.6vw] lg:text-[clamp(13px,1.08vw,20px)]"
+          <button
+            type="button"
+            data-story-toggle
+            aria-expanded="false"
+            aria-controls="founder-story-more"
+            className="btn-outline min-h-[52px] cursor-pointer gap-3 rounded-md border-[#e2401f] bg-transparent text-[#e2401f] lg:min-h-[clamp(52px,4vw,76px)] lg:px-[1.6vw] lg:text-[clamp(13px,1.08vw,20px)]"
           >
-            Read the founder story{" "}
-            <span aria-hidden="true" className="text-[1.3em]">
+            <span data-story-label>READ MY STORY</span>
+            <span
+              aria-hidden="true"
+              data-story-arrow
+              className="text-[1.3em] transition-transform duration-300"
+            >
               →
             </span>
-          </a>
+          </button>
         </div>
+        <div id="founder-story-more" data-story-more className="story-more" aria-hidden="true">
+          <div className="min-h-0 overflow-hidden">
+            <div className="space-y-3 pt-8 lg:space-y-[1vw] lg:pt-[2.8vw]">
+              <h3 className="text-[1.22em] font-bold tracking-[0.04em] text-ink">{STORY_TITLE}</h3>
+              <p className="text-[1.1em] font-semibold text-red italic">{STORY_SUBTITLE}</p>
+              {STORY_BLOCKS.map((b, i) =>
+                b.t === "h" ? (
+                  <div key={i} className="pt-4 lg:pt-[1.4vw]">
+                    <h4 className="text-[1.22em] font-bold text-ink">{b.text}</h4>
+                    <p className="text-[1.1em] font-semibold text-red italic">{b.sub}</p>
+                  </div>
+                ) : b.t === "p" ? (
+                  <div key={i} className="space-y-1.5 lg:space-y-[0.45vw]">
+                    {b.lines.map((l, j) => (
+                      <p key={j}>{l}</p>
+                    ))}
+                  </div>
+                ) : (
+                  <div key={i} className="pt-2 lg:pt-[0.6vw]">
+                    <p className="font-bold text-red">Malek Najm Ghaleb</p>
+                    <p className="text-[0.75em] tracking-[0.08em] text-ink-soft">
+                      Founder, Alchemist Ways
+                    </p>
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+        <script dangerouslySetInnerHTML={{ __html: STORY_SCRIPT }} />
       </div>
     </section>
   );
