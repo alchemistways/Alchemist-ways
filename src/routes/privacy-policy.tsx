@@ -19,6 +19,8 @@ export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
     meta: [
       { title: TITLE },
+      // Hidden for now: not linked or in the sitemap until Saad finishes editing.
+      { name: "robots", content: "noindex, nofollow" },
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
