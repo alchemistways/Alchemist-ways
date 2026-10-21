@@ -1,4 +1,5 @@
 import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 import { join } from "node:path";
 
 const rootEntries = [
@@ -49,6 +50,26 @@ for (const entry of rootEntries.filter((entry) => entry !== "404.html")) {
   } catch {
     throw new Error(`Required Pages output is missing: ${entry}`);
   }
+}
+
+// Keep the stylesheets from the last commit too: a browser or CDN can hold a cached
+// index.html after a deploy, and if its hashed CSS file is gone the page shows unstyled.
+// (Read from git, because the build itself must start with an empty assets folder.)
+try {
+  const tracked = execFileSync("git", ["ls-tree", "--name-only", "HEAD", "assets/"], {
+    encoding: "utf8",
+  })
+    .split("\n")
+    .filter((f) => /^assets\/styles-[\w-]+\.css$/.test(f));
+  for (const file of tracked) {
+    try {
+      await stat(file);
+    } catch {
+      await writeFile(file, execFileSync("git", ["show", `HEAD:${file}`]));
+    }
+  }
+} catch {
+  // Not a git checkout: nothing to keep.
 }
 
 await cp(join(source, "index.html"), "404.html", { force: true });
