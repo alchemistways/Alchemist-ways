@@ -119,6 +119,7 @@ function Home() {
         <Available />
         <Founder />
         <Begin />
+        <StayConnected />
       </main>
       <SiteFooter />
     </>
@@ -165,18 +166,18 @@ function HeroButtons() {
           solid Explore the map first. */}
       <div className="mx-auto flex w-full max-w-[400px] flex-col gap-3 lg:hidden">
         <a
-          href={LINKS.exploreTheMap}
-          {...ext(LINKS.exploreTheMap)}
-          className="btn-solid min-h-[52px] w-full text-[14px] tracking-[0.16em]"
-        >
-          Explore the map <span aria-hidden="true">→</span>
-        </a>
-        <a
           href={LINKS.getTheBook}
           {...ext(LINKS.getTheBook)}
           className="btn-pill min-h-[52px] w-full text-[14px] tracking-[0.16em]"
         >
           Get the book <span aria-hidden="true">→</span>
+        </a>
+        <a
+          href={LINKS.exploreTheMap}
+          {...ext(LINKS.exploreTheMap)}
+          className="btn-solid min-h-[52px] w-full text-[14px] tracking-[0.16em]"
+        >
+          Explore the map <span aria-hidden="true">→</span>
         </a>
       </div>
       {/* Desktop: Get the book (solid) left, Explore the map (outlined) right. */}
@@ -1043,6 +1044,133 @@ function Begin() {
           What will you choose for yourself now?
         </p>
       </div>
+    </section>
+  );
+}
+
+/* ---------- 11. Stay connected (newsletter) ---------- */
+// PLACEHOLDER: no newsletter / mailing-list service exists yet (none in the repo or the client's
+// files). The form posts nowhere; NEWSLETTER_SCRIPT only shows a "coming soon" note. Wire it by
+// setting LINKS.newsletter (form action) once the client picks a provider.
+const NEWSLETTER_SCRIPT = `(()=>{const f=document.querySelector("[data-newsletter-placeholder]");if(!f)return;f.addEventListener("submit",e=>{e.preventDefault();const s=f.querySelector("[data-newsletter-status]");if(s){s.hidden=false;s.textContent="Thank you. Newsletter sign-up is opening soon."}})})();`;
+
+function StayConnected() {
+  return (
+    <section
+      id="stay-connected"
+      aria-labelledby="stay-title"
+      className="stay-bg relative overflow-hidden px-6 py-16 sm:px-8 lg:px-[7vw] lg:py-[6.4vw]"
+    >
+      <div className="relative z-10">
+        <p className="font-serif text-[13px] tracking-[0.24em] text-ink uppercase lg:text-[clamp(13px,0.95vw,18px)]">
+          Stay connected
+        </p>
+        <h2
+          id="stay-title"
+          className="mt-5 font-serif text-[36px] leading-[1.12] font-normal tracking-[-0.01em] text-ink lg:mt-[1.6vw] lg:text-[clamp(40px,3.4vw,66px)]"
+        >
+          A little more awareness.
+          <br />A little more freedom.
+        </h2>
+        <p className="mt-5 max-w-[640px] text-[16px] leading-[1.55] text-[#5d5650] lg:mt-[1.3vw] lg:max-w-[46vw] lg:text-[clamp(16px,1.3vw,25px)]">
+          Receive reflections, insights and invitations from Alchemist Ways —
+          <br className="hidden lg:inline" /> to help you meet yourself more consciously and choose
+          differently.
+        </p>
+        <form
+          data-newsletter-placeholder
+          className="mt-8 grid gap-3 text-[15px] lg:mt-[2.6vw] lg:grid-cols-[1fr_1fr_1fr_1fr] lg:gap-[1.1vw] lg:text-[clamp(15px,1.05vw,20px)]"
+        >
+          <label className="relative block">
+            <span className="sr-only">Your name</span>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="pointer-events-none absolute top-1/2 left-4 h-[1.15em] w-[1.15em] -translate-y-1/2 text-ink-soft lg:left-[1.1vw]"
+            >
+              <>
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />
+              </>
+            </svg>
+            <input
+              name="name"
+              type="text"
+              autoComplete="name"
+              placeholder="Your name"
+
+              className="nl-input"
+            />
+          </label>
+          <label className="relative block">
+            <span className="sr-only">Phone number (optional)</span>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="pointer-events-none absolute top-1/2 left-4 h-[1.15em] w-[1.15em] -translate-y-1/2 text-ink-soft lg:left-[1.1vw]"
+            >
+              <path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z" />
+            </svg>
+            <input
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              placeholder="Phone number (optional)"
+
+              className="nl-input"
+            />
+          </label>
+          <label className="relative block">
+            <span className="sr-only">Email address</span>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="pointer-events-none absolute top-1/2 left-4 h-[1.15em] w-[1.15em] -translate-y-1/2 text-ink-soft lg:left-[1.1vw]"
+            >
+              <>
+                <rect x="3" y="5" width="18" height="14" rx="1.5" />
+                <path d="m3.5 6 8.5 7 8.5-7" />
+              </>
+            </svg>
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="Email address"
+              required
+              className="nl-input"
+            />
+          </label>
+          <button type="submit" className="btn-stay">
+            Stay connected <span aria-hidden="true">→</span>
+          </button>
+          <p
+            data-newsletter-status
+            role="status"
+            hidden
+            className="text-[14px] text-rust lg:col-span-4"
+          />
+        </form>
+        <p className="mt-5 text-[13px] text-[#5d5650] lg:mt-[1.6vw] lg:text-[clamp(13px,0.95vw,18px)]">
+          Thoughtful reflections. No noise. Unsubscribe anytime.
+        </p>
+      </div>
+      <script dangerouslySetInnerHTML={{ __html: NEWSLETTER_SCRIPT }} />
     </section>
   );
 }
