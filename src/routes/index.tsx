@@ -923,8 +923,12 @@ const PATHS = [
     id: "understand",
     tag: "Self-guided book",
     t: "The complete Map.",
-    d: "Understand the hidden patterns shaping your life through a practical framework for awareness, integration, and conscious choice.",
-    checks: ["See what’s been choosing for you.", "Learn to meet yourself differently."],
+    lead: "What if the patterns protecting you are also the ones limiting your freedom?",
+    d: "Discover a map for recognizing what’s been choosing for you — and learning to meet yourself differently.",
+    checks: [
+      "Recognize the patterns beneath your reactions.",
+      "Develop the freedom to respond to life more consciously.",
+    ],
     price: null,
     cta: "Explore the book",
     href: LINKS.exploreBook,
@@ -938,10 +942,11 @@ const PATHS = [
     id: "transform",
     tag: "Personal guidance",
     t: "Work with Malek.",
-    d: "Explore the hidden architecture beneath your patterns and develop the capacity to meet yourself more consciously.",
+    lead: "You don’t have to navigate everything within yourself alone.",
+    d: "Through personalized and creative guidance, explore what’s keeping you stuck, understand the patterns getting in your way, and develop the freedom to create what truly matters to you.",
     checks: [
-      "Meet what lies beneath your reactions.",
-      "Cultivate self-awareness, inner sovereignty, and the freedom to create what matters to you.",
+      "Discover what’s beneath your fears, reactions, and self-doubt.",
+      "Cultivate inner sovereignty, authentic expression, and the courage to bring your vision to life.",
     ],
     price: null,
     cta: "Work with Malek",
@@ -956,10 +961,11 @@ const PATHS = [
     id: "practice",
     tag: "Community membership",
     t: "Practice and create together.",
-    d: "Bring the Map to life through practice, authentic connection, and co-creation.",
+    lead: "Transformation deepens when we bring it into how we live, relate, and create.",
+    d: "Join a community of conscious creators bringing the Map to life through shared practice, authentic connection, and creative expression.",
     checks: [
-      "Practice awareness and conscious choice together.",
-      "Grow your capacity for authentic connection and creative freedom.",
+      "Practice awareness, integration, and conscious choice in everyday life.",
+      "Build meaningful connections and create alongside others who are learning to meet themselves differently.",
     ],
     price: "$44 / month · 7 days free",
     cta: "Start 7 days free",
@@ -1005,14 +1011,14 @@ function Begin() {
         <em className="text-[#c4442a]">Differently.</em>
       </p>
       {/* Three equal cards. From md the cards share one row grid (subgrid), so the photos,
-          labels, titles, copy, checks and buttons line up across all three and the buttons sit
+          labels, titles, both paragraphs, checks and buttons line up across all three and the buttons sit
           on one line at the bottom. */}
-      <ul className="mx-auto mt-9 grid max-w-[560px] gap-6 md:max-w-[min(92vw,1440px)] md:grid-cols-3 md:grid-rows-[auto_auto_auto_auto_1fr_auto] md:gap-x-[1.4vw] md:gap-y-0 lg:mt-[2.6vw]">
+      <ul className="mx-auto mt-9 grid max-w-[560px] gap-6 md:max-w-[min(92vw,1440px)] md:grid-cols-3 md:grid-rows-[auto_auto_auto_auto_auto_1fr_auto] md:gap-x-[1.4vw] md:gap-y-0 lg:mt-[2.6vw]">
         {PATHS.map((p) => (
           <li
             key={p.n}
             id={p.id}
-            className="flex scroll-mt-6 flex-col overflow-hidden rounded-[10px] border border-[#f0e2cf] bg-[#fcf8f2] text-left md:row-span-6 md:grid md:grid-rows-subgrid md:gap-0"
+            className="flex scroll-mt-6 flex-col overflow-hidden rounded-[10px] border border-[#f0e2cf] bg-[#fcf8f2] text-left md:row-span-7 md:grid md:grid-rows-subgrid md:gap-0"
           >
             <img
               src={p.img}
@@ -1031,7 +1037,10 @@ function Begin() {
             <h3 className="px-[24px] pt-[12px] font-serif text-[30px] leading-[1.08] font-normal tracking-[-0.01em] text-[#16181f] md:px-[2vw] md:pt-[1vw] md:text-[max(20px,2.55vw)]">
               {p.t}
             </h3>
-            <p className="px-[24px] pt-[12px] text-[16px] leading-[1.45] text-[#5a5d68] md:px-[2vw] md:pt-[1vw] md:text-[max(12px,1.28vw)]">
+            <p className="px-[24px] pt-[12px] text-[16.5px] leading-[1.42] font-medium text-[#2a2c33] md:px-[2vw] md:pt-[1vw] md:text-[max(12.5px,1.33vw)]">
+              {p.lead}
+            </p>
+            <p className="px-[24px] pt-[10px] text-[16px] leading-[1.45] text-[#5a5d68] md:px-[2vw] md:pt-[0.8vw] md:text-[max(12px,1.28vw)]">
               {p.d}
             </p>
             <ul className="space-y-[10px] px-[24px] pt-[18px] text-[15px] leading-[1.4] text-[#2a2c33] md:space-y-[0.8vw] md:px-[2vw] md:pt-[1.4vw] md:text-[max(12px,1.14vw)]">
