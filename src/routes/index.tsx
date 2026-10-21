@@ -8,7 +8,13 @@ import { DIAGRAM, HeroDiagram } from "../components/HeroDiagram";
 import { EclipseArt, LineIcon, WaveCircleArt, type IconName } from "../components/Art";
 import { LINKS, isExternal } from "../content/links";
 import { STAGES } from "../content/stages";
-import { STORY_BLOCKS, STORY_SUBTITLE, STORY_TITLE } from "../content/founderStory";
+import {
+  STORY_CLOSING,
+  STORY_INTRO,
+  STORY_PARAGRAPHS,
+  STORY_SUBTITLE,
+  STORY_TITLE,
+} from "../content/founderStory";
 
 import heroScene900 from "../assets/hero-scene-900.webp";
 import heroScene1280 from "../assets/hero-scene-1280.webp";
@@ -696,7 +702,7 @@ const CAPACITIES: { icon: IconName; t: ReactNode; label: string; d: string; e: s
     label: "Creative freedom",
     t: "Creative freedom",
     d: "Create without waiting for permission, approval or certainty.",
-    e: "Build work that brings you joy. Create a life that feels like yours.",
+    e: "Express yourself unapologetically. Begin creating your life’s work.",
   },
 ];
 
@@ -762,6 +768,13 @@ function Available() {
 /** Inline expand for the extended founder story (the page ships without a JS framework). */
 const STORY_SCRIPT = `(()=>{const b=document.querySelector("[data-story-toggle]"),m=document.getElementById("founder-story-more");if(!b||!m)return;const l=b.querySelector("[data-story-label]"),a=b.querySelector("[data-story-arrow]");b.addEventListener("click",()=>{const v=b.getAttribute("aria-expanded")!=="true";b.setAttribute("aria-expanded",String(v));m.setAttribute("aria-hidden",String(!v));m.classList.toggle("is-open",v);l.textContent=v?"SHOW LESS":"READ MY STORY";a.style.transform=v?"rotate(-90deg)":"";if(!v)b.scrollIntoView({block:"nearest"})})})();`;
 
+/** Intro lines that keep the story’s existing emphasis (red italic / bold). */
+const STORY_EMPHASIS: Record<string, "red" | "bold"> = {
+  "I was searching for inner safety.": "red",
+  "What is this anger trying to communicate?": "red",
+  "The Map emerged from that process.": "bold",
+};
+
 function Founder() {
   return (
     <section
@@ -786,44 +799,19 @@ function Founder() {
         </span>
       </h2>
       <div className="mx-auto mt-8 max-w-[600px] space-y-3 text-[16px] leading-[1.42] text-[#1d2340] lg:mt-[3.6vw] lg:mr-0 lg:ml-[28.6%] lg:max-w-[56%] lg:space-y-[1vw] lg:text-[clamp(16px,1.42vw,27px)]">
-        <p>
-          For years, I thought I was searching for freedom.
-          <br />
-          Validation. Creativity. Love.
-        </p>
-        <p>
-          But beneath all of those desires was something quieter
-          <br className="hidden sm:inline" /> I couldn’t yet see.
-        </p>
-        <p className="text-[1.22em] font-semibold text-red italic">
-          I was searching for inner safety.
-        </p>
-        <p>
-          Much of my life had become organized around looking
-          <br className="hidden sm:inline" /> outside myself — for approval, direction, permission,
-          and
-          <br className="hidden sm:inline" /> confirmation that who I was and what I wanted could be
-          trusted.
-        </p>
-        <p>
-          Eventually, I stopped trying to escape my anger
-          <br className="hidden sm:inline" /> and began trying to understand it.
-        </p>
-        <p className="text-[1.22em] font-semibold text-red italic">
-          What is this anger trying to communicate?
-        </p>
-        <p>
-          Following that question led me beneath the anger —
-          <br className="hidden sm:inline" /> to fear, hurt, protection, old conclusions about
-          myself,
-          <br className="hidden sm:inline" /> and parts of myself I had left behind.
-        </p>
-        <p>
-          <strong className="block text-[1.22em] font-bold text-ink">
-            The Map emerged from that process.
-          </strong>
-          Alchemist Ways grew from learning to meet those parts differently.
-        </p>
+        {STORY_INTRO.map((t, i) =>
+          STORY_EMPHASIS[t] === "red" ? (
+            <p key={i} className="text-[1.22em] font-semibold text-red italic">
+              {t}
+            </p>
+          ) : STORY_EMPHASIS[t] === "bold" ? (
+            <p key={i} className="text-[1.22em] font-bold text-ink">
+              {t}
+            </p>
+          ) : (
+            <p key={i}>{t}</p>
+          ),
+        )}
         <div className="pt-2 lg:pt-[0.6vw]">
           <p className="font-bold text-red">Malek Najm Ghaleb</p>
           <p className="text-[0.75em] tracking-[0.08em] text-ink-soft">Founder, Alchemist Ways</p>
@@ -851,27 +839,20 @@ function Founder() {
             <div className="space-y-3 pt-8 lg:space-y-[1vw] lg:pt-[2.8vw]">
               <h3 className="text-[1.22em] font-bold tracking-[0.04em] text-ink">{STORY_TITLE}</h3>
               <p className="text-[1.1em] font-semibold text-red italic">{STORY_SUBTITLE}</p>
-              {STORY_BLOCKS.map((b, i) =>
-                b.t === "h" ? (
-                  <div key={i} className="pt-4 lg:pt-[1.4vw]">
-                    <h4 className="text-[1.22em] font-bold text-ink">{b.text}</h4>
-                    <p className="text-[1.1em] font-semibold text-red italic">{b.sub}</p>
-                  </div>
-                ) : b.t === "p" ? (
-                  <div key={i} className="space-y-1.5 lg:space-y-[0.45vw]">
-                    {b.lines.map((l, j) => (
-                      <p key={j}>{l}</p>
-                    ))}
-                  </div>
-                ) : (
-                  <div key={i} className="pt-2 lg:pt-[0.6vw]">
-                    <p className="font-bold text-red">Malek Najm Ghaleb</p>
-                    <p className="text-[0.75em] tracking-[0.08em] text-ink-soft">
-                      Founder, Alchemist Ways
-                    </p>
-                  </div>
-                ),
-              )}
+              <div className="space-y-3 pt-3 lg:space-y-[1vw] lg:pt-[1vw]">
+                {STORY_PARAGRAPHS.map((t, i) => (
+                  <p key={i}>{t}</p>
+                ))}
+              </div>
+              <p className="pt-3 text-[1.22em] font-semibold text-red italic lg:pt-[1vw]">
+                {STORY_CLOSING}
+              </p>
+              <div className="pt-2 lg:pt-[0.6vw]">
+                <p className="font-bold text-red">Malek Najm Ghaleb</p>
+                <p className="text-[0.75em] tracking-[0.08em] text-ink-soft">
+                  Founder, Alchemist Ways
+                </p>
+              </div>
             </div>
           </div>
         </div>
