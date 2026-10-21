@@ -143,6 +143,9 @@
   /* Stay connected: warm cream with soft diagonal window-light shadows (CSS, so always sharp). */
   .stay-bg {
     background-color: #f3ebdf;
+    /* Clip the blurred light layer to the section (Safari can paint blur outside overflow). */
+    clip-path: inset(0);
+    contain: paint;
   }
   .stay-bg::before {
     content: "";

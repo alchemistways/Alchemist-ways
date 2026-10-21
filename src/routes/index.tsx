@@ -1000,7 +1000,7 @@ function Begin() {
     <section
       id="begin"
       aria-labelledby="begin-title"
-      className="scroll-mt-4 bg-white px-5 pt-14 pb-6 text-center sm:px-8 lg:px-0 lg:pt-[4.6vw] lg:pb-[1vw]"
+      className="scroll-mt-4 bg-white px-5 pt-14 pb-14 text-center sm:px-8 lg:px-0 lg:pt-[4.6vw] lg:pb-[7vw]"
     >
       <h2
         id="begin-title"
